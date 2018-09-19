@@ -1,0 +1,27 @@
+
+{
+    "jtTestingApp": {
+        "jTTest" : {
+            "home": {
+                "title": "JT Tests",
+                "createLabel": "JT Test erstellen",
+                "createOrEditLabel": "JT Test erstellen oder bearbeiten",
+                "search": "Suche nach JT Test"
+            },
+            "created": "JT Test erstellt mit ID {{ param }}",
+            "updated": "JT Test aktualisiert mit ID {{ param }}",
+            "deleted": "JT Test gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll JT Test {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "JT Test"
+            },
+            "name": "Name",
+            "description": "Description",
+            "activities": "Activities",
+            "categories": "Categories",
+            "sports": "Sports"
+        }
+    }
+}

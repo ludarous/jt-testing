@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="activityResult">
+            <h2><span jhiTranslate="jtTestingApp.activityResult.detail.title">Activity Result</span> {{activityResult.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jtTestingApp.activityResult.primaryResultValue">Primary Result Value</span></dt>
+                <dd>
+                    <span>{{activityResult.primaryResultValue}}</span>
+                </dd>
+                <dt><span jhiTranslate="jtTestingApp.activityResult.secondaryResultValue">Secondary Result Value</span></dt>
+                <dd>
+                    <span>{{activityResult.secondaryResultValue}}</span>
+                </dd>
+                <dt><span jhiTranslate="jtTestingApp.activityResult.note">Note</span></dt>
+                <dd>
+                    <span>{{activityResult.note}}</span>
+                </dd>
+                <dt><span jhiTranslate="jtTestingApp.activityResult.testResult">Test Result</span></dt>
+                <dd>
+                    <div *ngIf="activityResult.testResultId">
+                        <a [routerLink]="['/test-result', activityResult.testResultId, 'view']">{{activityResult.testResultId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jtTestingApp.activityResult.activity">Activity</span></dt>
+                <dd>
+                    <div *ngIf="activityResult.activityId">
+                        <a [routerLink]="['/activity', activityResult.activityId, 'view']">{{activityResult.activityId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/activity-result', activityResult.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

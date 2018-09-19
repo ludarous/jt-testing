@@ -1,0 +1,25 @@
+
+{
+    "jtTestingApp": {
+        "testCategory" : {
+            "home": {
+                "title": "Test Categories",
+                "createLabel": "Test Category erstellen",
+                "createOrEditLabel": "Test Category erstellen oder bearbeiten",
+                "search": "Suche nach Test Category"
+            },
+            "created": "Test Category erstellt mit ID {{ param }}",
+            "updated": "Test Category aktualisiert mit ID {{ param }}",
+            "deleted": "Test Category gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Test Category {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Test Category"
+            },
+            "name": "Name",
+            "key": "Key",
+            "description": "Description"
+        }
+    }
+}

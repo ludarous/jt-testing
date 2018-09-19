@@ -1,0 +1,26 @@
+
+{
+    "jtTestingApp": {
+        "testResult" : {
+            "home": {
+                "title": "Test Results",
+                "createLabel": "Vytvořit Test Result",
+                "createOrEditLabel": "Vytvořit nebo upravit Test Result",
+                "search": "Vyhledat Test Result"
+            },
+            "created": "Byl vytvořen potomek entity Test Result s identifikátorem {{ param }}",
+            "updated": "Potomek entity Test Result s identifikátorem {{ param }} byl upravený.",
+            "deleted": "Potomek entity Test Result s identifikátorem {{ param }} bol smazaný.",
+            "delete": {
+                "question": "Jste si jisti, že chcete smazat Test Result {{ id }}?"
+            },
+            "detail": {
+                "title": "Test Result"
+            },
+            "note": "Note",
+            "eventResult": "Event Result",
+            "activitiesResults": "Activities Results",
+            "test": "Test"
+        }
+    }
+}

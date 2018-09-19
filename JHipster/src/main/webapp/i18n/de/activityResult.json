@@ -1,0 +1,27 @@
+
+{
+    "jtTestingApp": {
+        "activityResult" : {
+            "home": {
+                "title": "Activity Results",
+                "createLabel": "Activity Result erstellen",
+                "createOrEditLabel": "Activity Result erstellen oder bearbeiten",
+                "search": "Suche nach Activity Result"
+            },
+            "created": "Activity Result erstellt mit ID {{ param }}",
+            "updated": "Activity Result aktualisiert mit ID {{ param }}",
+            "deleted": "Activity Result gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Activity Result {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Activity Result"
+            },
+            "primaryResultValue": "Primary Result Value",
+            "secondaryResultValue": "Secondary Result Value",
+            "note": "Note",
+            "testResult": "Test Result",
+            "activity": "Activity"
+        }
+    }
+}

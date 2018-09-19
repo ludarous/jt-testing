@@ -1,0 +1,31 @@
+
+{
+    "jtTestingApp": {
+        "activity" : {
+            "home": {
+                "title": "Activities",
+                "createLabel": "Activity erstellen",
+                "createOrEditLabel": "Activity erstellen oder bearbeiten",
+                "search": "Suche nach Activity"
+            },
+            "created": "Activity erstellt mit ID {{ param }}",
+            "updated": "Activity aktualisiert mit ID {{ param }}",
+            "deleted": "Activity gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Activity {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Activity"
+            },
+            "name": "Name",
+            "description": "Description",
+            "help": "Help",
+            "key": "Key",
+            "primaryResultValueUnit": "Primary Result Value Unit",
+            "secondaryResultValueUnit": "Secondary Result Value Unit",
+            "minAge": "Min Age",
+            "maxAge": "Max Age",
+            "categories": "Categories"
+        }
+    }
+}

@@ -1,0 +1,24 @@
+
+{
+    "jtTestingApp": {
+        "person" : {
+            "home": {
+                "title": "People",
+                "createLabel": "Vytvořit Person",
+                "createOrEditLabel": "Vytvořit nebo upravit Person",
+                "search": "Vyhledat Person"
+            },
+            "created": "Byl vytvořen potomek entity Person s identifikátorem {{ param }}",
+            "updated": "Potomek entity Person s identifikátorem {{ param }} byl upravený.",
+            "deleted": "Potomek entity Person s identifikátorem {{ param }} bol smazaný.",
+            "delete": {
+                "question": "Jste si jisti, že chcete smazat Person {{ id }}?"
+            },
+            "detail": {
+                "title": "Person"
+            },
+            "personalData": "Personal Data",
+            "address": "Address"
+        }
+    }
+}

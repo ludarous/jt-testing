@@ -1,0 +1,26 @@
+
+{
+    "jtTestingApp": {
+        "testResult" : {
+            "home": {
+                "title": "Test Results",
+                "createLabel": "Test Result erstellen",
+                "createOrEditLabel": "Test Result erstellen oder bearbeiten",
+                "search": "Suche nach Test Result"
+            },
+            "created": "Test Result erstellt mit ID {{ param }}",
+            "updated": "Test Result aktualisiert mit ID {{ param }}",
+            "deleted": "Test Result gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Test Result {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Test Result"
+            },
+            "note": "Note",
+            "eventResult": "Event Result",
+            "activitiesResults": "Activities Results",
+            "test": "Test"
+        }
+    }
+}

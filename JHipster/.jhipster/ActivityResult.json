@@ -1,0 +1,45 @@
+{
+    "name": "ActivityResult",
+    "fields": [
+        {
+            "fieldName": "primaryResultValue",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "secondaryResultValue",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "note",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "testResult",
+            "otherEntityName": "testResult",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "activity",
+            "otherEntityName": "activity",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20180919081356",
+    "entityTableName": "activity_result",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "searchEngine": "elasticsearch"
+}

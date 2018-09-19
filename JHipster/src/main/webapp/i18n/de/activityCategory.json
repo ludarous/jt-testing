@@ -1,0 +1,25 @@
+
+{
+    "jtTestingApp": {
+        "activityCategory" : {
+            "home": {
+                "title": "Activity Categories",
+                "createLabel": "Activity Category erstellen",
+                "createOrEditLabel": "Activity Category erstellen oder bearbeiten",
+                "search": "Suche nach Activity Category"
+            },
+            "created": "Activity Category erstellt mit ID {{ param }}",
+            "updated": "Activity Category aktualisiert mit ID {{ param }}",
+            "deleted": "Activity Category gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Activity Category {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Activity Category"
+            },
+            "name": "Name",
+            "key": "Key",
+            "description": "Description"
+        }
+    }
+}

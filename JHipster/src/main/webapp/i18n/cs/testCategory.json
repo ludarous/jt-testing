@@ -1,0 +1,25 @@
+
+{
+    "jtTestingApp": {
+        "testCategory" : {
+            "home": {
+                "title": "Test Categories",
+                "createLabel": "Vytvořit Test Category",
+                "createOrEditLabel": "Vytvořit nebo upravit Test Category",
+                "search": "Vyhledat Test Category"
+            },
+            "created": "Byl vytvořen potomek entity Test Category s identifikátorem {{ param }}",
+            "updated": "Potomek entity Test Category s identifikátorem {{ param }} byl upravený.",
+            "deleted": "Potomek entity Test Category s identifikátorem {{ param }} bol smazaný.",
+            "delete": {
+                "question": "Jste si jisti, že chcete smazat Test Category {{ id }}?"
+            },
+            "detail": {
+                "title": "Test Category"
+            },
+            "name": "Name",
+            "key": "Key",
+            "description": "Description"
+        }
+    }
+}

@@ -1,0 +1,27 @@
+
+{
+    "jtTestingApp": {
+        "jTTest" : {
+            "home": {
+                "title": "JT Tests",
+                "createLabel": "Create a new JT Test",
+                "createOrEditLabel": "Create or edit a JT Test",
+                "search": "Search for JT Test"
+            },
+            "created": "A new JT Test is created with identifier {{ param }}",
+            "updated": "A JT Test is updated with identifier {{ param }}",
+            "deleted": "A JT Test is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete JT Test {{ id }}?"
+            },
+            "detail": {
+                "title": "JT Test"
+            },
+            "name": "Name",
+            "description": "Description",
+            "activities": "Activities",
+            "categories": "Categories",
+            "sports": "Sports"
+        }
+    }
+}

@@ -1,0 +1,28 @@
+
+{
+    "jtTestingApp": {
+        "eventResult" : {
+            "home": {
+                "title": "Event Results",
+                "createLabel": "Create a new Event Result",
+                "createOrEditLabel": "Create or edit a Event Result",
+                "search": "Search for Event Result"
+            },
+            "created": "A new Event Result is created with identifier {{ param }}",
+            "updated": "A Event Result is updated with identifier {{ param }}",
+            "deleted": "A Event Result is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Event Result {{ id }}?"
+            },
+            "detail": {
+                "title": "Event Result"
+            },
+            "note": "Note",
+            "actualHeightInCm": "Actual Height In Cm",
+            "actualWeightInKg": "Actual Weight In Kg",
+            "event": "Event",
+            "testResults": "Test Results",
+            "person": "Person"
+        }
+    }
+}

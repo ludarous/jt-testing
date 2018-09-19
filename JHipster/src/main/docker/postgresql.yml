@@ -1,0 +1,11 @@
+version: '2'
+services:
+    jttesting-postgresql:
+        image: postgres:10.4
+        # volumes:
+        #     - ~/volumes/jhipster/JTTesting/postgresql/:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_USER=JTTesting
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432

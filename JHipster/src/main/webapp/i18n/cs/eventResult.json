@@ -1,0 +1,28 @@
+
+{
+    "jtTestingApp": {
+        "eventResult" : {
+            "home": {
+                "title": "Event Results",
+                "createLabel": "Vytvořit Event Result",
+                "createOrEditLabel": "Vytvořit nebo upravit Event Result",
+                "search": "Vyhledat Event Result"
+            },
+            "created": "Byl vytvořen potomek entity Event Result s identifikátorem {{ param }}",
+            "updated": "Potomek entity Event Result s identifikátorem {{ param }} byl upravený.",
+            "deleted": "Potomek entity Event Result s identifikátorem {{ param }} bol smazaný.",
+            "delete": {
+                "question": "Jste si jisti, že chcete smazat Event Result {{ id }}?"
+            },
+            "detail": {
+                "title": "Event Result"
+            },
+            "note": "Note",
+            "actualHeightInCm": "Actual Height In Cm",
+            "actualWeightInKg": "Actual Weight In Kg",
+            "event": "Event",
+            "testResults": "Test Results",
+            "person": "Person"
+        }
+    }
+}

@@ -1,0 +1,27 @@
+
+{
+    "jtTestingApp": {
+        "jTTest" : {
+            "home": {
+                "title": "JT Tests",
+                "createLabel": "Vytvořit JT Test",
+                "createOrEditLabel": "Vytvořit nebo upravit JT Test",
+                "search": "Vyhledat JT Test"
+            },
+            "created": "Byl vytvořen potomek entity JT Test s identifikátorem {{ param }}",
+            "updated": "Potomek entity JT Test s identifikátorem {{ param }} byl upravený.",
+            "deleted": "Potomek entity JT Test s identifikátorem {{ param }} bol smazaný.",
+            "delete": {
+                "question": "Jste si jisti, že chcete smazat JT Test {{ id }}?"
+            },
+            "detail": {
+                "title": "JT Test"
+            },
+            "name": "Name",
+            "description": "Description",
+            "activities": "Activities",
+            "categories": "Categories",
+            "sports": "Sports"
+        }
+    }
+}

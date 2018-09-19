@@ -1,0 +1,26 @@
+
+{
+    "jtTestingApp": {
+        "personalData" : {
+            "home": {
+                "title": "Personal Data",
+                "createLabel": "Vytvořit Personal Data",
+                "createOrEditLabel": "Vytvořit nebo upravit Personal Data",
+                "search": "Vyhledat Personal Data"
+            },
+            "created": "Byl vytvořen potomek entity Personal Data s identifikátorem {{ param }}",
+            "updated": "Potomek entity Personal Data s identifikátorem {{ param }} byl upravený.",
+            "deleted": "Potomek entity Personal Data s identifikátorem {{ param }} bol smazaný.",
+            "delete": {
+                "question": "Jste si jisti, že chcete smazat Personal Data {{ id }}?"
+            },
+            "detail": {
+                "title": "Personal Data"
+            },
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "birthDate": "Birth Date",
+            "nationality": "Nationality"
+        }
+    }
+}

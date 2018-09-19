@@ -1,0 +1,15 @@
+{
+    "jtTestingApp": {
+        "ActivityResultUnits" : {
+            "null": "",
+            "SECONDS": "SECONDS",
+            "MINUTES": "MINUTES",
+            "CENTIMETERS": "CENTIMETERS",
+            "METERS": "METERS",
+            "COUNTS": "COUNTS",
+            "GOALS": "GOALS",
+            "POINTS": "POINTS",
+            "PERECENTS": "PERECENTS"
+        }
+    }
+}

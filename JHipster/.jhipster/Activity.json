@@ -1,0 +1,65 @@
+{
+    "name": "Activity",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "help",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "key",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "primaryResultValueUnit",
+            "fieldType": "ActivityResultUnits",
+            "fieldValues": "SECONDS,MINUTES,CENTIMETERS,METERS,COUNTS,GOALS,POINTS,PERECENTS",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "secondaryResultValueUnit",
+            "fieldType": "ActivityResultUnits",
+            "fieldValues": "SECONDS,MINUTES,CENTIMETERS,METERS,COUNTS,GOALS,POINTS,PERECENTS"
+        },
+        {
+            "fieldName": "minAge",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "maxAge",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "categories",
+            "otherEntityName": "activityCategory",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20180919081351",
+    "entityTableName": "activity",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "searchEngine": "elasticsearch"
+}

@@ -1,0 +1,98 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-activity-heading" jhiTranslate="jtTestingApp.activity.home.createOrEditLabel">Create or edit a Activity</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!activity.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="activity.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activity.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="activity.name" required/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activity.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="activity.description" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activity.help" for="field_help">Help</label>
+                    <input type="text" class="form-control" name="help" id="field_help"
+                        [(ngModel)]="activity.help" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activity.key" for="field_key">Key</label>
+                    <input type="text" class="form-control" name="key" id="field_key"
+                        [(ngModel)]="activity.key" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activity.primaryResultValueUnit" for="field_primaryResultValueUnit">Primary Result Value Unit</label>
+                    <select class="form-control" name="primaryResultValueUnit" [(ngModel)]="activity.primaryResultValueUnit" id="field_primaryResultValueUnit"  required>
+                        <option value="SECONDS">{{'jtTestingApp.ActivityResultUnits.SECONDS' | translate}}</option>
+                        <option value="MINUTES">{{'jtTestingApp.ActivityResultUnits.MINUTES' | translate}}</option>
+                        <option value="CENTIMETERS">{{'jtTestingApp.ActivityResultUnits.CENTIMETERS' | translate}}</option>
+                        <option value="METERS">{{'jtTestingApp.ActivityResultUnits.METERS' | translate}}</option>
+                        <option value="COUNTS">{{'jtTestingApp.ActivityResultUnits.COUNTS' | translate}}</option>
+                        <option value="GOALS">{{'jtTestingApp.ActivityResultUnits.GOALS' | translate}}</option>
+                        <option value="POINTS">{{'jtTestingApp.ActivityResultUnits.POINTS' | translate}}</option>
+                        <option value="PERECENTS">{{'jtTestingApp.ActivityResultUnits.PERECENTS' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.primaryResultValueUnit?.dirty && editForm.controls.primaryResultValueUnit?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.primaryResultValueUnit?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activity.secondaryResultValueUnit" for="field_secondaryResultValueUnit">Secondary Result Value Unit</label>
+                    <select class="form-control" name="secondaryResultValueUnit" [(ngModel)]="activity.secondaryResultValueUnit" id="field_secondaryResultValueUnit" >
+                        <option value="SECONDS">{{'jtTestingApp.ActivityResultUnits.SECONDS' | translate}}</option>
+                        <option value="MINUTES">{{'jtTestingApp.ActivityResultUnits.MINUTES' | translate}}</option>
+                        <option value="CENTIMETERS">{{'jtTestingApp.ActivityResultUnits.CENTIMETERS' | translate}}</option>
+                        <option value="METERS">{{'jtTestingApp.ActivityResultUnits.METERS' | translate}}</option>
+                        <option value="COUNTS">{{'jtTestingApp.ActivityResultUnits.COUNTS' | translate}}</option>
+                        <option value="GOALS">{{'jtTestingApp.ActivityResultUnits.GOALS' | translate}}</option>
+                        <option value="POINTS">{{'jtTestingApp.ActivityResultUnits.POINTS' | translate}}</option>
+                        <option value="PERECENTS">{{'jtTestingApp.ActivityResultUnits.PERECENTS' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activity.minAge" for="field_minAge">Min Age</label>
+                    <input type="number" class="form-control" name="minAge" id="field_minAge"
+                        [(ngModel)]="activity.minAge" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activity.maxAge" for="field_maxAge">Max Age</label>
+                    <input type="number" class="form-control" name="maxAge" id="field_maxAge"
+                        [(ngModel)]="activity.maxAge" />
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="jtTestingApp.activity.categories" for="field_categories">Categories</label>
+                    <select class="form-control" id="field_categories" multiple name="categories" [(ngModel)]="activity.categories">
+                        <option [ngValue]="getSelected(activity.categories, activityCategoryOption)" *ngFor="let activityCategoryOption of activitycategories; trackBy: trackActivityCategoryById">{{activityCategoryOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

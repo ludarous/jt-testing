@@ -1,0 +1,26 @@
+
+{
+    "jtTestingApp": {
+        "personalData" : {
+            "home": {
+                "title": "Personal Data",
+                "createLabel": "Create a new Personal Data",
+                "createOrEditLabel": "Create or edit a Personal Data",
+                "search": "Search for Personal Data"
+            },
+            "created": "A new Personal Data is created with identifier {{ param }}",
+            "updated": "A Personal Data is updated with identifier {{ param }}",
+            "deleted": "A Personal Data is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Personal Data {{ id }}?"
+            },
+            "detail": {
+                "title": "Personal Data"
+            },
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "birthDate": "Birth Date",
+            "nationality": "Nationality"
+        }
+    }
+}

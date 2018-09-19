@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="personalData">
+            <h2><span jhiTranslate="jtTestingApp.personalData.detail.title">Personal Data</span> {{personalData.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jtTestingApp.personalData.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{personalData.firstName}}</span>
+                </dd>
+                <dt><span jhiTranslate="jtTestingApp.personalData.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{personalData.lastName}}</span>
+                </dd>
+                <dt><span jhiTranslate="jtTestingApp.personalData.birthDate">Birth Date</span></dt>
+                <dd>
+                    <span>{{personalData.birthDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="jtTestingApp.personalData.nationality">Nationality</span></dt>
+                <dd>
+                    <span>{{personalData.nationality}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/personal-data', personalData.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
