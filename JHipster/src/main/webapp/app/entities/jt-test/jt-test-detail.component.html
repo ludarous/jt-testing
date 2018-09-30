@@ -16,19 +16,19 @@
                 <dt><span jhiTranslate="jtTestingApp.jTTest.activities">Activities</span></dt>
                 <dd>
                     <span *ngFor="let activities of jTTest.activities; let last = last">
-                        <a [routerLink]="['/activity', activities?.id, 'view' ]">{{activities.id}}</a>{{last ? '' : ', '}}
+                        <a [routerLink]="['/activity', activities?.id, 'view' ]">{{activities.name}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
                 <dt><span jhiTranslate="jtTestingApp.jTTest.categories">Categories</span></dt>
                 <dd>
                     <span *ngFor="let categories of jTTest.categories; let last = last">
-                        <a [routerLink]="['/test-category', categories?.id, 'view' ]">{{categories.id}}</a>{{last ? '' : ', '}}
+                        <a [routerLink]="['/test-category', categories?.id, 'view' ]">{{categories.name}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
                 <dt><span jhiTranslate="jtTestingApp.jTTest.sports">Sports</span></dt>
                 <dd>
                     <span *ngFor="let sports of jTTest.sports; let last = last">
-                        <a [routerLink]="['/sport', sports?.id, 'view' ]">{{sports.id}}</a>{{last ? '' : ', '}}
+                        <a [routerLink]="['/sport', sports?.id, 'view' ]">{{sports.name}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
             </dl>
