@@ -16,9 +16,3 @@ export const createRequestOption = (req?: any): HttpParams => {
     }
     return options;
 };
-
-export const createRequestHeaders = (): HttpHeaders => {
-  let headers: HttpHeaders = new HttpHeaders();
-  headers = headers.append('Authentication')
-  return options;
-};
