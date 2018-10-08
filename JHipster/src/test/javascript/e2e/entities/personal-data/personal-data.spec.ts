@@ -1,48 +1,69 @@
-import { browser, protractor } from 'protractor';
-import { NavBarPage } from './../../page-objects/jhi-page-objects';
-import { PersonalDataComponentsPage, PersonalDataUpdatePage } from './personal-data.page-object';
+/* tslint:disable no-unused-expression */
+import { browser, ExpectedConditions as ec, protractor } from 'protractor';
+import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
+
+import { PersonalDataComponentsPage, PersonalDataDeleteDialog, PersonalDataUpdatePage } from './personal-data.page-object';
+
+const expect = chai.expect;
 
 describe('PersonalData e2e test', () => {
     let navBarPage: NavBarPage;
+    let signInPage: SignInPage;
     let personalDataUpdatePage: PersonalDataUpdatePage;
     let personalDataComponentsPage: PersonalDataComponentsPage;
+    let personalDataDeleteDialog: PersonalDataDeleteDialog;
 
-    beforeAll(() => {
-        browser.get('/');
-        browser.waitForAngular();
+    before(async () => {
+        await browser.get('/');
         navBarPage = new NavBarPage();
-        navBarPage.getSignInPage().autoSignInUsing('admin', 'admin');
-        browser.waitForAngular();
+        signInPage = await navBarPage.getSignInPage();
+        await signInPage.loginWithOAuth('admin', 'admin');
+        await browser.wait(ec.visibilityOf(navBarPage.entityMenu), 5000);
     });
 
-    it('should load PersonalData', () => {
-        navBarPage.goToEntity('personal-data');
+    it('should load PersonalData', async () => {
+        await navBarPage.goToEntity('personal-data');
         personalDataComponentsPage = new PersonalDataComponentsPage();
-        expect(personalDataComponentsPage.getTitle()).toMatch(/jtTestingApp.personalData.home.title/);
+        expect(await personalDataComponentsPage.getTitle()).to.eq('jtTestingApp.personalData.home.title');
     });
 
-    it('should load create PersonalData page', () => {
-        personalDataComponentsPage.clickOnCreateButton();
+    it('should load create PersonalData page', async () => {
+        await personalDataComponentsPage.clickOnCreateButton();
         personalDataUpdatePage = new PersonalDataUpdatePage();
-        expect(personalDataUpdatePage.getPageTitle()).toMatch(/jtTestingApp.personalData.home.createOrEditLabel/);
-        personalDataUpdatePage.cancel();
+        expect(await personalDataUpdatePage.getPageTitle()).to.eq('jtTestingApp.personalData.home.createOrEditLabel');
+        await personalDataUpdatePage.cancel();
     });
 
-    it('should create and save PersonalData', () => {
-        personalDataComponentsPage.clickOnCreateButton();
-        personalDataUpdatePage.setFirstNameInput('firstName');
-        expect(personalDataUpdatePage.getFirstNameInput()).toMatch('firstName');
-        personalDataUpdatePage.setLastNameInput('lastName');
-        expect(personalDataUpdatePage.getLastNameInput()).toMatch('lastName');
-        personalDataUpdatePage.setBirthDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM');
-        expect(personalDataUpdatePage.getBirthDateInput()).toContain('2001-01-01T02:30');
-        personalDataUpdatePage.setNationalityInput('nationality');
-        expect(personalDataUpdatePage.getNationalityInput()).toMatch('nationality');
-        personalDataUpdatePage.save();
-        expect(personalDataUpdatePage.getSaveButton().isPresent()).toBeFalsy();
+    it('should create and save PersonalData', async () => {
+        const nbButtonsBeforeCreate = await personalDataComponentsPage.countDeleteButtons();
+
+        await personalDataComponentsPage.clickOnCreateButton();
+        await personalDataUpdatePage.setFirstNameInput('firstName');
+        expect(await personalDataUpdatePage.getFirstNameInput()).to.eq('firstName');
+        await personalDataUpdatePage.setLastNameInput('lastName');
+        expect(await personalDataUpdatePage.getLastNameInput()).to.eq('lastName');
+        await personalDataUpdatePage.setBirthDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM');
+        expect(await personalDataUpdatePage.getBirthDateInput()).to.contain('2001-01-01T02:30');
+        await personalDataUpdatePage.setNationalityInput('nationality');
+        expect(await personalDataUpdatePage.getNationalityInput()).to.eq('nationality');
+        await personalDataUpdatePage.save();
+        expect(await personalDataUpdatePage.getSaveButton().isPresent()).to.be.false;
+
+        expect(await personalDataComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1);
     });
 
-    afterAll(() => {
-        navBarPage.autoSignOut();
+    it('should delete last PersonalData', async () => {
+        const nbButtonsBeforeDelete = await personalDataComponentsPage.countDeleteButtons();
+        await personalDataComponentsPage.clickOnLastDeleteButton();
+
+        personalDataDeleteDialog = new PersonalDataDeleteDialog();
+        expect(await personalDataDeleteDialog.getDialogTitle()).to.eq('jtTestingApp.personalData.delete.question');
+        await personalDataDeleteDialog.clickOnConfirmButton();
+
+        expect(await personalDataComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    });
+
+    after(async () => {
+        await navBarPage.autoSignOut();
     });
 });

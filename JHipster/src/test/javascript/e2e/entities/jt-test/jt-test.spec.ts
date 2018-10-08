@@ -1,47 +1,68 @@
-import { browser } from 'protractor';
-import { NavBarPage } from './../../page-objects/jhi-page-objects';
-import { JTTestComponentsPage, JTTestUpdatePage } from './jt-test.page-object';
+/* tslint:disable no-unused-expression */
+import { browser, ExpectedConditions as ec } from 'protractor';
+import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
+
+import { JTTestComponentsPage, JTTestDeleteDialog, JTTestUpdatePage } from './jt-test.page-object';
+
+const expect = chai.expect;
 
 describe('JTTest e2e test', () => {
     let navBarPage: NavBarPage;
+    let signInPage: SignInPage;
     let jTTestUpdatePage: JTTestUpdatePage;
     let jTTestComponentsPage: JTTestComponentsPage;
+    let jTTestDeleteDialog: JTTestDeleteDialog;
 
-    beforeAll(() => {
-        browser.get('/');
-        browser.waitForAngular();
+    before(async () => {
+        await browser.get('/');
         navBarPage = new NavBarPage();
-        navBarPage.getSignInPage().autoSignInUsing('admin', 'admin');
-        browser.waitForAngular();
+        signInPage = await navBarPage.getSignInPage();
+        await signInPage.loginWithOAuth('admin', 'admin');
+        await browser.wait(ec.visibilityOf(navBarPage.entityMenu), 5000);
     });
 
-    it('should load JTTests', () => {
-        navBarPage.goToEntity('jt-test');
+    it('should load JTTests', async () => {
+        await navBarPage.goToEntity('jt-test');
         jTTestComponentsPage = new JTTestComponentsPage();
-        expect(jTTestComponentsPage.getTitle()).toMatch(/jtTestingApp.jTTest.home.title/);
+        expect(await jTTestComponentsPage.getTitle()).to.eq('jtTestingApp.jTTest.home.title');
     });
 
-    it('should load create JTTest page', () => {
-        jTTestComponentsPage.clickOnCreateButton();
+    it('should load create JTTest page', async () => {
+        await jTTestComponentsPage.clickOnCreateButton();
         jTTestUpdatePage = new JTTestUpdatePage();
-        expect(jTTestUpdatePage.getPageTitle()).toMatch(/jtTestingApp.jTTest.home.createOrEditLabel/);
-        jTTestUpdatePage.cancel();
+        expect(await jTTestUpdatePage.getPageTitle()).to.eq('jtTestingApp.jTTest.home.createOrEditLabel');
+        await jTTestUpdatePage.cancel();
     });
 
-    it('should create and save JTTests', () => {
-        jTTestComponentsPage.clickOnCreateButton();
-        jTTestUpdatePage.setNameInput('name');
-        expect(jTTestUpdatePage.getNameInput()).toMatch('name');
-        jTTestUpdatePage.setDescriptionInput('description');
-        expect(jTTestUpdatePage.getDescriptionInput()).toMatch('description');
+    it('should create and save JTTests', async () => {
+        const nbButtonsBeforeCreate = await jTTestComponentsPage.countDeleteButtons();
+
+        await jTTestComponentsPage.clickOnCreateButton();
+        await jTTestUpdatePage.setNameInput('name');
+        expect(await jTTestUpdatePage.getNameInput()).to.eq('name');
+        await jTTestUpdatePage.setDescriptionInput('description');
+        expect(await jTTestUpdatePage.getDescriptionInput()).to.eq('description');
         // jTTestUpdatePage.activitiesSelectLastOption();
         // jTTestUpdatePage.categoriesSelectLastOption();
         // jTTestUpdatePage.sportsSelectLastOption();
-        jTTestUpdatePage.save();
-        expect(jTTestUpdatePage.getSaveButton().isPresent()).toBeFalsy();
+        await jTTestUpdatePage.save();
+        expect(await jTTestUpdatePage.getSaveButton().isPresent()).to.be.false;
+
+        expect(await jTTestComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1);
     });
 
-    afterAll(() => {
-        navBarPage.autoSignOut();
+    it('should delete last JTTest', async () => {
+        const nbButtonsBeforeDelete = await jTTestComponentsPage.countDeleteButtons();
+        await jTTestComponentsPage.clickOnLastDeleteButton();
+
+        jTTestDeleteDialog = new JTTestDeleteDialog();
+        expect(await jTTestDeleteDialog.getDialogTitle()).to.eq('jtTestingApp.jTTest.delete.question');
+        await jTTestDeleteDialog.clickOnConfirmButton();
+
+        expect(await jTTestComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    });
+
+    after(async () => {
+        await navBarPage.autoSignOut();
     });
 });

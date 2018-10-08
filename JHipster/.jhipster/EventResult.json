@@ -35,7 +35,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20180919081354",
+    "changelogDate": "20181007184751",
     "entityTableName": "event_result",
     "dto": "mapstruct",
     "pagination": "pagination",

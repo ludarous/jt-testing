@@ -10,7 +10,7 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20180919081400",
+    "changelogDate": "20181007184757",
     "entityTableName": "sport",
     "dto": "mapstruct",
     "pagination": "pagination",

@@ -1,48 +1,69 @@
-import { browser } from 'protractor';
-import { NavBarPage } from './../../page-objects/jhi-page-objects';
-import { AddressComponentsPage, AddressUpdatePage } from './address.page-object';
+/* tslint:disable no-unused-expression */
+import { browser, ExpectedConditions as ec } from 'protractor';
+import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
+
+import { AddressComponentsPage, AddressDeleteDialog, AddressUpdatePage } from './address.page-object';
+
+const expect = chai.expect;
 
 describe('Address e2e test', () => {
     let navBarPage: NavBarPage;
+    let signInPage: SignInPage;
     let addressUpdatePage: AddressUpdatePage;
     let addressComponentsPage: AddressComponentsPage;
+    let addressDeleteDialog: AddressDeleteDialog;
 
-    beforeAll(() => {
-        browser.get('/');
-        browser.waitForAngular();
+    before(async () => {
+        await browser.get('/');
         navBarPage = new NavBarPage();
-        navBarPage.getSignInPage().autoSignInUsing('admin', 'admin');
-        browser.waitForAngular();
+        signInPage = await navBarPage.getSignInPage();
+        await signInPage.loginWithOAuth('admin', 'admin');
+        await browser.wait(ec.visibilityOf(navBarPage.entityMenu), 5000);
     });
 
-    it('should load Addresses', () => {
-        navBarPage.goToEntity('address');
+    it('should load Addresses', async () => {
+        await navBarPage.goToEntity('address');
         addressComponentsPage = new AddressComponentsPage();
-        expect(addressComponentsPage.getTitle()).toMatch(/jtTestingApp.address.home.title/);
+        expect(await addressComponentsPage.getTitle()).to.eq('jtTestingApp.address.home.title');
     });
 
-    it('should load create Address page', () => {
-        addressComponentsPage.clickOnCreateButton();
+    it('should load create Address page', async () => {
+        await addressComponentsPage.clickOnCreateButton();
         addressUpdatePage = new AddressUpdatePage();
-        expect(addressUpdatePage.getPageTitle()).toMatch(/jtTestingApp.address.home.createOrEditLabel/);
-        addressUpdatePage.cancel();
+        expect(await addressUpdatePage.getPageTitle()).to.eq('jtTestingApp.address.home.createOrEditLabel');
+        await addressUpdatePage.cancel();
     });
 
-    it('should create and save Addresses', () => {
-        addressComponentsPage.clickOnCreateButton();
-        addressUpdatePage.setCountryInput('country');
-        expect(addressUpdatePage.getCountryInput()).toMatch('country');
-        addressUpdatePage.setCityInput('city');
-        expect(addressUpdatePage.getCityInput()).toMatch('city');
-        addressUpdatePage.setStreetInput('street');
-        expect(addressUpdatePage.getStreetInput()).toMatch('street');
-        addressUpdatePage.setZipCodeInput('zipCode');
-        expect(addressUpdatePage.getZipCodeInput()).toMatch('zipCode');
-        addressUpdatePage.save();
-        expect(addressUpdatePage.getSaveButton().isPresent()).toBeFalsy();
+    it('should create and save Addresses', async () => {
+        const nbButtonsBeforeCreate = await addressComponentsPage.countDeleteButtons();
+
+        await addressComponentsPage.clickOnCreateButton();
+        await addressUpdatePage.setCountryInput('country');
+        expect(await addressUpdatePage.getCountryInput()).to.eq('country');
+        await addressUpdatePage.setCityInput('city');
+        expect(await addressUpdatePage.getCityInput()).to.eq('city');
+        await addressUpdatePage.setStreetInput('street');
+        expect(await addressUpdatePage.getStreetInput()).to.eq('street');
+        await addressUpdatePage.setZipCodeInput('zipCode');
+        expect(await addressUpdatePage.getZipCodeInput()).to.eq('zipCode');
+        await addressUpdatePage.save();
+        expect(await addressUpdatePage.getSaveButton().isPresent()).to.be.false;
+
+        expect(await addressComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1);
     });
 
-    afterAll(() => {
-        navBarPage.autoSignOut();
+    it('should delete last Address', async () => {
+        const nbButtonsBeforeDelete = await addressComponentsPage.countDeleteButtons();
+        await addressComponentsPage.clickOnLastDeleteButton();
+
+        addressDeleteDialog = new AddressDeleteDialog();
+        expect(await addressDeleteDialog.getDialogTitle()).to.eq('jtTestingApp.address.delete.question');
+        await addressDeleteDialog.clickOnConfirmButton();
+
+        expect(await addressComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    });
+
+    after(async () => {
+        await navBarPage.autoSignOut();
     });
 });

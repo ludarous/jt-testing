@@ -19,7 +19,7 @@
             "otherEntityRelationshipName": "person"
         }
     ],
-    "changelogDate": "20180919081357",
+    "changelogDate": "20181007184754",
     "entityTableName": "person",
     "dto": "mapstruct",
     "pagination": "pagination",

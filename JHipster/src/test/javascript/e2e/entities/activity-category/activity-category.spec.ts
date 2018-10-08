@@ -1,46 +1,67 @@
-import { browser } from 'protractor';
-import { NavBarPage } from './../../page-objects/jhi-page-objects';
-import { ActivityCategoryComponentsPage, ActivityCategoryUpdatePage } from './activity-category.page-object';
+/* tslint:disable no-unused-expression */
+import { browser, ExpectedConditions as ec } from 'protractor';
+import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
+
+import { ActivityCategoryComponentsPage, ActivityCategoryDeleteDialog, ActivityCategoryUpdatePage } from './activity-category.page-object';
+
+const expect = chai.expect;
 
 describe('ActivityCategory e2e test', () => {
     let navBarPage: NavBarPage;
+    let signInPage: SignInPage;
     let activityCategoryUpdatePage: ActivityCategoryUpdatePage;
     let activityCategoryComponentsPage: ActivityCategoryComponentsPage;
+    let activityCategoryDeleteDialog: ActivityCategoryDeleteDialog;
 
-    beforeAll(() => {
-        browser.get('/');
-        browser.waitForAngular();
+    before(async () => {
+        await browser.get('/');
         navBarPage = new NavBarPage();
-        navBarPage.getSignInPage().autoSignInUsing('admin', 'admin');
-        browser.waitForAngular();
+        signInPage = await navBarPage.getSignInPage();
+        await signInPage.loginWithOAuth('admin', 'admin');
+        await browser.wait(ec.visibilityOf(navBarPage.entityMenu), 5000);
     });
 
-    it('should load ActivityCategories', () => {
-        navBarPage.goToEntity('activity-category');
+    it('should load ActivityCategories', async () => {
+        await navBarPage.goToEntity('activity-category');
         activityCategoryComponentsPage = new ActivityCategoryComponentsPage();
-        expect(activityCategoryComponentsPage.getTitle()).toMatch(/jtTestingApp.activityCategory.home.title/);
+        expect(await activityCategoryComponentsPage.getTitle()).to.eq('jtTestingApp.activityCategory.home.title');
     });
 
-    it('should load create ActivityCategory page', () => {
-        activityCategoryComponentsPage.clickOnCreateButton();
+    it('should load create ActivityCategory page', async () => {
+        await activityCategoryComponentsPage.clickOnCreateButton();
         activityCategoryUpdatePage = new ActivityCategoryUpdatePage();
-        expect(activityCategoryUpdatePage.getPageTitle()).toMatch(/jtTestingApp.activityCategory.home.createOrEditLabel/);
-        activityCategoryUpdatePage.cancel();
+        expect(await activityCategoryUpdatePage.getPageTitle()).to.eq('jtTestingApp.activityCategory.home.createOrEditLabel');
+        await activityCategoryUpdatePage.cancel();
     });
 
-    it('should create and save ActivityCategories', () => {
-        activityCategoryComponentsPage.clickOnCreateButton();
-        activityCategoryUpdatePage.setNameInput('name');
-        expect(activityCategoryUpdatePage.getNameInput()).toMatch('name');
-        activityCategoryUpdatePage.setKeyInput('key');
-        expect(activityCategoryUpdatePage.getKeyInput()).toMatch('key');
-        activityCategoryUpdatePage.setDescriptionInput('description');
-        expect(activityCategoryUpdatePage.getDescriptionInput()).toMatch('description');
-        activityCategoryUpdatePage.save();
-        expect(activityCategoryUpdatePage.getSaveButton().isPresent()).toBeFalsy();
+    it('should create and save ActivityCategories', async () => {
+        const nbButtonsBeforeCreate = await activityCategoryComponentsPage.countDeleteButtons();
+
+        await activityCategoryComponentsPage.clickOnCreateButton();
+        await activityCategoryUpdatePage.setNameInput('name');
+        expect(await activityCategoryUpdatePage.getNameInput()).to.eq('name');
+        await activityCategoryUpdatePage.setKeyInput('key');
+        expect(await activityCategoryUpdatePage.getKeyInput()).to.eq('key');
+        await activityCategoryUpdatePage.setDescriptionInput('description');
+        expect(await activityCategoryUpdatePage.getDescriptionInput()).to.eq('description');
+        await activityCategoryUpdatePage.save();
+        expect(await activityCategoryUpdatePage.getSaveButton().isPresent()).to.be.false;
+
+        expect(await activityCategoryComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1);
     });
 
-    afterAll(() => {
-        navBarPage.autoSignOut();
+    it('should delete last ActivityCategory', async () => {
+        const nbButtonsBeforeDelete = await activityCategoryComponentsPage.countDeleteButtons();
+        await activityCategoryComponentsPage.clickOnLastDeleteButton();
+
+        activityCategoryDeleteDialog = new ActivityCategoryDeleteDialog();
+        expect(await activityCategoryDeleteDialog.getDialogTitle()).to.eq('jtTestingApp.activityCategory.delete.question');
+        await activityCategoryDeleteDialog.clickOnConfirmButton();
+
+        expect(await activityCategoryComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    });
+
+    after(async () => {
+        await navBarPage.autoSignOut();
     });
 });

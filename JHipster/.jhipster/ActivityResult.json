@@ -32,7 +32,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20180919081356",
+    "changelogDate": "20181007184753",
     "entityTableName": "activity_result",
     "dto": "mapstruct",
     "pagination": "pagination",

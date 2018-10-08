@@ -1,0 +1,111 @@
+entity Event {
+	name String required,
+    date ZonedDateTime
+}
+
+
+entity JTTest {
+	name String required,
+    description String
+}
+
+entity Activity {
+   	name String required,
+    description String,
+    help String,
+    key String,
+    primaryResultValueUnit ActivityResultUnits required,
+    secondaryResultValueUnit ActivityResultUnits, 
+    minAge Integer,
+    maxAge Integer
+}
+
+entity TestCategory {
+	name String required,
+    key String,
+    description String
+}
+
+entity ActivityCategory {
+	name String required,
+    key String,
+    description String
+}
+
+entity EventResult {
+	note String,
+    actualHeightInCm Float,
+    actualWeightInKg Float
+}
+
+entity TestResult {
+    note String
+}
+
+entity ActivityResult {
+	primaryResultValue Float required,
+    secondaryResultValue Float,
+    note String
+}
+
+entity Person {
+	
+}
+
+entity PersonalData {
+	firstName String required,
+    lastName String required,
+    birthDate ZonedDateTime required,
+    nationality String
+}
+
+entity Address {
+	country String required,
+    city String required,
+	street String required,
+    zipCode String required
+}
+
+entity Sport {
+	name String required
+}
+
+enum ActivityResultUnits {
+	SECONDS, MINUTES, CENTIMETERS, METERS, COUNTS, GOALS, POINTS, PERECENTS
+}
+
+relationship OneToOne {
+	Person{personalData} to PersonalData
+    Person{address} to Address
+}
+
+relationship ManyToMany {
+	JTTest{activities} to Activity
+    Activity{categories} to ActivityCategory
+    JTTest{categories} to TestCategory
+    JTTest{sports} to Sport
+    Event{tests} to JTTest
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	TestResult{activitiesResults} to ActivityResult
+    Event{eventResults} to EventResult
+    EventResult{testResults} to TestResult
+}
+
+relationship ManyToOne {
+	EventResult{person required} to Person
+    TestResult{test required} to JTTest
+    ActivityResult{activity required} to Activity
+    Event{address} to Address
+}
+
+// Set pagination options
+paginate * with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+search * with elasticsearch

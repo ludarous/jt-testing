@@ -1,4 +1,4 @@
-import { element, by, ElementFinder } from 'protractor';
+import { element, by, ElementFinder, browser } from 'protractor';
 
 export class NavBarPage {
     entityMenu = element(by.id('entity-menu'));
@@ -16,215 +16,116 @@ export class NavBarPage {
         }
     }
 
-    clickOnEntityMenu() {
-        return this.entityMenu.click();
+    async clickOnEntityMenu() {
+        await this.entityMenu.click();
     }
 
-    clickOnAccountMenu() {
-        return this.accountMenu.click();
+    async clickOnAccountMenu() {
+        await this.accountMenu.click();
     }
 
-    clickOnAdminMenu() {
-        return this.adminMenu.click();
+    async clickOnAdminMenu() {
+        await this.adminMenu.click();
     }
 
-    clickOnSignIn() {
-        return this.signIn.click();
+    async clickOnSignIn() {
+        await this.signIn.click();
     }
 
-    clickOnRegister() {
-        return this.signIn.click();
+    async clickOnRegister() {
+        await this.signIn.click();
     }
 
-    clickOnSignOut() {
-        return this.signOut.click();
+    async clickOnSignOut() {
+        await this.signOut.click();
     }
 
-    clickOnPasswordMenu() {
-        return this.passwordMenu.click();
+    async clickOnPasswordMenu() {
+        await this.passwordMenu.click();
     }
 
-    clickOnSettingsMenu() {
-        return this.settingsMenu.click();
+    async clickOnSettingsMenu() {
+        await this.settingsMenu.click();
     }
 
-    clickOnEntity(entityName: string) {
-        return element(by.css('[routerLink="' + entityName + '"]')).click();
+    async clickOnEntity(entityName: string) {
+        await element(by.css('[routerLink="' + entityName + '"]')).click();
     }
 
-    clickOnAdmin(entityName: string) {
-        return element(by.css('[routerLink="admin/' + entityName + '"]')).click();
+    async clickOnAdmin(entityName: string) {
+        await element(by.css('[routerLink="admin/' + entityName + '"]')).click();
     }
 
-    getSignInPage() {
-        this.clickOnAccountMenu();
-        this.clickOnSignIn();
+    async getSignInPage() {
+        await this.clickOnAccountMenu();
+        await this.clickOnSignIn();
         return new SignInPage();
     }
-    getPasswordPage() {
-        this.clickOnAccountMenu();
-        this.clickOnPasswordMenu();
-        return new PasswordPage();
+
+    async goToEntity(entityName: string) {
+        await this.clickOnEntityMenu();
+        await this.clickOnEntity(entityName);
     }
 
-    getSettingsPage() {
-        this.clickOnAccountMenu();
-        this.clickOnSettingsMenu();
-        return new SettingsPage();
+    async goToSignInPage() {
+        await this.clickOnAccountMenu();
+        await this.clickOnSignIn();
     }
 
-    goToEntity(entityName: string) {
-        this.clickOnEntityMenu();
-        return this.clickOnEntity(entityName);
+    async goToPasswordMenu() {
+        await this.clickOnAccountMenu();
+        await this.clickOnPasswordMenu();
     }
 
-    goToSignInPage() {
-        this.clickOnAccountMenu();
-        this.clickOnSignIn();
-    }
-
-    goToPasswordMenu() {
-        this.clickOnAccountMenu();
-        this.clickOnPasswordMenu();
-    }
-
-    autoSignOut() {
-        this.clickOnAccountMenu();
-        this.clickOnSignOut();
+    async autoSignOut() {
+        await this.clickOnAccountMenu();
+        await this.clickOnSignOut();
     }
 }
 
 export class SignInPage {
-    username = element(by.id('username'));
-    password = element(by.id('password'));
-    loginButton = element(by.css('button[type=submit]'));
+    username = element(by.name('username'));
+    password = element(by.name('password'));
+    loginButton = element(by.css('input[type=submit]'));
 
-    setUserName(username) {
-        this.username.sendKeys(username);
+    async setUserName(username) {
+        await this.username.sendKeys(username);
     }
 
-    getUserName() {
+    async getUserName() {
         return this.username.getAttribute('value');
     }
 
-    clearUserName() {
-        this.username.clear();
+    async clearUserName() {
+        await this.username.clear();
     }
 
-    setPassword(password) {
-        this.password.sendKeys(password);
+    async setPassword(password) {
+        await this.password.sendKeys(password);
     }
 
-    getPassword() {
+    async getPassword() {
         return this.password.getAttribute('value');
     }
 
-    clearPassword() {
-        this.password.clear();
+    async clearPassword() {
+        await this.password.clear();
     }
 
-    autoSignInUsing(username: string, password: string) {
-        this.setUserName(username);
-        this.setPassword(password);
-        return this.login();
+    async loginWithOAuth(username: string, password: string) {
+        // Entering non angular site, tell webdriver to switch to synchronous mode.
+        browser.waitForAngularEnabled(false);
+
+        if (await this.username.isPresent()) {
+            await this.username.sendKeys(username);
+            await this.password.sendKeys(password);
+            await this.loginButton.click();
+        } else {
+            browser.waitForAngularEnabled(true);
+        }
     }
 
-    login() {
-        return this.loginButton.click();
-    }
-}
-export class PasswordPage {
-    currentPassword = element(by.id('currentPassword'));
-    password = element(by.id('newPassword'));
-    confirmPassword = element(by.id('confirmPassword'));
-    saveButton = element(by.css('button[type=submit]'));
-    title = element.all(by.css('h2')).first();
-
-    setCurrentPassword(password) {
-        this.currentPassword.sendKeys(password);
-    }
-
-    setPassword(password) {
-        this.password.sendKeys(password);
-    }
-
-    getPassword() {
-        return this.password.getAttribute('value');
-    }
-
-    clearPassword() {
-        this.password.clear();
-    }
-
-    setConfirmPassword(confirmPassword) {
-        this.confirmPassword.sendKeys(confirmPassword);
-    }
-
-    getConfirmPassword() {
-        return this.confirmPassword.getAttribute('value');
-    }
-
-    clearConfirmPassword() {
-        this.confirmPassword.clear();
-    }
-
-    getTitle() {
-        return this.title.getAttribute('jhiTranslate');
-    }
-
-    save() {
-        return this.saveButton.click();
-    }
-}
-
-export class SettingsPage {
-    firstName = element(by.id('firstName'));
-    lastName = element(by.id('lastName'));
-    email = element(by.id('email'));
-    saveButton = element(by.css('button[type=submit]'));
-    title = element.all(by.css('h2')).first();
-
-    setFirstName(firstName) {
-        this.firstName.sendKeys(firstName);
-    }
-
-    getFirstName() {
-        return this.firstName.getAttribute('value');
-    }
-
-    clearFirstName() {
-        this.firstName.clear();
-    }
-
-    setLastName(lastName) {
-        this.lastName.sendKeys(lastName);
-    }
-
-    getLastName() {
-        return this.lastName.getAttribute('value');
-    }
-
-    clearLastName() {
-        this.lastName.clear();
-    }
-
-    setEmail(email) {
-        this.email.sendKeys(email);
-    }
-
-    getEmail() {
-        return this.email.getAttribute('value');
-    }
-
-    clearEmail() {
-        this.email.clear();
-    }
-
-    getTitle() {
-        return this.title.getAttribute('jhiTranslate');
-    }
-
-    save() {
-        return this.saveButton.click();
+    async login() {
+        await this.loginButton.click();
     }
 }

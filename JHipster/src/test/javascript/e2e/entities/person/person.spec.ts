@@ -1,42 +1,63 @@
-import { browser } from 'protractor';
-import { NavBarPage } from './../../page-objects/jhi-page-objects';
-import { PersonComponentsPage, PersonUpdatePage } from './person.page-object';
+/* tslint:disable no-unused-expression */
+import { browser, ExpectedConditions as ec } from 'protractor';
+import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
+
+import { PersonComponentsPage, PersonDeleteDialog, PersonUpdatePage } from './person.page-object';
+
+const expect = chai.expect;
 
 describe('Person e2e test', () => {
     let navBarPage: NavBarPage;
+    let signInPage: SignInPage;
     let personUpdatePage: PersonUpdatePage;
     let personComponentsPage: PersonComponentsPage;
+    let personDeleteDialog: PersonDeleteDialog;
 
-    beforeAll(() => {
-        browser.get('/');
-        browser.waitForAngular();
+    before(async () => {
+        await browser.get('/');
         navBarPage = new NavBarPage();
-        navBarPage.getSignInPage().autoSignInUsing('admin', 'admin');
-        browser.waitForAngular();
+        signInPage = await navBarPage.getSignInPage();
+        await signInPage.loginWithOAuth('admin', 'admin');
+        await browser.wait(ec.visibilityOf(navBarPage.entityMenu), 5000);
     });
 
-    it('should load People', () => {
-        navBarPage.goToEntity('person');
+    it('should load People', async () => {
+        await navBarPage.goToEntity('person');
         personComponentsPage = new PersonComponentsPage();
-        expect(personComponentsPage.getTitle()).toMatch(/jtTestingApp.person.home.title/);
+        expect(await personComponentsPage.getTitle()).to.eq('jtTestingApp.person.home.title');
     });
 
-    it('should load create Person page', () => {
-        personComponentsPage.clickOnCreateButton();
+    it('should load create Person page', async () => {
+        await personComponentsPage.clickOnCreateButton();
         personUpdatePage = new PersonUpdatePage();
-        expect(personUpdatePage.getPageTitle()).toMatch(/jtTestingApp.person.home.createOrEditLabel/);
-        personUpdatePage.cancel();
+        expect(await personUpdatePage.getPageTitle()).to.eq('jtTestingApp.person.home.createOrEditLabel');
+        await personUpdatePage.cancel();
     });
 
-    it('should create and save People', () => {
-        personComponentsPage.clickOnCreateButton();
-        personUpdatePage.personalDataSelectLastOption();
-        personUpdatePage.addressSelectLastOption();
-        personUpdatePage.save();
-        expect(personUpdatePage.getSaveButton().isPresent()).toBeFalsy();
+    it('should create and save People', async () => {
+        const nbButtonsBeforeCreate = await personComponentsPage.countDeleteButtons();
+
+        await personComponentsPage.clickOnCreateButton();
+        await personUpdatePage.personalDataSelectLastOption();
+        await personUpdatePage.addressSelectLastOption();
+        await personUpdatePage.save();
+        expect(await personUpdatePage.getSaveButton().isPresent()).to.be.false;
+
+        expect(await personComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1);
     });
 
-    afterAll(() => {
-        navBarPage.autoSignOut();
+    it('should delete last Person', async () => {
+        const nbButtonsBeforeDelete = await personComponentsPage.countDeleteButtons();
+        await personComponentsPage.clickOnLastDeleteButton();
+
+        personDeleteDialog = new PersonDeleteDialog();
+        expect(await personDeleteDialog.getDialogTitle()).to.eq('jtTestingApp.person.delete.question');
+        await personDeleteDialog.clickOnConfirmButton();
+
+        expect(await personComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    });
+
+    after(async () => {
+        await navBarPage.autoSignOut();
     });
 });

@@ -1,14 +1,23 @@
-import { element, by, promise, ElementFinder } from 'protractor';
+import { element, by, ElementFinder } from 'protractor';
 
 export class EventComponentsPage {
     createButton = element(by.id('jh-create-entity'));
+    deleteButtons = element.all(by.css('jhi-event div table .btn-danger'));
     title = element.all(by.css('jhi-event div h2#page-heading span')).first();
 
-    clickOnCreateButton(): promise.Promise<void> {
-        return this.createButton.click();
+    async clickOnCreateButton() {
+        await this.createButton.click();
     }
 
-    getTitle(): any {
+    async clickOnLastDeleteButton() {
+        await this.deleteButtons.last().click();
+    }
+
+    async countDeleteButtons() {
+        return this.deleteButtons.count();
+    }
+
+    async getTitle() {
         return this.title.getAttribute('jhiTranslate');
     }
 }
@@ -22,73 +31,86 @@ export class EventUpdatePage {
     addressSelect = element(by.id('field_address'));
     testsSelect = element(by.id('field_tests'));
 
-    getPageTitle() {
+    async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
     }
 
-    setNameInput(name): promise.Promise<void> {
-        return this.nameInput.sendKeys(name);
+    async setNameInput(name) {
+        await this.nameInput.sendKeys(name);
     }
 
-    getNameInput() {
+    async getNameInput() {
         return this.nameInput.getAttribute('value');
     }
 
-    setDateInput(date): promise.Promise<void> {
-        return this.dateInput.sendKeys(date);
+    async setDateInput(date) {
+        await this.dateInput.sendKeys(date);
     }
 
-    getDateInput() {
+    async getDateInput() {
         return this.dateInput.getAttribute('value');
     }
 
-    addressSelectLastOption(): promise.Promise<void> {
-        return this.addressSelect
+    async addressSelectLastOption() {
+        await this.addressSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    addressSelectOption(option): promise.Promise<void> {
-        return this.addressSelect.sendKeys(option);
+    async addressSelectOption(option) {
+        await this.addressSelect.sendKeys(option);
     }
 
     getAddressSelect(): ElementFinder {
         return this.addressSelect;
     }
 
-    getAddressSelectedOption() {
+    async getAddressSelectedOption() {
         return this.addressSelect.element(by.css('option:checked')).getText();
     }
 
-    testsSelectLastOption(): promise.Promise<void> {
-        return this.testsSelect
+    async testsSelectLastOption() {
+        await this.testsSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    testsSelectOption(option): promise.Promise<void> {
-        return this.testsSelect.sendKeys(option);
+    async testsSelectOption(option) {
+        await this.testsSelect.sendKeys(option);
     }
 
     getTestsSelect(): ElementFinder {
         return this.testsSelect;
     }
 
-    getTestsSelectedOption() {
+    async getTestsSelectedOption() {
         return this.testsSelect.element(by.css('option:checked')).getText();
     }
 
-    save(): promise.Promise<void> {
-        return this.saveButton.click();
+    async save() {
+        await this.saveButton.click();
     }
 
-    cancel(): promise.Promise<void> {
-        return this.cancelButton.click();
+    async cancel() {
+        await this.cancelButton.click();
     }
 
     getSaveButton(): ElementFinder {
         return this.saveButton;
+    }
+}
+
+export class EventDeleteDialog {
+    private dialogTitle = element(by.id('jhi-delete-event-heading'));
+    private confirmButton = element(by.id('jhi-confirm-delete-event'));
+
+    async getDialogTitle() {
+        return this.dialogTitle.getAttribute('jhiTranslate');
+    }
+
+    async clickOnConfirmButton() {
+        await this.confirmButton.click();
     }
 }

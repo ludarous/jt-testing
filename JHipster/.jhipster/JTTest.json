@@ -39,7 +39,7 @@
             "ownerSide": true
         }
     ],
-    "changelogDate": "20180919081350",
+    "changelogDate": "20181007184747",
     "entityTableName": "jt_test",
     "dto": "mapstruct",
     "pagination": "pagination",

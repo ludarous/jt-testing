@@ -18,7 +18,7 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20180919081352",
+    "changelogDate": "20181007184749",
     "entityTableName": "test_category",
     "dto": "mapstruct",
     "pagination": "pagination",

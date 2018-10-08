@@ -35,7 +35,7 @@
             "ownerSide": true
         }
     ],
-    "changelogDate": "20180919081349",
+    "changelogDate": "20181007184746",
     "entityTableName": "event",
     "dto": "mapstruct",
     "pagination": "pagination",

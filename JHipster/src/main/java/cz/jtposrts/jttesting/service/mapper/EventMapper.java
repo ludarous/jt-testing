@@ -1,0 +1,29 @@
+package cz.jtposrts.jttesting.service.mapper;
+
+import cz.jtposrts.jttesting.domain.*;
+import cz.jtposrts.jttesting.service.dto.EventDTO;
+
+import org.mapstruct.*;
+
+/**
+ * Mapper for the entity Event and its DTO EventDTO.
+ */
+@Mapper(componentModel = "spring", uses = {AddressMapper.class, JTTestMapper.class})
+public interface EventMapper extends EntityMapper<EventDTO, Event> {
+
+    @Mapping(source = "address.id", target = "addressId")
+    EventDTO toDto(Event event);
+
+    @Mapping(target = "eventResults", ignore = true)
+    @Mapping(source = "addressId", target = "address")
+    Event toEntity(EventDTO eventDTO);
+
+    default Event fromId(Long id) {
+        if (id == null) {
+            return null;
+        }
+        Event event = new Event();
+        event.setId(id);
+        return event;
+    }
+}

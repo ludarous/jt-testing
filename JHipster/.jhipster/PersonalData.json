@@ -28,7 +28,7 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20180919081358",
+    "changelogDate": "20181007184755",
     "entityTableName": "personal_data",
     "dto": "mapstruct",
     "pagination": "pagination",

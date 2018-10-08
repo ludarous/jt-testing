@@ -52,7 +52,7 @@
             "ownerSide": true
         }
     ],
-    "changelogDate": "20180919081351",
+    "changelogDate": "20181007184748",
     "entityTableName": "activity",
     "dto": "mapstruct",
     "pagination": "pagination",

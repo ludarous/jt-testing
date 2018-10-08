@@ -1,14 +1,23 @@
-import { element, by, promise, ElementFinder } from 'protractor';
+import { element, by, ElementFinder } from 'protractor';
 
 export class AddressComponentsPage {
     createButton = element(by.id('jh-create-entity'));
+    deleteButtons = element.all(by.css('jhi-address div table .btn-danger'));
     title = element.all(by.css('jhi-address div h2#page-heading span')).first();
 
-    clickOnCreateButton(): promise.Promise<void> {
-        return this.createButton.click();
+    async clickOnCreateButton() {
+        await this.createButton.click();
     }
 
-    getTitle(): any {
+    async clickOnLastDeleteButton() {
+        await this.deleteButtons.last().click();
+    }
+
+    async countDeleteButtons() {
+        return this.deleteButtons.count();
+    }
+
+    async getTitle() {
         return this.title.getAttribute('jhiTranslate');
     }
 }
@@ -22,51 +31,64 @@ export class AddressUpdatePage {
     streetInput = element(by.id('field_street'));
     zipCodeInput = element(by.id('field_zipCode'));
 
-    getPageTitle() {
+    async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
     }
 
-    setCountryInput(country): promise.Promise<void> {
-        return this.countryInput.sendKeys(country);
+    async setCountryInput(country) {
+        await this.countryInput.sendKeys(country);
     }
 
-    getCountryInput() {
+    async getCountryInput() {
         return this.countryInput.getAttribute('value');
     }
 
-    setCityInput(city): promise.Promise<void> {
-        return this.cityInput.sendKeys(city);
+    async setCityInput(city) {
+        await this.cityInput.sendKeys(city);
     }
 
-    getCityInput() {
+    async getCityInput() {
         return this.cityInput.getAttribute('value');
     }
 
-    setStreetInput(street): promise.Promise<void> {
-        return this.streetInput.sendKeys(street);
+    async setStreetInput(street) {
+        await this.streetInput.sendKeys(street);
     }
 
-    getStreetInput() {
+    async getStreetInput() {
         return this.streetInput.getAttribute('value');
     }
 
-    setZipCodeInput(zipCode): promise.Promise<void> {
-        return this.zipCodeInput.sendKeys(zipCode);
+    async setZipCodeInput(zipCode) {
+        await this.zipCodeInput.sendKeys(zipCode);
     }
 
-    getZipCodeInput() {
+    async getZipCodeInput() {
         return this.zipCodeInput.getAttribute('value');
     }
 
-    save(): promise.Promise<void> {
-        return this.saveButton.click();
+    async save() {
+        await this.saveButton.click();
     }
 
-    cancel(): promise.Promise<void> {
-        return this.cancelButton.click();
+    async cancel() {
+        await this.cancelButton.click();
     }
 
     getSaveButton(): ElementFinder {
         return this.saveButton;
+    }
+}
+
+export class AddressDeleteDialog {
+    private dialogTitle = element(by.id('jhi-delete-address-heading'));
+    private confirmButton = element(by.id('jhi-confirm-delete-address'));
+
+    async getDialogTitle() {
+        return this.dialogTitle.getAttribute('jhiTranslate');
+    }
+
+    async clickOnConfirmButton() {
+        await this.confirmButton.click();
     }
 }

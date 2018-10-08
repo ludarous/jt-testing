@@ -1,14 +1,23 @@
-import { element, by, promise, ElementFinder } from 'protractor';
+import { element, by, ElementFinder } from 'protractor';
 
 export class TestResultComponentsPage {
     createButton = element(by.id('jh-create-entity'));
+    deleteButtons = element.all(by.css('jhi-test-result div table .btn-danger'));
     title = element.all(by.css('jhi-test-result div h2#page-heading span')).first();
 
-    clickOnCreateButton(): promise.Promise<void> {
-        return this.createButton.click();
+    async clickOnCreateButton() {
+        await this.createButton.click();
     }
 
-    getTitle(): any {
+    async clickOnLastDeleteButton() {
+        await this.deleteButtons.last().click();
+    }
+
+    async countDeleteButtons() {
+        return this.deleteButtons.count();
+    }
+
+    async getTitle() {
         return this.title.getAttribute('jhiTranslate');
     }
 }
@@ -21,65 +30,78 @@ export class TestResultUpdatePage {
     eventResultSelect = element(by.id('field_eventResult'));
     testSelect = element(by.id('field_test'));
 
-    getPageTitle() {
+    async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
     }
 
-    setNoteInput(note): promise.Promise<void> {
-        return this.noteInput.sendKeys(note);
+    async setNoteInput(note) {
+        await this.noteInput.sendKeys(note);
     }
 
-    getNoteInput() {
+    async getNoteInput() {
         return this.noteInput.getAttribute('value');
     }
 
-    eventResultSelectLastOption(): promise.Promise<void> {
-        return this.eventResultSelect
+    async eventResultSelectLastOption() {
+        await this.eventResultSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    eventResultSelectOption(option): promise.Promise<void> {
-        return this.eventResultSelect.sendKeys(option);
+    async eventResultSelectOption(option) {
+        await this.eventResultSelect.sendKeys(option);
     }
 
     getEventResultSelect(): ElementFinder {
         return this.eventResultSelect;
     }
 
-    getEventResultSelectedOption() {
+    async getEventResultSelectedOption() {
         return this.eventResultSelect.element(by.css('option:checked')).getText();
     }
 
-    testSelectLastOption(): promise.Promise<void> {
-        return this.testSelect
+    async testSelectLastOption() {
+        await this.testSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    testSelectOption(option): promise.Promise<void> {
-        return this.testSelect.sendKeys(option);
+    async testSelectOption(option) {
+        await this.testSelect.sendKeys(option);
     }
 
     getTestSelect(): ElementFinder {
         return this.testSelect;
     }
 
-    getTestSelectedOption() {
+    async getTestSelectedOption() {
         return this.testSelect.element(by.css('option:checked')).getText();
     }
 
-    save(): promise.Promise<void> {
-        return this.saveButton.click();
+    async save() {
+        await this.saveButton.click();
     }
 
-    cancel(): promise.Promise<void> {
-        return this.cancelButton.click();
+    async cancel() {
+        await this.cancelButton.click();
     }
 
     getSaveButton(): ElementFinder {
         return this.saveButton;
+    }
+}
+
+export class TestResultDeleteDialog {
+    private dialogTitle = element(by.id('jhi-delete-testResult-heading'));
+    private confirmButton = element(by.id('jhi-confirm-delete-testResult'));
+
+    async getDialogTitle() {
+        return this.dialogTitle.getAttribute('jhiTranslate');
+    }
+
+    async clickOnConfirmButton() {
+        await this.confirmButton.click();
     }
 }

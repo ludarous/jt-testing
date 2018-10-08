@@ -81,7 +81,7 @@
                 <div class="form-group">
                     <label jhiTranslate="jtTestingApp.activity.categories" for="field_categories">Categories</label>
                     <select class="form-control" id="field_categories" multiple name="categories" [(ngModel)]="activity.categories">
-                        <option [ngValue]="getSelected(activity.categories, activityCategoryOption)" *ngFor="let activityCategoryOption of activitycategories; trackBy: trackActivityCategoryById">{{activityCategoryOption.name}}</option>
+                        <option [ngValue]="getSelected(activity.categories, activityCategoryOption)" *ngFor="let activityCategoryOption of activitycategories; trackBy: trackActivityCategoryById">{{activityCategoryOption.id}}</option>
                     </select>
                 </div>
             </div>

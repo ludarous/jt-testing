@@ -1,0 +1,30 @@
+package cz.jtposrts.jttesting.service.mapper;
+
+import cz.jtposrts.jttesting.domain.*;
+import cz.jtposrts.jttesting.service.dto.ActivityResultDTO;
+
+import org.mapstruct.*;
+
+/**
+ * Mapper for the entity ActivityResult and its DTO ActivityResultDTO.
+ */
+@Mapper(componentModel = "spring", uses = {TestResultMapper.class, ActivityMapper.class})
+public interface ActivityResultMapper extends EntityMapper<ActivityResultDTO, ActivityResult> {
+
+    @Mapping(source = "testResult.id", target = "testResultId")
+    @Mapping(source = "activity.id", target = "activityId")
+    ActivityResultDTO toDto(ActivityResult activityResult);
+
+    @Mapping(source = "testResultId", target = "testResult")
+    @Mapping(source = "activityId", target = "activity")
+    ActivityResult toEntity(ActivityResultDTO activityResultDTO);
+
+    default ActivityResult fromId(Long id) {
+        if (id == null) {
+            return null;
+        }
+        ActivityResult activityResult = new ActivityResult();
+        activityResult.setId(id);
+        return activityResult;
+    }
+}

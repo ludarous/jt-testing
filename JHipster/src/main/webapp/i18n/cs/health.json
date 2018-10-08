@@ -11,10 +11,6 @@
             "error": "Chyba"
         },
         "indicator": {
-            "discoveryComposite": "Discovery Composite",
-            "refreshScope": "Microservice obnovovací rozsah",
-            "configServer": "Microservice konfiguračný server",
-            "hystrix": "Hystrix",
             "diskSpace": "Diskový prostor",
             "mail": "Email",
             "elasticsearch": "Elasticsearch",

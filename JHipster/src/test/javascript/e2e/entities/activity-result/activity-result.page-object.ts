@@ -1,14 +1,23 @@
-import { element, by, promise, ElementFinder } from 'protractor';
+import { element, by, ElementFinder } from 'protractor';
 
 export class ActivityResultComponentsPage {
     createButton = element(by.id('jh-create-entity'));
+    deleteButtons = element.all(by.css('jhi-activity-result div table .btn-danger'));
     title = element.all(by.css('jhi-activity-result div h2#page-heading span')).first();
 
-    clickOnCreateButton(): promise.Promise<void> {
-        return this.createButton.click();
+    async clickOnCreateButton() {
+        await this.createButton.click();
     }
 
-    getTitle(): any {
+    async clickOnLastDeleteButton() {
+        await this.deleteButtons.last().click();
+    }
+
+    async countDeleteButtons() {
+        return this.deleteButtons.count();
+    }
+
+    async getTitle() {
         return this.title.getAttribute('jhiTranslate');
     }
 }
@@ -23,81 +32,94 @@ export class ActivityResultUpdatePage {
     testResultSelect = element(by.id('field_testResult'));
     activitySelect = element(by.id('field_activity'));
 
-    getPageTitle() {
+    async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
     }
 
-    setPrimaryResultValueInput(primaryResultValue): promise.Promise<void> {
-        return this.primaryResultValueInput.sendKeys(primaryResultValue);
+    async setPrimaryResultValueInput(primaryResultValue) {
+        await this.primaryResultValueInput.sendKeys(primaryResultValue);
     }
 
-    getPrimaryResultValueInput() {
+    async getPrimaryResultValueInput() {
         return this.primaryResultValueInput.getAttribute('value');
     }
 
-    setSecondaryResultValueInput(secondaryResultValue): promise.Promise<void> {
-        return this.secondaryResultValueInput.sendKeys(secondaryResultValue);
+    async setSecondaryResultValueInput(secondaryResultValue) {
+        await this.secondaryResultValueInput.sendKeys(secondaryResultValue);
     }
 
-    getSecondaryResultValueInput() {
+    async getSecondaryResultValueInput() {
         return this.secondaryResultValueInput.getAttribute('value');
     }
 
-    setNoteInput(note): promise.Promise<void> {
-        return this.noteInput.sendKeys(note);
+    async setNoteInput(note) {
+        await this.noteInput.sendKeys(note);
     }
 
-    getNoteInput() {
+    async getNoteInput() {
         return this.noteInput.getAttribute('value');
     }
 
-    testResultSelectLastOption(): promise.Promise<void> {
-        return this.testResultSelect
+    async testResultSelectLastOption() {
+        await this.testResultSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    testResultSelectOption(option): promise.Promise<void> {
-        return this.testResultSelect.sendKeys(option);
+    async testResultSelectOption(option) {
+        await this.testResultSelect.sendKeys(option);
     }
 
     getTestResultSelect(): ElementFinder {
         return this.testResultSelect;
     }
 
-    getTestResultSelectedOption() {
+    async getTestResultSelectedOption() {
         return this.testResultSelect.element(by.css('option:checked')).getText();
     }
 
-    activitySelectLastOption(): promise.Promise<void> {
-        return this.activitySelect
+    async activitySelectLastOption() {
+        await this.activitySelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    activitySelectOption(option): promise.Promise<void> {
-        return this.activitySelect.sendKeys(option);
+    async activitySelectOption(option) {
+        await this.activitySelect.sendKeys(option);
     }
 
     getActivitySelect(): ElementFinder {
         return this.activitySelect;
     }
 
-    getActivitySelectedOption() {
+    async getActivitySelectedOption() {
         return this.activitySelect.element(by.css('option:checked')).getText();
     }
 
-    save(): promise.Promise<void> {
-        return this.saveButton.click();
+    async save() {
+        await this.saveButton.click();
     }
 
-    cancel(): promise.Promise<void> {
-        return this.cancelButton.click();
+    async cancel() {
+        await this.cancelButton.click();
     }
 
     getSaveButton(): ElementFinder {
         return this.saveButton;
+    }
+}
+
+export class ActivityResultDeleteDialog {
+    private dialogTitle = element(by.id('jhi-delete-activityResult-heading'));
+    private confirmButton = element(by.id('jhi-confirm-delete-activityResult'));
+
+    async getDialogTitle() {
+        return this.dialogTitle.getAttribute('jhiTranslate');
+    }
+
+    async clickOnConfirmButton() {
+        await this.confirmButton.click();
     }
 }

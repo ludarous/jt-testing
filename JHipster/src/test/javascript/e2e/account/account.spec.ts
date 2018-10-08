@@ -1,137 +1,44 @@
-import { browser, element, by } from 'protractor';
-import { NavBarPage, SignInPage, PasswordPage, SettingsPage } from './../page-objects/jhi-page-objects';
+import { browser, element, by, ExpectedConditions as ec } from 'protractor';
+
+import { NavBarPage, SignInPage } from '../page-objects/jhi-page-objects';
+
+const expect = chai.expect;
 
 describe('account', () => {
     let navBarPage: NavBarPage;
     let signInPage: SignInPage;
-    let passwordPage: PasswordPage;
-    let settingsPage: SettingsPage;
 
-    beforeAll(() => {
-        browser.get('/');
-        browser.waitForAngular();
+    before(async () => {
+        await browser.get('/');
         navBarPage = new NavBarPage(true);
-        browser.waitForAngular();
     });
 
-    it('should fail to login with bad password', () => {
-        const expect1 = /home.title/;
-        element
-            .all(by.css('h1'))
-            .first()
-            .getAttribute('jhiTranslate')
-            .then(value => {
-                expect(value).toMatch(expect1);
-            });
-        signInPage = navBarPage.getSignInPage();
-        signInPage.autoSignInUsing('admin', 'foo');
+    it('should fail to login with bad password', async () => {
+        const expect1 = 'home.title';
+        const value1 = await element(by.css('h1')).getAttribute('jhiTranslate');
+        expect(value1).to.eq(expect1);
+        signInPage = await navBarPage.getSignInPage();
+        await signInPage.loginWithOAuth('admin', 'foo');
 
-        const expect2 = /login.messages.error.authentication/;
-        element
-            .all(by.css('.alert-danger'))
-            .first()
-            .getAttribute('jhiTranslate')
-            .then(value => {
-                expect(value).toMatch(expect2);
-            });
+        // Keycloak
+        const alert = element(by.css('.alert-error'));
+        if (await alert.isPresent()) {
+            expect(await alert.getText()).to.eq('Invalid username or password.');
+        } else {
+            // Okta
+            const error = element(by.css('.infobox-error'));
+            expect(await error.getText()).to.eq('Sign in failed!');
+        }
     });
 
-    it('should login successfully with admin account', () => {
-        const expect1 = /global.form.username/;
-        element
-            .all(by.css('.modal-content label'))
-            .first()
-            .getAttribute('jhiTranslate')
-            .then(value => {
-                expect(value).toMatch(expect1);
-            });
-        signInPage.clearUserName();
-        signInPage.setUserName('admin');
-        signInPage.clearPassword();
-        signInPage.setPassword('admin');
-        signInPage.login();
+    it('should login successfully with admin account', async () => {
+        await signInPage.loginWithOAuth('', 'admin');
 
-        browser.waitForAngular();
+        const expect2 = 'home.logged.message';
+        await browser.wait(ec.visibilityOf(element(by.id('home-logged-message'))));
+        const value2 = await element(by.id('home-logged-message')).getAttribute('jhiTranslate');
+        expect(value2).to.eq(expect2);
 
-        const expect2 = /home.logged.message/;
-        element
-            .all(by.css('.alert-success span'))
-            .getAttribute('jhiTranslate')
-            .then(value => {
-                expect(value).toMatch(expect2);
-            });
-    });
-    it('should be able to update settings', () => {
-        settingsPage = navBarPage.getSettingsPage();
-
-        const expect1 = /settings.title/;
-        settingsPage.getTitle().then(value => {
-            expect(value).toMatch(expect1);
-        });
-        settingsPage.save();
-
-        const expect2 = /settings.messages.success/;
-        element
-            .all(by.css('.alert-success'))
-            .first()
-            .getAttribute('jhiTranslate')
-            .then(value => {
-                expect(value).toMatch(expect2);
-            });
-    });
-
-    it('should fail to update password when using incorrect current password', () => {
-        passwordPage = navBarPage.getPasswordPage();
-
-        expect(passwordPage.getTitle()).toMatch(/password.title/);
-
-        passwordPage.setCurrentPassword('wrong_current_password');
-        passwordPage.setPassword('new_password');
-        passwordPage.setConfirmPassword('new_password');
-        passwordPage.save();
-
-        const expect2 = /password.messages.error/;
-        element
-            .all(by.css('.alert-danger'))
-            .first()
-            .getAttribute('jhiTranslate')
-            .then(value => {
-                expect(value).toMatch(expect2);
-            });
-        settingsPage = navBarPage.getSettingsPage();
-    });
-
-    it('should be able to update password', () => {
-        passwordPage = navBarPage.getPasswordPage();
-
-        expect(passwordPage.getTitle()).toMatch(/password.title/);
-
-        passwordPage.setCurrentPassword('admin');
-        passwordPage.setPassword('newpassword');
-        passwordPage.setConfirmPassword('newpassword');
-        passwordPage.save();
-
-        const expect2 = /password.messages.success/;
-        element
-            .all(by.css('.alert-success'))
-            .first()
-            .getAttribute('jhiTranslate')
-            .then(value => {
-                expect(value).toMatch(expect2);
-            });
-        navBarPage.autoSignOut();
-        navBarPage.goToSignInPage();
-        signInPage.autoSignInUsing('admin', 'newpassword');
-
-        // change back to default
-        navBarPage.goToPasswordMenu();
-        passwordPage.setCurrentPassword('newpassword');
-        passwordPage.setPassword('admin');
-        passwordPage.setConfirmPassword('admin');
-        passwordPage.save();
-    });
-
-    afterAll(() => {
-        navBarPage.autoSignOut();
+        await navBarPage.autoSignOut();
     });
 });

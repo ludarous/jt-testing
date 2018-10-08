@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity JTTest.
+    -->
+    <changeSet id="20181007184747-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="jttests_id"
+                                 baseTableName="jttest_activities"
+                                 constraintName="fk_jttest_activities_jttests_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jt_test"/>
+        <addForeignKeyConstraint baseColumnNames="activities_id"
+                                 baseTableName="jttest_activities"
+                                 constraintName="fk_jttest_activities_activities_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="activity"/>
+        
+        <addForeignKeyConstraint baseColumnNames="jttests_id"
+                                 baseTableName="jttest_categories"
+                                 constraintName="fk_jttest_categories_jttests_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jt_test"/>
+        <addForeignKeyConstraint baseColumnNames="categories_id"
+                                 baseTableName="jttest_categories"
+                                 constraintName="fk_jttest_categories_categories_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="test_category"/>
+        
+        <addForeignKeyConstraint baseColumnNames="jttests_id"
+                                 baseTableName="jttest_sports"
+                                 constraintName="fk_jttest_sports_jttests_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jt_test"/>
+        <addForeignKeyConstraint baseColumnNames="sports_id"
+                                 baseTableName="jttest_sports"
+                                 constraintName="fk_jttest_sports_sports_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sport"/>
+        
+    </changeSet>
+</databaseChangeLog>
