@@ -13,6 +13,7 @@ public interface TestResultMapper extends EntityMapper<TestResultDTO, TestResult
 
     @Mapping(source = "eventResult.id", target = "eventResultId")
     @Mapping(source = "test.id", target = "testId")
+    @Mapping(source = "test.name", target = "testName")
     TestResultDTO toDto(TestResult testResult);
 
     @Mapping(source = "eventResultId", target = "eventResult")

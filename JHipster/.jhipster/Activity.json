@@ -23,7 +23,7 @@
         {
             "fieldName": "primaryResultValueUnit",
             "fieldType": "ActivityResultUnits",
-            "fieldValues": "SECONDS,MINUTES,CENTIMETERS,METERS,COUNTS,GOALS,POINTS,PERECENTS",
+            "fieldValues": "SECONDS,MINUTES,CENTIMETERS,METERS,COUNTS,GOALS,POINTS,PERCENTS",
             "fieldValidateRules": [
                 "required"
             ]
@@ -31,7 +31,7 @@
         {
             "fieldName": "secondaryResultValueUnit",
             "fieldType": "ActivityResultUnits",
-            "fieldValues": "SECONDS,MINUTES,CENTIMETERS,METERS,COUNTS,GOALS,POINTS,PERECENTS"
+            "fieldValues": "SECONDS,MINUTES,CENTIMETERS,METERS,COUNTS,GOALS,POINTS,PERCENTS"
         },
         {
             "fieldName": "minAge",
@@ -48,7 +48,7 @@
             "otherEntityRelationshipName": "",
             "relationshipName": "categories",
             "otherEntityName": "activityCategory",
-            "otherEntityField": "id",
+            "otherEntityField": "name",
             "ownerSide": true
         }
     ],

@@ -32,7 +32,7 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="note"><span jhiTranslate="jtTestingApp.testResult.note">Note</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="eventResultId"><span jhiTranslate="jtTestingApp.testResult.eventResult">Event Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="testId"><span jhiTranslate="jtTestingApp.testResult.test">Test</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="testName"><span jhiTranslate="jtTestingApp.testResult.test">Test</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -47,7 +47,7 @@
                 </td>
                 <td>
                     <div *ngIf="testResult.testId">
-                        <a [routerLink]="['../jt-test', testResult.testId , 'view' ]" >{{testResult.testId}}</a>
+                        <a [routerLink]="['../jt-test', testResult.testId , 'view' ]" >{{testResult.testName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

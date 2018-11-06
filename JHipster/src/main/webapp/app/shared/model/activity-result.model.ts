@@ -4,6 +4,7 @@ export interface IActivityResult {
     secondaryResultValue?: number;
     note?: string;
     testResultId?: number;
+    activityName?: string;
     activityId?: number;
 }
 
@@ -14,6 +15,7 @@ export class ActivityResult implements IActivityResult {
         public secondaryResultValue?: number,
         public note?: string,
         public testResultId?: number,
+        public activityName?: string,
         public activityId?: number
     ) {}
 }

@@ -8,7 +8,7 @@ export const enum ActivityResultUnits {
     COUNTS = 'COUNTS',
     GOALS = 'GOALS',
     POINTS = 'POINTS',
-    PERECENTS = 'PERECENTS'
+    PERCENTS = 'PERCENTS'
 }
 
 export interface IActivity {

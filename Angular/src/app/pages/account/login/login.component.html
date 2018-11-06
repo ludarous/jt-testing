@@ -1,0 +1,29 @@
+<div class="row wrapper-margin-bottom">
+  <div class="login-page">
+    <form [formGroup]="form" (submit)="onSubmit()">
+      <div class="login-form">
+        <div class="heading" translate>Přihlášení</div>
+        <div class="content">
+          <mat-form-field>
+            <input [formControl]="username" type="text" matInput
+                   [placeholder]="'Email / Přihlašovací jméno' | translate" name="username"
+                   autofocus="autofocus">
+            <mat-error *ngIf="form.controls['username'].hasError('loginOrEmail')">
+              <span translate>Pole musí obsahovat platný email nebo přihlašovací jméno.</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input [formControl]="password" type="password" matInput [placeholder]="'Heslo' | translate"
+                   name="password">
+            <mat-hint align="end"><a routerLink="/reset-password/request" translate>Zapomněli jste heslo?</a></mat-hint>
+          </mat-form-field>
+          <a routerLink="/register" class="register-link">Nemáte účet? Zaregistrujte se!</a>
+        </div>
+        <div class="btn-panel text-center">
+          <button mat-button [disabled]="!form.valid || isSubmitting" class="btn-primary" id="loginBtn" type="submit" [innerHtml]="'Přihlásit se' | translate"></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

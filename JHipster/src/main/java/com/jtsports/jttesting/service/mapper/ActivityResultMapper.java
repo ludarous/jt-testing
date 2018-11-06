@@ -13,6 +13,7 @@ public interface ActivityResultMapper extends EntityMapper<ActivityResultDTO, Ac
 
     @Mapping(source = "testResult.id", target = "testResultId")
     @Mapping(source = "activity.id", target = "activityId")
+    @Mapping(source = "activity.name", target = "activityName")
     ActivityResultDTO toDto(ActivityResult activityResult);
 
     @Mapping(source = "testResultId", target = "testResult")

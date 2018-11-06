@@ -8,7 +8,7 @@ export class Principal {
     private authenticated = false;
     private authenticationState = new Subject<any>();
 
-    constructor(private account: AccountService) {}
+    constructor(private accountService: AccountService) {}
 
     authenticate(identity) {
         this.userIdentity = identity;
@@ -61,7 +61,7 @@ export class Principal {
         }
 
         // retrieve the userIdentity data from the server, update the identity object, and then resolve.
-        return this.account
+        return this.accountService
             .get()
             .toPromise()
             .then(response => {

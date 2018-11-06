@@ -24,7 +24,7 @@
             "relationshipValidateRules": "required",
             "relationshipName": "test",
             "otherEntityName": "jTTest",
-            "otherEntityField": "id"
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20180919081355",

@@ -16,13 +16,13 @@
                 <dt><span jhiTranslate="jtTestingApp.event.address">Address</span></dt>
                 <dd>
                     <div *ngIf="event.addressId">
-                        <a [routerLink]="['/address', event.addressId, 'view']">{{event.addressId}}</a>
+                        <a [routerLink]="['/address', event.addressId, 'view']">{{event.addressStreet}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="jtTestingApp.event.tests">Tests</span></dt>
                 <dd>
                     <span *ngFor="let tests of event.tests; let last = last">
-                        <a [routerLink]="['/jt-test', tests?.id, 'view' ]">{{tests.id}}</a>{{last ? '' : ', '}}
+                        <a [routerLink]="['/jt-test', tests?.id, 'view' ]">{{tests.name}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
             </dl>

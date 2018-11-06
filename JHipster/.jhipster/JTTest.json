@@ -19,7 +19,7 @@
             "otherEntityRelationshipName": "",
             "relationshipName": "activities",
             "otherEntityName": "activity",
-            "otherEntityField": "id",
+            "otherEntityField": "name",
             "ownerSide": true
         },
         {
@@ -27,7 +27,7 @@
             "otherEntityRelationshipName": "",
             "relationshipName": "categories",
             "otherEntityName": "testCategory",
-            "otherEntityField": "id",
+            "otherEntityField": "name",
             "ownerSide": true
         },
         {
@@ -35,7 +35,7 @@
             "otherEntityRelationshipName": "",
             "relationshipName": "sports",
             "otherEntityName": "sport",
-            "otherEntityField": "id",
+            "otherEntityField": "name",
             "ownerSide": true
         }
     ],

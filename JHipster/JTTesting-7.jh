@@ -71,7 +71,7 @@ entity Sport {
 }
 
 enum ActivityResultUnits {
-	SECONDS, MINUTES, CENTIMETERS, METERS, COUNTS, GOALS, POINTS, PERECENTS
+	SECONDS, MINUTES, CENTIMETERS, METERS, COUNTS, GOALS, POINTS, PERCENTS
 }
 
 relationship OneToOne {
@@ -80,11 +80,11 @@ relationship OneToOne {
 }
 
 relationship ManyToMany {
-	JTTest{activities} to Activity
-    Activity{categories} to ActivityCategory
-    JTTest{categories} to TestCategory
-    JTTest{sports} to Sport
-    Event{tests} to JTTest
+	JTTest{activities(name)} to Activity
+    Activity{categories(name)} to ActivityCategory
+    JTTest{categories(name)} to TestCategory
+    JTTest{sports(name)} to Sport
+    Event{tests(name)} to JTTest
 }
 
 // defining multiple OneToMany relationships with comments
@@ -96,9 +96,9 @@ relationship OneToMany {
 
 relationship ManyToOne {
 	EventResult{person required} to Person
-    TestResult{test required} to JTTest
-    ActivityResult{activity required} to Activity
-    Event{address} to Address
+    TestResult{test(name) required} to JTTest
+    ActivityResult{activity(name) required} to Activity
+    Event{address(street)} to Address
 }
 
 // Set pagination options

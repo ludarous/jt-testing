@@ -22,6 +22,8 @@ public class ActivityResultDTO implements Serializable {
 
     private Long activityId;
 
+    private String activityName;
+
     public Long getId() {
         return id;
     }
@@ -70,6 +72,14 @@ public class ActivityResultDTO implements Serializable {
         this.activityId = activityId;
     }
 
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -100,6 +110,7 @@ public class ActivityResultDTO implements Serializable {
             ", note='" + getNote() + "'" +
             ", testResult=" + getTestResultId() +
             ", activity=" + getActivityId() +
+            ", activity='" + getActivityName() + "'" +
             "}";
     }
 }

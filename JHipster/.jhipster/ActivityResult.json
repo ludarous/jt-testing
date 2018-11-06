@@ -29,7 +29,7 @@
             "relationshipValidateRules": "required",
             "relationshipName": "activity",
             "otherEntityName": "activity",
-            "otherEntityField": "id"
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20180919081356",

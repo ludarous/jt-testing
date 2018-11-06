@@ -4,10 +4,14 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import {environment} from '../../../environments/environment';
+import {EventService} from '../../services/event.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthServerProvider {
-    constructor(private http: HttpClient, private $localStorage: LocalStorageService, private $sessionStorage: SessionStorageService) {}
+    constructor(private http: HttpClient,
+                private $localStorage: LocalStorageService,
+                private $sessionStorage: SessionStorageService,
+                private eventService: EventService) {}
 
     getToken() {
         return this.$localStorage.retrieve('authenticationToken') || this.$sessionStorage.retrieve('authenticationToken');
@@ -19,16 +23,21 @@ export class AuthServerProvider {
             password: credentials.password,
             rememberMe: credentials.rememberMe
         };
-        return this.http.post(environment.backendUrl + '/authenticate', data, { observe: 'response' }).pipe(map(authenticateSuccess.bind(this)));
 
-        function authenticateSuccess(resp) {
-            const bearerToken = resp.headers.get('Authorization');
-            if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
-                const jwt = bearerToken.slice(7, bearerToken.length);
-                this.storeAuthenticationToken(jwt, credentials.rememberMe);
-                return jwt;
-            }
+      function authenticateSuccess(resp) {
+        const bearerToken = resp.headers.get('Authorization');
+        if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
+          const jwt = bearerToken.slice(7, bearerToken.length);
+          this.storeAuthenticationToken(jwt, credentials.rememberMe);
+          this.eventService.broadcast('authenticationSuccess');
+          return jwt;
         }
+      }
+
+        return this.http.post(environment.backendUrl + '/authenticate', data, { observe: 'response' })
+          .pipe(map(authenticateSuccess.bind(this)));
+
+
     }
 
     loginWithToken(jwt, rememberMe) {

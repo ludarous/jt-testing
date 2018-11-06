@@ -24,14 +24,14 @@
             "relationshipType": "many-to-one",
             "relationshipName": "address",
             "otherEntityName": "address",
-            "otherEntityField": "id"
+            "otherEntityField": "street"
         },
         {
             "relationshipType": "many-to-many",
             "otherEntityRelationshipName": "",
             "relationshipName": "tests",
             "otherEntityName": "jTTest",
-            "otherEntityField": "id",
+            "otherEntityField": "name",
             "ownerSide": true
         }
     ],

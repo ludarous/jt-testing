@@ -17,6 +17,8 @@ public class TestResultDTO implements Serializable {
 
     private Long testId;
 
+    private String testName;
+
     public Long getId() {
         return id;
     }
@@ -49,6 +51,14 @@ public class TestResultDTO implements Serializable {
         this.testId = jTTestId;
     }
 
+    public String getTestName() {
+        return testName;
+    }
+
+    public void setTestName(String jTTestName) {
+        this.testName = jTTestName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -77,6 +87,7 @@ public class TestResultDTO implements Serializable {
             ", note='" + getNote() + "'" +
             ", eventResult=" + getEventResultId() +
             ", test=" + getTestId() +
+            ", test='" + getTestName() + "'" +
             "}";
     }
 }

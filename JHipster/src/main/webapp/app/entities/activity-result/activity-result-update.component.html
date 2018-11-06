@@ -46,7 +46,7 @@
                     <label class="form-control-label" jhiTranslate="jtTestingApp.activityResult.activity" for="field_activity">Activity</label>
                     <select class="form-control" id="field_activity" name="activity" [(ngModel)]="activityResult.activityId"  required>
                         <option *ngIf="!editForm.value.activity" [ngValue]="null" selected></option>
-                        <option [ngValue]="activityOption.id" *ngFor="let activityOption of activities; trackBy: trackActivityById">{{activityOption.id}}</option>
+                        <option [ngValue]="activityOption.id" *ngFor="let activityOption of activities; trackBy: trackActivityById">{{activityOption.name}}</option>
                     </select>
                 </div>
                 <div [hidden]="!(editForm.controls.activity?.dirty && editForm.controls.activity?.invalid)">

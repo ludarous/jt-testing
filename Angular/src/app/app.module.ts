@@ -12,6 +12,8 @@ import {StateStorageService} from './core/auth/state-storage.service';
 import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import {UserService} from './services/user.service';
 import {AuthInterceptor} from './blocks/auth.interceptor';
+import {AccountModule} from './pages/account/account.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import {AuthInterceptor} from './blocks/auth.interceptor';
   imports: [
     BrowserModule,
     HttpClientModule,
+    AccountModule,
   ],
   providers: [
     {

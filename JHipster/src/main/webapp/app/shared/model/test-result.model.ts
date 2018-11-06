@@ -5,6 +5,7 @@ export interface ITestResult {
     note?: string;
     eventResultId?: number;
     activitiesResults?: IActivityResult[];
+    testName?: string;
     testId?: number;
 }
 
@@ -14,6 +15,7 @@ export class TestResult implements ITestResult {
         public note?: string,
         public eventResultId?: number,
         public activitiesResults?: IActivityResult[],
+        public testName?: string,
         public testId?: number
     ) {}
 }

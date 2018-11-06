@@ -26,7 +26,7 @@
                 <dt><span jhiTranslate="jtTestingApp.activityResult.activity">Activity</span></dt>
                 <dd>
                     <div *ngIf="activityResult.activityId">
-                        <a [routerLink]="['/activity', activityResult.activityId, 'view']">{{activityResult.activityId}}</a>
+                        <a [routerLink]="['/activity', activityResult.activityId, 'view']">{{activityResult.activityName}}</a>
                     </div>
                 </dd>
             </dl>

@@ -21,6 +21,8 @@ public class EventDTO implements Serializable {
 
     private Long addressId;
 
+    private String addressStreet;
+
     private Set<JTTestDTO> tests = new HashSet<>();
 
     public Long getId() {
@@ -53,6 +55,14 @@ public class EventDTO implements Serializable {
 
     public void setAddressId(Long addressId) {
         this.addressId = addressId;
+    }
+
+    public String getAddressStreet() {
+        return addressStreet;
+    }
+
+    public void setAddressStreet(String addressStreet) {
+        this.addressStreet = addressStreet;
     }
 
     public Set<JTTestDTO> getTests() {
@@ -91,6 +101,7 @@ public class EventDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", date='" + getDate() + "'" +
             ", address=" + getAddressId() +
+            ", address='" + getAddressStreet() + "'" +
             "}";
     }
 }
