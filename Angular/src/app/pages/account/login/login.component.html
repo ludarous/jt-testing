@@ -1,5 +1,5 @@
-<div class="row wrapper-margin-bottom">
-  <div class="login-page">
+<div class="container">
+  <div *ngIf="form" class="login-page">
     <form [formGroup]="form" (submit)="onSubmit()">
       <div class="login-form">
         <div class="heading" translate>Přihlášení</div>
@@ -19,8 +19,8 @@
           </mat-form-field>
           <a routerLink="/register" class="register-link">Nemáte účet? Zaregistrujte se!</a>
         </div>
-        <div class="btn-panel text-center">
-          <button mat-button [disabled]="!form.valid || isSubmitting" class="btn-primary" id="loginBtn" type="submit" [innerHtml]="'Přihlásit se' | translate"></button>
+        <div>
+          <button mat-raised-button color="accent" id="loginBtn" type="submit" [innerHtml]="'Přihlásit se' | translate"></button>
         </div>
       </div>
     </form>

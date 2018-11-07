@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin-ext');
+
+@import "app-colors";
+@import "app-sizes";
+@import "app-animations";
+@import "app-print";
+
+
+@import "overrides/primeng-override";
+@import "overrides/material-override";
+@import "overrides/bootstrap-override";
+@import "overrides/froala-override";
+
+@mixin theme-color-grabber($theme) {
+  // Parse the theme and create variables for each color in the pallete
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  // Create theme specfic styles
+  .primary-bg {
+    background-color: mat-color($primary);
+  }
+  .accent-bg {
+    background-color: mat-color($accent);
+  }
+  .warn-bg {
+    background-color: mat-color($warn);
+  }
+
+  .primary-color {
+    color: mat-color($primary);
+  }
+
+  .accent-color {
+    color: mat-color($accent);
+  }
+
+  .warn-color {
+    color: mat-color($warn);
+  }
+}
+
+html {
+  overflow-y: scroll;
+}
+
+html, body {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+}
+
+
+body {
+  font-family: 'Open Sans', sans-serif !important;
+  color: white;
+  background-color: dimgray;
+}
+
+app-root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.outlet-container {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+
+  & > *:not(router-outlet) {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    background-color: dimgray;
+    justify-content: flex-start;
+  }
+}
+
+.heading {
+  @extend .accent-bg;
+
+  padding: 5px;
+}
+
+.container {
+  padding: 20px;
+}
+
+.content {
+  padding: 20px;
+  background-color: gray;
+}
+
+.elevation-z6 {
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+}

@@ -1,0 +1,208 @@
+/* buttons */
+button, .btn, .mat-button {
+  border: none;
+  font-size: $button-font-size !important;
+  outline: none;
+
+  &.mat-fab .mat-button-wrapper {
+    display: block !important;
+    white-space: normal !important;
+  }
+
+  &.btn-primary:not(:disabled):not(.disabled).active, &.btn-primary:not(:disabled):not(.disabled):active {
+    box-shadow: none;
+  }
+
+  &.btn-primary-focus, &.btn-primary:focus {
+    box-shadow: none;
+  }
+
+  &.ui-button { // Rewrites prime-ng button style
+    padding: $button-padding;
+  }
+  &.btn-primary.mat-button, &.btn-primary { // Rewrites angular material button style
+    background-color: $primary-color;
+    color: $text-primary-color;
+  }
+  &.btn-primary.mat-button:hover, &.btn-primar.mat-button:active { // Rewrites angular material button style
+    background-color: $primary-color-5;
+    color: $text-primary-color;
+  }
+  &.btn-accent.mat-button, &.btn-accent { // Rewrites angular material button style
+    background-color: $accent-color;
+    color: $text-accent-color;
+  }
+  &.btn-accent.mat-button:hover, &.btn-accent.mat-button:active { // Rewrites angular material button style
+    background-color: $accent-color-4;
+    color: $text-accent-color;
+  }
+
+  &.btn-danger.mat-button, &.btn-danger { // Rewrites angular material button style
+    background-color: $app-danger-color;
+    border-color: $app-danger-color;
+    color: $text-accent-color;
+  }
+  &.btn-danger.mat-button:hover, &.btn-danger.mat-button:active { // Rewrites angular material button style
+    background-color: $app-danger-color-2;
+    border-color: $app-danger-color-2;
+    color: $text-accent-color;
+  }
+
+  .mat-button-focus-overlay { // Rewrites angular material button overlay style
+    background-color: transparent;
+  }
+  .mat-button-wrapper .fa {
+    position: relative;
+    top: $button-icon-position-top;
+    font-size: $button-icon-size;
+    margin-right: $button-icon-margin-right;
+  }
+}
+
+.mat-button {
+  margin-right: $button-margin-right !important;
+  border-radius: $button-border-radius !important;
+  //padding: $button-padding !important;
+}
+
+/* overlay */
+.cdk-overlay-container {
+  z-index: 1000000 !important;
+}
+
+/* inputs */
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.mat-form-field-underline {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.mat-input-container {
+  width: 100%;
+  .mat-input-error { // Extends angular material mat-input-error
+    text-align: right;
+  }
+  & + * { // If is something after mat-form-field element, it will have margin-top
+    margin-top: $mat-form-field-margin-top;
+  }
+}
+
+.mat-select-panel {
+  width: 100%;
+}
+
+//.mat-option {
+//  height: 35px;
+//  line-height: 35px;
+//}
+
+.mat-checkbox {
+  display: block;
+  //padding: $select-margin;
+}
+
+.mat-form-field.mat-form-field {
+  display: block !important;
+}
+
+.checkbox-list {
+  padding-left: 10px;
+  margin-bottom: 10px;
+  .mat-checkbox {
+    padding: 0;
+  }
+}
+
+/* textarea */
+
+textarea.autosize-textarea {
+  &.mat-input-element {
+    overflow: hidden;
+  }
+}
+
+/* tooltip */
+.mat-tooltip {
+  font-size: 16px !important;
+}
+
+/* tabs */
+.mat-tab-group {
+  font-family: 'Open Sans', sans-serif !important;
+}
+
+/* stepper */
+.mat-step-text-label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.report-stepper {
+
+  mat-step-header[aria-selected="true"] {
+    .mat-step-icon {
+      background-color: $accent-color;
+    }
+  }
+
+  &.mat-stepper-horizontal {
+    background-color: transparent !important;
+  }
+
+  .mat-horizontal-stepper-header-container {
+    background-color: white !important;
+  }
+
+  .mat-horizontal-content-container {
+    background-color: transparent !important;
+    padding: 0 !important;
+  }
+
+}
+
+.report-datepicker {
+  height: 250px !important;
+}
+
+
+/* tab group */
+.results-tab {
+  .mat-tab-header {
+    box-shadow: 0px 12px 15px #ababab;
+    //box-shadow: -20px 0px $primary-color, -20px -20px $primary-color, 20px 0px $primary-color, 20px -20px $primary-color, 0px -20px $primary-color, 0px 12px 15px #ababab;
+  }
+
+  .mat-tab-label {
+    //background-color: $primary-color-1;
+    //color: $primary-color;
+    background-color: $primary-color;
+    color: white;
+    //font-weight: bold;
+    font-size: 20px;
+    opacity: 1;
+
+    &.cdk-focused {
+      background-color: $primary-color !important;
+      color: white;
+    }
+
+    &.mat-tab-label-active {
+      background-color: $primary-color !important;
+      color: white;
+      font-weight: bold;
+    }
+  }
+
+  .mat-ink-bar {
+    //background-color: $accent-color !important;
+    background-color: white !important;
+    height: 5px;
+  }
+
+ .mat-tab-header {
+    border-bottom: none;
+  }
+}

@@ -1,0 +1,6 @@
+<div class="menu">
+  <nav>
+    <a mat-raised-button [routerLink]="['admin']">Admin</a>
+  </nav>
+  <div *ngIf="account" class="profile">{{account.firstName + ' ' + account.lastName}}</div>
+</div>

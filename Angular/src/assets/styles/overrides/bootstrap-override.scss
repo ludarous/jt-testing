@@ -1,0 +1,33 @@
+/* Card */
+.card {
+  border-radius: $border-radius-off;
+  border: none;
+  background-color: transparent;
+  margin-right: 5px !important;
+  margin-left: 5px !important;
+}
+
+.card-deck {
+  margin-bottom: 20px !important;
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+/* Alerts */
+
+.alert {
+  border-radius: 0;
+  border: 1px solid transparent;
+}
+
+.alert-danger {
+  color: white;
+  background-color: #f44336;
+  border-color: #f44336;
+}
+
+.alert-success {
+  color: white;
+  background-color: #4CAF50;
+  border-color: #4CAF50
+}

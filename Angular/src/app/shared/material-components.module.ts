@@ -4,7 +4,7 @@ import {
   MatButtonModule, MatCardModule, MatCheckboxModule, MatDatepickerModule, MatDialogModule, MatIconModule,
   MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressSpinnerModule,
   MatRadioModule,
-  MatSelectModule,
+  MatSelectModule, MatSidenavModule,
   MatSnackBarModule, MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatTooltipModule
 } from '@angular/material';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
@@ -13,12 +13,32 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
 @NgModule({
   imports: [
-    CommonModule,
+    MatCardModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatTabsModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule,
+    MatMenuModule,
+    MatListModule,
+    MatStepperModule,
+    MatSidenavModule,
   ],
   providers: [
   ],
   exports: [
-    CommonModule,
     // Materialized design
     MatCardModule,
     MatSelectModule,
@@ -40,7 +60,8 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatTooltipModule,
     MatMenuModule,
     MatListModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSidenavModule,
   ],
 })
 export class MaterialComponentsModule { }

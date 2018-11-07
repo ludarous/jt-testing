@@ -1,0 +1,13 @@
+@import '~@angular/material/theming';
+//We import our custom scss component here
+@import 'styles';
+
+@include mat-core();
+
+$theme-primary: mat-palette($mat-indigo);
+$theme-accent:  mat-palette($mat-blue-gray, A200, A100, A400);
+$theme-warn:    mat-palette($mat-red);
+$theme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
+
+@include theme-color-grabber($theme);
+@include angular-material-theme($theme);

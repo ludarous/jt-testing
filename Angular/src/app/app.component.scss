@@ -1,0 +1,16 @@
+
+.menu-container {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  background-color: dimgray;
+  padding: 10px;
+  z-index: 2;
+
+  app-menu {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+  }
+}
+

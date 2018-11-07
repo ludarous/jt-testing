@@ -1,0 +1,84 @@
+@import "app-colors";
+
+@-moz-keyframes background-animation {
+  0% {background-color: transparent}
+  30% {background-color: $accent-color}
+  100% {background-color: transparent}
+}
+
+@-webkit-keyframes background-animation {
+  0% {background-color: transparent}
+  30% {background-color: $accent-color}
+  100% {background-color: transparent}
+}
+
+@-o-keyframes background-animation {
+  0% {background-color: transparent}
+  30% {background-color: $accent-color}
+  100% {background-color: transparent}
+}
+
+@-ms-keyframes background-animation {
+  0% {background-color: transparent}
+  30% {background-color: $accent-color}
+  100% {background-color: transparent}
+}
+
+
+@keyframes background-animation {
+  0% {background-color: transparent}
+  30% {background-color: $accent-color}
+  100% {background-color: transparent}
+}
+
+
+$breathing-scale: 1.3;
+$breathing-duration: 1s;
+
+@-webkit-keyframes breathing {
+  0% {
+    -webkit-transform: scale($breathing-scale);
+    transform: scale($breathing-scale);
+  }
+
+  25% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  60% {
+    -webkit-transform: scale($breathing-scale);
+    transform: scale($breathing-scale);
+  }
+
+  100% {
+    -webkit-transform: scale($breathing-scale);
+    transform: scale($breathing-scale);
+  }
+}
+
+@keyframes breathing {
+  0% {
+    -webkit-transform: scale($breathing-scale);
+    -ms-transform: scale($breathing-scale);
+    transform: scale($breathing-scale);
+  }
+
+  25% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+
+  60% {
+    -webkit-transform: scale($breathing-scale);
+    -ms-transform: scale($breathing-scale);
+    transform: scale($breathing-scale);
+  }
+
+  100% {
+    -webkit-transform: scale($breathing-scale);
+    -ms-transform: scale($breathing-scale);
+    transform: scale($breathing-scale);
+  }
+}

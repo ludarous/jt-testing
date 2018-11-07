@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {LoginComponent} from './pages/account/login/login.component';
 
 /**
  * Definition of routes.
@@ -11,6 +12,11 @@ export const appRoutes: Routes = [
     path: 'account',
     loadChildren: 'app/pages/account/account.module#AccountModule',
   },
+  {
+    path: 'admin',
+    loadChildren: 'app/pages/admin/admin.module#AdminModule',
+  }
+
 ];
 
 @NgModule({

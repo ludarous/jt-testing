@@ -1,0 +1,45 @@
+$primary-color: rgb(65, 65, 65) !default;
+$accent-color: rgba(141, 198, 63, 1) !default;
+
+$app-gray-color: rgba(91,91,91,1) !default;
+
+$app-danger-color: rgba(217,83,79,1) !default;
+$app-danger-color-2: rgba(201,48,44,1) !default;
+
+$primary-color-0: rgb(105, 105, 105) !default;
+$primary-color-1: rgb(135, 135, 135) !default;
+$primary-color-2: rgba(206,226,245,1) !default;
+$primary-color-3: rgba(157,193,224,1) !default;
+$primary-color-4: rgba(133,174,210,1) !default;
+$primary-color-5: rgba( 92,149,201,1) !default;
+
+$accent-color-0: rgba(240, 248, 236,1) !default;
+$accent-color-1: rgba(212,	235,	198,1) !default;
+$accent-color-2: rgba(169,	216,	142,1) !default;
+$accent-color-3: rgba(141,	203,	105,1) !default;
+$accent-color-4: rgba(90,152,54,1);
+
+$text-body-color: rgba( 0,  0,  0,1) !default;
+$text-body-invert-color: rgba(255,255,255,1) !default;
+$text-primary-color: rgba(255,255,255,1) !default;
+$text-accent-color: rgba(255,255,255,1) !default;
+
+$light-color: rgba(255,255,255,1) !default;
+$light-color-fill-50: rgba(255, 255, 255, 0.5) !default;
+$light-color-fill-10: rgba(255, 255, 255, 0.1) !default;
+
+$button-disabled: #a7a7a7;
+$input-border-color: rgba(210,210,210,1);
+
+$background-color-1: rgb(243, 248, 254);
+
+$froala-toolbar-background: #eaeaea !default;
+$froala-toolbar-color: black !default;
+$froala-toolbar-btn-hover: lightgray !default;
+
+$change-remove: rgb(255, 126, 126); //rgba(255, 0, 0, 0.4);
+$change-add: rgb(177, 216, 177); //rgba(0, 128, 0, 0.4);
+
+.accent {
+  color: $accent-color;
+}

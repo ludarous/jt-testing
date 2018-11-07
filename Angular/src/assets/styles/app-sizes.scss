@@ -1,0 +1,51 @@
+/* elements paddings & margins */
+$button-padding: .75rem;
+$button-margin-right: 10px;
+$element-margin-from-header: 20px;
+$element-space: 20px;
+$table-paginator-margin-top: 10px;
+$table-paginator-padding: 10px 0;
+$table-cell-padding: 10px 15px;
+$table-head-padding: 10px 15px;
+$logo-padding: 22px 22px 22px 16px;
+$header-nav-padding: 0; // off
+$header-nav-link-padding: 1rem 1rem;
+$heading-padding: 10px 20px;
+$mat-form-field-margin-top: 0px; // Only for second and follow elements after mat-form-field
+$wrapper-margin-bottom: 50px;
+$select-margin: 20px 0px;
+$checkbox-margin: 20px 0px;
+$button-panel-margin-top: 20px;
+$button-panel-padding: 20px;
+$button-icon-margin-right: 10px;
+$modal-header-padding: 10px 20px;
+$modal-header-title-padding: 13px 20px;
+$content-padding: 10px 20px;
+$content-margin-bottom: 5px;
+$radio-label-margin-bottom: 10px;
+$shapes-padding: 6px 0;
+$static-info-margin-bottom: 5px;
+$static-info-margin: 0px 0 10px 0px;
+$dropdown-select-value-padding-bottom: 5px;
+
+/* font sizes */
+$button-font-size: 16px;
+$heading-font-size: 20px;
+$sub-heading-font-size: 18px;
+$table-head-font-size: 12px;
+$table-content-font-size: 16px;
+$comment-font-size: 12px;
+$static-info-label-font-size: 12px;
+
+/* heights & widths */
+$horizontal-navigation-height: 56px;
+$logo-height: 70px;
+$logo-width: auto;
+$footer_height: 40px;
+
+/* others */
+$button-border-radius: 0; // off
+$border-radius-off: 0;
+$modal-border-radius: 0;
+$button-icon-size: 1.2em;
+$button-icon-position-top: 0px;

@@ -1,0 +1,130 @@
+/* FROALA */
+
+.fr-box.fr-basic.fr-top .fr-wrapper {
+  border-top: 0;
+  border-radius: 0 0 2px 2px;
+  -moz-border-radius: 0 0 2px 2px;
+  -webkit-border-radius: 0 0 2px 2px;
+  background-clip: padding-box;
+  box-shadow: none;
+
+}
+
+.fr-box.fr-basic .fr-wrapper {
+  background: transparent; //needed for handbook node highlight
+}
+
+.fr-box.fr-basic .fr-element {
+  padding: 0px;
+  min-height: 20px;
+  overflow-x: hidden;
+}
+
+.fr-separator.fr-vs {
+  height: 26px;
+  width: 1px;
+  margin: 2px 0px 2px 0px;
+  background: darkgray;
+}
+
+.fr-toolbar .fr-command.fr-btn i {
+  display: block;
+  font-size: 18px;
+  width: 18px;
+  margin: 6px;
+  text-align: center;
+  float: none;
+}
+
+.fr-toolbar .fr-command.fr-btn, .fr-popup .fr-command.fr-btn {
+  background: 0 0;
+  //color: #222;
+  color: $froala-toolbar-color;
+  -moz-outline: 0;
+  font-weight: 100;
+  outline: 0;
+  border: 0;
+  line-height: 1;
+  cursor: pointer;
+  text-align: left;
+  margin: 0 2px;
+  -webkit-transition: background .2s ease 0s;
+  -moz-transition: background .2s ease 0s;
+  -ms-transition: background .2s ease 0s;
+  -o-transition: background .2s ease 0s;
+  border-radius: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  background-clip: padding-box;
+  z-index: 2;
+  position: relative;
+  box-sizing: border-box;
+  text-decoration: none;
+  user-select: none;
+  -o-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  float: left;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+
+  &:hover {
+    background-color: $froala-toolbar-btn-hover;
+  }
+}
+
+.fr-toolbar.fr-top {
+  top: 0px;
+  border-radius: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+
+  background-clip: padding-box;
+  box-shadow: none;
+
+  border-bottom: 0px solid $froala-toolbar-btn-hover;
+}
+
+.fr-toolbar {
+  color: $froala-toolbar-color;
+  background: transparent;
+  position: relative;
+  z-index: 4;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  box-sizing: border-box;
+
+  user-select: none;
+  -o-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+
+  padding: 0 2px;
+
+  border-radius: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+
+  background-clip: padding-box;
+  box-shadow: none;
+  text-align: left;
+  border: 0;
+  border-top: 0px solid #222;
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.2;
+}
+
+.fr-buttons {
+  background: $froala-toolbar-background;
+}
+
+.fr-sticky-off {
+  position: sticky;
+}
