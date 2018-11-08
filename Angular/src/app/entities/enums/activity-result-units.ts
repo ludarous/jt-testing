@@ -1,0 +1,3 @@
+export enum ActivityResultUnits {
+  SECONDS, MINUTES, CENTIMETERS, METERS, COUNTS, GOALS, POINTS, PERCENTS
+}
