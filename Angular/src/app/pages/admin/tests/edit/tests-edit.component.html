@@ -1,0 +1,30 @@
+<div class="component-container-center">
+  <div class="form-container">
+    <form class="form" *ngIf="testForm" [formGroup]="testForm" (submit)="saveTest()">
+      <mat-form-field>
+        <input matInput [placeholder]="'Název' | translate" name="name"
+               formControlName="name"
+               required/>
+        <mat-error *ngIf="testForm.controls['name'].hasError('required')">
+          {{'Název musí být vyplněn' | translate }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Activity" [(ngModel)]="selectedActivities"  [ngModelOptions]="{standalone: true}" multiple>
+          <mat-option *ngFor="let activity of testActivities" [value]="activity">{{activity.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Kategorie" [(ngModel)]="selectedCategories"  [ngModelOptions]="{standalone: true}" multiple>
+          <mat-option *ngFor="let category of testCategories" [value]="category">{{category.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Sporty" [(ngModel)]="selectedSports"  [ngModelOptions]="{standalone: true}" multiple>
+          <mat-option *ngFor="let sport of sports" [value]="category">{{category.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button>{{'Uložit' | translate}}</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="component-container-left">
+  <div>
+    <button mat-raised-button (click)="addCategory()">{{'Přidat kategorii' | translate}}</button>
+    <p-table [value]="categories" selectionMode="single">
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of tableCols">
+            {{col.header}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-category>
+        <tr (click)="rowSelect(category)">
+          <td *ngFor="let col of tableCols">
+            {{category[col.field]}}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div>
+    <form class="form" *ngIf="categoryForm" [formGroup]="categoryForm" (submit)="saveCategory()">
+      <mat-form-field>
+        <input matInput [placeholder]="'Název' | translate" name="name"
+               formControlName="name"
+               required/>
+        <mat-error *ngIf="categoryForm.controls['name'].hasError('required')">
+          {{'Název musí být vyplněn' | translate }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput cdkTextareaAutosize [placeholder]="'Popis' | translate" name="description"
+                  formControlName="description"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'Klíč' | translate" name="key" formControlName="key"/>
+      </mat-form-field>
+      <button mat-raised-button>{{'Uložit' | translate}}</button>
+    </form>
+  </div>
+</div>

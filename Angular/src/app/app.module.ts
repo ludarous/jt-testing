@@ -9,19 +9,15 @@ import {AuthServerProvider} from './core/auth/auth-jwt.service';
 import {AccountService} from './core/auth/account.service';
 import {Principal} from './core/auth/principal.service';
 import {StateStorageService} from './core/auth/state-storage.service';
-import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
+import {LocalStorageService, NgxWebstorageModule, SessionStorageService} from 'ngx-webstorage';
 import {UserService} from './services/user.service';
 import {AuthInterceptor} from './blocks/auth.interceptor';
-import {AccountModule} from './pages/account/account.module';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {AppRoutingModule} from './app-routing.module';
-import {RouterModule} from '@angular/router';
-import {CommonModule} from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {SharedModule} from './shared/shared.module';
 import {SharedComponentsModule} from './shared/components/shared-components.module';
+import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -36,6 +32,8 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserAnimationsModule,
     HttpClientModule,
     SharedComponentsModule,
+    NgxWebstorageModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -57,8 +55,6 @@ export function createTranslateLoader(http: HttpClient) {
     AccountService,
     Principal,
     StateStorageService,
-    LocalStorageService,
-    SessionStorageService,
     AuthServerProvider,
     UserService,
   ],

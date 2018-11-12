@@ -17,11 +17,11 @@ const routes: Routes = [
       },
       {
         path: 'activities',
-        component: ActivitiesComponent
+        loadChildren: 'app/pages/admin/activities/activities.module#ActivitiesModule',
       },
       {
         path: 'tests',
-        component: TestsComponent
+        loadChildren: 'app/pages/admin/tests/tests.module#TestsModule',
       },
       {
         path: 'sessions',

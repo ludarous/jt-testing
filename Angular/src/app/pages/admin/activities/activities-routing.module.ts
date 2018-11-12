@@ -6,6 +6,7 @@ import {TestsComponent} from '../tests/tests.component';
 import {SessionsComponent} from '../sessions/sessions.component';
 import {ActivitiesComponent} from './activities.component';
 import {ActivitiesEditComponent} from './edit/activities-edit.component';
+import {CategoriesComponent} from './categories/categories.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: ActivitiesEditComponent
+      },
+      {
+        path: 'categories',
+        component: CategoriesComponent
       },
     ]
   }

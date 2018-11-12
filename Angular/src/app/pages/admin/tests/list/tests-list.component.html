@@ -1,5 +1,5 @@
 <div class="component-container-center">
-  <p-table [value]="activities" selectionMode="single">
+  <p-table [value]="tests" selectionMode="single">
     <ng-template pTemplate="header">
       <tr>
         <th *ngFor="let col of tableCols">
@@ -7,10 +7,10 @@
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-activity>
-      <tr (click)="rowSelect(activity)">
+    <ng-template pTemplate="body" let-test>
+      <tr (click)="rowSelect(test)">
         <td *ngFor="let col of tableCols">
-          {{activity[col.field]}}
+          {{test[col.field]}}
         </td>
       </tr>
     </ng-template>

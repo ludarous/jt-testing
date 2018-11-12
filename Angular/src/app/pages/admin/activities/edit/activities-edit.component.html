@@ -1,3 +1,51 @@
-<p>
-  edit works!
-</p>
+<div class="component-container-center">
+  <div class="form-container">
+    <form class="form" *ngIf="activityForm" [formGroup]="activityForm" (submit)="saveActivity()">
+      <mat-form-field>
+        <input matInput [placeholder]="'Název' | translate" name="name"
+               formControlName="name"
+               required/>
+        <mat-error *ngIf="activityForm.controls['name'].hasError('required')">
+          {{'Název musí být vyplněn' | translate }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput cdkTextareaAutosize [placeholder]="'Popis' | translate" name="description"
+                  formControlName="description"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput cdkTextareaAutosize [placeholder]="'Nápověda' | translate" name="help"
+                  formControlName="help"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'Klíč' | translate" name="key" formControlName="key"/>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Jednotky výsledku 1" formControlName="primaryResultValueUnit">
+          <mat-option *ngFor="let unit of units" [value]="unit.ordinal">
+            {{unit.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Jednotky výsledku 2" formControlName="secondaryResultValueUnit">
+          <mat-option *ngFor="let unit of units" [value]="unit.ordinal">
+            {{unit.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'Minimální věk' | translate" name="minAge" formControlName="minAge"/>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'Maximální věk' | translate" name="maxAge" formControlName="maxAge"/>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Kategorie" [(ngModel)]="selectedCategories"  [ngModelOptions]="{standalone: true}" multiple>
+          <mat-option *ngFor="let category of activityCategories" [value]="category">{{category.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button>{{'Uložit' | translate}}</button>
+    </form>
+  </div>
+</div>

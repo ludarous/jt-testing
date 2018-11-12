@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {HttpResponse} from '@angular/common/http';
 import {IActivity} from '../../../../entities/activity';
 import {ActivityService} from '../../../../services/activity.service';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-activities',
+  selector: 'app-activities-list',
   templateUrl: './activities-list.component.html',
   styleUrls: ['./activities-list.component.scss']
 })
@@ -13,7 +14,8 @@ export class ActivitiesListComponent implements OnInit {
   tableCols: Array<any>;
   activities: Array<IActivity>;
 
-  constructor(private activityService: ActivityService) { }
+  constructor(private activityService: ActivityService,
+              private router: Router) { }
 
   ngOnInit() {
 
@@ -28,4 +30,7 @@ export class ActivitiesListComponent implements OnInit {
     });
   }
 
+  rowSelect(activity: IActivity) {
+    this.router.navigate(['/admin/activities/edit', activity.id]);
+  }
 }

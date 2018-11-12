@@ -8,27 +8,34 @@ import {AdminComponent} from './admin.component';
 import {MaterialComponentsModule} from '../../shared/material-components.module';
 import {ActivityService} from '../../services/activity.service';
 import {PrimeNgComponentsModule} from '../../shared/primeng-components.module';
-import {ActivitiesListComponent} from './activities/list/activities-list.component';
-import {ActivitiesEditComponent} from './activities/edit/activities-edit.component';
+import {ActivitiesModule} from './activities/activities.module';
+import {ActivityCategoryService} from '../../services/activity-category.service';
+import {TestService} from '../../services/test.service';
+import {SportService} from '../../services/sport.service';
+import {TestCategoryService} from '../../services/test-category.service';
 
 
 @NgModule({
   declarations:
     [
       AdminComponent,
-      TestsComponent,
       SessionsComponent,
-      ActivitiesListComponent,
-      ActivitiesEditComponent,
     ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     MaterialComponentsModule,
-    PrimeNgComponentsModule
+    PrimeNgComponentsModule,
+
+    ActivitiesModule,
   ],
   providers: [
-    ActivityService
+    ActivityService,
+    TestService,
+    SportService,
+    ActivityCategoryService,
+    TestCategoryService,
+
   ]
 })
 export class AdminModule { }
