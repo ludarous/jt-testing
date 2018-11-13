@@ -2,6 +2,7 @@ package com.jtsports.jttesting.service;
 
 import com.jtsports.jttesting.service.dto.PersonDTO;
 
+import com.jtsports.jttesting.service.dto.PersonFullDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -26,7 +27,7 @@ public interface PersonService {
      * @param pageable the pagination information
      * @return the list of entities
      */
-    Page<PersonDTO> findAll(Pageable pageable);
+    Page<PersonFullDTO> findAll(Pageable pageable);
 
 
     /**
@@ -36,6 +37,14 @@ public interface PersonService {
      * @return the entity
      */
     Optional<PersonDTO> findOne(Long id);
+
+    /**
+     * Get the "userId" person.
+     *
+     * @param userId the userId of the entity
+     * @return the entity
+     */
+    Optional<PersonDTO> findOneByUserId(Long userId);
 
     /**
      * Delete the "id" person.

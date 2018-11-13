@@ -5,6 +5,8 @@ import com.jtsports.jttesting.domain.Person;
 import com.jtsports.jttesting.repository.PersonRepository;
 import com.jtsports.jttesting.repository.search.PersonSearchRepository;
 import com.jtsports.jttesting.service.dto.PersonDTO;
+import com.jtsports.jttesting.service.dto.PersonFullDTO;
+import com.jtsports.jttesting.service.mapper.PersonFullMapper;
 import com.jtsports.jttesting.service.mapper.PersonMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,11 +34,14 @@ public class PersonServiceImpl implements PersonService {
 
     private final PersonMapper personMapper;
 
+    private final PersonFullMapper personFullMapper;
+
     private final PersonSearchRepository personSearchRepository;
 
-    public PersonServiceImpl(PersonRepository personRepository, PersonMapper personMapper, PersonSearchRepository personSearchRepository) {
+    public PersonServiceImpl(PersonRepository personRepository, PersonMapper personMapper, PersonFullMapper personFullMapper, PersonSearchRepository personSearchRepository) {
         this.personRepository = personRepository;
         this.personMapper = personMapper;
+        this.personFullMapper = personFullMapper;
         this.personSearchRepository = personSearchRepository;
     }
 
@@ -64,10 +69,10 @@ public class PersonServiceImpl implements PersonService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<PersonDTO> findAll(Pageable pageable) {
+    public Page<PersonFullDTO> findAll(Pageable pageable) {
         log.debug("Request to get all People");
         return personRepository.findAll(pageable)
-            .map(personMapper::toDto);
+            .map(personFullMapper::toDto);
     }
 
 
@@ -82,6 +87,13 @@ public class PersonServiceImpl implements PersonService {
     public Optional<PersonDTO> findOne(Long id) {
         log.debug("Request to get Person : {}", id);
         return personRepository.findById(id)
+            .map(personMapper::toDto);
+    }
+
+    @Override
+    public Optional<PersonDTO> findOneByUserId(Long userId) {
+        log.debug("Request to get Person by userId : {}", userId);
+        return personRepository.findByUserId(userId)
             .map(personMapper::toDto);
     }
 

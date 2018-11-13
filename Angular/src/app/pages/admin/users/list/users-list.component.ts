@@ -5,6 +5,8 @@ import {ActivityService} from '../../../../services/activity.service';
 import {Router} from '@angular/router';
 import {IUser} from '../../../../entities/user';
 import {UserService} from '../../../../services/user.service';
+import {PersonService} from '../../../../services/person.service';
+import {IPersonFull} from '../../../../entities/person-full';
 
 @Component({
   selector: 'app-users-list',
@@ -14,9 +16,10 @@ import {UserService} from '../../../../services/user.service';
 export class UsersListComponent implements OnInit {
 
   tableCols: Array<any>;
-  users: Array<IUser>;
+  users: Array<IPersonFull>;
 
   constructor(private userService: UserService,
+              private personService: PersonService,
               private router: Router) { }
 
   ngOnInit() {
@@ -27,7 +30,7 @@ export class UsersListComponent implements OnInit {
       { field: 'login', header: 'Login' },
     ];
 
-    this.userService.query().subscribe((users: HttpResponse<Array<IUser>>) => {
+    this.personService.query().subscribe((users: HttpResponse<Array<IPersonFull>>) => {
       this.users = users.body;
     });
   }

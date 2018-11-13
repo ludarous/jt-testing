@@ -17,6 +17,7 @@
     <include file="config/liquibase/changelog/20180919081358_added_entity_PersonalData.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081359_added_entity_Address.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081400_added_entity_Sport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181113073023_added_person_user_relation.xml" relativeToChangelogFile="false" />
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180919081349_added_entity_constraints_Event.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081350_added_entity_constraints_JTTest.xml" relativeToChangelogFile="false"/>

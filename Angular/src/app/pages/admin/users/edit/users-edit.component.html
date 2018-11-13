@@ -14,5 +14,37 @@
         <input matInput [placeholder]="'email' | translate" name="email" [ngModel]="user.email" disabled/>
       </mat-form-field>
     </div>
+
+    <form class="form" (submit)="saveUser()">
+      <div *ngIf="addressForm" [formGroup]="addressForm">
+        <mat-form-field>
+          <input matInput [placeholder]="'Země' | translate" name="country" formControlName="country"/>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [placeholder]="'Město' | translate" name="city" formControlName="city"/>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [placeholder]="'Ulice' | translate" name="street" formControlName="street"/>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [placeholder]="'PSČ' | translate" name="zipCode" formControlName="country"/>
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="personalDataForm" [formGroup]="addressForm">
+        <mat-form-field>
+          <input matInput [placeholder]="'Země' | translate" name="country" formControlName="country"/>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [placeholder]="'Město' | translate" name="city" formControlName="city"/>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [placeholder]="'Ulice' | translate" name="street" formControlName="street"/>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [placeholder]="'PSČ' | translate" name="zipCode" formControlName="country"/>
+        </mat-form-field>
+      </div>
+    </form>
   </div>
 </div>

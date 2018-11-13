@@ -6,15 +6,15 @@ import java.util.Objects;
 /**
  * A DTO for the Person entity.
  */
-public class PersonDTO implements Serializable {
+public class PersonFullDTO implements Serializable {
 
     private Long id;
 
-    private Long personalDataId;
+    private PersonalDataDTO personalData;
 
-    private Long addressId;
+    private AddressDTO address;
 
-    private Long userId;
+    private UserDTO user;
 
     public Long getId() {
         return id;
@@ -24,25 +24,29 @@ public class PersonDTO implements Serializable {
         this.id = id;
     }
 
-    public Long getPersonalDataId() {
-        return personalDataId;
+    public PersonalDataDTO getPersonalData() {
+        return personalData;
     }
 
-    public void setPersonalDataId(Long personalDataId) {
-        this.personalDataId = personalDataId;
+    public void setPersonalData(PersonalDataDTO personalData) {
+        this.personalData = personalData;
     }
 
-    public Long getAddressId() {
-        return addressId;
+    public AddressDTO getAddress() {
+        return address;
     }
 
-    public void setAddressId(Long addressId) {
-        this.addressId = addressId;
+    public void setAddress(AddressDTO address) {
+        this.address = address;
     }
 
-    public Long getUserId() { return userId; }
+    public UserDTO getUser() {
+        return user;
+    }
 
-    public void setUserId(Long userId) { this.userId = userId; }
+    public void setUser(UserDTO user) {
+        this.user = user;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -53,7 +57,7 @@ public class PersonDTO implements Serializable {
             return false;
         }
 
-        PersonDTO personDTO = (PersonDTO) o;
+        PersonFullDTO personDTO = (PersonFullDTO) o;
         if (personDTO.getId() == null || getId() == null) {
             return false;
         }
@@ -69,8 +73,8 @@ public class PersonDTO implements Serializable {
     public String toString() {
         return "PersonDTO{" +
             "id=" + getId() +
-            ", personalData=" + getPersonalDataId() +
-            ", address=" + getAddressId() +
+            ", personalData=" + getPersonalData().toString() +
+            ", address=" + getAddress().toString() +
             "}";
     }
 }

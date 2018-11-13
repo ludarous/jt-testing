@@ -2,6 +2,7 @@ package com.jtsports.jttesting.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.jtsports.jttesting.service.PersonService;
+import com.jtsports.jttesting.service.dto.PersonFullDTO;
 import com.jtsports.jttesting.web.rest.errors.BadRequestAlertException;
 import com.jtsports.jttesting.web.rest.util.HeaderUtil;
 import com.jtsports.jttesting.web.rest.util.PaginationUtil;
@@ -92,9 +93,9 @@ public class PersonResource {
      */
     @GetMapping("/people")
     @Timed
-    public ResponseEntity<List<PersonDTO>> getAllPeople(Pageable pageable) {
+    public ResponseEntity<List<PersonFullDTO>> getAllPeople(Pageable pageable) {
         log.debug("REST request to get a page of People");
-        Page<PersonDTO> page = personService.findAll(pageable);
+        Page<PersonFullDTO> page = personService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/people");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -110,6 +111,20 @@ public class PersonResource {
     public ResponseEntity<PersonDTO> getPerson(@PathVariable Long id) {
         log.debug("REST request to get Person : {}", id);
         Optional<PersonDTO> personDTO = personService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(personDTO);
+    }
+
+    /**
+     * GET  /people/by-user-id/:userId : get the "userId" person.
+     *
+     * @param userId the userId of the personDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the personDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/people/by-user-id/{userId}")
+    @Timed
+    public ResponseEntity<PersonDTO> getPersonByUserId(@PathVariable Long userId) {
+        log.debug("REST request to get Person by userId : {}", userId);
+        Optional<PersonDTO> personDTO = personService.findOne(userId);
         return ResponseUtil.wrapOrNotFound(personDTO);
     }
 

@@ -5,7 +5,7 @@ import {createRequestOption} from '../utils/request-util';
 
 
 export class CrudBaseService<T> {
-  private readonly resourceUrl;
+  readonly resourceUrl;
 
   constructor(private http: HttpClient, apiUrl: string) {
     this.resourceUrl = environment.backendUrl + apiUrl;

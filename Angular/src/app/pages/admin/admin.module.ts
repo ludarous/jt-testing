@@ -13,6 +13,10 @@ import {ActivityCategoryService} from '../../services/activity-category.service'
 import {TestService} from '../../services/test.service';
 import {SportService} from '../../services/sport.service';
 import {TestCategoryService} from '../../services/test-category.service';
+import {UserService} from '../../services/user.service';
+import {PersonService} from '../../services/person.service';
+import {PersonalDataService} from '../../services/personal-data.service';
+import {AddressService} from '../../services/address.service';
 
 
 @NgModule({
@@ -33,6 +37,10 @@ import {TestCategoryService} from '../../services/test-category.service';
     ActivityService,
     TestService,
     SportService,
+    UserService,
+    PersonService,
+    PersonalDataService,
+    AddressService,
     ActivityCategoryService,
     TestCategoryService,
 
