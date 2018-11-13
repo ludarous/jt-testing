@@ -107,7 +107,7 @@ export class TestsEditComponent implements OnInit {
 
       testToSave.categories = this.selectedCategories;
       testToSave.activities = this.selectedActivities;
-      testToSave.sports = this.sports;
+      testToSave.sports = this.selectedSports;
 
       saveTest$.subscribe((testResponse: HttpResponse<ITest>) => {
         this.test = testResponse.body;

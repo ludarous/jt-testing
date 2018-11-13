@@ -21,7 +21,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-select placeholder="Sporty" [(ngModel)]="selectedSports"  [ngModelOptions]="{standalone: true}" multiple>
-          <mat-option *ngFor="let sport of sports" [value]="category">{{category.name}}</mat-option>
+          <mat-option *ngFor="let sport of sports" [value]="sport">{{sport.name}}</mat-option>
         </mat-select>
       </mat-form-field>
       <button mat-raised-button>{{'Uložit' | translate}}</button>

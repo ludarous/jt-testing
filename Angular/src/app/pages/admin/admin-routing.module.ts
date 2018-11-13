@@ -27,6 +27,10 @@ const routes: Routes = [
         path: 'sessions',
         component: SessionsComponent
       },
+      {
+        path: 'users',
+        loadChildren: 'app/pages/admin/users/users.module#UsersModule',
+      },
     ]
   }
 ];

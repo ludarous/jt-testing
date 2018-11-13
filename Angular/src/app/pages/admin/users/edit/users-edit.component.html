@@ -1,0 +1,18 @@
+<div class="component-container-center">
+  <div class="form-container">
+    <div class="form" *ngIf="user">
+      <mat-form-field>
+        <input matInput [placeholder]="'Křestní jméno' | translate" name="firstName" [ngModel]="user.firstName" disabled/>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'Příjmení' | translate" name="lastName" [ngModel]="user.lastName" disabled/>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'login' | translate" name="login" [ngModel]="user.login" disabled/>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'email' | translate" name="email" [ngModel]="user.email" disabled/>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
