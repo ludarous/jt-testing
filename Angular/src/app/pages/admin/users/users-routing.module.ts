@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {UsersComponent} from './users.component';
 import {UsersListComponent} from './list/users-list.component';
 import {UsersEditComponent} from './edit/users-edit.component';
+import {PersonEditComponent} from './person-edit/person-edit.component';
 
 const routes: Routes = [
   {
@@ -11,10 +12,14 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'list'
+        redirectTo: 'person-list'
       },
       {
-        path: 'list',
+        path: 'person-list',
+        component: UsersListComponent
+      },
+      {
+        path: 'user-list',
         component: UsersListComponent
       },
       {
@@ -24,6 +29,14 @@ const routes: Routes = [
       {
         path: 'edit/:login',
         component: UsersEditComponent
+      },
+      {
+        path: 'person-edit/:id',
+        component: PersonEditComponent
+      },
+      {
+        path: 'person-edit',
+        component: PersonEditComponent
       },
     ]
   }

@@ -10,6 +10,7 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {TranslateModule} from '@ngx-translate/core';
 import {SharedModule} from '../../../shared/shared.module';
 import {PrimeNgComponentsModule} from '../../../shared/primeng-components.module';
+import {PersonEditComponent} from './person-edit/person-edit.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import {PrimeNgComponentsModule} from '../../../shared/primeng-components.module
     UsersComponent,
     UsersListComponent,
     UsersEditComponent,
+    PersonEditComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +35,7 @@ import {PrimeNgComponentsModule} from '../../../shared/primeng-components.module
     UsersComponent,
     UsersListComponent,
     UsersEditComponent,
+    PersonEditComponent,
   ]
 })
 export class UsersModule { }

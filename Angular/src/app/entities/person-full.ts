@@ -1,9 +1,10 @@
-import {IAddress} from './address';
-import {IPersonalData} from './personal-data';
+import {Address, IAddress} from './address';
+import {IPersonalData, PersonalData} from './personal-data';
 import {IUser} from './user';
 
 export interface IPersonFull {
   id?: any;
+  email?: string;
   address?: IAddress;
   personalData?: IPersonalData;
   user?: IUser;
@@ -11,7 +12,8 @@ export interface IPersonFull {
 
 export class PersonFull implements IPersonFull {
   id: any;
-  address: IAddress;
-  personalData: IPersonalData;
+  email: string;
+  address: IAddress = new Address();
+  personalData: IPersonalData = new PersonalData();
   user: IUser;
 }

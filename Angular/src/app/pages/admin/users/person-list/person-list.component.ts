@@ -7,15 +7,15 @@ import {IUser} from '../../../../entities/user';
 import {UserService} from '../../../../services/user.service';
 import {PersonService} from '../../../../services/person.service';
 import {IPersonFull} from '../../../../entities/person-full';
-import {IPerson} from '../../../../entities/person';
 
 @Component({
-  selector: 'app-users-list',
-  templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.scss']
+  selector: 'app-person-list',
+  templateUrl: './person-list.component.html',
+  styleUrls: ['./person-list.component.scss']
 })
-export class UsersListComponent implements OnInit {
+export class PersonListComponent implements OnInit {
 
+  tableCols: Array<any>;
   persons: Array<IPersonFull>;
 
   constructor(private userService: UserService,
@@ -24,12 +24,18 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.personService.query().subscribe((personsResponse: HttpResponse<Array<IPersonFull>>) => {
-      this.persons = personsResponse.body;
+    this.tableCols = [
+      { field: 'firstName', header: 'Křestní jméno' },
+      { field: 'lastName', header: 'Příjmení' },
+      { field: 'login', header: 'Login' },
+    ];
+
+    this.personService.query().subscribe((persons: HttpResponse<Array<IPersonFull>>) => {
+      this.persons = persons.body;
     });
   }
 
-  rowSelect(person: IPerson) {
-    this.router.navigate(['/admin/users/person-edit', person.id]);
+  rowSelect(user: IUser) {
+    this.router.navigate(['/admin/users/edit', user.login]);
   }
 }

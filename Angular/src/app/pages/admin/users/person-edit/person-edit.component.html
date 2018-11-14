@@ -1,0 +1,40 @@
+<div class="component-container-center">
+  <div class="form-container">
+    <form *ngIf="personForm" [formGroup]="personForm" class="form" (submit)="savePerson()">
+      <mat-form-field>
+        <input matInput [placeholder]="'email' | translate" name="email" formControlName="email" disabled/>
+      </mat-form-field>
+
+      <div formGroupName="personalData">
+        <mat-form-field>
+          <input matInput [placeholder]="'Křestní jméno' | translate" name="country" formControlName="firstName"/>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [placeholder]="'Příjmení' | translate" name="city" formControlName="lastName"/>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [placeholder]="'Datum narození' | translate" name="street" formControlName="birthDate"/>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [placeholder]="'Národnost' | translate" name="zipCode" formControlName="nationality"/>
+        </mat-form-field>
+      </div>
+
+      <div formGroupName="address">
+        <mat-form-field>
+          <input matInput [placeholder]="'Země' | translate" name="country" formControlName="country"/>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [placeholder]="'Město' | translate" name="city" formControlName="city"/>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [placeholder]="'Ulice' | translate" name="street" formControlName="street"/>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [placeholder]="'PSČ' | translate" name="zipCode" formControlName="zipCode"/>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button>{{'Uložit' | translate}}</button>
+    </form>
+  </div>
+</div>

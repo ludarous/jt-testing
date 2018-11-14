@@ -1,16 +1,28 @@
 <div class="component-container-center">
-  <p-table [value]="users" selectionMode="single">
+  <p-table [value]="persons" selectionMode="single">
     <ng-template pTemplate="header">
       <tr>
-        <th *ngFor="let col of tableCols">
-          {{col.header}}
+        <th>
+          {{'Křestní jméno' | translate}}
+        </th>
+        <th>
+          {{'Rous' | translate}}
+        </th>
+        <th>
+          {{'Email' | translate}}
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-user>
-      <tr (click)="rowSelect(user)">
-        <td *ngFor="let col of tableCols">
-          {{user[col.field]}}
+    <ng-template pTemplate="body" let-person>
+      <tr (click)="rowSelect(person)">
+        <td>
+          {{person.personalData.firstName}}
+        </td>
+        <td>
+          {{person.personalData.lastName}}
+        </td>
+        <td>
+          {{person.email}}
         </td>
       </tr>
     </ng-template>
