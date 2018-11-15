@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UsersComponent } from './activities.component';
 
-describe('TestsComponent', () => {
+describe('EventsComponent', () => {
   let component: UsersComponent;
   let fixture: ComponentFixture<UsersComponent>;
 

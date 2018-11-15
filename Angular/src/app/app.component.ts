@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from './services/user.service';
 import {Principal} from './core/auth/principal.service';
-import {EventService} from './services/event.service';
+import {EventManager} from './services/event.manager';
 import {AuthServerProvider} from './core/auth/auth-jwt.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   constructor(private authProvider: AuthServerProvider,
               private principal: Principal,
               private userService: UserService,
-              private eventService: EventService) {
+              private eventManager: EventManager) {
 
   }
 
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
     this.authProvider.login({username: 'admin', password: 'admin', rememberMe: true}).subscribe(result => {
-      this.eventService.broadcast({
+      this.eventManager.broadcast({
         name: 'authenticationSuccess',
         content: 'Sending Authentication Success'
       });
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
   }
 
   registerAuthenticationSuccess() {
-    this.eventService.subscribe('authenticationSuccess', message => {
+    this.eventManager.subscribe('authenticationSuccess', message => {
       this.principal.identity().then(account => {
         this.account = account;
       });

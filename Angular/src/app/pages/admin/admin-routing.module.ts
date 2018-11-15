@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {AdminComponent} from './admin.component';
-import {TestsComponent} from './tests/tests.component';
-import {SessionsComponent} from './sessions/sessions.component';
-import {ActivitiesListComponent} from './activities/list/activities-list.component';
-import {ActivitiesComponent} from './activities/activities.component';
 
 const routes: Routes = [
   {
@@ -24,8 +20,8 @@ const routes: Routes = [
         loadChildren: 'app/pages/admin/tests/tests.module#TestsModule',
       },
       {
-        path: 'sessions',
-        component: SessionsComponent
+        path: 'events',
+        loadChildren: 'app/pages/admin/events/events.module#EventsModule',
       },
       {
         path: 'users',

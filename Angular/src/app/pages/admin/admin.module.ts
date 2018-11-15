@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { TestsComponent } from './tests/tests.component';
-import { SessionsComponent } from './sessions/sessions.component';
 import {AdminComponent} from './admin.component';
 import {MaterialComponentsModule} from '../../shared/material-components.module';
 import {ActivityService} from '../../services/activity.service';
@@ -17,13 +16,13 @@ import {UserService} from '../../services/user.service';
 import {PersonService} from '../../services/person.service';
 import {PersonalDataService} from '../../services/personal-data.service';
 import {AddressService} from '../../services/address.service';
+import {EventService} from '../../services/event.service';
 
 
 @NgModule({
   declarations:
     [
       AdminComponent,
-      SessionsComponent,
     ],
   imports: [
     CommonModule,
@@ -34,6 +33,7 @@ import {AddressService} from '../../services/address.service';
     ActivitiesModule,
   ],
   providers: [
+    EventService,
     ActivityService,
     TestService,
     SportService,

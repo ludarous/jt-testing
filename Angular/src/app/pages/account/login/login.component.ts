@@ -3,7 +3,7 @@ import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/form
 import {environment} from '../../../../environments/environment';
 import {CustomValidators} from '../../../shared/validators/custom-validators';
 import {AuthServerProvider} from '../../../core/auth/auth-jwt.service';
-import {EventService} from '../../../services/event.service';
+import {EventManager} from '../../../services/event.manager';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   env = environment;
 
   constructor(private authProvider: AuthServerProvider,
-              private eventService: EventService) {
+              private eventManager: EventManager) {
     this.form = new FormGroup({
       username: new FormControl('', [Validators.compose([Validators.required, Validators.minLength(3), CustomValidators.loginOrEmail])]),
       password: new FormControl('', [Validators.compose([Validators.required, Validators.minLength(4)])])
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.authProvider.login(this.form.value).subscribe(() => {
-      this.eventService.broadcast({
+      this.eventManager.broadcast({
         name: 'authenticationSuccess',
         content: 'Sending Authentication Success'
       });

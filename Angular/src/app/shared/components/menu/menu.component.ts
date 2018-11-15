@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Principal} from '../../../core/auth/principal.service';
-import {EventService} from '../../../services/event.service';
+import {EventManager} from '../../../services/event.manager';
 import {User} from '../../../entities/user';
 
 @Component({
@@ -13,7 +13,7 @@ export class MenuComponent implements OnInit {
   account: User;
 
   constructor(private principal: Principal,
-              private eventService: EventService) { }
+              private eventManager: EventManager) { }
 
   ngOnInit() {
 
@@ -26,7 +26,7 @@ export class MenuComponent implements OnInit {
   }
 
   registerAuthenticationSuccess() {
-    this.eventService.subscribe('authenticationSuccess', message => {
+    this.eventManager.subscribe('authenticationSuccess', message => {
       this.principal.identity().then(account => {
         this.account = account;
       });

@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import {environment} from '../../../environments/environment';
-import {EventService} from '../../services/event.service';
+import {EventManager} from '../../services/event.manager';
 
 @Injectable({ providedIn: 'root' })
 export class AuthServerProvider {
     constructor(private http: HttpClient,
                 private $localStorage: LocalStorageService,
                 private $sessionStorage: SessionStorageService,
-                private eventService: EventService) {}
+                private eventManager: EventManager) {}
 
     getToken() {
         return this.$localStorage.retrieve('authenticationToken') || this.$sessionStorage.retrieve('authenticationToken');
@@ -29,7 +29,7 @@ export class AuthServerProvider {
         if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
           const jwt = bearerToken.slice(7, bearerToken.length);
           this.storeAuthenticationToken(jwt, credentials.rememberMe);
-          this.eventService.broadcast('authenticationSuccess');
+          this.eventManager.broadcast('authenticationSuccess');
           return jwt;
         }
       }

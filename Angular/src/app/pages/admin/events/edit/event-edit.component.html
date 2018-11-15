@@ -1,0 +1,20 @@
+<div class="component-container-center">
+  <div class="form-container">
+    <form class="form" *ngIf="eventForm" [formGroup]="eventForm" (submit)="saveTest()">
+      <mat-form-field>
+        <input matInput [placeholder]="'Název' | translate" name="name"
+               formControlName="name"
+               required/>
+        <mat-error *ngIf="eventForm.controls['name'].hasError('required')">
+          {{'Název musí být vyplněn' | translate }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Testy" [(ngModel)]="selectedTests"  [ngModelOptions]="{standalone: true}" multiple>
+          <mat-option *ngFor="let test of tests" [value]="test">{{test.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button>{{'Uložit' | translate}}</button>
+    </form>
+  </div>
+</div>

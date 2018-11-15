@@ -13,7 +13,7 @@ import {ITest} from '../../../../entities/test';
 export class TestsListComponent implements OnInit {
 
   tableCols: Array<any>;
-  tests: Array<IActivity>;
+  tests: Array<ITest>;
 
   constructor(private testService: TestService,
               private router: Router) { }
@@ -25,12 +25,12 @@ export class TestsListComponent implements OnInit {
       { field: 'description', header: 'Popis' },
     ];
 
-    this.testService.query().subscribe((tests: HttpResponse<Array<ITest>>) => {
-      this.tests = tests.body;
+    this.testService.query().subscribe((testsResponse: HttpResponse<Array<ITest>>) => {
+      this.tests = testsResponse.body;
     });
   }
 
-  rowSelect(activity: IActivity) {
-    this.router.navigate(['/admin/tests/edit', activity.id]);
+  rowSelect(test: ITest) {
+    this.router.navigate(['/admin/tests/edit', test.id]);
   }
 }

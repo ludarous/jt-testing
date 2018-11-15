@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import {EventService} from './services/event.service';
 import {CrudBaseService} from './services/crud-base.service';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {AuthServerProvider} from './core/auth/auth-jwt.service';
@@ -18,6 +17,7 @@ import {AppRoutingModule} from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SharedComponentsModule} from './shared/components/shared-components.module';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
+import {EventManager} from './services/event.manager';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -50,7 +50,7 @@ export function createTranslateLoader(http: HttpClient) {
       multi: true,
       deps: [LocalStorageService, SessionStorageService]
     },
-    EventService,
+    EventManager,
     AuthServerProvider,
     AccountService,
     Principal,
