@@ -36,6 +36,7 @@ describe('Event e2e test', () => {
         expect(eventUpdatePage.getDateInput()).toContain('2001-01-01T02:30');
         eventUpdatePage.addressSelectLastOption();
         // eventUpdatePage.testsSelectLastOption();
+        // eventUpdatePage.attachedPersonsSelectLastOption();
         eventUpdatePage.save();
         expect(eventUpdatePage.getSaveButton().isPresent()).toBeFalsy();
     });

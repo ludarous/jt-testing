@@ -48,6 +48,12 @@ public class Event implements Serializable {
                inverseJoinColumns = @JoinColumn(name = "tests_id", referencedColumnName = "id"))
     private Set<JTTest> tests = new HashSet<>();
 
+    @ManyToMany
+    @JoinTable(name = "event_attached_persons",
+               joinColumns = @JoinColumn(name = "events_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "attached_persons_id", referencedColumnName = "id"))
+    private Set<Person> attachedPersons = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -142,6 +148,31 @@ public class Event implements Serializable {
 
     public void setTests(Set<JTTest> jTTests) {
         this.tests = jTTests;
+    }
+
+    public Set<Person> getAttachedPersons() {
+        return attachedPersons;
+    }
+
+    public Event attachedPersons(Set<Person> people) {
+        this.attachedPersons = people;
+        return this;
+    }
+
+    public Event addAttachedPersons(Person person) {
+        this.attachedPersons.add(person);
+        person.getEvents().add(this);
+        return this;
+    }
+
+    public Event removeAttachedPersons(Person person) {
+        this.attachedPersons.remove(person);
+        person.getEvents().remove(this);
+        return this;
+    }
+
+    public void setAttachedPersons(Set<Person> people) {
+        this.attachedPersons = people;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

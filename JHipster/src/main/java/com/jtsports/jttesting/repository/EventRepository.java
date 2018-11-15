@@ -17,14 +17,14 @@ import java.util.Optional;
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
 
-    @Query(value = "select distinct event from Event event left join fetch event.tests",
+    @Query(value = "select distinct event from Event event left join fetch event.tests left join fetch event.attachedPersons",
         countQuery = "select count(distinct event) from Event event")
     Page<Event> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query(value = "select distinct event from Event event left join fetch event.tests")
+    @Query(value = "select distinct event from Event event left join fetch event.tests left join fetch event.attachedPersons")
     List<Event> findAllWithEagerRelationships();
 
-    @Query("select event from Event event left join fetch event.tests where event.id =:id")
+    @Query("select event from Event event left join fetch event.tests left join fetch event.attachedPersons where event.id =:id")
     Optional<Event> findOneWithEagerRelationships(@Param("id") Long id);
 
 }

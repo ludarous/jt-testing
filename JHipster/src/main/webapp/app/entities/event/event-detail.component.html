@@ -25,6 +25,12 @@
                         <a [routerLink]="['/jt-test', tests?.id, 'view' ]">{{tests.name}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
+                <dt><span jhiTranslate="jtTestingApp.event.attachedPersons">Attached Persons</span></dt>
+                <dd>
+                    <span *ngFor="let attachedPersons of event.attachedPersons; let last = last">
+                        <a [routerLink]="['/person', attachedPersons?.id, 'view' ]">{{attachedPersons.email}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
             </dl>
 
             <button type="submit"

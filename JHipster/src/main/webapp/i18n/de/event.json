@@ -21,7 +21,8 @@
             "date": "Date",
             "eventResults": "Event Results",
             "address": "Address",
-            "tests": "Tests"
+            "tests": "Tests",
+            "attachedPersons": "Attached Persons"
         }
     }
 }

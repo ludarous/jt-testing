@@ -17,6 +17,13 @@
             "otherEntityField": "id",
             "ownerSide": true,
             "otherEntityRelationshipName": "person"
+        },
+        {
+            "relationshipName": "events",
+            "otherEntityName": "event",
+            "relationshipType": "many-to-many",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "attachedPersons"
         }
     ],
     "fields": [

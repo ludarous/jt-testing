@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
 import { IEventResult } from 'app/shared/model//event-result.model';
 import { IJTTest } from 'app/shared/model//jt-test.model';
+import { IPerson } from 'app/shared/model//person.model';
 
 export interface IEvent {
     id?: number;
@@ -10,6 +11,7 @@ export interface IEvent {
     addressStreet?: string;
     addressId?: number;
     tests?: IJTTest[];
+    attachedPersons?: IPerson[];
 }
 
 export class Event implements IEvent {
@@ -20,6 +22,7 @@ export class Event implements IEvent {
         public eventResults?: IEventResult[],
         public addressStreet?: string,
         public addressId?: number,
-        public tests?: IJTTest[]
+        public tests?: IJTTest[],
+        public attachedPersons?: IPerson[]
     ) {}
 }

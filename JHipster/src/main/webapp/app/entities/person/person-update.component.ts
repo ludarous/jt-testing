@@ -10,6 +10,8 @@ import { IPersonalData } from 'app/shared/model/personal-data.model';
 import { PersonalDataService } from 'app/entities/personal-data';
 import { IAddress } from 'app/shared/model/address.model';
 import { AddressService } from 'app/entities/address';
+import { IEvent } from 'app/shared/model/event.model';
+import { EventService } from 'app/entities/event';
 
 @Component({
     selector: 'jhi-person-update',
@@ -23,11 +25,14 @@ export class PersonUpdateComponent implements OnInit {
 
     addresses: IAddress[];
 
+    events: IEvent[];
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private personService: PersonService,
         private personalDataService: PersonalDataService,
         private addressService: AddressService,
+        private eventService: EventService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -63,6 +68,12 @@ export class PersonUpdateComponent implements OnInit {
                         (subRes: HttpErrorResponse) => this.onError(subRes.message)
                     );
                 }
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.eventService.query().subscribe(
+            (res: HttpResponse<IEvent[]>) => {
+                this.events = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -104,6 +115,21 @@ export class PersonUpdateComponent implements OnInit {
 
     trackAddressById(index: number, item: IAddress) {
         return item.id;
+    }
+
+    trackEventById(index: number, item: IEvent) {
+        return item.id;
+    }
+
+    getSelected(selectedVals: Array<any>, option: any) {
+        if (selectedVals) {
+            for (let i = 0; i < selectedVals.length; i++) {
+                if (option.id === selectedVals[i].id) {
+                    return selectedVals[i];
+                }
+            }
+        }
+        return option;
     }
     get person() {
         return this._person;

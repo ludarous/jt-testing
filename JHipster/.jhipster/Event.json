@@ -1,18 +1,6 @@
 {
-    "name": "Event",
-    "fields": [
-        {
-            "fieldName": "name",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "date",
-            "fieldType": "ZonedDateTime"
-        }
-    ],
+    "fluentMethods": true,
+    "clientRootFolder": "",
     "relationships": [
         {
             "relationshipType": "one-to-many",
@@ -33,16 +21,34 @@
             "otherEntityName": "jTTest",
             "otherEntityField": "name",
             "ownerSide": true
+        },
+        {
+            "relationshipName": "attachedPersons",
+            "otherEntityName": "person",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "email",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "events"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "ZonedDateTime"
         }
     ],
     "changelogDate": "20180919081349",
-    "entityTableName": "event",
     "dto": "mapstruct",
-    "pagination": "pagination",
+    "searchEngine": "elasticsearch",
     "service": "serviceImpl",
+    "entityTableName": "event",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*",
-    "searchEngine": "elasticsearch"
+    "pagination": "pagination"
 }

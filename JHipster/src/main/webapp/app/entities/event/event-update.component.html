@@ -41,6 +41,12 @@
                         <option [ngValue]="getSelected(event.tests, jTTestOption)" *ngFor="let jTTestOption of jttests; trackBy: trackJTTestById">{{jTTestOption.name}}</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label jhiTranslate="jtTestingApp.event.attachedPersons" for="field_attachedPersons">Attached Persons</label>
+                    <select class="form-control" id="field_attachedPersons" multiple name="attachedPersons" [(ngModel)]="event.attachedPersons">
+                        <option [ngValue]="getSelected(event.attachedPersons, personOption)" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.email}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

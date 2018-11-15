@@ -1,11 +1,14 @@
 package com.jtsports.jttesting.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -38,6 +41,9 @@ public class Person implements Serializable {
     @OneToOne
     @JoinColumn(unique = true)
     private User user;
+    @ManyToMany(mappedBy = "attachedPersons")
+    @JsonIgnore
+    private Set<Event> events = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -86,10 +92,18 @@ public class Person implements Serializable {
     public void setAddress(Address address) {
         this.address = address;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     public User getUser() {
         return user;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public Person events(Set<Event> events) {
+        this.events = events;
+        return this;
     }
 
     public Person user(User user) {
@@ -97,9 +111,26 @@ public class Person implements Serializable {
         return this;
     }
 
+    public Person addEvents(Event event) {
+        this.events.add(event);
+        event.getAttachedPersons().add(this);
+        return this;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Person removeEvents(Event event) {
+        this.events.remove(event);
+        event.getAttachedPersons().remove(this);
+        return this;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

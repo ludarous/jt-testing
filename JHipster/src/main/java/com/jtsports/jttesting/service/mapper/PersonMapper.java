@@ -19,6 +19,7 @@ public interface PersonMapper extends EntityMapper<PersonDTO, Person> {
     @Mapping(source = "personalDataId", target = "personalData")
     @Mapping(source = "addressId", target = "address")
     @Mapping(source = "userId", target = "user")
+    @Mapping(target = "events", ignore = true)
     Person toEntity(PersonDTO personDTO);
 
     default Person fromId(Long id) {

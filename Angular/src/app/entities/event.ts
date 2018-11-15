@@ -1,4 +1,5 @@
 import {ITest} from './test';
+import {IPerson} from './person';
 
 export interface IEvent {
   id?: number;
@@ -9,6 +10,7 @@ export interface IEvent {
   addressStreet?: string;
   
   tests?: Array<ITest>;
+  attachedPersons?: Array<IPerson>;
   
 }
 
@@ -21,4 +23,5 @@ export class Event implements IEvent {
   addressStreet: string;
 
   tests: Array<ITest>;
+  attachedPersons: Array<IPerson>;
 }

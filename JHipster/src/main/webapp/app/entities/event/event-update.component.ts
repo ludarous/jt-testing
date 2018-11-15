@@ -12,6 +12,8 @@ import { IAddress } from 'app/shared/model/address.model';
 import { AddressService } from 'app/entities/address';
 import { IJTTest } from 'app/shared/model/jt-test.model';
 import { JTTestService } from 'app/entities/jt-test';
+import { IPerson } from 'app/shared/model/person.model';
+import { PersonService } from 'app/entities/person';
 
 @Component({
     selector: 'jhi-event-update',
@@ -24,6 +26,8 @@ export class EventUpdateComponent implements OnInit {
     addresses: IAddress[];
 
     jttests: IJTTest[];
+
+    people: IPerson[];
     date: string;
 
     constructor(
@@ -31,6 +35,7 @@ export class EventUpdateComponent implements OnInit {
         private eventService: EventService,
         private addressService: AddressService,
         private jTTestService: JTTestService,
+        private personService: PersonService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -48,6 +53,12 @@ export class EventUpdateComponent implements OnInit {
         this.jTTestService.query().subscribe(
             (res: HttpResponse<IJTTest[]>) => {
                 this.jttests = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.personService.query().subscribe(
+            (res: HttpResponse<IPerson[]>) => {
+                this.people = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -89,6 +100,10 @@ export class EventUpdateComponent implements OnInit {
     }
 
     trackJTTestById(index: number, item: IJTTest) {
+        return item.id;
+    }
+
+    trackPersonById(index: number, item: IPerson) {
         return item.id;
     }
 

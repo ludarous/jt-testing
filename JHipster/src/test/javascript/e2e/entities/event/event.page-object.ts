@@ -21,6 +21,7 @@ export class EventUpdatePage {
     dateInput = element(by.id('field_date'));
     addressSelect = element(by.id('field_address'));
     testsSelect = element(by.id('field_tests'));
+    attachedPersonsSelect = element(by.id('field_attachedPersons'));
 
     getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -78,6 +79,25 @@ export class EventUpdatePage {
 
     getTestsSelectedOption() {
         return this.testsSelect.element(by.css('option:checked')).getText();
+    }
+
+    attachedPersonsSelectLastOption(): promise.Promise<void> {
+        return this.attachedPersonsSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    attachedPersonsSelectOption(option): promise.Promise<void> {
+        return this.attachedPersonsSelect.sendKeys(option);
+    }
+
+    getAttachedPersonsSelect(): ElementFinder {
+        return this.attachedPersonsSelect;
+    }
+
+    getAttachedPersonsSelectedOption() {
+        return this.attachedPersonsSelect.element(by.css('option:checked')).getText();
     }
 
     save(): promise.Promise<void> {

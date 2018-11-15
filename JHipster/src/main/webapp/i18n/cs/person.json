@@ -19,7 +19,8 @@
             },
             "email": "Email",
             "personalData": "Personal Data",
-            "address": "Address"
+            "address": "Address",
+            "events": "Events"
         }
     }
 }
