@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -52,12 +53,32 @@ public class PersonResource {
      */
     @PostMapping("/people")
     @Timed
-    public ResponseEntity<PersonDTO> createPerson(@RequestBody PersonDTO personDTO) throws URISyntaxException {
+    public ResponseEntity<PersonDTO> createPerson(@Valid @RequestBody PersonDTO personDTO) throws URISyntaxException {
         log.debug("REST request to save Person : {}", personDTO);
         if (personDTO.getId() != null) {
             throw new BadRequestAlertException("A new person cannot already have an ID", ENTITY_NAME, "idexists");
         }
         PersonDTO result = personService.save(personDTO);
+        return ResponseEntity.created(new URI("/api/people/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * POST  /people/full : Create a new person.
+     *
+     * @param personFullDTO the personFullDTO to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new personDTO, or with status 400 (Bad Request) if the person has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/people/full")
+    @Timed
+    public ResponseEntity<PersonFullDTO> createFullPerson(@Valid @RequestBody PersonFullDTO personFullDTO) throws URISyntaxException {
+        log.debug("REST request to save Person : {}", personFullDTO);
+        if (personFullDTO.getId() != null) {
+            throw new BadRequestAlertException("A new person cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        PersonFullDTO result = personService.saveFull(personFullDTO);
         return ResponseEntity.created(new URI("/api/people/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -74,7 +95,7 @@ public class PersonResource {
      */
     @PutMapping("/people")
     @Timed
-    public ResponseEntity<PersonDTO> updatePerson(@RequestBody PersonDTO personDTO) throws URISyntaxException {
+    public ResponseEntity<PersonDTO> updatePerson(@Valid @RequestBody PersonDTO personDTO) throws URISyntaxException {
         log.debug("REST request to update Person : {}", personDTO);
         if (personDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -100,6 +121,7 @@ public class PersonResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+
     /**
      * GET  /people/:id : get the "id" person.
      *
@@ -112,6 +134,20 @@ public class PersonResource {
         log.debug("REST request to get Person : {}", id);
         Optional<PersonDTO> personDTO = personService.findOne(id);
         return ResponseUtil.wrapOrNotFound(personDTO);
+    }
+
+    /**
+     * GET  /people/full/:id : get the "id" person.
+     *
+     * @param id the id of the personDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the personDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/people/full/{id}")
+    @Timed
+    public ResponseEntity<PersonFullDTO> getPersonFull(@PathVariable Long id) {
+        log.debug("REST request to get Person : {}", id);
+        Optional<PersonFullDTO> personFullDTO = personService.findOneFull(id);
+        return ResponseUtil.wrapOrNotFound(personFullDTO);
     }
 
     /**

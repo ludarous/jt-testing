@@ -48,6 +48,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = JtTestingApp.class)
 public class PersonResourceIntTest {
 
+    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
+    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
+
     @Autowired
     private PersonRepository personRepository;
 
@@ -101,7 +104,8 @@ public class PersonResourceIntTest {
      * if they test an entity which requires the current entity.
      */
     public static Person createEntity(EntityManager em) {
-        Person person = new Person();
+        Person person = new Person()
+            .email(DEFAULT_EMAIL);
         return person;
     }
 
@@ -126,6 +130,7 @@ public class PersonResourceIntTest {
         List<Person> personList = personRepository.findAll();
         assertThat(personList).hasSize(databaseSizeBeforeCreate + 1);
         Person testPerson = personList.get(personList.size() - 1);
+        assertThat(testPerson.getEmail()).isEqualTo(DEFAULT_EMAIL);
 
         // Validate the Person in Elasticsearch
         verify(mockPersonSearchRepository, times(1)).save(testPerson);
@@ -156,6 +161,25 @@ public class PersonResourceIntTest {
 
     @Test
     @Transactional
+    public void checkEmailIsRequired() throws Exception {
+        int databaseSizeBeforeTest = personRepository.findAll().size();
+        // set the field null
+        person.setEmail(null);
+
+        // Create the Person, which fails.
+        PersonDTO personDTO = personMapper.toDto(person);
+
+        restPersonMockMvc.perform(post("/api/people")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(personDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Person> personList = personRepository.findAll();
+        assertThat(personList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllPeople() throws Exception {
         // Initialize the database
         personRepository.saveAndFlush(person);
@@ -164,7 +188,8 @@ public class PersonResourceIntTest {
         restPersonMockMvc.perform(get("/api/people?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(person.getId().intValue())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(person.getId().intValue())))
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())));
     }
     
 
@@ -178,7 +203,8 @@ public class PersonResourceIntTest {
         restPersonMockMvc.perform(get("/api/people/{id}", person.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(person.getId().intValue()));
+            .andExpect(jsonPath("$.id").value(person.getId().intValue()))
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()));
     }
     @Test
     @Transactional
@@ -200,6 +226,8 @@ public class PersonResourceIntTest {
         Person updatedPerson = personRepository.findById(person.getId()).get();
         // Disconnect from session so that the updates on updatedPerson are not directly saved in db
         em.detach(updatedPerson);
+        updatedPerson
+            .email(UPDATED_EMAIL);
         PersonDTO personDTO = personMapper.toDto(updatedPerson);
 
         restPersonMockMvc.perform(put("/api/people")
@@ -211,6 +239,7 @@ public class PersonResourceIntTest {
         List<Person> personList = personRepository.findAll();
         assertThat(personList).hasSize(databaseSizeBeforeUpdate);
         Person testPerson = personList.get(personList.size() - 1);
+        assertThat(testPerson.getEmail()).isEqualTo(UPDATED_EMAIL);
 
         // Validate the Person in Elasticsearch
         verify(mockPersonSearchRepository, times(1)).save(testPerson);
@@ -270,7 +299,8 @@ public class PersonResourceIntTest {
         restPersonMockMvc.perform(get("/api/_search/people?query=id:" + person.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(person.getId().intValue())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(person.getId().intValue())))
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())));
     }
 
     @Test

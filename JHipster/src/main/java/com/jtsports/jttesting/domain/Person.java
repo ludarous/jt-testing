@@ -2,6 +2,7 @@ package com.jtsports.jttesting.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
@@ -22,6 +23,10 @@ public class Person implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @NotNull
+    @Column(name = "email", nullable = false)
+    private String email;
+
     @OneToOne
     @JoinColumn(unique = true)
     private PersonalData personalData;
@@ -41,6 +46,19 @@ public class Person implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Person email(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public PersonalData getPersonalData() {
@@ -107,6 +125,7 @@ public class Person implements Serializable {
     public String toString() {
         return "Person{" +
             "id=" + getId() +
+            ", email='" + getEmail() + "'" +
             "}";
     }
 }

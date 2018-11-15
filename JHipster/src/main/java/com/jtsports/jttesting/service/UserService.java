@@ -1,10 +1,11 @@
 package com.jtsports.jttesting.service;
 
-import com.jtsports.jttesting.domain.Authority;
-import com.jtsports.jttesting.domain.User;
+import com.jtsports.jttesting.domain.*;
 import com.jtsports.jttesting.repository.AuthorityRepository;
 import com.jtsports.jttesting.config.Constants;
+import com.jtsports.jttesting.repository.PersonRepository;
 import com.jtsports.jttesting.repository.UserRepository;
+import com.jtsports.jttesting.repository.search.PersonSearchRepository;
 import com.jtsports.jttesting.repository.search.UserSearchRepository;
 import com.jtsports.jttesting.security.AuthoritiesConstants;
 import com.jtsports.jttesting.security.SecurityUtils;
@@ -43,11 +44,17 @@ public class UserService {
 
     private final AuthorityRepository authorityRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserSearchRepository userSearchRepository, AuthorityRepository authorityRepository) {
+    private final PersonRepository personRepository;
+
+    private final PersonSearchRepository personSearchRepository;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserSearchRepository userSearchRepository, AuthorityRepository authorityRepository, PersonRepository personRepository, PersonSearchRepository personSearchRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.userSearchRepository = userSearchRepository;
         this.authorityRepository = authorityRepository;
+        this.personRepository = personRepository;
+        this.personSearchRepository = personSearchRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -59,6 +66,10 @@ public class UserService {
                 user.setActivationKey(null);
                 userSearchRepository.save(user);
                 log.debug("Activated user: {}", user);
+
+                //Attach Person
+                this.attachPerson(user);
+
                 return user;
             });
     }
@@ -163,6 +174,39 @@ public class UserService {
                 userSearchRepository.save(user);
                 log.debug("Changed Information for User: {}", user);
             });
+    }
+
+    public void attachPerson(User user) {
+        Optional<Person> personOptional = personRepository.findByUserId(user.getId());
+        if (personOptional.isPresent()) {
+            log.info("Person for user already exists User: {}", user);
+            return;
+        }
+
+        personOptional = personRepository.findByEmail(user.getEmail());
+        if (personOptional.isPresent()) {
+            log.info("Person for user found by email: {}", user);
+            Person person = personOptional.get();
+            person.setUser(user);
+            person = personRepository.save(person);
+            personSearchRepository.save(person);
+            return;
+        }
+
+        Person person = new Person();
+        PersonalData personalData = new PersonalData();
+        personalData.setFirstName(user.getFirstName());
+        personalData.setLastName(user.getLastName());
+
+        person.setPersonalData(personalData);
+        person.setAddress(new Address());
+        person.setUser(user);
+
+        person.setEmail(user.getEmail());
+
+        person = personRepository.save(person);
+        personSearchRepository.save(person);
+
     }
 
     /**

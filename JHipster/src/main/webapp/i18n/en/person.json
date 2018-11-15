@@ -17,6 +17,7 @@
             "detail": {
                 "title": "Person"
             },
+            "email": "Email",
             "personalData": "Personal Data",
             "address": "Address"
         }

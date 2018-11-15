@@ -17,11 +17,20 @@ export class PersonUpdatePage {
     pageTitle = element(by.id('jhi-person-heading'));
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
+    emailInput = element(by.id('field_email'));
     personalDataSelect = element(by.id('field_personalData'));
     addressSelect = element(by.id('field_address'));
 
     getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
+    }
+
+    setEmailInput(email): promise.Promise<void> {
+        return this.emailInput.sendKeys(email);
+    }
+
+    getEmailInput() {
+        return this.emailInput.getAttribute('value');
     }
 
     personalDataSelectLastOption(): promise.Promise<void> {

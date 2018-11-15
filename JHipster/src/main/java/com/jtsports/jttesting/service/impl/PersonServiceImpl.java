@@ -1,13 +1,16 @@
 package com.jtsports.jttesting.service.impl;
 
+import com.jtsports.jttesting.domain.User;
+import com.jtsports.jttesting.repository.AddressRepository;
+import com.jtsports.jttesting.service.AddressService;
 import com.jtsports.jttesting.service.PersonService;
 import com.jtsports.jttesting.domain.Person;
 import com.jtsports.jttesting.repository.PersonRepository;
 import com.jtsports.jttesting.repository.search.PersonSearchRepository;
-import com.jtsports.jttesting.service.dto.PersonDTO;
-import com.jtsports.jttesting.service.dto.PersonFullDTO;
-import com.jtsports.jttesting.service.mapper.PersonFullMapper;
-import com.jtsports.jttesting.service.mapper.PersonMapper;
+import com.jtsports.jttesting.service.PersonalDataService;
+import com.jtsports.jttesting.service.UserService;
+import com.jtsports.jttesting.service.dto.*;
+import com.jtsports.jttesting.service.mapper.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,14 +35,32 @@ public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository personRepository;
 
+    private final AddressService addressService;
+
+    private final AddressMapper addressMapper;
+
+    private final UserService userService;
+
+    private final UserMapper userMapper;
+
+    private final PersonalDataService personalDataService;
+
+    private final PersonalDataMapper personalDataMapper;
+
     private final PersonMapper personMapper;
 
     private final PersonFullMapper personFullMapper;
 
     private final PersonSearchRepository personSearchRepository;
 
-    public PersonServiceImpl(PersonRepository personRepository, PersonMapper personMapper, PersonFullMapper personFullMapper, PersonSearchRepository personSearchRepository) {
+    public PersonServiceImpl(PersonRepository personRepository, AddressRepository addressRepository, AddressService addressService, AddressMapper addressMapper, UserService userService, UserMapper userMapper, PersonalDataService personalDataService, PersonalDataMapper personalDataMapper, PersonMapper personMapper, PersonFullMapper personFullMapper, PersonSearchRepository personSearchRepository) {
         this.personRepository = personRepository;
+        this.addressService = addressService;
+        this.addressMapper = addressMapper;
+        this.userService = userService;
+        this.userMapper = userMapper;
+        this.personalDataService = personalDataService;
+        this.personalDataMapper = personalDataMapper;
         this.personMapper = personMapper;
         this.personFullMapper = personFullMapper;
         this.personSearchRepository = personSearchRepository;
@@ -91,6 +112,13 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public Optional<PersonFullDTO> findOneFull(Long id) {
+        log.debug("Request to get Person : {}", id);
+        return personRepository.findById(id)
+            .map(personFullMapper::toDto);
+    }
+
+    @Override
     public Optional<PersonDTO> findOneByUserId(Long userId) {
         log.debug("Request to get Person by userId : {}", userId);
         return personRepository.findByUserId(userId)
@@ -122,5 +150,40 @@ public class PersonServiceImpl implements PersonService {
         log.debug("Request to search for a page of People for query {}", query);
         return personSearchRepository.search(queryStringQuery(query), pageable)
             .map(personMapper::toDto);
+    }
+
+    @Override
+    public PersonFullDTO saveFull(PersonFullDTO personFullDTO) {
+        Person person = new Person();
+
+        if(personFullDTO.getId() != null) {
+            Optional<Person> personOptional = this.personRepository.findById(personFullDTO.getId());
+            if(personOptional.isPresent()) {
+                person = personOptional.get();
+            }
+        }
+
+
+        if(personFullDTO.getAddress() != null) {
+            AddressDTO addressDTO = this.addressService.save(personFullDTO.getAddress());
+            person.setAddress(addressMapper.toEntity(addressDTO));
+        }
+
+        if(personFullDTO.getPersonalData() != null) {
+            PersonalDataDTO personalDataDTO = this.personalDataService.save(personFullDTO.getPersonalData());
+            person.setPersonalData(personalDataMapper.toEntity(personalDataDTO));
+        }
+
+        if(personFullDTO.getUser() != null) {
+            User user = this.userService.createUser(personFullDTO.getUser());
+            person.setUser(user);
+        }
+
+        person.setEmail(personFullDTO.getEmail());
+
+        person = personRepository.save(person);
+        PersonDTO result = personMapper.toDto(person);
+        personSearchRepository.save(person);
+        return personFullMapper.toDto(person);
     }
 }

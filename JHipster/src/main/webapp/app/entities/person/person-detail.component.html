@@ -5,6 +5,10 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jtTestingApp.person.email">Email</span></dt>
+                <dd>
+                    <span>{{person.email}}</span>
+                </dd>
                 <dt><span jhiTranslate="jtTestingApp.person.personalData">Personal Data</span></dt>
                 <dd>
                     <div *ngIf="person.personalDataId">

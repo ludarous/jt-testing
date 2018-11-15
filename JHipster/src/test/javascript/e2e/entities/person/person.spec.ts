@@ -30,6 +30,8 @@ describe('Person e2e test', () => {
 
     it('should create and save People', () => {
         personComponentsPage.clickOnCreateButton();
+        personUpdatePage.setEmailInput('email');
+        expect(personUpdatePage.getEmailInput()).toMatch('email');
         personUpdatePage.personalDataSelectLastOption();
         personUpdatePage.addressSelectLastOption();
         personUpdatePage.save();

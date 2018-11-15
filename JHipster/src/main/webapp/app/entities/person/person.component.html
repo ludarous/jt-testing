@@ -30,6 +30,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="email"><span jhiTranslate="jtTestingApp.person.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="personalDataId"><span jhiTranslate="jtTestingApp.person.personalData">Personal Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="addressId"><span jhiTranslate="jtTestingApp.person.address">Address</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
@@ -38,6 +39,7 @@
             <tbody>
             <tr *ngFor="let person of people ;trackBy: trackId">
                 <td><a [routerLink]="['/person', person.id, 'view' ]">{{person.id}}</a></td>
+                <td>{{person.email}}</td>
                 <td>
                     <div *ngIf="person.personalDataId">
                         <a [routerLink]="['../personal-data', person.personalDataId , 'view' ]" >{{person.personalDataId}}</a>

@@ -1,8 +1,6 @@
 package com.jtsports.jttesting.service.mapper;
 
 import com.jtsports.jttesting.domain.Person;
-import com.jtsports.jttesting.domain.User;
-import com.jtsports.jttesting.service.dto.PersonDTO;
 import com.jtsports.jttesting.service.dto.PersonFullDTO;
 import org.mapstruct.*;
 
@@ -15,11 +13,13 @@ public interface PersonFullMapper extends EntityMapper<PersonFullDTO, Person> {
     @Mapping(source = "personalData", target = "personalData", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
     @Mapping(source = "address", target = "address", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
     @Mapping(source = "user", target = "user", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
+    @Mapping(source = "email", target = "email")
     PersonFullDTO toDto(Person person);
 
     @Mapping(source = "personalData", target = "personalData", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
     @Mapping(source = "address", target = "address", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
     @Mapping(source = "user", target = "user", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
+    @Mapping(source = "email", target = "email")
     Person toEntity(PersonFullDTO personFullDTO);
 
     default Person fromId(Long id) {

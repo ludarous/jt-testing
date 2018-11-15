@@ -10,6 +10,8 @@ public class PersonFullDTO implements Serializable {
 
     private Long id;
 
+    private String email;
+
     private PersonalDataDTO personalData;
 
     private AddressDTO address;
@@ -48,6 +50,14 @@ public class PersonFullDTO implements Serializable {
         this.user = user;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -77,4 +87,5 @@ public class PersonFullDTO implements Serializable {
             ", address=" + getAddress().toString() +
             "}";
     }
+
 }

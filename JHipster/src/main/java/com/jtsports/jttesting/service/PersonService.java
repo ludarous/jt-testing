@@ -39,6 +39,14 @@ public interface PersonService {
     Optional<PersonDTO> findOne(Long id);
 
     /**
+     * Get the "id" person.
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */
+    Optional<PersonFullDTO> findOneFull(Long id);
+
+    /**
      * Get the "userId" person.
      *
      * @param userId the userId of the entity
@@ -62,4 +70,7 @@ public interface PersonService {
      * @return the list of entities
      */
     Page<PersonDTO> search(String query, Pageable pageable);
+
+
+    PersonFullDTO saveFull(PersonFullDTO personFullDTO);
 }
