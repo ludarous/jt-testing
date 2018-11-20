@@ -12,6 +12,9 @@ import {ISport} from '../../../../entities/sport';
 import {TestService} from '../../../../services/test.service';
 import {EventService} from '../../../../services/event.service';
 import {IEvent, Event} from '../../../../entities/event';
+import {IPersonFull} from '../../../../entities/person-full';
+import {PersonService} from '../../../../services/person.service';
+import {Person} from '../../../../entities/person';
 
 @Component({
   selector: 'app-events-edit',
@@ -25,10 +28,14 @@ export class EventEditComponent implements OnInit {
   eventId: number;
 
   tests: Array<ITest>;
+  persons: Array<IPersonFull>;
+
   selectedTests: Array<ITest>;
+  selectedPersons: Array<IPersonFull>;
 
   constructor(private activatedRoute: ActivatedRoute,
               private eventService: EventService,
+              private personService: PersonService,
               private testService: TestService) { }
 
   ngOnInit() {
@@ -38,20 +45,22 @@ export class EventEditComponent implements OnInit {
       this.eventId = +params['id'];
 
       const getTests$ = this.testService.query();
+      const getPersons$ = this.personService.queryFull();
       const getEvent$ = this.getEvent(this.eventId);
 
-      zip(getEvent$, getTests$).subscribe(([event, tests]) => {
+      zip(getEvent$, getTests$, getPersons$).subscribe(([event, tests, persons]) => {
         this.event = event;
         this.tests = tests.body;
+        this.persons = persons.body;
         
-        this.setEventForm(this.event, this.tests);
+        this.setEventForm(this.event, this.tests, this.persons);
       });
 
     });
   }
   
 
-  setEventForm(event: IEvent, tests: Array<ITest>) {
+  setEventForm(event: IEvent, tests: Array<ITest>, persons: Array<IPersonFull>) {
 
     this.eventForm = new FormGroup({
       id: new FormControl(event.id),
@@ -61,6 +70,10 @@ export class EventEditComponent implements OnInit {
 
     if (event.tests) {
       this.selectedTests = tests.filter((t) => event.tests.some((st) => st.id === t.id));
+    }
+
+    if (event.tests) {
+      this.selectedPersons = persons.filter((p) => event.attachedPersons.some((sp) => sp.id === p.id));
     }
     
   }
@@ -77,10 +90,11 @@ export class EventEditComponent implements OnInit {
       }
 
       eventToSave.tests = this.selectedTests;
+      eventToSave.attachedPersons = this.selectedPersons.map(pf => Person.createPerson(pf));
 
       saveEvent$.subscribe((eventResponse: HttpResponse<IEvent>) => {
         this.event = eventResponse.body;
-        this.setEventForm(this.event, this.tests);
+        this.setEventForm(this.event, this.tests, this.persons);
       });
     }
   }

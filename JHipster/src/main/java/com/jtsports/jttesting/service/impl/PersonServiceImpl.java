@@ -90,7 +90,21 @@ public class PersonServiceImpl implements PersonService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<PersonFullDTO> findAll(Pageable pageable) {
+    public Page<PersonDTO> findAll(Pageable pageable) {
+        log.debug("Request to get all People");
+        return personRepository.findAll(pageable)
+            .map(personMapper::toDto);
+    }
+
+    /**
+     * Get all the people.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Page<PersonFullDTO> findAllFull(Pageable pageable) {
         log.debug("Request to get all People");
         return personRepository.findAll(pageable)
             .map(personFullMapper::toDto);

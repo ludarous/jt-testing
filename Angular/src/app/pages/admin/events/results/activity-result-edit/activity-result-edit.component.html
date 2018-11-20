@@ -1,0 +1,27 @@
+<div class="component-container-center">
+  <div class="form-container">
+    <div class="activity-name">{{activity.name}}</div>
+    <form class="form" *ngIf="activityResultForm" [formGroup]="activityResultForm" (submit)="saveActivityResult()">
+      <mat-form-field>
+        <input matInput [placeholder]="'Hlavní výsledek' | translate" name="primaryResultValue"
+               formControlName="primaryResultValue"
+               required/>
+        <span matSuffix>{{activity.primaryResultValueUnit.value}}</span>
+        <mat-error *ngIf="activityResultForm.controls['primaryResultValue'].hasError('required')">
+          {{'Hodnota hlavního výsledku musí být vyplněna' | translate }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'Vedlejší výsledek' | translate" name="secondaryResultValue"
+               formControlName="secondaryResultValue"
+               required/>
+        <span matSuffix>{{activity.secondaryResultValueUnit.value}}</span>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput cdkTextareaAutosize [placeholder]="'Poznámka' | translate" name="note"
+                  formControlName="note"></textarea>
+      </mat-form-field>
+      <button mat-raised-button>{{'Uložit' | translate}}</button>
+    </form>
+  </div>
+</div>

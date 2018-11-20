@@ -7,6 +7,7 @@ import {IAddress} from '../entities/address';
 import {IPerson} from '../entities/person';
 import {Observable} from 'rxjs';
 import {IPersonFull, PersonFull} from '../entities/person-full';
+import {createRequestOption} from '../utils/request-util';
 
 @Injectable()
 export class PersonService extends CrudBaseService<IPerson> {
@@ -24,5 +25,10 @@ export class PersonService extends CrudBaseService<IPerson> {
 
   findFull(personId: string | number): Observable<HttpResponse<IPersonFull>> {
     return this.httpClient.get<IPersonFull>(`${this.resourceUrl}/full/${personId}`, { observe: 'response' });
+  }
+
+  queryFull(req?: any): Observable<HttpResponse<IPersonFull[]>> {
+    const options = createRequestOption(req);
+    return this.httpClient.get<IPersonFull[]>(`${this.resourceUrl}/full/`, { params: options, observe: 'response' });
   }
 }

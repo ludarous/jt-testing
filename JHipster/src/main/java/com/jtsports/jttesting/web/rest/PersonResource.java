@@ -114,9 +114,24 @@ public class PersonResource {
      */
     @GetMapping("/people")
     @Timed
-    public ResponseEntity<List<PersonFullDTO>> getAllPeople(Pageable pageable) {
+    public ResponseEntity<List<PersonDTO>> getAllPeople(Pageable pageable) {
         log.debug("REST request to get a page of People");
-        Page<PersonFullDTO> page = personService.findAll(pageable);
+        Page<PersonDTO> page = personService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/people");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /people/full : get all the people.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of people in body
+     */
+    @GetMapping("/people/full")
+    @Timed
+    public ResponseEntity<List<PersonFullDTO>> getAllPeopleFull(Pageable pageable) {
+        log.debug("REST request to get a page of People");
+        Page<PersonFullDTO> page = personService.findAllFull(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/people");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

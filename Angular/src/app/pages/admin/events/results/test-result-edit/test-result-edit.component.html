@@ -1,0 +1,8 @@
+<div class="component-container-center">
+  <div class="form-container">
+    <div class="event-name">{{event.name}}</div>
+    <div *ngFor="let activity of test.activities">
+      <app-activity-result-edit [activity]="activity" [testResult]="testsResult" [activityResult]="activityResult"></app-activity-result-edit>
+    </div>
+  </div>
+</div>

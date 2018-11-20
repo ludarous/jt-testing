@@ -12,6 +12,9 @@ import {EventEditComponent} from './edit/event-edit.component';
 import {EventsRoutingModule} from './events-routing.module';
 import {MaterialComponentsModule} from '../../../shared/material-components.module';
 import {PrimeNgComponentsModule} from '../../../shared/primeng-components.module';
+import { EventResultCreateComponent } from './results/event-result-create/event-result-create.component';
+import { TestResultEditComponent } from './results/test-result-edit/test-result-edit.component';
+import { ActivityResultEditComponent } from './results/activity-result-edit/activity-result-edit.component';
 
 
 @NgModule({
@@ -20,6 +23,9 @@ import {PrimeNgComponentsModule} from '../../../shared/primeng-components.module
     EventListComponent,
     EventEditComponent,
     TestCategoriesComponent,
+    EventResultCreateComponent,
+    TestResultEditComponent,
+    ActivityResultEditComponent,
   ],
   imports: [
     CommonModule,

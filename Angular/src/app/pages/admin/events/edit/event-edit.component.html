@@ -14,7 +14,13 @@
           <mat-option *ngFor="let test of tests" [value]="test">{{test.name}}</mat-option>
         </mat-select>
       </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Uživatelé" [(ngModel)]="selectedPersons"  [ngModelOptions]="{standalone: true}" multiple>
+          <mat-option *ngFor="let person of persons" [value]="person">{{person.personalData.firstName + ' ' + person.personalData.lastName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
       <button mat-raised-button>{{'Uložit' | translate}}</button>
     </form>
+    <button mat-raised-button [routerLink]="['results/create']">{{'Vytvořit výlsedek' | translate}}</button>
   </div>
 </div>

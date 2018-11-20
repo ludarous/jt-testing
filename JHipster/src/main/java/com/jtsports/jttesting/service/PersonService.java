@@ -27,7 +27,15 @@ public interface PersonService {
      * @param pageable the pagination information
      * @return the list of entities
      */
-    Page<PersonFullDTO> findAll(Pageable pageable);
+    Page<PersonDTO> findAll(Pageable pageable);
+
+    /**
+     * Get all the people.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    Page<PersonFullDTO> findAllFull(Pageable pageable);
 
 
     /**
