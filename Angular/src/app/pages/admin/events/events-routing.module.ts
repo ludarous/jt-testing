@@ -3,7 +3,6 @@ import {Routes, RouterModule} from '@angular/router';
 import {EventsComponent} from './events.component';
 import {EventListComponent} from './list/event-list.component';
 import {EventEditComponent} from './edit/event-edit.component';
-import {EventResultCreateComponent} from './results/event-result-create/event-result-create.component';
 
 const routes: Routes = [
   {
@@ -27,8 +26,8 @@ const routes: Routes = [
         component: EventEditComponent,
       },
       {
-        path: 'edit/:id/results/create',
-        component: EventResultCreateComponent,
+        path: 'edit/:id/results',
+        loadChildren: 'app/pages/admin/events/results/results.module#ResultsModule',
       }
     ]
   }

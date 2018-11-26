@@ -133,10 +133,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Optional<PersonDTO> findOneByUserId(Long userId) {
+    public Optional<PersonFullDTO> findOneByUserId(Long userId) {
         log.debug("Request to get Person by userId : {}", userId);
         return personRepository.findByUserId(userId)
-            .map(personMapper::toDto);
+            .map(personFullMapper::toDto);
     }
 
     /**

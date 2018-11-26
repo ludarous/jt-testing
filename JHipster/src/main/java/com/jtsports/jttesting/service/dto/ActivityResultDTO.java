@@ -11,7 +11,6 @@ public class ActivityResultDTO implements Serializable {
 
     private Long id;
 
-    @NotNull
     private Float primaryResultValue;
 
     private Float secondaryResultValue;

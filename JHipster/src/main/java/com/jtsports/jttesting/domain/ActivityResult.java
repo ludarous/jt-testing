@@ -24,7 +24,6 @@ public class ActivityResult implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @NotNull
     @Column(name = "primary_result_value", nullable = false)
     private Float primaryResultValue;
 

@@ -53,4 +53,13 @@ public interface EventResultService {
      * @return the list of entities
      */
     Page<EventResultDTO> search(String query, Pageable pageable);
+
+
+    /**
+     * Get all the eventResults by eventId.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    Page<EventResultDTO> findAllByEventId(Pageable pageable, Long eventId);
 }

@@ -1,5 +1,9 @@
 package com.jtsports.jttesting.service.impl;
 
+import com.jtsports.jttesting.domain.ActivityResult;
+import com.jtsports.jttesting.domain.TestResult;
+import com.jtsports.jttesting.repository.ActivityResultRepository;
+import com.jtsports.jttesting.repository.TestResultRepository;
 import com.jtsports.jttesting.service.EventResultService;
 import com.jtsports.jttesting.domain.EventResult;
 import com.jtsports.jttesting.repository.EventResultRepository;
@@ -30,12 +34,18 @@ public class EventResultServiceImpl implements EventResultService {
 
     private final EventResultRepository eventResultRepository;
 
+    private final TestResultRepository testResultRepository;
+
+    private final ActivityResultRepository activityResultRepository;
+
     private final EventResultMapper eventResultMapper;
 
     private final EventResultSearchRepository eventResultSearchRepository;
 
-    public EventResultServiceImpl(EventResultRepository eventResultRepository, EventResultMapper eventResultMapper, EventResultSearchRepository eventResultSearchRepository) {
+    public EventResultServiceImpl(EventResultRepository eventResultRepository, TestResultRepository testResultRepository, ActivityResultRepository activityResultRepository, EventResultMapper eventResultMapper, EventResultSearchRepository eventResultSearchRepository) {
         this.eventResultRepository = eventResultRepository;
+        this.testResultRepository = testResultRepository;
+        this.activityResultRepository = activityResultRepository;
         this.eventResultMapper = eventResultMapper;
         this.eventResultSearchRepository = eventResultSearchRepository;
     }
@@ -51,6 +61,18 @@ public class EventResultServiceImpl implements EventResultService {
         log.debug("Request to save EventResult : {}", eventResultDTO);
         EventResult eventResult = eventResultMapper.toEntity(eventResultDTO);
         eventResult = eventResultRepository.save(eventResult);
+
+        for(TestResult testResult : eventResult.getTestResults()) {
+            testResult.setEventResult(eventResult);
+
+            for(ActivityResult activityResult : testResult.getActivitiesResults()) {
+                activityResult.setTestResult(testResult);
+                activityResultRepository.save(activityResult);
+            }
+
+            testResultRepository.save(testResult);
+        }
+
         EventResultDTO result = eventResultMapper.toDto(eventResult);
         eventResultSearchRepository.save(eventResult);
         return result;
@@ -109,6 +131,13 @@ public class EventResultServiceImpl implements EventResultService {
     public Page<EventResultDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of EventResults for query {}", query);
         return eventResultSearchRepository.search(queryStringQuery(query), pageable)
+            .map(eventResultMapper::toDto);
+    }
+
+    @Override
+    public Page<EventResultDTO> findAllByEventId(Pageable pageable, Long eventId) {
+        log.debug("Request to get all EventResults");
+        return eventResultRepository.findAllByEventIdWithEagerRelationships(pageable, eventId)
             .map(eventResultMapper::toDto);
     }
 }

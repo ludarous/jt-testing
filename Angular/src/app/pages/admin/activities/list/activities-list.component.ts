@@ -25,7 +25,10 @@ export class ActivitiesListComponent implements OnInit {
       { field: 'help', header: 'Nápověda' },
     ];
 
-    this.activityService.query().subscribe((activities: HttpResponse<Array<IActivity>>) => {
+    this.activityService.query({
+      page: 0,
+      size: 1000,
+    }).subscribe((activities: HttpResponse<Array<IActivity>>) => {
       this.activities = activities.body;
     });
   }

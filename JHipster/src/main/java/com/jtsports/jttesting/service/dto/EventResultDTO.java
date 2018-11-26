@@ -2,7 +2,9 @@ package com.jtsports.jttesting.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the EventResult entity.
@@ -20,6 +22,8 @@ public class EventResultDTO implements Serializable {
     private Long eventId;
 
     private Long personId;
+
+    private Set<TestResultDTO> testResults = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -69,6 +73,14 @@ public class EventResultDTO implements Serializable {
         this.personId = personId;
     }
 
+    public Set<TestResultDTO> getTestResults() {
+        return testResults;
+    }
+
+    public void setTestResults(Set<TestResultDTO> testResults) {
+        this.testResults = testResults;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -101,4 +113,6 @@ public class EventResultDTO implements Serializable {
             ", person=" + getPersonId() +
             "}";
     }
+
+
 }

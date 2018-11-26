@@ -7,25 +7,18 @@ import {SharedModule} from '../../../shared/shared.module';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {EventsComponent} from './events.component';
 import {EventListComponent} from './list/event-list.component';
-import {TestCategoriesComponent} from '../tests/categories/test-categories.component';
 import {EventEditComponent} from './edit/event-edit.component';
 import {EventsRoutingModule} from './events-routing.module';
 import {MaterialComponentsModule} from '../../../shared/material-components.module';
 import {PrimeNgComponentsModule} from '../../../shared/primeng-components.module';
-import { EventResultCreateComponent } from './results/event-result-create/event-result-create.component';
-import { TestResultEditComponent } from './results/test-result-edit/test-result-edit.component';
-import { ActivityResultEditComponent } from './results/activity-result-edit/activity-result-edit.component';
+import {ResultsModule} from './results/results.module';
 
 
 @NgModule({
   declarations: [
     EventsComponent,
     EventListComponent,
-    EventEditComponent,
-    TestCategoriesComponent,
-    EventResultCreateComponent,
-    TestResultEditComponent,
-    ActivityResultEditComponent,
+    EventEditComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +29,8 @@ import { ActivityResultEditComponent } from './results/activity-result-edit/acti
     PrimeNgComponentsModule,
     TranslateModule,
     SharedModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    ResultsModule,
   ],
   exports: [
     EventsComponent,

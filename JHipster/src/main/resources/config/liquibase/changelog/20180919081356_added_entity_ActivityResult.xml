@@ -22,7 +22,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="primary_result_value" type="${floatType}">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
 
             <column name="secondary_result_value" type="${floatType}">

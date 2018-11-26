@@ -173,9 +173,9 @@ public class PersonResource {
      */
     @GetMapping("/people/by-user-id/{userId}")
     @Timed
-    public ResponseEntity<PersonDTO> getPersonByUserId(@PathVariable Long userId) {
+    public ResponseEntity<PersonFullDTO> getPersonByUserId(@PathVariable Long userId) {
         log.debug("REST request to get Person by userId : {}", userId);
-        Optional<PersonDTO> personDTO = personService.findOne(userId);
+        Optional<PersonFullDTO> personDTO = personService.findOneByUserId(userId);
         return ResponseUtil.wrapOrNotFound(personDTO);
     }
 

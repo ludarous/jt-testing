@@ -41,7 +41,7 @@
 }
 
 html {
-  overflow-y: scroll;
+
 }
 
 html, body {
@@ -73,10 +73,11 @@ app-root {
 
   & > *:not(router-outlet) {
     flex: 1;
+    flex-grow: 1;
     display: flex;
     align-items: stretch;
     background-color: dimgray;
-    justify-content: flex-start;
+    justify-content: stretch;
   }
 }
 
@@ -117,10 +118,15 @@ app-root {
     align-items: stretch;
     background-color: dimgray;
     justify-content: flex-start;
+    overflow-y: auto;
   }
 
   flex: 1;
   display: flex !important;
+}
+
+.mat-drawer-content {
+  overflow-y: visible !important;
 }
 
 .sidenav-menu {

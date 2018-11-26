@@ -34,7 +34,7 @@ public class TestResult implements Serializable {
     @JsonIgnoreProperties("testResults")
     private EventResult eventResult;
 
-    @OneToMany(mappedBy = "testResult")
+    @OneToMany(mappedBy = "testResult", cascade = CascadeType.ALL)
     private Set<ActivityResult> activitiesResults = new HashSet<>();
 
     @ManyToOne(optional = false)

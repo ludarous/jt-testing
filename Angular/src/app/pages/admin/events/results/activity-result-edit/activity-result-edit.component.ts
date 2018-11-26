@@ -13,35 +13,57 @@ export class ActivityResultEditComponent implements OnInit {
 
   constructor() { }
 
+  private _activity: IActivity;
   @Input()
-  activity: IActivity;
+  get activity(): IActivity {
+    return this._activity;
+  }
 
-  @Input()
-  activityResult: IActivityResult;
+  set activity(value: IActivity) {
+    this._activity = value;
+  }
 
+  private _activityResult: IActivityResult;
   @Input()
-  testResult: ITestResult;
+  get activityResult(): IActivityResult {
+    return this._activityResult;
+  }
+
+  set activityResult(value: IActivityResult) {
+    if (value) {
+      this._activityResult = value;
+      this.setActivityResultForm(this._activityResult);
+    }
+  }
+
+  private _testResult: ITestResult;
+  @Input()
+  get testResult(): ITestResult {
+    return this._testResult;
+  }
+
+  set testResult(value: ITestResult) {
+    this._testResult = value;
+  }
 
   activityResultForm: FormGroup;
 
   ngOnInit() {
-    if (!this.activityResult) this.activityResult = new ActivityResult();
-    this.setActivityResultForm(this.activityResult);
+    // if (!this.activityResult) this.activityResult = new ActivityResult();
+    if (this.activityResult) {
+      this.setActivityResultForm(this.activityResult);
+    }
   }
 
   setActivityResultForm(activityResult: IActivityResult) {
     this.activityResultForm = new FormGroup({
       id: new FormControl(activityResult.id),
-      name: new FormControl(activityResult.note),
+      note: new FormControl(activityResult.note),
       primaryResultValue: new FormControl(activityResult.primaryResultValue),
       secondaryResultValue: new FormControl(activityResult.secondaryResultValue),
       testResultId: new FormControl(activityResult.testResultId),
       activityId: new FormControl(activityResult.activityId),
     });
-  }
-
-  saveActivityResult() {
-
   }
 
 }

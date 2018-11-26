@@ -1,6 +1,7 @@
 import {ActivityResultUnits} from './enums/activity-result-units';
 import {IActivityCategory} from './activity-category';
 import {HttpResponse} from '@angular/common/http';
+import {ITest} from './test';
 
 export interface IActivity {
   id?: number;
@@ -42,5 +43,14 @@ export class Activity implements IActivity {
       }
     }
     return activity;
+  }
+
+  static parseItemsEnums(activities: Array<any>): Array<IActivity> {
+    if (activities) {
+      for (const activity of activities) {
+        Activity.parseItemEnums(activity);
+      }
+    }
+    return activities;
   }
 }

@@ -25,7 +25,8 @@ export class LoginComponent implements OnInit {
               private eventManager: EventManager) {
     this.form = new FormGroup({
       username: new FormControl('', [Validators.compose([Validators.required, Validators.minLength(3), CustomValidators.loginOrEmail])]),
-      password: new FormControl('', [Validators.compose([Validators.required, Validators.minLength(4)])])
+      password: new FormControl('', [Validators.compose([Validators.required, Validators.minLength(4)])]),
+      rememberMe: new FormControl(true)
     });
 
     this.username = this.form.controls['username'];

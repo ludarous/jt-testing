@@ -60,7 +60,7 @@ public interface PersonService {
      * @param userId the userId of the entity
      * @return the entity
      */
-    Optional<PersonDTO> findOneByUserId(Long userId);
+    Optional<PersonFullDTO> findOneByUserId(Long userId);
 
     /**
      * Delete the "id" person.

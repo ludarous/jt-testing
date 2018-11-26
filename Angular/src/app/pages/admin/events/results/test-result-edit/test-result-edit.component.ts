@@ -4,6 +4,8 @@ import {IEvent} from '../../../../../entities/event';
 import {IPersonFull} from '../../../../../entities/person-full';
 import {ITestResult, TestResult} from '../../../../../entities/test-result';
 import {IEventResult} from '../../../../../entities/event-result';
+import {IActivityResult} from '../../../../../entities/activity-result';
+import {IActivity} from '../../../../../entities/activity';
 
 @Component({
   selector: 'app-test-result-edit',
@@ -14,25 +16,64 @@ export class TestResultEditComponent implements OnInit {
 
   constructor() { }
 
+  private _test: ITest;
   @Input()
-  test: ITest;
+  get test(): ITest {
+    return this._test;
+  }
 
-  @Input()
-  testsResult: ITestResult;
+  set test(value: ITest) {
+    this._test = value;
+  }
 
+  private _testsResult: ITestResult;
   @Input()
-  event: IEvent;
+  get testsResult(): ITestResult {
+    return this._testsResult;
+  }
 
-  @Input()
-  eventResult: IEventResult;
+  set testsResult(value: ITestResult) {
+    this._testsResult = value;
+  }
 
+  private _testEvent: IEvent;
   @Input()
-  person: IPersonFull;
+  get testEvent(): IEvent {
+    return this._testEvent;
+  }
+
+  set testEvent(value: IEvent) {
+    this._testEvent = value;
+  }
+
+  private _eventResult: IEventResult;
+  @Input()
+  get eventResult(): IEventResult {
+    return this._eventResult;
+  }
+
+  set eventResult(value: IEventResult) {
+    this._eventResult = value;
+  }
+
+  private _person: IPersonFull;
+  @Input()
+  get person(): IPersonFull {
+    return this._person;
+  }
+
+  set person(value: IPersonFull) {
+    this._person = value;
+  }
 
 
 
   ngOnInit() {
 
+  }
+
+  getActivityForActivityResult(activityResult: IActivityResult): IActivity {
+    return this.test.activities.find(a => a.id === activityResult.activityId);
   }
 
 }

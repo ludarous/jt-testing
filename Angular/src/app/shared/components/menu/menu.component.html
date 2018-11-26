@@ -1,6 +1,8 @@
 <div class="menu">
   <nav>
-    <a mat-raised-button [routerLink]="['admin']">Admin</a>
+    <a *ngIf="showAdminMenuItem" mat-raised-button [routerLink]="['admin']">Admin</a>
+    <a *ngIf="person" mat-raised-button [routerLink]="['admin']">Moje výsledky</a>
+    <a *ngIf="person" mat-raised-button [routerLink]="['admin']">Moje statistiky</a>
   </nav>
-  <div *ngIf="account" class="profile">{{account.firstName + ' ' + account.lastName}}</div>
+  <div *ngIf="account" class="profile">{{showUserName()}}</div>
 </div>

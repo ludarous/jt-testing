@@ -25,7 +25,7 @@ public class EventDTO implements Serializable {
 
     private Set<JTTestDTO> tests = new HashSet<>();
 
-    private Set<PersonDTO> attachedPersons = new HashSet<>();
+    private Set<PersonFullDTO> attachedPersons = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -75,11 +75,11 @@ public class EventDTO implements Serializable {
         this.tests = jTTests;
     }
 
-    public Set<PersonDTO> getAttachedPersons() {
+    public Set<PersonFullDTO> getAttachedPersons() {
         return attachedPersons;
     }
 
-    public void setAttachedPersons(Set<PersonDTO> people) {
+    public void setAttachedPersons(Set<PersonFullDTO> people) {
         this.attachedPersons = people;
     }
 

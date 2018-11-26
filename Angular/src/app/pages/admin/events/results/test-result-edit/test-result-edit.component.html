@@ -1,8 +1,7 @@
-<div class="component-container-center">
-  <div class="form-container">
-    <div class="event-name">{{event.name}}</div>
-    <div *ngFor="let activity of test.activities">
-      <app-activity-result-edit [activity]="activity" [testResult]="testsResult" [activityResult]="activityResult"></app-activity-result-edit>
-    </div>
+<div class="test-result-container">
+  <div class="test-name">{{test.name}}</div>
+  <div class="flex-fill" *ngFor="let activityResult of testsResult.activitiesResults">
+    <app-activity-result-edit [activity]="getActivityForActivityResult(activityResult)" [testResult]="testsResult"
+                              [activityResult]="activityResult"></app-activity-result-edit>
   </div>
 </div>

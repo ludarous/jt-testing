@@ -49,9 +49,18 @@ export class TestsEditComponent implements OnInit {
     params$.subscribe((params) => {
       this.testId = +params['id'];
 
-      const getActivities$ = this.activityService.query();
-      const getCategories$ = this.testCategoryService.query();
-      const getSports$ = this.sportService.query();
+      const getActivities$ = this.activityService.query({
+        page: 0,
+        size: 1000,
+      });
+      const getCategories$ = this.testCategoryService.query({
+        page: 0,
+        size: 1000,
+      });
+      const getSports$ = this.sportService.query({
+        page: 0,
+        size: 1000,
+      });
       const getTest$ = this.getTest(this.testId);
 
       zip(getTest$, getActivities$, getCategories$, getSports$).subscribe(([test, activities, categories, sports]) => {
@@ -125,5 +134,13 @@ export class TestsEditComponent implements OnInit {
     } else {
       return RxjsUtils.create(new Test());
     }
+  }
+
+  duplicateTest() {
+    this.testForm.controls['id'].setValue(null);
+    const testName = this.testForm.controls['name'].value;
+    this.testForm.controls['name'].setValue(testName + ' kopie');
+
+    this.saveTest();
   }
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
 import { MenuComponent } from './menu/menu.component';
 import {RouterModule} from '@angular/router';
+import {PersonService} from '../../services/person.service';
 
 @NgModule({
   imports: [
@@ -12,6 +13,9 @@ import {RouterModule} from '@angular/router';
   declarations: [
     ProfileComponent,
     MenuComponent
+  ],
+  providers: [
+    PersonService,
   ],
   exports: [
     MenuComponent

@@ -40,7 +40,7 @@ public class EventResult implements Serializable {
     @JsonIgnoreProperties("eventResults")
     private Event event;
 
-    @OneToMany(mappedBy = "eventResult")
+    @OneToMany(mappedBy = "eventResult", cascade = CascadeType.ALL)
     private Set<TestResult> testResults = new HashSet<>();
 
     @ManyToOne(optional = false)

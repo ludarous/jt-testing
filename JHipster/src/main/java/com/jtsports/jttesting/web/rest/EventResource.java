@@ -1,7 +1,9 @@
 package com.jtsports.jttesting.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.jtsports.jttesting.service.EventResultService;
 import com.jtsports.jttesting.service.EventService;
+import com.jtsports.jttesting.service.dto.EventResultDTO;
 import com.jtsports.jttesting.web.rest.errors.BadRequestAlertException;
 import com.jtsports.jttesting.web.rest.util.HeaderUtil;
 import com.jtsports.jttesting.web.rest.util.PaginationUtil;
@@ -22,9 +24,6 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Event.
@@ -39,8 +38,11 @@ public class EventResource {
 
     private final EventService eventService;
 
-    public EventResource(EventService eventService) {
+    private final EventResultService eventResultService;
+
+    public EventResource(EventService eventService, EventResultService eventResultService) {
         this.eventService = eventService;
+        this.eventResultService = eventResultService;
     }
 
     /**
@@ -148,6 +150,23 @@ public class EventResource {
         log.debug("REST request to search for a page of Events for query {}", query);
         Page<EventDTO> page = eventService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/events");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /*------------------------ RESULTS --------------------------------- */
+
+    /**
+     * GET  /events/:id/results : get the "id" event results.
+     *
+     * @param id the id of the event EventResultDTOs to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the eventDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/events/{id}/results")
+    @Timed
+    public ResponseEntity<List<EventResultDTO>> getEventResults(@PathVariable Long id, Pageable pageable) {
+        log.debug("REST request to get Event EventResults : {}", id);
+        Page<EventResultDTO> page = eventResultService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/events/:id/results");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

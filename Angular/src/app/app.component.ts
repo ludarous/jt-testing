@@ -23,13 +23,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.authProvider.login({username: 'admin', password: 'admin', rememberMe: true}).subscribe(result => {
-      this.eventManager.broadcast({
-        name: 'authenticationSuccess',
-        content: 'Sending Authentication Success'
-      });
-    });
-
     this.principal.identity().then(account => {
       this.account = account;
     });
