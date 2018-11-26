@@ -56,6 +56,12 @@ public class JTTestResourceIntTest {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
+    private static final Integer DEFAULT_MIN_AGE = 1;
+    private static final Integer UPDATED_MIN_AGE = 2;
+
+    private static final Integer DEFAULT_MAX_AGE = 1;
+    private static final Integer UPDATED_MAX_AGE = 2;
+
     @Autowired
     private JTTestRepository jTTestRepository;
     @Mock
@@ -114,7 +120,9 @@ public class JTTestResourceIntTest {
     public static JTTest createEntity(EntityManager em) {
         JTTest jTTest = new JTTest()
             .name(DEFAULT_NAME)
-            .description(DEFAULT_DESCRIPTION);
+            .description(DEFAULT_DESCRIPTION)
+            .minAge(DEFAULT_MIN_AGE)
+            .maxAge(DEFAULT_MAX_AGE);
         return jTTest;
     }
 
@@ -141,6 +149,8 @@ public class JTTestResourceIntTest {
         JTTest testJTTest = jTTestList.get(jTTestList.size() - 1);
         assertThat(testJTTest.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testJTTest.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testJTTest.getMinAge()).isEqualTo(DEFAULT_MIN_AGE);
+        assertThat(testJTTest.getMaxAge()).isEqualTo(DEFAULT_MAX_AGE);
 
         // Validate the JTTest in Elasticsearch
         verify(mockJTTestSearchRepository, times(1)).save(testJTTest);
@@ -200,7 +210,9 @@ public class JTTestResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(jTTest.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].minAge").value(hasItem(DEFAULT_MIN_AGE)))
+            .andExpect(jsonPath("$.[*].maxAge").value(hasItem(DEFAULT_MAX_AGE)));
     }
     
     public void getAllJTTestsWithEagerRelationshipsIsEnabled() throws Exception {
@@ -246,7 +258,9 @@ public class JTTestResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(jTTest.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.minAge").value(DEFAULT_MIN_AGE))
+            .andExpect(jsonPath("$.maxAge").value(DEFAULT_MAX_AGE));
     }
     @Test
     @Transactional
@@ -270,7 +284,9 @@ public class JTTestResourceIntTest {
         em.detach(updatedJTTest);
         updatedJTTest
             .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .minAge(UPDATED_MIN_AGE)
+            .maxAge(UPDATED_MAX_AGE);
         JTTestDTO jTTestDTO = jTTestMapper.toDto(updatedJTTest);
 
         restJTTestMockMvc.perform(put("/api/jt-tests")
@@ -284,6 +300,8 @@ public class JTTestResourceIntTest {
         JTTest testJTTest = jTTestList.get(jTTestList.size() - 1);
         assertThat(testJTTest.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testJTTest.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testJTTest.getMinAge()).isEqualTo(UPDATED_MIN_AGE);
+        assertThat(testJTTest.getMaxAge()).isEqualTo(UPDATED_MAX_AGE);
 
         // Validate the JTTest in Elasticsearch
         verify(mockJTTestSearchRepository, times(1)).save(testJTTest);
@@ -345,7 +363,9 @@ public class JTTestResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(jTTest.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].minAge").value(hasItem(DEFAULT_MIN_AGE)))
+            .andExpect(jsonPath("$.[*].maxAge").value(hasItem(DEFAULT_MAX_AGE)));
     }
 
     @Test

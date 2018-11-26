@@ -8,7 +8,9 @@ export interface IEvent {
   id?: number;
   name?: string;
   date?: string;
-  
+  minAge?: number;
+  maxAge?: number;
+
   addressId?: number;
   addressStreet?: string;
   
@@ -21,6 +23,8 @@ export class Event implements IEvent {
   id: number;
   name: string;
   date: string;
+  minAge: number;
+  maxAge: number;
 
   addressId: number;
   addressStreet: string;

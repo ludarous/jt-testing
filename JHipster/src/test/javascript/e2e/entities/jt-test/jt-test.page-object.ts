@@ -19,6 +19,8 @@ export class JTTestUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     nameInput = element(by.id('field_name'));
     descriptionInput = element(by.id('field_description'));
+    minAgeInput = element(by.id('field_minAge'));
+    maxAgeInput = element(by.id('field_maxAge'));
     activitiesSelect = element(by.id('field_activities'));
     categoriesSelect = element(by.id('field_categories'));
     sportsSelect = element(by.id('field_sports'));
@@ -41,6 +43,22 @@ export class JTTestUpdatePage {
 
     getDescriptionInput() {
         return this.descriptionInput.getAttribute('value');
+    }
+
+    setMinAgeInput(minAge): promise.Promise<void> {
+        return this.minAgeInput.sendKeys(minAge);
+    }
+
+    getMinAgeInput() {
+        return this.minAgeInput.getAttribute('value');
+    }
+
+    setMaxAgeInput(maxAge): promise.Promise<void> {
+        return this.maxAgeInput.sendKeys(maxAge);
+    }
+
+    getMaxAgeInput() {
+        return this.maxAgeInput.getAttribute('value');
     }
 
     activitiesSelectLastOption(): promise.Promise<void> {

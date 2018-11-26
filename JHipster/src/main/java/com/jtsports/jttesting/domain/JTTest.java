@@ -32,6 +32,12 @@ public class JTTest implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "min_age")
+    private Integer minAge;
+
+    @Column(name = "max_age")
+    private Integer maxAge;
+
     @ManyToMany
     @JoinTable(name = "jttest_activities",
                joinColumns = @JoinColumn(name = "jttests_id", referencedColumnName = "id"),
@@ -83,6 +89,32 @@ public class JTTest implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getMinAge() {
+        return minAge;
+    }
+
+    public JTTest minAge(Integer minAge) {
+        this.minAge = minAge;
+        return this;
+    }
+
+    public void setMinAge(Integer minAge) {
+        this.minAge = minAge;
+    }
+
+    public Integer getMaxAge() {
+        return maxAge;
+    }
+
+    public JTTest maxAge(Integer maxAge) {
+        this.maxAge = maxAge;
+        return this;
+    }
+
+    public void setMaxAge(Integer maxAge) {
+        this.maxAge = maxAge;
     }
 
     public Set<Activity> getActivities() {
@@ -181,6 +213,8 @@ public class JTTest implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", minAge=" + getMinAge() +
+            ", maxAge=" + getMaxAge() +
             "}";
     }
 }

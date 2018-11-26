@@ -13,6 +13,14 @@
                 <dd>
                     <span>{{event.date}}</span>
                 </dd>
+                <dt><span jhiTranslate="jtTestingApp.event.minAge">Min Age</span></dt>
+                <dd>
+                    <span>{{event.minAge}}</span>
+                </dd>
+                <dt><span jhiTranslate="jtTestingApp.event.maxAge">Max Age</span></dt>
+                <dd>
+                    <span>{{event.maxAge}}</span>
+                </dd>
                 <dt><span jhiTranslate="jtTestingApp.event.address">Address</span></dt>
                 <dd>
                     <div *ngIf="event.addressId">

@@ -19,6 +19,8 @@ export class EventUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     nameInput = element(by.id('field_name'));
     dateInput = element(by.id('field_date'));
+    minAgeInput = element(by.id('field_minAge'));
+    maxAgeInput = element(by.id('field_maxAge'));
     addressSelect = element(by.id('field_address'));
     testsSelect = element(by.id('field_tests'));
     attachedPersonsSelect = element(by.id('field_attachedPersons'));
@@ -41,6 +43,22 @@ export class EventUpdatePage {
 
     getDateInput() {
         return this.dateInput.getAttribute('value');
+    }
+
+    setMinAgeInput(minAge): promise.Promise<void> {
+        return this.minAgeInput.sendKeys(minAge);
+    }
+
+    getMinAgeInput() {
+        return this.minAgeInput.getAttribute('value');
+    }
+
+    setMaxAgeInput(maxAge): promise.Promise<void> {
+        return this.maxAgeInput.sendKeys(maxAge);
+    }
+
+    getMaxAgeInput() {
+        return this.maxAgeInput.getAttribute('value');
     }
 
     addressSelectLastOption(): promise.Promise<void> {

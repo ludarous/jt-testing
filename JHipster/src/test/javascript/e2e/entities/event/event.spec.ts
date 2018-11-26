@@ -34,6 +34,10 @@ describe('Event e2e test', () => {
         expect(eventUpdatePage.getNameInput()).toMatch('name');
         eventUpdatePage.setDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM');
         expect(eventUpdatePage.getDateInput()).toContain('2001-01-01T02:30');
+        eventUpdatePage.setMinAgeInput('5');
+        expect(eventUpdatePage.getMinAgeInput()).toMatch('5');
+        eventUpdatePage.setMaxAgeInput('5');
+        expect(eventUpdatePage.getMaxAgeInput()).toMatch('5');
         eventUpdatePage.addressSelectLastOption();
         // eventUpdatePage.testsSelectLastOption();
         // eventUpdatePage.attachedPersonsSelectLastOption();

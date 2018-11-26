@@ -42,6 +42,14 @@
         {
             "fieldName": "date",
             "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "minAge",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "maxAge",
+            "fieldType": "Integer"
         }
     ],
     "changelogDate": "20180919081349",

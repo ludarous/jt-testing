@@ -7,6 +7,8 @@ export interface IEvent {
     id?: number;
     name?: string;
     date?: Moment;
+    minAge?: number;
+    maxAge?: number;
     eventResults?: IEventResult[];
     addressStreet?: string;
     addressId?: number;
@@ -19,6 +21,8 @@ export class Event implements IEvent {
         public id?: number,
         public name?: string,
         public date?: Moment,
+        public minAge?: number,
+        public maxAge?: number,
         public eventResults?: IEventResult[],
         public addressStreet?: string,
         public addressId?: number,

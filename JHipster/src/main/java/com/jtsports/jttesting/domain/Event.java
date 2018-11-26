@@ -35,6 +35,12 @@ public class Event implements Serializable {
     @Column(name = "jhi_date")
     private ZonedDateTime date;
 
+    @Column(name = "min_age")
+    private Integer minAge;
+
+    @Column(name = "max_age")
+    private Integer maxAge;
+
     @OneToMany(mappedBy = "event")
     private Set<EventResult> eventResults = new HashSet<>();
 
@@ -87,6 +93,32 @@ public class Event implements Serializable {
 
     public void setDate(ZonedDateTime date) {
         this.date = date;
+    }
+
+    public Integer getMinAge() {
+        return minAge;
+    }
+
+    public Event minAge(Integer minAge) {
+        this.minAge = minAge;
+        return this;
+    }
+
+    public void setMinAge(Integer minAge) {
+        this.minAge = minAge;
+    }
+
+    public Integer getMaxAge() {
+        return maxAge;
+    }
+
+    public Event maxAge(Integer maxAge) {
+        this.maxAge = maxAge;
+        return this;
+    }
+
+    public void setMaxAge(Integer maxAge) {
+        this.maxAge = maxAge;
     }
 
     public Set<EventResult> getEventResults() {
@@ -202,6 +234,8 @@ public class Event implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", date='" + getDate() + "'" +
+            ", minAge=" + getMinAge() +
+            ", maxAge=" + getMaxAge() +
             "}";
     }
 }

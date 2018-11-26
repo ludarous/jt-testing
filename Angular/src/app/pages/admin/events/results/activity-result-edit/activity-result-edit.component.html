@@ -10,7 +10,7 @@
         {{'Hodnota hlavního výsledku musí být vyplněna' | translate }}
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="col-6">
+    <mat-form-field *ngIf="activity.secondaryResultValueUnit" class="col-6">
       <input matInput [placeholder]="'Vedlejší výsledek' | translate" name="secondaryResultValue"
              [(ngModel)]="activityResult.secondaryResultValue"/>
       <span matSuffix>{{activity.secondaryResultValueUnit.value}}</span>

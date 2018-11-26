@@ -18,6 +18,10 @@ public class JTTestDTO implements Serializable {
 
     private String description;
 
+    private Integer minAge;
+
+    private Integer maxAge;
+
     private Set<ActivityDTO> activities = new HashSet<>();
 
     private Set<TestCategoryDTO> categories = new HashSet<>();
@@ -46,6 +50,22 @@ public class JTTestDTO implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getMinAge() {
+        return minAge;
+    }
+
+    public void setMinAge(Integer minAge) {
+        this.minAge = minAge;
+    }
+
+    public Integer getMaxAge() {
+        return maxAge;
+    }
+
+    public void setMaxAge(Integer maxAge) {
+        this.maxAge = maxAge;
     }
 
     public Set<ActivityDTO> getActivities() {
@@ -99,6 +119,8 @@ public class JTTestDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", minAge=" + getMinAge() +
+            ", maxAge=" + getMaxAge() +
             "}";
     }
 }

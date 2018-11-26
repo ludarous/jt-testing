@@ -62,6 +62,12 @@ public class EventResourceIntTest {
     private static final ZonedDateTime DEFAULT_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
+    private static final Integer DEFAULT_MIN_AGE = 1;
+    private static final Integer UPDATED_MIN_AGE = 2;
+
+    private static final Integer DEFAULT_MAX_AGE = 1;
+    private static final Integer UPDATED_MAX_AGE = 2;
+
     @Autowired
     private EventRepository eventRepository;
     @Mock
@@ -123,7 +129,9 @@ public class EventResourceIntTest {
     public static Event createEntity(EntityManager em) {
         Event event = new Event()
             .name(DEFAULT_NAME)
-            .date(DEFAULT_DATE);
+            .date(DEFAULT_DATE)
+            .minAge(DEFAULT_MIN_AGE)
+            .maxAge(DEFAULT_MAX_AGE);
         return event;
     }
 
@@ -150,6 +158,8 @@ public class EventResourceIntTest {
         Event testEvent = eventList.get(eventList.size() - 1);
         assertThat(testEvent.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testEvent.getDate()).isEqualTo(DEFAULT_DATE);
+        assertThat(testEvent.getMinAge()).isEqualTo(DEFAULT_MIN_AGE);
+        assertThat(testEvent.getMaxAge()).isEqualTo(DEFAULT_MAX_AGE);
 
         // Validate the Event in Elasticsearch
         verify(mockEventSearchRepository, times(1)).save(testEvent);
@@ -209,7 +219,9 @@ public class EventResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(event.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].date").value(hasItem(sameInstant(DEFAULT_DATE))));
+            .andExpect(jsonPath("$.[*].date").value(hasItem(sameInstant(DEFAULT_DATE))))
+            .andExpect(jsonPath("$.[*].minAge").value(hasItem(DEFAULT_MIN_AGE)))
+            .andExpect(jsonPath("$.[*].maxAge").value(hasItem(DEFAULT_MAX_AGE)));
     }
     
     public void getAllEventsWithEagerRelationshipsIsEnabled() throws Exception {
@@ -255,7 +267,9 @@ public class EventResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(event.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.date").value(sameInstant(DEFAULT_DATE)));
+            .andExpect(jsonPath("$.date").value(sameInstant(DEFAULT_DATE)))
+            .andExpect(jsonPath("$.minAge").value(DEFAULT_MIN_AGE))
+            .andExpect(jsonPath("$.maxAge").value(DEFAULT_MAX_AGE));
     }
     @Test
     @Transactional
@@ -279,7 +293,9 @@ public class EventResourceIntTest {
         em.detach(updatedEvent);
         updatedEvent
             .name(UPDATED_NAME)
-            .date(UPDATED_DATE);
+            .date(UPDATED_DATE)
+            .minAge(UPDATED_MIN_AGE)
+            .maxAge(UPDATED_MAX_AGE);
         EventDTO eventDTO = eventMapper.toDto(updatedEvent);
 
         restEventMockMvc.perform(put("/api/events")
@@ -293,6 +309,8 @@ public class EventResourceIntTest {
         Event testEvent = eventList.get(eventList.size() - 1);
         assertThat(testEvent.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testEvent.getDate()).isEqualTo(UPDATED_DATE);
+        assertThat(testEvent.getMinAge()).isEqualTo(UPDATED_MIN_AGE);
+        assertThat(testEvent.getMaxAge()).isEqualTo(UPDATED_MAX_AGE);
 
         // Validate the Event in Elasticsearch
         verify(mockEventSearchRepository, times(1)).save(testEvent);
@@ -354,7 +372,9 @@ public class EventResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(event.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].date").value(hasItem(sameInstant(DEFAULT_DATE))));
+            .andExpect(jsonPath("$.[*].date").value(hasItem(sameInstant(DEFAULT_DATE))))
+            .andExpect(jsonPath("$.[*].minAge").value(hasItem(DEFAULT_MIN_AGE)))
+            .andExpect(jsonPath("$.[*].maxAge").value(hasItem(DEFAULT_MAX_AGE)));
     }
 
     @Test

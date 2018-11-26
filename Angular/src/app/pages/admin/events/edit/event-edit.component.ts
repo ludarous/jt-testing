@@ -66,6 +66,8 @@ export class EventEditComponent implements OnInit {
       id: new FormControl(event.id),
       name: new FormControl(event.name),
       date: new FormControl(event.date),
+      minAge: new FormControl(event.minAge),
+      maxAge: new FormControl(event.maxAge)
     });
 
     if (event.tests) {

@@ -87,6 +87,8 @@ export class TestsEditComponent implements OnInit {
     this.testForm = new FormGroup({
       id: new FormControl(test.id),
       name: new FormControl(test.name),
+      minAge: new FormControl(test.minAge),
+      maxAge: new FormControl(test.maxAge)
     });
 
     if (test.activities) {

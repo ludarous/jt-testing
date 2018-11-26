@@ -34,6 +34,10 @@ describe('JTTest e2e test', () => {
         expect(jTTestUpdatePage.getNameInput()).toMatch('name');
         jTTestUpdatePage.setDescriptionInput('description');
         expect(jTTestUpdatePage.getDescriptionInput()).toMatch('description');
+        jTTestUpdatePage.setMinAgeInput('5');
+        expect(jTTestUpdatePage.getMinAgeInput()).toMatch('5');
+        jTTestUpdatePage.setMaxAgeInput('5');
+        expect(jTTestUpdatePage.getMaxAgeInput()).toMatch('5');
         // jTTestUpdatePage.activitiesSelectLastOption();
         // jTTestUpdatePage.categoriesSelectLastOption();
         // jTTestUpdatePage.sportsSelectLastOption();

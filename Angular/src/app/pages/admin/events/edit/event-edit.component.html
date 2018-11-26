@@ -10,6 +10,12 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field>
+        <input matInput [placeholder]="'Minimální věk' | translate" name="minAge" formControlName="minAge"/>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [placeholder]="'Maximální věk' | translate" name="maxAge" formControlName="maxAge"/>
+      </mat-form-field>
+      <mat-form-field>
         <mat-select placeholder="Testy" [(ngModel)]="selectedTests"  [ngModelOptions]="{standalone: true}" multiple>
           <mat-option *ngFor="let test of tests" [value]="test">{{test.name}}</mat-option>
         </mat-select>

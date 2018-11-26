@@ -3,10 +3,7 @@
     "fields": [
         {
             "fieldName": "primaryResultValue",
-            "fieldType": "Float",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "Float"
         },
         {
             "fieldName": "secondaryResultValue",

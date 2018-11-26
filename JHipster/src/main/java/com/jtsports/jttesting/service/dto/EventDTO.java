@@ -19,6 +19,10 @@ public class EventDTO implements Serializable {
 
     private ZonedDateTime date;
 
+    private Integer minAge;
+
+    private Integer maxAge;
+
     private Long addressId;
 
     private String addressStreet;
@@ -49,6 +53,22 @@ public class EventDTO implements Serializable {
 
     public void setDate(ZonedDateTime date) {
         this.date = date;
+    }
+
+    public Integer getMinAge() {
+        return minAge;
+    }
+
+    public void setMinAge(Integer minAge) {
+        this.minAge = minAge;
+    }
+
+    public Integer getMaxAge() {
+        return maxAge;
+    }
+
+    public void setMaxAge(Integer maxAge) {
+        this.maxAge = maxAge;
     }
 
     public Long getAddressId() {
@@ -110,6 +130,8 @@ public class EventDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", date='" + getDate() + "'" +
+            ", minAge=" + getMinAge() +
+            ", maxAge=" + getMaxAge() +
             ", address=" + getAddressId() +
             ", address='" + getAddressStreet() + "'" +
             "}";

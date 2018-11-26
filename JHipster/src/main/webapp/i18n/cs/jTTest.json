@@ -19,6 +19,8 @@
             },
             "name": "Name",
             "description": "Description",
+            "minAge": "Min Age",
+            "maxAge": "Max Age",
             "activities": "Activities",
             "categories": "Categories",
             "sports": "Sports"

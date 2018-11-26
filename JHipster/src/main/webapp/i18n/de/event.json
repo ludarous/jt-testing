@@ -19,6 +19,8 @@
             },
             "name": "Name",
             "date": "Date",
+            "minAge": "Min Age",
+            "maxAge": "Max Age",
             "eventResults": "Event Results",
             "address": "Address",
             "tests": "Tests",

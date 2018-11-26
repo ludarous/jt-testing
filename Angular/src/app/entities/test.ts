@@ -8,6 +8,9 @@ export interface ITest {
   id?: number;
   name?: string;
   description?: string;
+  minAge?: number;
+  maxAge?: number;
+
   activities: Array<IActivity>;
   categories?: Array<ITestCategory>;
   sports?: Array<ISport>;
@@ -17,6 +20,8 @@ export class Test implements ITest {
   id: number;
   name: string;
   description: string;
+  minAge: number;
+  maxAge: number;
   activities: Array<IActivity>;
   categories: Array<ITestCategory>;
   sports: Array<ISport>;

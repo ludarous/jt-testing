@@ -32,6 +32,8 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="name"><span jhiTranslate="jtTestingApp.jTTest.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="description"><span jhiTranslate="jtTestingApp.jTTest.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="minAge"><span jhiTranslate="jtTestingApp.jTTest.minAge">Min Age</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="maxAge"><span jhiTranslate="jtTestingApp.jTTest.maxAge">Max Age</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -40,6 +42,8 @@
                 <td><a [routerLink]="['/jt-test', jTTest.id, 'view' ]">{{jTTest.id}}</a></td>
                 <td>{{jTTest.name}}</td>
                 <td>{{jTTest.description}}</td>
+                <td>{{jTTest.minAge}}</td>
+                <td>{{jTTest.maxAge}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

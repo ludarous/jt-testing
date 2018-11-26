@@ -13,6 +13,14 @@
                 <dd>
                     <span>{{jTTest.description}}</span>
                 </dd>
+                <dt><span jhiTranslate="jtTestingApp.jTTest.minAge">Min Age</span></dt>
+                <dd>
+                    <span>{{jTTest.minAge}}</span>
+                </dd>
+                <dt><span jhiTranslate="jtTestingApp.jTTest.maxAge">Max Age</span></dt>
+                <dd>
+                    <span>{{jTTest.maxAge}}</span>
+                </dd>
                 <dt><span jhiTranslate="jtTestingApp.jTTest.activities">Activities</span></dt>
                 <dd>
                     <span *ngFor="let activities of jTTest.activities; let last = last">
