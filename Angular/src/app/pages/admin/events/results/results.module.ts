@@ -11,6 +11,7 @@ import {PrimeNgComponentsModule} from '../../../../shared/primeng-components.mod
 import {TranslateModule} from '@ngx-translate/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {EventResultService} from '../../../../services/event-result.service';
+import {EnumTranslationsModule} from '../../../../shared/pipes/enum-translator/enum-translations.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {EventResultService} from '../../../../services/event-result.service';
     MaterialComponentsModule,
     PrimeNgComponentsModule,
     TranslateModule,
+    EnumTranslationsModule,
   ],
   providers: [
     EventResultService,
