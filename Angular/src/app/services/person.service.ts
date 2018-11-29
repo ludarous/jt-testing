@@ -23,6 +23,10 @@ export class PersonService extends CrudBaseService<IPerson> {
     return this.httpClient.post<IPerson>(`${this.resourceUrl}/full`, personFull, { observe: 'response' });
   }
 
+  updateFull(personFull: IPersonFull): Observable<HttpResponse<IPersonFull>> {
+    return this.httpClient.put<IPerson>(`${this.resourceUrl}/full`, personFull, { observe: 'response' });
+  }
+
   findFull(personId: string | number): Observable<HttpResponse<IPersonFull>> {
     return this.httpClient.get<IPersonFull>(`${this.resourceUrl}/full/${personId}`, { observe: 'response' });
   }

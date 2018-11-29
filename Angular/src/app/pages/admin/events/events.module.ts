@@ -13,6 +13,7 @@ import {MaterialComponentsModule} from '../../../shared/material-components.modu
 import {PrimeNgComponentsModule} from '../../../shared/primeng-components.module';
 import {ResultsModule} from './results/results.module';
 import {EnumTranslationsModule} from '../../../shared/pipes/enum-translator/enum-translations.module';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {EnumTranslationsModule} from '../../../shared/pipes/enum-translator/enum
     NgMultiSelectDropDownModule,
     ResultsModule,
     EnumTranslationsModule,
+    NgxMaterialTimepickerModule
   ],
   exports: [
     EventsComponent,

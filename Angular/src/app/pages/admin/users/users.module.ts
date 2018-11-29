@@ -11,6 +11,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {SharedModule} from '../../../shared/shared.module';
 import {PrimeNgComponentsModule} from '../../../shared/primeng-components.module';
 import {PersonEditComponent} from './person-edit/person-edit.component';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {PersonEditComponent} from './person-edit/person-edit.component';
     PrimeNgComponentsModule,
     TranslateModule,
     SharedModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    NgxMaterialTimepickerModule
   ],
   exports: [
     UsersComponent,

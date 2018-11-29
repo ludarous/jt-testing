@@ -68,6 +68,7 @@ export class UsersEditComponent implements OnInit {
             const getPersonalData$ = this.getPersonalData(this.person.personalDataId);
             getPersonalData$.subscribe((personalData: IPersonalData) => {
               this.personalData = personalData;
+              this.setPersonalDataForm(this.personalData);
             });
 
 

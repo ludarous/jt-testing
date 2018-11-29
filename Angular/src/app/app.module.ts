@@ -18,6 +18,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SharedComponentsModule} from './shared/components/shared-components.module';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {EventManager} from './services/event.manager';
+import {MAT_DATE_LOCALE} from '@angular/material';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -32,6 +34,7 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserAnimationsModule,
     HttpClientModule,
     SharedComponentsModule,
+    NgxMaterialTimepickerModule.forRoot(),
     NgxWebstorageModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot(),
     TranslateModule.forRoot({
@@ -50,6 +53,7 @@ export function createTranslateLoader(http: HttpClient) {
       multi: true,
       deps: [LocalStorageService, SessionStorageService]
     },
+    {provide: MAT_DATE_LOCALE, useValue: 'cs-CS'},
     EventManager,
     AuthServerProvider,
     AccountService,

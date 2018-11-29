@@ -177,6 +177,35 @@ app-root {
   margin-bottom: 25px;
 }
 
+.timepicker {
+
+  .timepicker__header {
+    background-color: $primary-color !important;
+  }
+
+  .clock-face__clock-hand {
+    background-color: $primary-color !important;
+
+    &::after {
+      background-color: $primary-color !important;
+    }
+
+    &::before {
+      border-color: $primary-color !important;
+    }
+  }
+
+  .clock-face__number {
+    > span.active {
+      background-color: $primary-color !important;
+    }
+  }
+
+  button:not(.timepicker-dial__item) {
+    color: $primary-color !important;
+  }
+}
+
 
 
 

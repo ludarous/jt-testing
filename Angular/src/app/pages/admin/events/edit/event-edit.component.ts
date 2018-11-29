@@ -15,6 +15,8 @@ import {IEvent, Event} from '../../../../entities/event';
 import {IPersonFull} from '../../../../entities/person-full';
 import {PersonService} from '../../../../services/person.service';
 import {Person} from '../../../../entities/person';
+import {Moment} from 'moment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-events-edit',
@@ -32,6 +34,30 @@ export class EventEditComponent implements OnInit {
 
   selectedTests: Array<ITest>;
   selectedPersons: Array<IPersonFull>;
+
+
+  private _eventDate: Moment;
+  get eventDate(): Moment {
+    return this._eventDate;
+  }
+
+  set eventDate(value: Moment) {
+    this._eventDate = value;
+  }
+
+  get eventTime(): String {
+    if (this.eventDate) {
+      return this.eventDate.hour() + ':' + this.eventDate.minute();
+    }
+  }
+
+  set eventTime(value: String) {
+    const time = value.split(':');
+    if (time && time.length === 2) {
+      this.eventDate.hour(+time[0]);
+      this.eventDate.minute(+time[1]);
+    }
+  }
 
   constructor(private activatedRoute: ActivatedRoute,
               private eventService: EventService,
@@ -52,6 +78,7 @@ export class EventEditComponent implements OnInit {
         this.event = event;
         this.tests = tests.body;
         this.persons = persons.body;
+        this.eventDate = moment(this.event.date);
         
         this.setEventForm(this.event, this.tests, this.persons);
       });
@@ -84,6 +111,7 @@ export class EventEditComponent implements OnInit {
     if (this.eventForm.valid) {
 
       const eventToSave = <IEvent>this.eventForm.value;
+      eventToSave.date = this.eventDate.toISOString();
       let saveEvent$;
       if (eventToSave.id) {
         saveEvent$ = this.eventService.update(eventToSave);

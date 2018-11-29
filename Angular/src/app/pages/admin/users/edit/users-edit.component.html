@@ -31,18 +31,18 @@
         </mat-form-field>
       </div>
 
-      <div *ngIf="personalDataForm" [formGroup]="addressForm">
+      <div *ngIf="personalDataForm" [formGroup]="personalDataForm">
         <mat-form-field>
-          <input matInput [placeholder]="'Země' | translate" name="country" formControlName="country"/>
+          <input matInput [placeholder]="'Křestní jméno' | translate" name="firstName" formControlName="firstName"/>
         </mat-form-field>
         <mat-form-field>
-          <input matInput [placeholder]="'Město' | translate" name="city" formControlName="city"/>
+          <input matInput [placeholder]="'Příjmení' | translate" name="lastName" formControlName="lastName"/>
         </mat-form-field>
         <mat-form-field>
-          <input matInput [placeholder]="'Ulice' | translate" name="street" formControlName="street"/>
+          <input matInput [placeholder]="'Datum narození' | translate" name="birthDate" formControlName="birthDate"/>
         </mat-form-field>
         <mat-form-field>
-          <input matInput [placeholder]="'PSČ' | translate" name="zipCode" formControlName="country"/>
+          <input matInput [placeholder]="'Národnost' | translate" name="nationality" formControlName="nationality"/>
         </mat-form-field>
       </div>
     </form>

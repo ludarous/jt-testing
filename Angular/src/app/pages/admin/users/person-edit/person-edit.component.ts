@@ -1,21 +1,16 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
-import {User, IUser} from '../../../../entities/user';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../../../../services/user.service';
-import {Observable, zip} from 'rxjs';
-import {catchError, concatMap, map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {HttpResponse} from '@angular/common/http';
 import {RxjsUtils} from '../../../../utils/rxjs.utils';
 import {AddressService} from '../../../../services/address.service';
 import {PersonalDataService} from '../../../../services/personal-data.service';
-import {IActivity} from '../../../../entities/activity';
-import {IActivityCategory} from '../../../../entities/activity-category';
-import {CustomValidators} from '../../../../shared/validators/custom-validators';
 import {Address, IAddress} from '../../../../entities/address';
 import {IPersonalData, PersonalData} from '../../../../entities/personal-data';
 import {PersonService} from '../../../../services/person.service';
-import {IPerson, Person} from '../../../../entities/person';
 import {IPersonFull, PersonFull} from '../../../../entities/person-full';
 
 @Component({
@@ -100,12 +95,16 @@ export class PersonEditComponent implements OnInit {
   savePerson() {
     if (this.personForm.valid) {
 
-      const personalDataFormGroup = <FormGroup>this.personForm.controls['personalData'];
-      const date = new Date();
-      personalDataFormGroup.controls['birthDate'].setValue(date.toISOString());
-
       const personToSave = this.personForm.value;
-      this.personService.saveFull(personToSave).subscribe((personResponse: HttpResponse<PersonFull>) => {
+
+      let savePerson$;
+      if (personToSave.id) {
+        savePerson$ = this.personService.updateFull(personToSave);
+      } else {
+        savePerson$ = this.personService.saveFull(personToSave);
+      }
+
+      savePerson$.subscribe((personResponse: HttpResponse<PersonFull>) => {
         this.person = personResponse.body;
       });
     }

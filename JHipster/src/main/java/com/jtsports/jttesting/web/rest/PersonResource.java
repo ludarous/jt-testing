@@ -107,6 +107,28 @@ public class PersonResource {
     }
 
     /**
+     * PUT  /people/full : Updates an existing person.
+     *
+     * @param personDTO the personDTO to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated personDTO,
+     * or with status 400 (Bad Request) if the personDTO is not valid,
+     * or with status 500 (Internal Server Error) if the personDTO couldn't be updated
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PutMapping("/people/full")
+    @Timed
+    public ResponseEntity<PersonFullDTO> updatePersonFull(@Valid @RequestBody PersonFullDTO personDTO) throws URISyntaxException {
+        log.debug("REST request to update Person Full : {}", personDTO);
+        if (personDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        PersonFullDTO result = personService.saveFull(personDTO);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, personDTO.getId().toString()))
+            .body(result);
+    }
+
+    /**
      * GET  /people : get all the people.
      *
      * @param pageable the pagination information

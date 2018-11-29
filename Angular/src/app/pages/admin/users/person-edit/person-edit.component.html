@@ -13,7 +13,12 @@
           <input matInput [placeholder]="'Příjmení' | translate" name="city" formControlName="lastName"/>
         </mat-form-field>
         <mat-form-field>
-          <input matInput [placeholder]="'Datum narození' | translate" name="street" formControlName="birthDate"/>
+          <input matInput
+                 formControlName="birthDate"
+                 placeholder="{{'Datum narození' | translate}}"
+                 [matDatepicker]="dateFromDatePicker">
+          <mat-datepicker-toggle matSuffix [for]="dateFromDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #dateFromDatePicker></mat-datepicker>
         </mat-form-field>
         <mat-form-field>
           <input matInput [placeholder]="'Národnost' | translate" name="zipCode" formControlName="nationality"/>
