@@ -50,6 +50,7 @@ export class PersonEditComponent implements OnInit {
     this.personForm = new FormGroup({
       id: new FormControl(person.id),
       email: new FormControl(person.email),
+      virtual: new FormControl(person.virtual)
     });
 
     if (!person.address) person.address = new Address();
@@ -108,6 +109,16 @@ export class PersonEditComponent implements OnInit {
         this.person = personResponse.body;
       });
     }
+  }
+
+  duplicatePerson() {
+    this.personForm.controls['id'].setValue(null);
+    const personalDataForm = <FormGroup>this.personForm.controls['personalData'];
+    const addressForm = <FormGroup>this.personForm.controls['address'];
+
+    personalDataForm.controls['id'].setValue(null);
+    addressForm.controls['id'].setValue(null);
+    this.savePerson();
   }
 
 }

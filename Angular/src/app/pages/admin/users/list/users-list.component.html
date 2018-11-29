@@ -1,12 +1,14 @@
 <div class="component-container-center">
-  <p-table [value]="persons" selectionMode="single">
+  <p-table [value]="persons" selectionMode="single" [sortMode]="">
     <ng-template pTemplate="header">
       <tr>
-        <th>
+        <th [pSortableColumn]="'personalData.firstName'">
           {{'Křestní jméno' | translate}}
+          <p-sortIcon [field]="'personalData.firstName'" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
         </th>
-        <th>
+        <th [pSortableColumn]="'personalData.lastName'">
           {{'Rous' | translate}}
+          <p-sortIcon [field]="'personalData.lastName'" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
         </th>
         <th>
           {{'Email' | translate}}

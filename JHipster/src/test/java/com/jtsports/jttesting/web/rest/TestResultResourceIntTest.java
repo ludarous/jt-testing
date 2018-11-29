@@ -6,7 +6,9 @@ import com.jtsports.jttesting.domain.TestResult;
 import com.jtsports.jttesting.domain.JTTest;
 import com.jtsports.jttesting.repository.TestResultRepository;
 import com.jtsports.jttesting.repository.search.TestResultSearchRepository;
+import com.jtsports.jttesting.service.PersonService;
 import com.jtsports.jttesting.service.TestResultService;
+import com.jtsports.jttesting.service.UserService;
 import com.jtsports.jttesting.service.dto.TestResultDTO;
 import com.jtsports.jttesting.service.mapper.TestResultMapper;
 import com.jtsports.jttesting.web.rest.errors.ExceptionTranslator;
@@ -81,6 +83,12 @@ public class TestResultResourceIntTest {
     private ExceptionTranslator exceptionTranslator;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
+    private PersonService personService;
+
+    @Autowired
     private EntityManager em;
 
     private MockMvc restTestResultMockMvc;
@@ -90,7 +98,7 @@ public class TestResultResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final TestResultResource testResultResource = new TestResultResource(testResultService);
+        final TestResultResource testResultResource = new TestResultResource(testResultService, userService, personService);
         this.restTestResultMockMvc = MockMvcBuilders.standaloneSetup(testResultResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

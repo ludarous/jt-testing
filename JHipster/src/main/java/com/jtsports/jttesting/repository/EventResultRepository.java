@@ -20,4 +20,10 @@ public interface EventResultRepository extends JpaRepository<EventResult, Long> 
         "left join fetch eventResult.testResults where eventResult.event.id = :eventId",
         countQuery = "select count(distinct eventResult) from EventResult eventResult where eventResult.event.id = :eventId")
     Page<EventResult> findAllByEventIdWithEagerRelationships(Pageable pageable, @Param("eventId") Long eventId);
+
+
+    @Query(value = "select distinct eventResult from EventResult eventResult " +
+        "left join fetch eventResult.testResults where eventResult.person.id = :personId",
+        countQuery = "select count(distinct eventResult) from EventResult eventResult where eventResult.event.id = :personId")
+    Page<EventResult> findAllByPersonIdWithEagerRelationships(Pageable pageable, @Param("personId") Long personId);
 }

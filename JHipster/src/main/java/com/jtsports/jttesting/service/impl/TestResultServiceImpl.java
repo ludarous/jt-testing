@@ -111,4 +111,5 @@ public class TestResultServiceImpl implements TestResultService {
         return testResultSearchRepository.search(queryStringQuery(query), pageable)
             .map(testResultMapper::toDto);
     }
+
 }

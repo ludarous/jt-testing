@@ -33,6 +33,10 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "virtual",
+            "fieldType": "Boolean"
         }
     ],
     "changelogDate": "20180919081357",

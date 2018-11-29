@@ -12,6 +12,8 @@ public class PersonFullDTO implements Serializable {
 
     private String email;
 
+    private Boolean virtual;
+
     private PersonalDataDTO personalData;
 
     private AddressDTO address;
@@ -58,6 +60,14 @@ public class PersonFullDTO implements Serializable {
         this.email = email;
     }
 
+    public Boolean isVirtual() {
+        return virtual;
+    }
+
+    public void setVirtual(Boolean virtual) {
+        this.virtual = virtual;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -83,8 +93,8 @@ public class PersonFullDTO implements Serializable {
     public String toString() {
         return "PersonDTO{" +
             "id=" + getId() +
-            ", personalData=" + getPersonalData().toString() +
-            ", address=" + getAddress().toString() +
+            ", personalData=" + getPersonalData() != null ? getPersonalData().toString() : "" +
+            ", address=" + getAddress() != null ? getAddress().toString() : "" +
             "}";
     }
 

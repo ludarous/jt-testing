@@ -15,6 +15,14 @@ export const appRoutes: Routes = [
   {
     path: 'admin',
     loadChildren: 'app/pages/admin/admin.module#AdminModule',
+  },
+  {
+    path: 'my-results',
+    loadChildren: 'app/pages/user-results/user-results.module#UserResultsModule',
+  },
+  {
+    path: 'my-stats',
+    loadChildren: 'app/pages/user-stats/user-stats.module#UserStatsModule',
   }
 
 ];

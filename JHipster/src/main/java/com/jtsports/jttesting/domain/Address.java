@@ -23,19 +23,15 @@ public class Address implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @NotNull
     @Column(name = "country", nullable = false)
     private String country;
 
-    @NotNull
     @Column(name = "city", nullable = false)
     private String city;
 
-    @NotNull
     @Column(name = "street", nullable = false)
     private String street;
 
-    @NotNull
     @Column(name = "zip_code", nullable = false)
     private String zipCode;
 

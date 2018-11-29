@@ -194,6 +194,7 @@ public class PersonServiceImpl implements PersonService {
         }
 
         person.setEmail(personFullDTO.getEmail());
+        person.setVirtual(personFullDTO.isVirtual());
 
         person = personRepository.save(person);
         PersonDTO result = personMapper.toDto(person);

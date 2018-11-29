@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {UsersComponent} from './users.component';
 import {UsersListComponent} from './list/users-list.component';
-import {UsersEditComponent} from './edit/users-edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UsersRoutingModule} from './users-routing.module';
 import {MaterialComponentsModule} from '../../../shared/material-components.module';
@@ -18,7 +17,6 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
   declarations: [
     UsersComponent,
     UsersListComponent,
-    UsersEditComponent,
     PersonEditComponent,
   ],
   imports: [
@@ -36,7 +34,6 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
   exports: [
     UsersComponent,
     UsersListComponent,
-    UsersEditComponent,
     PersonEditComponent,
   ]
 })

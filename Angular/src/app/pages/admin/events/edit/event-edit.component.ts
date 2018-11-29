@@ -70,8 +70,14 @@ export class EventEditComponent implements OnInit {
     params$.subscribe((params) => {
       this.eventId = +params['id'];
 
-      const getTests$ = this.testService.query();
-      const getPersons$ = this.personService.queryFull();
+      const getTests$ = this.testService.query({
+        page: 0,
+        size: 1000,
+      });
+      const getPersons$ = this.personService.queryFull({
+        page: 0,
+        size: 1000,
+      });
       const getEvent$ = this.getEvent(this.eventId);
 
       zip(getEvent$, getTests$, getPersons$).subscribe(([event, tests, persons]) => {

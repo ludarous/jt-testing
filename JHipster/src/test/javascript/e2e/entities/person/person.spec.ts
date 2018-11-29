@@ -32,6 +32,18 @@ describe('Person e2e test', () => {
         personComponentsPage.clickOnCreateButton();
         personUpdatePage.setEmailInput('email');
         expect(personUpdatePage.getEmailInput()).toMatch('email');
+        personUpdatePage
+            .getVirtualInput()
+            .isSelected()
+            .then(selected => {
+                if (selected) {
+                    personUpdatePage.getVirtualInput().click();
+                    expect(personUpdatePage.getVirtualInput().isSelected()).toBeFalsy();
+                } else {
+                    personUpdatePage.getVirtualInput().click();
+                    expect(personUpdatePage.getVirtualInput().isSelected()).toBeTruthy();
+                }
+            });
         personUpdatePage.personalDataSelectLastOption();
         personUpdatePage.addressSelectLastOption();
         personUpdatePage.save();

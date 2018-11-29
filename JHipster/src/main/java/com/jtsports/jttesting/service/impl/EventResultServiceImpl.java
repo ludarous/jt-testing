@@ -9,6 +9,7 @@ import com.jtsports.jttesting.domain.EventResult;
 import com.jtsports.jttesting.repository.EventResultRepository;
 import com.jtsports.jttesting.repository.search.EventResultSearchRepository;
 import com.jtsports.jttesting.service.dto.EventResultDTO;
+import com.jtsports.jttesting.service.dto.TestResultDTO;
 import com.jtsports.jttesting.service.mapper.EventResultMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -138,6 +139,12 @@ public class EventResultServiceImpl implements EventResultService {
     public Page<EventResultDTO> findAllByEventId(Pageable pageable, Long eventId) {
         log.debug("Request to get all EventResults");
         return eventResultRepository.findAllByEventIdWithEagerRelationships(pageable, eventId)
+            .map(eventResultMapper::toDto);
+    }
+
+    @Override
+    public Page<EventResultDTO> findAllByPersonId(Pageable pageable, Long id) {
+        return eventResultRepository.findAllByPersonIdWithEagerRelationships(pageable, id)
             .map(eventResultMapper::toDto);
     }
 }

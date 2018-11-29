@@ -14,12 +14,14 @@ public interface PersonFullMapper extends EntityMapper<PersonFullDTO, Person> {
     @Mapping(source = "address", target = "address", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
     @Mapping(source = "user", target = "user", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
     @Mapping(source = "email", target = "email")
+    @Mapping(source = "virtual", target = "virtual")
     PersonFullDTO toDto(Person person);
 
     @Mapping(source = "personalData", target = "personalData", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
     @Mapping(source = "address", target = "address", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
     @Mapping(source = "user", target = "user", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
     @Mapping(source = "email", target = "email")
+    @Mapping(source = "virtual", target = "virtual")
     Person toEntity(PersonFullDTO personFullDTO);
 
     default Person fromId(Long id) {

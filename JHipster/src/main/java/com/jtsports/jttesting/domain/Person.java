@@ -30,6 +30,9 @@ public class Person implements Serializable {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @Column(name = "virtual")
+    private Boolean virtual;
+
     @OneToOne
     @JoinColumn(unique = true)
     private PersonalData personalData;
@@ -65,6 +68,19 @@ public class Person implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Boolean isVirtual() {
+        return virtual;
+    }
+
+    public Person virtual(Boolean virtual) {
+        this.virtual = virtual;
+        return this;
+    }
+
+    public void setVirtual(Boolean virtual) {
+        this.virtual = virtual;
     }
 
     public PersonalData getPersonalData() {
@@ -157,6 +173,7 @@ public class Person implements Serializable {
         return "Person{" +
             "id=" + getId() +
             ", email='" + getEmail() + "'" +
+            ", virtual='" + isVirtual() + "'" +
             "}";
     }
 }

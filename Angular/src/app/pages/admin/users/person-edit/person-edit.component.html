@@ -5,6 +5,8 @@
         <input matInput [placeholder]="'email' | translate" name="email" formControlName="email" disabled/>
       </mat-form-field>
 
+      <mat-checkbox matInput formControlName="virtual">{{'Virtuální uživatel' | translate}}</mat-checkbox>
+
       <div formGroupName="personalData">
         <mat-form-field>
           <input matInput [placeholder]="'Křestní jméno' | translate" name="country" formControlName="firstName"/>
@@ -40,6 +42,8 @@
         </mat-form-field>
       </div>
       <button mat-raised-button>{{'Uložit' | translate}}</button>
+      <br>
+      <button type="button" mat-raised-button (click)="duplicatePerson()">{{'Vytvořit kopii' | translate}}</button>
     </form>
   </div>
 </div>

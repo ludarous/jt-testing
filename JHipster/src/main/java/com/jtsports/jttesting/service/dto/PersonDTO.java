@@ -14,6 +14,8 @@ public class PersonDTO implements Serializable {
     @NotNull
     private String email;
 
+    private Boolean virtual;
+
     private Long personalDataId;
 
     private Long addressId;
@@ -34,6 +36,14 @@ public class PersonDTO implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Boolean isVirtual() {
+        return virtual;
+    }
+
+    public void setVirtual(Boolean virtual) {
+        this.virtual = virtual;
     }
 
     public Long getPersonalDataId() {
@@ -82,6 +92,7 @@ public class PersonDTO implements Serializable {
         return "PersonDTO{" +
             "id=" + getId() +
             ", email='" + getEmail() + "'" +
+            ", virtual='" + isVirtual() + "'" +
             ", personalData=" + getPersonalDataId() +
             ", address=" + getAddressId() +
             "}";

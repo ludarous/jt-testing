@@ -18,6 +18,7 @@
                 "title": "Person"
             },
             "email": "Email",
+            "virtual": "Virtual",
             "personalData": "Personal Data",
             "address": "Address",
             "events": "Events"

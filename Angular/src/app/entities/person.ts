@@ -2,6 +2,8 @@ import {IPersonFull} from './person-full';
 
 export interface IPerson {
   id?: any;
+  email?: string;
+  virtual?: boolean;
   addressId?: number;
   personalDataId?: number;
   userId?: number;
@@ -9,6 +11,8 @@ export interface IPerson {
 
 export class Person implements IPerson {
   id: any;
+  email: string;
+  virtual: boolean;
   addressId: number;
   personalDataId: number;
   userId: number;

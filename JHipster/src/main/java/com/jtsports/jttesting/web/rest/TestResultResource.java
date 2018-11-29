@@ -1,7 +1,12 @@
 package com.jtsports.jttesting.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.jtsports.jttesting.domain.Person;
+import com.jtsports.jttesting.domain.User;
+import com.jtsports.jttesting.service.PersonService;
 import com.jtsports.jttesting.service.TestResultService;
+import com.jtsports.jttesting.service.UserService;
+import com.jtsports.jttesting.service.dto.PersonFullDTO;
 import com.jtsports.jttesting.web.rest.errors.BadRequestAlertException;
 import com.jtsports.jttesting.web.rest.util.HeaderUtil;
 import com.jtsports.jttesting.web.rest.util.PaginationUtil;
@@ -22,9 +27,6 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing TestResult.
@@ -39,8 +41,14 @@ public class TestResultResource {
 
     private final TestResultService testResultService;
 
-    public TestResultResource(TestResultService testResultService) {
+    private final UserService userService;
+
+    private final PersonService personService;
+
+    public TestResultResource(TestResultService testResultService, UserService userService, PersonService personService) {
         this.testResultService = testResultService;
+        this.userService = userService;
+        this.personService = personService;
     }
 
     /**
@@ -144,5 +152,8 @@ public class TestResultResource {
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/test-results");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+    /* ----------------------------- MY RESULTS ----------------------------- */
+
 
 }

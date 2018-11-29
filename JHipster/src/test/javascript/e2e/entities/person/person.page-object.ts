@@ -18,6 +18,7 @@ export class PersonUpdatePage {
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     emailInput = element(by.id('field_email'));
+    virtualInput = element(by.id('field_virtual'));
     personalDataSelect = element(by.id('field_personalData'));
     addressSelect = element(by.id('field_address'));
 
@@ -33,6 +34,9 @@ export class PersonUpdatePage {
         return this.emailInput.getAttribute('value');
     }
 
+    getVirtualInput() {
+        return this.virtualInput;
+    }
     personalDataSelectLastOption(): promise.Promise<void> {
         return this.personalDataSelect
             .all(by.tagName('option'))

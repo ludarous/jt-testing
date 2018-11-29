@@ -11,16 +11,12 @@ public class AddressDTO implements Serializable {
 
     private Long id;
 
-    @NotNull
     private String country;
 
-    @NotNull
     private String city;
 
-    @NotNull
     private String street;
 
-    @NotNull
     private String zipCode;
 
     public Long getId() {

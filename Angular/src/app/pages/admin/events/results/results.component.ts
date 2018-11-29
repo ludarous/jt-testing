@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {EventService} from '../../../../services/event.service';
 import {IEvent, Event} from '../../../../entities/event';
-import {IPersonFull} from '../../../../entities/person-full';
+import {IPersonFull, PersonFull} from '../../../../entities/person-full';
 import {zip} from 'rxjs';
 import {IEventResult} from '../../../../entities/event-result';
 import {EventManager} from '../../../../services/event.manager';
@@ -34,6 +34,7 @@ export class ResultsComponent implements OnInit {
       zip(getEvent$, getEventResults$).subscribe(([eventResponse, eventResultResponse]) => {
         this.event = Event.resolveResponse(eventResponse);
         this.eventResults = eventResultResponse.body;
+        this.event.attachedPersons = PersonFull.sortByName(this.event.attachedPersons);
       });
 
     });

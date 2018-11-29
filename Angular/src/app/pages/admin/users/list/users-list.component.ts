@@ -24,7 +24,10 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.personService.queryFull().subscribe((personsResponse: HttpResponse<Array<IPersonFull>>) => {
+    this.personService.queryFull({
+      page: 0,
+      size: 1000,
+    }).subscribe((personsResponse: HttpResponse<Array<IPersonFull>>) => {
       this.persons = personsResponse.body;
     });
   }
