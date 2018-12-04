@@ -23,16 +23,16 @@ public class Address implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "country", nullable = false)
+    @Column(name = "country")
     private String country;
 
-    @Column(name = "city", nullable = false)
+    @Column(name = "city")
     private String city;
 
-    @Column(name = "street", nullable = false)
+    @Column(name = "street")
     private String street;
 
-    @Column(name = "zip_code", nullable = false)
+    @Column(name = "zip_code")
     private String zipCode;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

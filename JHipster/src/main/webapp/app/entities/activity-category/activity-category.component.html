@@ -33,6 +33,7 @@
             <th jhiSortBy="name"><span jhiTranslate="jtTestingApp.activityCategory.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="key"><span jhiTranslate="jtTestingApp.activityCategory.key">Key</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="description"><span jhiTranslate="jtTestingApp.activityCategory.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="parentName"><span jhiTranslate="jtTestingApp.activityCategory.parent">Parent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -42,6 +43,11 @@
                 <td>{{activityCategory.name}}</td>
                 <td>{{activityCategory.key}}</td>
                 <td>{{activityCategory.description}}</td>
+                <td>
+                    <div *ngIf="activityCategory.parentId">
+                        <a [routerLink]="['../activity-category', activityCategory.parentId , 'view' ]" >{{activityCategory.parentName}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

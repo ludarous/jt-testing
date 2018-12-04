@@ -1,11 +1,15 @@
 package com.jtsports.jttesting.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -32,6 +36,13 @@ public class ActivityCategory implements Serializable {
 
     @Column(name = "description")
     private String description;
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private ActivityCategory parent;
+
+    @OneToMany(mappedBy = "parent")
+    private Set<ActivityCategory> children = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -79,6 +90,44 @@ public class ActivityCategory implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ActivityCategory getParent() {
+        return parent;
+    }
+
+    public ActivityCategory parent(ActivityCategory activityCategory) {
+        this.parent = activityCategory;
+        return this;
+    }
+
+    public void setParent(ActivityCategory activityCategory) {
+        this.parent = activityCategory;
+    }
+
+    public Set<ActivityCategory> getChildren() {
+        return children;
+    }
+
+    public ActivityCategory children(Set<ActivityCategory> activityCategories) {
+        this.children = activityCategories;
+        return this;
+    }
+
+    public ActivityCategory addChildren(ActivityCategory activityCategory) {
+        this.children.add(activityCategory);
+        activityCategory.setParent(this);
+        return this;
+    }
+
+    public ActivityCategory removeChildren(ActivityCategory activityCategory) {
+        this.children.remove(activityCategory);
+        activityCategory.setParent(null);
+        return this;
+    }
+
+    public void setChildren(Set<ActivityCategory> activityCategories) {
+        this.children = activityCategories;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

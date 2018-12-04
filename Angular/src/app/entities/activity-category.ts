@@ -3,6 +3,10 @@ export interface IActivityCategory {
   name?: string;
   description?: string;
   key?: string;
+  parentId?: number;
+
+  parent?: ActivityCategory;
+  chidlren?: Array<ActivityCategory>;
 }
 
 export class ActivityCategory implements IActivityCategory {
@@ -10,4 +14,9 @@ export class ActivityCategory implements IActivityCategory {
   name: string;
   description: string;
   key: string;
+  parentId?: number;
+
+
+  parent: ActivityCategory;
+  chidlren: Array<ActivityCategory>;
 }

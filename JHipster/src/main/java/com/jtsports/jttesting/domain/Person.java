@@ -30,7 +30,8 @@ public class Person implements Serializable {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "virtual")
+    @NotNull
+    @Column(name = "virtual", nullable = false)
     private Boolean virtual;
 
     @OneToOne

@@ -31,6 +31,8 @@ public class EventDTO implements Serializable {
 
     private Set<PersonFullDTO> attachedPersons = new HashSet<>();
 
+    private Set<EventResultDTO> eventResults = new HashSet<>();
+
     public Long getId() {
         return id;
     }
@@ -101,6 +103,14 @@ public class EventDTO implements Serializable {
 
     public void setAttachedPersons(Set<PersonFullDTO> people) {
         this.attachedPersons = people;
+    }
+
+    public Set<EventResultDTO> getEventResults() {
+        return eventResults;
+    }
+
+    public void setEventResults(Set<EventResultDTO> eventResults) {
+        this.eventResults = eventResults;
     }
 
     @Override

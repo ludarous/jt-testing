@@ -1,6 +1,7 @@
 package com.jtsports.jttesting.repository;
 
 import com.jtsports.jttesting.domain.Activity;
+import com.jtsports.jttesting.domain.ActivityResult;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -26,5 +27,13 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
 
     @Query("select activity from Activity activity left join fetch activity.categories where activity.id =:id")
     Optional<Activity> findOneWithEagerRelationships(@Param("id") Long id);
+
+    @Query("select activityResult from ActivityResult activityResult " +
+        "inner join fetch activityResult.activity activity " +
+        "inner join activityResult.testResult testResult " +
+        "inner join testResult.eventResult eventResult " +
+        "inner join eventResult.person person " +
+        "where activity.id = :id and person.virtual = :virtual")
+    List<ActivityResult> findActivityStats(@Param("id") Long id, @Param("virtual") Boolean virtual);
 
 }

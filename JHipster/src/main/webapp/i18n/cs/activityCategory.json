@@ -19,7 +19,9 @@
             },
             "name": "Name",
             "key": "Key",
-            "description": "Description"
+            "description": "Description",
+            "parent": "Parent",
+            "children": "Children"
         }
     }
 }

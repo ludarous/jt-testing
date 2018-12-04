@@ -2,7 +2,9 @@ package com.jtsports.jttesting.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the ActivityCategory entity.
@@ -17,6 +19,12 @@ public class ActivityCategoryDTO implements Serializable {
     private String key;
 
     private String description;
+
+    private Long parentId;
+
+    private String parentName;
+
+    private Set<ActivityCategoryDTO> children = new HashSet<ActivityCategoryDTO>();
 
     public Long getId() {
         return id;
@@ -50,6 +58,22 @@ public class ActivityCategoryDTO implements Serializable {
         this.description = description;
     }
 
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long activityCategoryId) {
+        this.parentId = activityCategoryId;
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String activityCategoryName) {
+        this.parentName = activityCategoryName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -78,6 +102,16 @@ public class ActivityCategoryDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", key='" + getKey() + "'" +
             ", description='" + getDescription() + "'" +
+            ", parent=" + getParentId() +
+            ", parent='" + getParentName() + "'" +
             "}";
+    }
+
+    public Set<ActivityCategoryDTO> getChildren() {
+        return children;
+    }
+
+    public void setChildren(Set<ActivityCategoryDTO> children) {
+        this.children = children;
     }
 }

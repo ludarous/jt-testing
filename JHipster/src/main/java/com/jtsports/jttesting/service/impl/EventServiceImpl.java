@@ -6,6 +6,7 @@ import com.jtsports.jttesting.repository.EventRepository;
 import com.jtsports.jttesting.repository.search.EventSearchRepository;
 import com.jtsports.jttesting.service.dto.EventDTO;
 import com.jtsports.jttesting.service.mapper.EventMapper;
+import com.jtsports.jttesting.service.mapper.EventMapperCustom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,11 +33,14 @@ public class EventServiceImpl implements EventService {
 
     private final EventMapper eventMapper;
 
+    private final EventMapperCustom eventMapperCustom;
+
     private final EventSearchRepository eventSearchRepository;
 
-    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, EventSearchRepository eventSearchRepository) {
+    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, EventMapperCustom eventMapperCustom, EventSearchRepository eventSearchRepository) {
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
+        this.eventMapperCustom = eventMapperCustom;
         this.eventSearchRepository = eventSearchRepository;
     }
 
@@ -119,5 +123,11 @@ public class EventServiceImpl implements EventService {
         log.debug("Request to search for a page of Events for query {}", query);
         return eventSearchRepository.search(queryStringQuery(query), pageable)
             .map(eventMapper::toDto);
+    }
+
+    @Override
+    public Page<EventDTO> findAllMyWithEagerRelationships(Pageable pageable, Long personId) {
+        Page<Event> events = eventRepository.findAllMyWithEagerRelationships(pageable, personId);
+        return events.map(eventMapperCustom::toDto);
     }
 }

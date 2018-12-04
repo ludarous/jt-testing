@@ -34,7 +34,7 @@ export class MenuComponent implements OnInit {
 
   registerAuthenticationSuccess() {
     this.eventManager.subscribe('authenticationSuccess', message => {
-      this.updateIdentity();
+      this.updateIdentity(true);
     });
   }
 
@@ -60,8 +60,11 @@ export class MenuComponent implements OnInit {
         });
 
         this.personService.findByUserId(this.account.id).subscribe((person: HttpResponse<IPerson>) => {
-          this.person = person.body;
-        });
+            this.person = person.body;
+          },
+          (error: HttpResponse<any>) => {
+            this.person = null;
+          });
       }
 
     });

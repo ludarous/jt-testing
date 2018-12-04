@@ -59,4 +59,11 @@ public interface EventService {
      * @return the list of entities
      */
     Page<EventDTO> search(String query, Pageable pageable);
+
+    /**
+     * Get all the Event of personId with eager load of many-to-many relationships.
+     *
+     * @return the list of entities
+     */
+    Page<EventDTO> findAllMyWithEagerRelationships(Pageable pageable, Long personId);
 }

@@ -54,3 +54,27 @@ export class Activity implements IActivity {
     return activities;
   }
 }
+
+export class ActivityStatsRequest {
+  dateFrom?: string;
+  dateTo?: string;
+  usersBirthdayFrom?: string;
+  usersBirthdayTo?: string;
+}
+
+export class ActivityStats {
+  activity: IActivity;
+  virtualStats: ActivityResultStats;
+  realStats: ActivityResultStats;
+}
+
+export class ActivityResultStats {
+  primaryMin?: number;
+  secondaryMin?: number;
+  primaryAverage?: number;
+  secondaryAverage?: number;
+  primaryMedian?: number;
+  secondaryMedian?: number;
+  primaryMax?: number;
+  secondaryMax?: number;
+}

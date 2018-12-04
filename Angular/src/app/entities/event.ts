@@ -3,6 +3,7 @@ import {IPerson} from './person';
 import {IPersonFull} from './person-full';
 import {HttpResponse} from '@angular/common/http';
 import {Activity} from './activity';
+import {IEventResult} from './event-result';
 
 export interface IEvent {
   id?: number;
@@ -16,6 +17,7 @@ export interface IEvent {
   
   tests?: Array<ITest>;
   attachedPersons?: Array<IPersonFull>;
+  eventResults?: Array<IEventResult>;
   
 }
 
@@ -31,6 +33,7 @@ export class Event implements IEvent {
 
   tests: Array<ITest>;
   attachedPersons: Array<IPersonFull>;
+  eventResults: Array<IEventResult>;
 
   static resolveResponse(response: HttpResponse<IEvent>): IEvent {
     const responseActivity = this.parseItemEnums(response.body);

@@ -2,6 +2,8 @@ package com.jtsports.jttesting.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.jtsports.jttesting.service.ActivityService;
+import com.jtsports.jttesting.service.dto.Activity.ActivityStatsDTO;
+import com.jtsports.jttesting.service.dto.Activity.ActivityStatsRequestDTO;
 import com.jtsports.jttesting.web.rest.errors.BadRequestAlertException;
 import com.jtsports.jttesting.web.rest.util.HeaderUtil;
 import com.jtsports.jttesting.web.rest.util.PaginationUtil;
@@ -149,6 +151,20 @@ public class ActivityResource {
         Page<ActivityDTO> page = activityService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/activities");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /activities/:id/stats : get the "id" activity.
+     *
+     * @param id the id of the activityDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the activityDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/activities/{id}/stats")
+    @Timed
+    public ResponseEntity<ActivityStatsDTO> getActivity(@PathVariable Long id, ActivityStatsRequestDTO activityStatsRequestDTO) {
+        log.debug("REST request to get Activity : {}", id);
+        ActivityStatsDTO activityStatsDTO = activityService.findStats(id);
+        return ResponseEntity.ok(activityStatsDTO);
     }
 
 }

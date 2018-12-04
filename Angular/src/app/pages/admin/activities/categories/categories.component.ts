@@ -49,6 +49,7 @@ export class CategoriesComponent implements OnInit {
       name: new FormControl(category.name),
       description: new FormControl(category.description),
       key: new FormControl(category.key),
+      parentId: new FormControl(category.parentId)
     });
   }
 

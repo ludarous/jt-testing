@@ -1,9 +1,13 @@
 package com.jtsports.jttesting.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.jtsports.jttesting.domain.User;
 import com.jtsports.jttesting.service.EventResultService;
 import com.jtsports.jttesting.service.EventService;
+import com.jtsports.jttesting.service.PersonService;
+import com.jtsports.jttesting.service.UserService;
 import com.jtsports.jttesting.service.dto.EventResultDTO;
+import com.jtsports.jttesting.service.dto.PersonFullDTO;
 import com.jtsports.jttesting.web.rest.errors.BadRequestAlertException;
 import com.jtsports.jttesting.web.rest.util.HeaderUtil;
 import com.jtsports.jttesting.web.rest.util.PaginationUtil;
@@ -40,9 +44,15 @@ public class EventResource {
 
     private final EventResultService eventResultService;
 
-    public EventResource(EventService eventService, EventResultService eventResultService) {
+    private final UserService userService;
+
+    private final PersonService personService;
+
+    public EventResource(EventService eventService, EventResultService eventResultService, UserService userService, PersonService personService) {
         this.eventService = eventService;
         this.eventResultService = eventResultService;
+        this.userService = userService;
+        this.personService = personService;
     }
 
     /**
@@ -168,6 +178,33 @@ public class EventResource {
         Page<EventResultDTO> page = eventResultService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/events/:id/results");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /*------------------------- MY EVENTS --------------------------------- */
+
+
+    /**
+     * GET  /events/my : get all the events.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of events in body
+     */
+    @GetMapping("/events/my")
+    @Timed
+    public ResponseEntity<List<EventDTO>> getAllMyEvents(Pageable pageable) {
+        log.debug("REST request to get a page of Events");
+        Optional<User> user = userService.getUserWithAuthorities();
+        if(user.isPresent()) {
+            Optional<PersonFullDTO> personFullDTO = this.personService.findOneByUserId(user.get().getId());
+            if(personFullDTO.isPresent()) {
+                Page<EventDTO> page = eventService.findAllMyWithEagerRelationships(pageable, personFullDTO.get().getId());
+                HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/events/my");
+                return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+            }
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
 

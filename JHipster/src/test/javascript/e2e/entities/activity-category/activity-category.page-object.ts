@@ -20,6 +20,7 @@ export class ActivityCategoryUpdatePage {
     nameInput = element(by.id('field_name'));
     keyInput = element(by.id('field_key'));
     descriptionInput = element(by.id('field_description'));
+    parentSelect = element(by.id('field_parent'));
 
     getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -47,6 +48,25 @@ export class ActivityCategoryUpdatePage {
 
     getDescriptionInput() {
         return this.descriptionInput.getAttribute('value');
+    }
+
+    parentSelectLastOption(): promise.Promise<void> {
+        return this.parentSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    parentSelectOption(option): promise.Promise<void> {
+        return this.parentSelect.sendKeys(option);
+    }
+
+    getParentSelect(): ElementFinder {
+        return this.parentSelect;
+    }
+
+    getParentSelectedOption() {
+        return this.parentSelect.element(by.css('option:checked')).getText();
     }
 
     save(): promise.Promise<void> {

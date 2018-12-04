@@ -1,5 +1,6 @@
 package com.jtsports.jttesting.service;
 
+import com.jtsports.jttesting.service.dto.Activity.ActivityStatsDTO;
 import com.jtsports.jttesting.service.dto.ActivityDTO;
 
 import org.springframework.data.domain.Page;
@@ -59,4 +60,6 @@ public interface ActivityService {
      * @return the list of entities
      */
     Page<ActivityDTO> search(String query, Pageable pageable);
+
+    ActivityStatsDTO findStats(Long id);
 }

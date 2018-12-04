@@ -14,4 +14,8 @@ export class EventService extends CrudBaseService<IEvent> {
   queryEventResults(eventId: string | number): Observable<HttpResponse<Array<IEventResult>>> {
     return this.httpClient.get<Array<IEventResult>>(`${this.resourceUrl}/${eventId}/results`, { observe: 'response' });
   }
+
+  queryMyEvents(): Observable<HttpResponse<Array<IEvent>>> {
+    return this.httpClient.get<Array<IEvent>>(`${this.resourceUrl}/my`, { observe: 'response' });
+  }
 }

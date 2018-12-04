@@ -23,6 +23,7 @@
     <include file="config/liquibase/changelog/20181126122145_added_minAge_maxAge_to_JTTest.xml" relativeToChangelogFile="false" />
     <include file="config/liquibase/changelog/20181126123222_added_minAge_maxAge_to_event.xml" relativeToChangelogFile="false" />
     <include file="config/liquibase/changelog/20181129121600_added_virtual_to_person.xml" relativeToChangelogFile="false" />
+    <include file="config/liquibase/changelog/20181129204712_activityCategory_tree_structure.xml" relativeToChangelogFile="false"></include>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180919081349_added_entity_constraints_Event.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081350_added_entity_constraints_JTTest.xml" relativeToChangelogFile="false"/>

@@ -36,6 +36,7 @@ describe('ActivityCategory e2e test', () => {
         expect(activityCategoryUpdatePage.getKeyInput()).toMatch('key');
         activityCategoryUpdatePage.setDescriptionInput('description');
         expect(activityCategoryUpdatePage.getDescriptionInput()).toMatch('description');
+        activityCategoryUpdatePage.parentSelectLastOption();
         activityCategoryUpdatePage.save();
         expect(activityCategoryUpdatePage.getSaveButton().isPresent()).toBeFalsy();
     });

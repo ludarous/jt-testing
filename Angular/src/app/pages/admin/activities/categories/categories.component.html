@@ -29,6 +29,13 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field>
+        <mat-select placeholder="Nadřazená kategorie" formControlName="parentId">
+          <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{category.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
         <textarea matInput cdkTextareaAutosize [placeholder]="'Popis' | translate" name="description"
                   formControlName="description"></textarea>
       </mat-form-field>
