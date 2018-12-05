@@ -1,7 +1,15 @@
-<div>
-  {{event.name}}
-</div>
-<div *ngFor="let eventResult of eventResults">
+<div class="user-event-result-container" *ngFor="let eventResult of eventResults">
+  <div class="event-result-info">
+    <div>
+      <span class="info-label" translate>Váha v době události: </span>{{eventResult.actualWeightInKg}} Kg
+    </div>
+    <div>
+      <span class="info-label" translate>Výška v době události: </span> {{eventResult.actualHeightInCm}} Cm
+    </div>
+    <div>
+      <span class="info-label" translate>Poznámka: </span> {{eventResult.note}}
+    </div>
+  </div>
   <div *ngFor="let testResult of eventResult.testResults">
     <app-user-test-result [test]="getTestForTestResult(testResult)" [testResult]="testResult"></app-user-test-result>
   </div>

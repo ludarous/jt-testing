@@ -3,7 +3,7 @@ import {HttpResponse} from '@angular/common/http';
 import {EventResultService} from '../../../services/event-result.service';
 import {EventService} from '../../../services/event.service';
 import {IEventResult} from '../../../entities/event-result';
-import {IEvent} from '../../../entities/event';
+import {IEvent, Event} from '../../../entities/event';
 
 @Component({
   selector: 'app-user-results',
@@ -22,7 +22,7 @@ export class UserResultsComponent implements OnInit {
 
     const getMyEvent$ = this.eventService.queryMyEvents();
     getMyEvent$.subscribe((myEventsResponse: HttpResponse<Array<IEvent>>) => {
-      this.myEvents = myEventsResponse.body;
+      this.myEvents = Event.resolveArrayResponse(myEventsResponse);
     });
   }
 

@@ -4,6 +4,7 @@ package com.jtsports.jttesting.domain;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import com.jtsports.jttesting.domain.util.RandomNumbers;
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.HashSet;

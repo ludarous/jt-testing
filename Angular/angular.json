@@ -36,7 +36,10 @@
               "node_modules/primeng/resources/primeng.min.css",
               "src/assets/styles/jt-theme.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/d3/dist/d3.min.js",
+              "node_modules/d3-shape/dist/d3-shape.min.js"
+            ]
           },
           "configurations": {
             "production": {

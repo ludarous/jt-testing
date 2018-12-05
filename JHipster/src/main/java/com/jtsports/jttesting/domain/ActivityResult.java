@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import com.jtsports.jttesting.domain.util.RandomNumbers;
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.Objects;
@@ -145,5 +146,20 @@ public class ActivityResult implements Serializable {
             ", secondaryResultValue=" + getSecondaryResultValue() +
             ", note='" + getNote() + "'" +
             "}";
+    }
+
+    public static ActivityResult craeteActivityResult(Activity activity, TestResult testResult) {
+        String personName =  testResult.getEventResult().getPerson().getPersonalData().getFirstName() + " " + testResult.getEventResult().getPerson().getPersonalData().getLastName();
+        ActivityResult activityResult = new ActivityResult();
+        activityResult.setTestResult(testResult);
+        activityResult.setActivity(activity);
+        activityResult.setNote("Poznámka k aktivitě " + activity.getName() + ". Osooba: " + personName);
+
+        activityResult.setPrimaryResultValue(new Float(RandomNumbers.getRandomNumberInRange(20,100)));
+
+        if(activity.getSecondaryResultValueUnit() != null) {
+            activityResult.setSecondaryResultValue(new Float(RandomNumbers.getRandomNumberInRange(30,50)));
+        }
+        return activityResult;
     }
 }

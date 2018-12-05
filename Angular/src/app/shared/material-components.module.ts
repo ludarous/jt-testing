@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  MatButtonModule, MatCardModule, MatCheckboxModule, MatDatepickerModule, MatDialogModule, MatIconModule,
+  MatButtonModule, MatCardModule, MatCheckboxModule, MatDatepickerModule, MatDialogModule, MatExpansionModule, MatIconModule,
   MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressSpinnerModule,
   MatRadioModule,
   MatSelectModule, MatSidenavModule,
@@ -35,6 +35,7 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatListModule,
     MatStepperModule,
     MatSidenavModule,
+    MatExpansionModule,
   ],
   providers: [
   ],
@@ -62,6 +63,7 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatListModule,
     MatStepperModule,
     MatSidenavModule,
+    MatExpansionModule,
   ],
 })
 export class MaterialComponentsModule { }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import com.jtsports.jttesting.domain.util.RandomNumbers;
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -176,5 +177,20 @@ public class EventResult implements Serializable {
             ", actualHeightInCm=" + getActualHeightInCm() +
             ", actualWeightInKg=" + getActualWeightInKg() +
             "}";
+    }
+
+    public static EventResult createEventResult(Event event, Person person) {
+        EventResult eventResult = new EventResult();
+        eventResult.setEvent(event);
+        eventResult.setPerson(person);
+        eventResult.setActualHeightInCm(RandomNumbers.getHeight());
+        eventResult.setActualWeightInKg(RandomNumbers.getWeight());
+
+        HashSet<TestResult> testResults = new HashSet<>();
+        for(JTTest test : event.getTests()) {
+            testResults.add(TestResult.createTestResult(test, eventResult));
+        }
+        eventResult.setTestResults(testResults);
+        return  eventResult;
     }
 }

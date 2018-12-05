@@ -174,7 +174,7 @@ public class ActivityServiceImpl implements ActivityService {
             resultsStatsDTO.setSecondaryAverage(StatsUtil.average(secondaryResults));
             resultsStatsDTO.setSecondaryMedian(StatsUtil.median(secondaryResults));
             resultsStatsDTO.setSecondaryMin(StatsUtil.min(secondaryResults));
-            resultsStatsDTO.setPrimaryMax(StatsUtil.max(secondaryResults));
+            resultsStatsDTO.setSecondaryMax(StatsUtil.max(secondaryResults));
         }
 
         return resultsStatsDTO;

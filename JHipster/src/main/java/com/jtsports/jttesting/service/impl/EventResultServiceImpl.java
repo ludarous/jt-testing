@@ -1,15 +1,10 @@
 package com.jtsports.jttesting.service.impl;
 
-import com.jtsports.jttesting.domain.ActivityResult;
-import com.jtsports.jttesting.domain.TestResult;
-import com.jtsports.jttesting.repository.ActivityResultRepository;
-import com.jtsports.jttesting.repository.TestResultRepository;
+import com.jtsports.jttesting.domain.*;
+import com.jtsports.jttesting.repository.*;
 import com.jtsports.jttesting.service.EventResultService;
-import com.jtsports.jttesting.domain.EventResult;
-import com.jtsports.jttesting.repository.EventResultRepository;
 import com.jtsports.jttesting.repository.search.EventResultSearchRepository;
 import com.jtsports.jttesting.service.dto.EventResultDTO;
-import com.jtsports.jttesting.service.dto.TestResultDTO;
 import com.jtsports.jttesting.service.mapper.EventResultMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -35,6 +31,10 @@ public class EventResultServiceImpl implements EventResultService {
 
     private final EventResultRepository eventResultRepository;
 
+    private final EventRepository eventRepository;
+
+    private final PersonRepository personRepository;
+
     private final TestResultRepository testResultRepository;
 
     private final ActivityResultRepository activityResultRepository;
@@ -43,8 +43,10 @@ public class EventResultServiceImpl implements EventResultService {
 
     private final EventResultSearchRepository eventResultSearchRepository;
 
-    public EventResultServiceImpl(EventResultRepository eventResultRepository, TestResultRepository testResultRepository, ActivityResultRepository activityResultRepository, EventResultMapper eventResultMapper, EventResultSearchRepository eventResultSearchRepository) {
+    public EventResultServiceImpl(EventResultRepository eventResultRepository, EventRepository eventRepository, PersonRepository personRepository, TestResultRepository testResultRepository, ActivityResultRepository activityResultRepository, EventResultMapper eventResultMapper, EventResultSearchRepository eventResultSearchRepository) {
         this.eventResultRepository = eventResultRepository;
+        this.eventRepository = eventRepository;
+        this.personRepository = personRepository;
         this.testResultRepository = testResultRepository;
         this.activityResultRepository = activityResultRepository;
         this.eventResultMapper = eventResultMapper;
@@ -146,5 +148,18 @@ public class EventResultServiceImpl implements EventResultService {
     public Page<EventResultDTO> findAllByPersonId(Pageable pageable, Long id) {
         return eventResultRepository.findAllByPersonIdWithEagerRelationships(pageable, id)
             .map(eventResultMapper::toDto);
+    }
+
+    @Override
+    public void generateFakeEventsResults() {
+        List<Event> events = this.eventRepository.findAll();
+        List<Person> persons = this.personRepository.findAllByVirtual(false);
+
+        for(Event event : events) {
+            for(Person person : persons) {
+                EventResult eventResult = EventResult.createEventResult(event, person);
+                this.eventResultRepository.save(eventResult);
+            }
+        }
     }
 }

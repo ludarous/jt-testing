@@ -7,7 +7,7 @@ import {KeysPipe} from './pipes/keys.pipe';
 
 @NgModule({
   declarations: [
-    KeysPipe,
+    KeysPipe
   ],
   imports: [
 

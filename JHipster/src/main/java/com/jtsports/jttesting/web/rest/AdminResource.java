@@ -1,14 +1,12 @@
 package com.jtsports.jttesting.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.jtsports.jttesting.service.EventResultService;
 import com.jtsports.jttesting.service.PersonService;
-import com.jtsports.jttesting.service.dto.PersonDTO;
 import com.jtsports.jttesting.service.dto.PersonFullDTO;
 import com.jtsports.jttesting.service.dto.PersonalDataDTO;
-import com.jtsports.jttesting.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +25,12 @@ public class AdminResource {
 
     private final PersonService personService;
 
-    public AdminResource(PersonService personService) {
+    private final EventResultService eventResultService;
+
+    public AdminResource(PersonService personService, EventResultService eventResultService) {
 
         this.personService = personService;
+        this.eventResultService = eventResultService;
     }
 
 
@@ -62,6 +63,21 @@ public class AdminResource {
             }
 
         }
+
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * GET  /generate-fake-event-results : generates virtual users
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of testResults in body
+     */
+    @GetMapping("/generate-fake-event-results")
+    @Timed
+    public ResponseEntity generateFakeEventResults() {
+        log.debug("REST request to get a page of TestResults");
+
+        this.eventResultService.generateFakeEventsResults();
 
         return ResponseEntity.ok().build();
     }

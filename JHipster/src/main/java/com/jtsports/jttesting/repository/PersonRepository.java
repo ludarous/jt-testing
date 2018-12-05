@@ -4,6 +4,7 @@ import com.jtsports.jttesting.domain.Person;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -17,4 +18,6 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     Optional<Person> findByUserId(Long userId);
 
     Optional<Person> findByEmail(String email);
+
+    List<Person> findAllByVirtual(Boolean virtual);
 }

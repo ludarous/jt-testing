@@ -1,7 +1,10 @@
-<div>
-  {{testResult.testName}}
-</div>
-
-<div *ngFor="let activityResult of testResult.activitiesResults">
-  <app-user-activity-result [activity]="getActivityForActivityResult(activityResult)" [activityResult]="activityResult"></app-user-activity-result>
+<div class="user-test-result-container">
+  <div class="user-test-result-info">
+    <div class="user-test-name">{{testResult.testName}}</div>
+    <span class="info-label" translate>Poznámka: </span>{{testResult.note}}
+  </div>
+  <div *ngFor="let activityResult of testResult.activitiesResults">
+    <app-user-activity-result [activity]="getActivityForActivityResult(activityResult)"
+                              [activityResult]="activityResult"></app-user-activity-result>
+  </div>
 </div>

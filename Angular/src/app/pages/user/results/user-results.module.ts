@@ -10,18 +10,25 @@ import { UserEventResultComponent } from './user-event-result/user-event-result.
 import { UserTestResultComponent } from './user-test-result/user-test-result.component';
 import { UserActivityResultComponent } from './user-activity-result/user-activity-result.component';
 import {ActivityService} from '../../../services/activity.service';
+import {EnumTranslationsModule} from '../../../shared/pipes/enum-translator/enum-translations.module';
+import {BarChartModule, BarHorizontal2DComponent, ChartCommonModule, LineChartModule, NumberCardModule} from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
     UserResultsComponent,
     UserEventResultComponent,
     UserTestResultComponent,
-    UserActivityResultComponent
+    UserActivityResultComponent,
   ],
   imports: [
     CommonModule,
     UserResultsRoutingModule,
-    MaterialComponentsModule
+    MaterialComponentsModule,
+    EnumTranslationsModule,
+    ChartCommonModule,
+    BarChartModule,
+    LineChartModule,
+    NumberCardModule
   ],
   providers: [
     EventResultService,

@@ -143,4 +143,20 @@ public class TestResult implements Serializable {
             ", note='" + getNote() + "'" +
             "}";
     }
+
+    public static TestResult createTestResult(JTTest test, EventResult eventResult) {
+        String personName =  eventResult.getPerson().getPersonalData().getFirstName() + " " + eventResult.getPerson().getPersonalData().getLastName();
+        TestResult testResult = new TestResult();
+        testResult.setTest(test);
+        testResult.setEventResult(eventResult);
+        testResult.setNote("Poznámka k testu " + test.getName() + ". Osooba: " + personName);
+
+        HashSet<ActivityResult> activitiesResults = new HashSet<>();
+        for(Activity activity : test.getActivities()) {
+            activitiesResults.add(ActivityResult.craeteActivityResult(activity, testResult));
+        }
+        testResult.setActivitiesResults(activitiesResults);
+
+        return testResult;
+    }
 }
