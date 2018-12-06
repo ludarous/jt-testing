@@ -1,9 +1,14 @@
 package com.jtsports.jttesting.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.jtsports.jttesting.domain.User;
 import com.jtsports.jttesting.service.ActivityService;
+import com.jtsports.jttesting.service.PersonService;
+import com.jtsports.jttesting.service.UserService;
 import com.jtsports.jttesting.service.dto.Activity.ActivityStatsDTO;
 import com.jtsports.jttesting.service.dto.Activity.ActivityStatsRequestDTO;
+import com.jtsports.jttesting.service.dto.Activity.PersonalActivityStatsDTO;
+import com.jtsports.jttesting.service.dto.PersonFullDTO;
 import com.jtsports.jttesting.web.rest.errors.BadRequestAlertException;
 import com.jtsports.jttesting.web.rest.util.HeaderUtil;
 import com.jtsports.jttesting.web.rest.util.PaginationUtil;
@@ -24,9 +29,6 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Activity.
@@ -41,8 +43,14 @@ public class ActivityResource {
 
     private final ActivityService activityService;
 
-    public ActivityResource(ActivityService activityService) {
+    private final UserService userService;
+
+    private final PersonService personService;
+
+    public ActivityResource(ActivityService activityService, UserService userService, PersonService personService) {
         this.activityService = activityService;
+        this.userService = userService;
+        this.personService = personService;
     }
 
     /**
@@ -154,17 +162,38 @@ public class ActivityResource {
     }
 
     /**
-     * GET  /activities/:id/stats : get the "id" activity.
+     * POST  /activities/stats : get the "id" activity.
      *
-     * @param id the id of the activityDTO to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the activityDTO, or with status 404 (Not Found)
      */
-    @GetMapping("/activities/{id}/stats")
+    @PostMapping("/activities/stats")
     @Timed
-    public ResponseEntity<ActivityStatsDTO> getActivity(@PathVariable Long id, ActivityStatsRequestDTO activityStatsRequestDTO) {
-        log.debug("REST request to get Activity : {}", id);
-        ActivityStatsDTO activityStatsDTO = activityService.findStats(id);
+    public ResponseEntity<ActivityStatsDTO> getActivityStats(@RequestBody ActivityStatsRequestDTO activityStatsRequestDTO) {
+        log.debug("REST request to get Activity stats : {}", activityStatsRequestDTO.getActivityId());
+        ActivityStatsDTO activityStatsDTO = activityService.findStats(activityStatsRequestDTO);
         return ResponseEntity.ok(activityStatsDTO);
+    }
+
+    /**
+     * POST  /activities/my-stats : get the "id" activity.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the activityDTO, or with status 404 (Not Found)
+     */
+    @PostMapping("/activities/my-stats")
+    @Timed
+    public ResponseEntity<PersonalActivityStatsDTO> getPersonalActivityStats(@RequestBody ActivityStatsRequestDTO activityStatsRequestDTO) {
+        log.debug("REST request to get Activity stats : {}", activityStatsRequestDTO.getActivityId());
+        Optional<User> user = userService.getUserWithAuthorities();
+        if(user.isPresent()) {
+            Optional<PersonFullDTO> personFullDTO = this.personService.findOneByUserId(user.get().getId());
+            if (personFullDTO.isPresent()) {
+
+                PersonalActivityStatsDTO activityStatsDTO = activityService.findPersonalStats(personFullDTO.get().getId(), activityStatsRequestDTO);
+                return ResponseEntity.ok(activityStatsDTO);
+            }
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }

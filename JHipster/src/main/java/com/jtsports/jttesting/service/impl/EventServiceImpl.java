@@ -1,9 +1,14 @@
 package com.jtsports.jttesting.service.impl;
 
+import com.jtsports.jttesting.domain.EventResult;
+import com.jtsports.jttesting.domain.Person;
+import com.jtsports.jttesting.repository.EventResultRepository;
+import com.jtsports.jttesting.repository.PersonRepository;
 import com.jtsports.jttesting.service.EventService;
 import com.jtsports.jttesting.domain.Event;
 import com.jtsports.jttesting.repository.EventRepository;
 import com.jtsports.jttesting.repository.search.EventSearchRepository;
+import com.jtsports.jttesting.service.dto.Event.PersonalEventStatsDTO;
 import com.jtsports.jttesting.service.dto.EventDTO;
 import com.jtsports.jttesting.service.mapper.EventMapper;
 import com.jtsports.jttesting.service.mapper.EventMapperCustom;
@@ -16,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -31,14 +37,20 @@ public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
 
+    private final PersonRepository personRepository;
+
+    private final EventResultRepository eventResultRepository;
+
     private final EventMapper eventMapper;
 
     private final EventMapperCustom eventMapperCustom;
 
     private final EventSearchRepository eventSearchRepository;
 
-    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, EventMapperCustom eventMapperCustom, EventSearchRepository eventSearchRepository) {
+    public EventServiceImpl(EventRepository eventRepository, PersonRepository personRepository, EventResultRepository eventResultRepository, EventMapper eventMapper, EventMapperCustom eventMapperCustom, EventSearchRepository eventSearchRepository) {
         this.eventRepository = eventRepository;
+        this.personRepository = personRepository;
+        this.eventResultRepository = eventResultRepository;
         this.eventMapper = eventMapper;
         this.eventMapperCustom = eventMapperCustom;
         this.eventSearchRepository = eventSearchRepository;
@@ -130,4 +142,5 @@ public class EventServiceImpl implements EventService {
         Page<Event> events = eventRepository.findAllMyWithEagerRelationships(pageable, personId);
         return events.map(eventMapperCustom::toDto);
     }
+
 }

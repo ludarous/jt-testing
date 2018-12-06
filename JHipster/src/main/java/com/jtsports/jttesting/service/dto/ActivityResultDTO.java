@@ -1,5 +1,7 @@
 package com.jtsports.jttesting.service.dto;
 
+import com.jtsports.jttesting.service.dto.Activity.ActivityStatsDTO;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;

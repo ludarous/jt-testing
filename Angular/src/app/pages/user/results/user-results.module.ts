@@ -11,7 +11,14 @@ import { UserTestResultComponent } from './user-test-result/user-test-result.com
 import { UserActivityResultComponent } from './user-activity-result/user-activity-result.component';
 import {ActivityService} from '../../../services/activity.service';
 import {EnumTranslationsModule} from '../../../shared/pipes/enum-translator/enum-translations.module';
-import {BarChartModule, BarHorizontal2DComponent, ChartCommonModule, LineChartModule, NumberCardModule} from '@swimlane/ngx-charts';
+import {
+  BarChartModule,
+  BarHorizontal2DComponent,
+  ChartCommonModule, GaugeModule,
+  LinearGaugeComponent,
+  LineChartModule,
+  NumberCardModule
+} from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -28,7 +35,8 @@ import {BarChartModule, BarHorizontal2DComponent, ChartCommonModule, LineChartMo
     ChartCommonModule,
     BarChartModule,
     LineChartModule,
-    NumberCardModule
+    NumberCardModule,
+    GaugeModule,
   ],
   providers: [
     EventResultService,

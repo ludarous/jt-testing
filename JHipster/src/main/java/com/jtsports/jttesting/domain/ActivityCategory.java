@@ -38,7 +38,7 @@ public class ActivityCategory implements Serializable {
     private String description;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnore
     private ActivityCategory parent;
 
     @OneToMany(mappedBy = "parent")

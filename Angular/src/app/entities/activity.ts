@@ -56,6 +56,9 @@ export class Activity implements IActivity {
 }
 
 export class ActivityStatsRequest {
+  activityId: number | string;
+  testId: number | string;
+  eventId: number | string;
   dateFrom?: string;
   dateTo?: string;
   usersBirthdayFrom?: string;
@@ -64,8 +67,7 @@ export class ActivityStatsRequest {
 
 export class ActivityStats {
   activity: IActivity;
-  virtualStats: ActivityResultStats;
-  realStats: ActivityResultStats;
+  activityResultsStats: ActivityResultStats;
 }
 
 export class ActivityResultStats {
@@ -77,4 +79,15 @@ export class ActivityResultStats {
   secondaryMedian?: number;
   primaryMax?: number;
   secondaryMax?: number;
+  primaryResultsCount?: number;
+  secondaryResultsCount?: number;
+}
+
+export class PersonalActivityResultsStats {
+  primaryPlacement: number;
+  secondaryPlacement: number;
+}
+
+export class PersonalActivityStats extends ActivityStats {
+  personalActivityResultsStats?: PersonalActivityResultsStats;
 }

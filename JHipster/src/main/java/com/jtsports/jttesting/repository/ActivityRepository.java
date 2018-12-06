@@ -33,7 +33,7 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
         "inner join activityResult.testResult testResult " +
         "inner join testResult.eventResult eventResult " +
         "inner join eventResult.person person " +
-        "where activity.id = :id and person.virtual = :virtual")
-    List<ActivityResult> findActivityStats(@Param("id") Long id, @Param("virtual") Boolean virtual);
+        "where activity.id = :id")
+    List<ActivityResult> findActivityResults(@Param("id") Long id);
 
 }

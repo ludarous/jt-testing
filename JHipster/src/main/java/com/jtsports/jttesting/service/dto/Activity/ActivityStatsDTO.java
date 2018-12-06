@@ -6,9 +6,7 @@ public class ActivityStatsDTO {
 
     private ActivityDTO activity;
 
-    private ActivityResultsStatsDTO virtualStats;
-
-    private ActivityResultsStatsDTO realStats;
+    private ActivityResultsStatsDTO activityResultsStats;
 
     public ActivityDTO getActivity() {
         return activity;
@@ -18,19 +16,11 @@ public class ActivityStatsDTO {
         this.activity = activity;
     }
 
-    public ActivityResultsStatsDTO getVirtualStats() {
-        return virtualStats;
+    public ActivityResultsStatsDTO getActivityResultsStats() {
+        return activityResultsStats;
     }
 
-    public void setVirtualStats(ActivityResultsStatsDTO virtualStats) {
-        this.virtualStats = virtualStats;
-    }
-
-    public ActivityResultsStatsDTO getRealStats() {
-        return realStats;
-    }
-
-    public void setRealStats(ActivityResultsStatsDTO realStats) {
-        this.realStats = realStats;
+    public void setActivityResultsStats(ActivityResultsStatsDTO activityResultsStats) {
+        this.activityResultsStats = activityResultsStats;
     }
 }

@@ -41,5 +41,11 @@
 }
 
 .result-charts {
-  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 80px;
+}
+
+.chart-container {
+  height: 200px;
 }

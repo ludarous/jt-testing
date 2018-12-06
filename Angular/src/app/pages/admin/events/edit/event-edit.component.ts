@@ -126,7 +126,9 @@ export class EventEditComponent implements OnInit {
       }
 
       eventToSave.tests = this.selectedTests;
-      eventToSave.attachedPersons = this.selectedPersons.map(pf => Person.createPerson(pf));
+      if (this.selectedPersons) {
+        eventToSave.attachedPersons = this.selectedPersons.map(pf => Person.createPerson(pf));
+      }
 
       saveEvent$.subscribe((eventResponse: HttpResponse<IEvent>) => {
         this.event = eventResponse.body;

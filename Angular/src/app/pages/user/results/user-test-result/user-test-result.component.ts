@@ -3,6 +3,7 @@ import {ITest} from '../../../../entities/test';
 import {ITestResult} from '../../../../entities/test-result';
 import {IActivityResult} from '../../../../entities/activity-result';
 import {IActivity} from '../../../../entities/activity';
+import {IEvent} from '../../../../entities/event';
 
 @Component({
   selector: 'app-user-test-result',
@@ -18,6 +19,9 @@ export class UserTestResultComponent implements OnInit {
 
   @Input()
   testResult: ITestResult;
+
+  @Input()
+  event: IEvent;
 
   ngOnInit() {
   }

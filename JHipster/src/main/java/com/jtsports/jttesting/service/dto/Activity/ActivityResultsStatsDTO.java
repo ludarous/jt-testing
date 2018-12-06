@@ -18,6 +18,10 @@ public class ActivityResultsStatsDTO {
 
     private Float secondaryMax;
 
+    private Integer primaryResultsCount;
+
+    private Integer secondaryResultsCount;
+
     public Float getPrimaryMin() {
         return primaryMin;
     }
@@ -80,5 +84,21 @@ public class ActivityResultsStatsDTO {
 
     public void setSecondaryAverage(Float secondaryAverage) {
         this.secondaryAverage = secondaryAverage;
+    }
+
+    public Integer getPrimaryResultsCount() {
+        return primaryResultsCount;
+    }
+
+    public void setPrimaryResultsCount(Integer primaryResultsCount) {
+        this.primaryResultsCount = primaryResultsCount;
+    }
+
+    public Integer getSecondaryResultsCount() {
+        return secondaryResultsCount;
+    }
+
+    public void setSecondaryResultsCount(Integer secondaryResultsCount) {
+        this.secondaryResultsCount = secondaryResultsCount;
     }
 }

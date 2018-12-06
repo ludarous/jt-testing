@@ -5,6 +5,9 @@
   </div>
   <div *ngFor="let activityResult of testResult.activitiesResults">
     <app-user-activity-result [activity]="getActivityForActivityResult(activityResult)"
-                              [activityResult]="activityResult"></app-user-activity-result>
+                              [activityResult]="activityResult"
+                              [test]="test"
+                              [event]="event">
+    </app-user-activity-result>
   </div>
 </div>

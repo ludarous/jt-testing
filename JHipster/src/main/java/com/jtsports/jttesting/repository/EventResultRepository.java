@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 /**
  * Spring Data  repository for the EventResult entity.
@@ -26,4 +28,9 @@ public interface EventResultRepository extends JpaRepository<EventResult, Long> 
         "left join fetch eventResult.testResults where eventResult.person.id = :personId",
         countQuery = "select count(distinct eventResult) from EventResult eventResult where eventResult.event.id = :personId")
     Page<EventResult> findAllByPersonIdWithEagerRelationships(Pageable pageable, @Param("personId") Long personId);
+
+
+    @Query(value = "select distinct eventResult from EventResult eventResult " +
+        "left join fetch eventResult.testResults where eventResult.person.id = :personId and eventResult.event.id = :eventId")
+    List<EventResult> findAllByPersonAndEventIdWithEagerRelationships(@Param("personId") Long personId, @Param("eventId") Long eventId);
 }

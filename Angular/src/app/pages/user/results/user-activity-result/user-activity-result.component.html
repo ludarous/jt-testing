@@ -4,8 +4,12 @@
       <div>{{activityResult.activityName}}</div>
     </mat-panel-title>
     <mat-panel-description>
-      <div><span class="info-label" translate>Hlavní výsledek aktivity: </span> {{activityResult.primaryResultValue}} {{activity.primaryResultValueUnit | enumTranslator: 'abbr'}}</div>
-      <div><span class="info-label" translate>Vedlejší výsledek aktivity: </span> {{activityResult.secondaryResultValue}} {{activity.secondaryResultValueUnit | enumTranslator: 'abbr'}}</div>
+      <div><span class="info-label" translate>Hlavní výsledek aktivity: </span> {{activityResult.primaryResultValue}}
+        {{activity.primaryResultValueUnit | enumTranslator: 'abbr'}}
+      </div>
+      <div><span class="info-label" translate>Vedlejší výsledek aktivity: </span>
+        {{activityResult.secondaryResultValue}} {{activity.secondaryResultValueUnit | enumTranslator: 'abbr'}}
+      </div>
     </mat-panel-description>
   </mat-expansion-panel-header>
 
@@ -20,134 +24,128 @@
         </div>
       </div>
       <div class="user-activity-content">
-        <div class="user-activity-my-results">
-          <div class="row">
-            <div class="col-6">
-              <span class="info-label" translate>Hlavní výsledek aktivity: </span> {{activityResult.primaryResultValue}}
-              {{activity.primaryResultValueUnit | enumTranslator: 'abbr'}}
-            </div>
-            <div class="col-6">
-              <span class="info-label" translate>Vedlejší výsledek aktivity: </span>
-              {{activityResult.secondaryResultValue}} {{activity.secondaryResultValueUnit | enumTranslator: 'abbr'}}
-            </div>
-          </div>
-        </div>
         <div *ngIf="activityStats">
-          <div *ngIf="activityStats.virtualStats" class="user-activity-stats">
-            <div class="info-label">Doporučené hodnoty</div>
+          <div class="result-charts dark">
             <div class="row">
-              <div class="col-3">
-                <span class="info-label" translate>Nejslabší výkon: </span> {{activityStats.virtualStats.primaryMin}}
-                {{activity.primaryResultValueUnit | enumTranslator: 'abbr'}}
-              </div>
-              <div class="col-3">
-                <span class="info-label" translate>Nejlepší výkon: </span> {{activityStats.virtualStats.primaryMax}}
-                {{activity.primaryResultValueUnit | enumTranslator: 'abbr'}}
-              </div>
-              <div class="col-3">
-                <span class="info-label" translate>Průměrný výkon: </span> {{activityStats.virtualStats.primaryAverage}}
-                {{activity.primaryResultValueUnit | enumTranslator: 'abbr'}}
-              </div>
-              <div class="col-3">
-                <span class="info-label" translate>Střední výkon (medián): </span>
-                {{activityStats.virtualStats.primaryMedian}} {{activity.primaryResultValueUnit | enumTranslator:
-                'abbr'}}
-              </div>
-            </div>
-          </div>
-          <div *ngIf="activityStats.realStats" class="user-activity-stats">
-            <div class="info-label">Reálné hodnoty</div>
-            <div class="row">
-              <div class="col-3">
-                <span class="info-label" translate>Nejslabší výkon: </span> {{activityStats.realStats.primaryMin}}
-                {{activity.secondaryResultValueUnit | enumTranslator: 'abbr'}}
-              </div>
-              <div class="col-3">
-                <span class="info-label" translate>Nejlepší výkon: </span> {{activityStats.realStats.primaryMax}}
-                {{activity.secondaryResultValueUnit | enumTranslator: 'abbr'}}
-              </div>
-              <div class="col-3">
-                <span class="info-label" translate>Průměrný výkon: </span> {{activityStats.realStats.primaryAverage}}
-                {{activity.secondaryResultValueUnit | enumTranslator: 'abbr'}}
-              </div>
-              <div class="col-3">
-                <span class="info-label" translate>Střední výkon (medián): </span>
-                {{activityStats.realStats.primaryMedian}} {{activity.secondaryResultValueUnit | enumTranslator: 'abbr'}}
-              </div>
-            </div>
-          </div>
-          <div class="result-charts">
-            <!--<ngx-charts-line-chart *ngIf="chartData && refLines"-->
-            <!--class="chart-container"-->
-            <!--[view]="[1000, 200]"-->
-            <!--[results]="chartData"-->
-            <!--[referenceLines]="refLines"-->
-            <!--[scheme]="colorScheme"-->
-            <!--[animations]="true"-->
-            <!--[legend]="'Legenda'"-->
-            <!--[legendTitle]="'Titulek legendy'"-->
-            <!--[legendPosition]="'right'"-->
-            <!--[gradient]="true"-->
-            <!--[xAxis]="true"-->
-            <!--[yAxis]="true"-->
-            <!--[autoScale]="true"-->
-            <!--[showXAxisLabel]="true"-->
-            <!--[showYAxisLabel]="true"-->
-            <!--[xAxisLabel]="'xAxis'"-->
-            <!--[yAxisLabel]="'yAxis'"-->
-            <!--[showGridLines]="true"-->
-            <!--[tooltipDisabled]="false"-->
-            <!--[showRefLines]="true"-->
-            <!--[showRefLabels]="true"-->
-            <!--[yScaleMax]="100"-->
-            <!--[yScaleMin]="10"-->
-            <!--(legendLabelClick)="onLegendLabelClick($event)"-->
-            <!--(select)="onSelect($event)">-->
-            <!--</ngx-charts-line-chart>-->
-            <ngx-charts-number-card *ngIf="myResultsCardData"
-                                    class="chart-container"
-                                    [scheme]="colorScheme"
-                                    cardColor="#232837"
-                                    emptyColor="#1e222e"
-                                    [results]="myResultsCardData"
-                                    [animations]="true"
-                                    (legendLabelClick)="onLegendLabelClick($event)"
-                                    (select)="select($event)">
-            </ngx-charts-number-card>
-            <ngx-charts-number-card *ngIf="primaryCardsData"
-                                    class="chart-container"
-                                    [scheme]="colorScheme"
-                                    cardColor="#232837"
-                                    emptyColor="#1e222e"
-                                    [results]="primaryCardsData"
-                                    [animations]="true"
-                                    (legendLabelClick)="onLegendLabelClick($event)"
-                                    (select)="select($event)">
-            </ngx-charts-number-card>
-            <ngx-charts-bar-vertical-2d *ngIf="chartData"
-                                          class="chart-container"
-                                          [scheme]="colorScheme"
-                                          [results]="chartData"
+              <div class="col-7">
+                <div class="chart-container" *ngIf="myPrimaryResultCardData">
+                  <ngx-charts-number-card class="chart-container"
+                                          [scheme]="getColorScheme('cool')"
+                                          cardColor="#232837"
+                                          emptyColor="#1e222e"
+                                          [results]="myPrimaryResultCardData"
                                           [animations]="true"
-                                          [gradient]="false"
-                                          [tooltipDisabled]="false"
-                                          [xAxis]="true"
-                                          [yAxis]="true"
-                                          [legend]="'Legenda'"
-                                          [legendTitle]="'titulek legendy'"
-                                          [legendPosition]="'right'"
-                                          [showXAxisLabel]="true"
-                                          [showYAxisLabel]="true"
-                                          [xAxisLabel]="xLabel"
-                                          [showGridLines]="true"
-                                          [barPadding]="8"
-                                          [groupPadding]="10"
-                                          [roundEdges]="true"
-                                          [yScaleMax]="100"
-                                          [showDataLabel]="true"
+                                          [valueFormatting]="valueFormat"
+                                          [labelFormatting]="statusLabelFormat"
                                           (legendLabelClick)="onLegendLabelClick($event)"
                                           (select)="select($event)">
-            </ngx-charts-bar-vertical-2d>
+                  </ngx-charts-number-card>
+                </div>
+                <div class="chart-container" *ngIf="primaryCardsData">
+                  <ngx-charts-number-card class="chart-container"
+                                          [scheme]="getColorScheme('fire')"
+                                          cardColor="#232837"
+                                          emptyColor="#1e222e"
+                                          [results]="primaryCardsData"
+                                          [animations]="true"
+                                          [valueFormatting]="valueFormat"
+                                          [labelFormatting]="statusLabelFormat"
+                                          (legendLabelClick)="onLegendLabelClick($event)"
+                                          (select)="select($event)">
+                  </ngx-charts-number-card>
+                </div>
+                <div class="chart-container">
+                  <ngx-charts-linear-gauge
+                    [scheme]="getColorScheme('cool')"
+                    [animations]="true"
+                    [min]="activityStats.activityResultsStats.primaryMin"
+                    [max]="activityStats.activityResultsStats.primaryMax"
+                    [value]="activityResult.primaryResultValue"
+                    [previousValue]="activityStats.activityResultsStats.primaryAverage"
+                    [units]="activity.primaryResultValueUnit | enumTranslator: 'plural'"
+                    (select)="onSelect($event)">
+                  </ngx-charts-linear-gauge>
+                  <ngx-charts-bar-vertical-2d *ngIf="primaryChartData"
+                                              class="chart-container"
+                                              [scheme]="getColorScheme('cool')"
+                                              [results]="primaryChartData"
+                                              [animations]="true"
+                                              [gradient]="false"
+                                              [tooltipDisabled]="false"
+                                              [xAxis]="true"
+                                              [yAxis]="true"
+                                              [legend]="true"
+                                              [legendPosition]="'below'"
+                                              [showXAxisLabel]="true"
+                                              [showYAxisLabel]="true"
+                                              [xAxisLabel]="xLabel"
+                                              [showGridLines]="true"
+                                              [barPadding]="8"
+                                              [groupPadding]="10"
+                                              [roundEdges]="true"
+                                              [yScaleMax]="activityStats.activityResultsStats.primaryMax"
+                                              [showDataLabel]="false"
+                                              (legendLabelClick)="onLegendLabelClick($event)"
+                                              (select)="select($event)">
+                  </ngx-charts-bar-vertical-2d>
+                </div>
+              </div>
+              <div *ngIf="activityResult.secondaryResultValue" class="col-5">
+                <div class="chart-container" *ngIf="mySecondaryResultCardData">
+                  <ngx-charts-number-card class="chart-container"
+                                          [scheme]="getColorScheme('cool')"
+                                          cardColor="#232837"
+                                          emptyColor="#1e222e"
+                                          [results]="mySecondaryResultCardData"
+                                          [animations]="true"
+                                          [valueFormatting]="valueFormat"
+                                          [labelFormatting]="statusLabelFormat"
+                                          (legendLabelClick)="onLegendLabelClick($event)"
+                                          (select)="select($event)">
+                  </ngx-charts-number-card>
+                </div>
+                <div class="chart-container" *ngIf="secondaryCardsData">
+                  <ngx-charts-number-card class="chart-container"
+                                          [scheme]="getColorScheme('air')"
+                                          cardColor="#232837"
+                                          emptyColor="#1e222e"
+                                          [results]="secondaryCardsData"
+                                          [animations]="true"
+                                          [valueFormatting]="valueFormat"
+                                          [labelFormatting]="statusLabelFormat"
+                                          (legendLabelClick)="onLegendLabelClick($event)"
+                                          (select)="select($event)">
+                  </ngx-charts-number-card>
+                </div>
+                <div class="chart-container">
+                  <ngx-charts-bar-vertical-2d *ngIf="secondaryChartData"
+                                              class="chart-container"
+                                              [scheme]="getColorScheme('cool')"
+                                              [results]="secondaryChartData"
+                                              [animations]="true"
+                                              [gradient]="false"
+                                              [tooltipDisabled]="false"
+                                              [xAxis]="true"
+                                              [yAxis]="true"
+                                              [legend]="true"
+                                              [legendPosition]="'below'"
+                                              [showXAxisLabel]="true"
+                                              [showYAxisLabel]="true"
+                                              [xAxisLabel]="xLabel"
+                                              [showGridLines]="true"
+                                              [barPadding]="8"
+                                              [groupPadding]="10"
+                                              [roundEdges]="true"
+                                              [yScaleMax]="activityStats.activityResultsStats.secondaryMax"
+                                              [showDataLabel]="true"
+                                              (legendLabelClick)="onLegendLabelClick($event)"
+                                              (select)="select($event)">
+                  </ngx-charts-bar-vertical-2d>
+                </div>
+              </div>
+            </div>
+
+
           </div>
         </div>
       </div>
