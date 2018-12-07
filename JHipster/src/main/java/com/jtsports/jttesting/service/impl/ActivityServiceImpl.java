@@ -164,7 +164,7 @@ public class ActivityServiceImpl implements ActivityService {
             ActivityResultsStatsDTO resultsStatsDTO = this.getActivityResultStats(filteredResults, activityStatsRequest);
             personalActivityStatsDTO.setActivityResultsStats(resultsStatsDTO);
 
-            PersonalActivityResultsStatsDTO personalActivityResultsStatsDTO = this.getPersonalActivityResultStats(filteredResults, personId, activityStatsRequest);
+            PersonalActivityResultsStatsDTO personalActivityResultsStatsDTO = this.getPersonalActivityResultStats(filteredResults, personId);
             personalActivityStatsDTO.setPersonalActivityResultsStats(personalActivityResultsStatsDTO);
 
 
@@ -173,7 +173,7 @@ public class ActivityServiceImpl implements ActivityService {
         return null;
     }
 
-    private PersonalActivityResultsStatsDTO getPersonalActivityResultStats(List<ActivityResult> filteredResults, Long personId, ActivityStatsRequestDTO activityStatsRequest) {
+    private PersonalActivityResultsStatsDTO getPersonalActivityResultStats(List<ActivityResult> filteredResults, Long personId) {
         PersonalActivityResultsStatsDTO personalActivityResultsStatsDTO = new PersonalActivityResultsStatsDTO();
         Optional<ActivityResult> personResultOptional = this.filterPersonResults(filteredResults, personId).stream().findFirst();
         if(personResultOptional.isPresent()) {

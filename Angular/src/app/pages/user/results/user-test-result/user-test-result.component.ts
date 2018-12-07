@@ -31,6 +31,7 @@ export class UserTestResultComponent implements OnInit {
   categoryStats: PersonalCategoryStats;
   primaryChartData: object[];
   secondaryChartData: object[];
+  activitiesChartData: object[];
 
 
   ngOnInit() {
@@ -78,6 +79,7 @@ export class UserTestResultComponent implements OnInit {
         series: secondarySeries
       }
     ];
+
   }
 
   getColorScheme(name): any {
