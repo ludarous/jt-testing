@@ -34,6 +34,8 @@ export class UserActivityResultComponent implements OnInit {
 
   activityStats: PersonalActivityStats;
 
+  headerResultCardData: object[];
+
   primaryChartData: object[];
   secondaryChartData: object[];
 
@@ -46,40 +48,54 @@ export class UserActivityResultComponent implements OnInit {
   xLabel: string;
 
   ngOnInit() {
-    const request = new ActivityStatsRequest();
-    request.activityId = this.activityResult.activityId;
-    request.testId = this.test ? this.test.id : null;
-    request.eventId = this.event ? this.event.id : null;
+    this.headerResultCardData = [
+      {
+        name: 'Výsledek',
+        value: this.activityResult.primaryResultValue,
+        extra: {
+          unit: this.enumTranslatorService.translate(this.activity.primaryResultValueUnit, 'plural'),
+        }
+      },
+      {
+        name: 'Vedlejší výsledek',
+        value: this.activityResult.secondaryResultValue,
+        extra: {
+          unit: this.enumTranslatorService.translate(this.activity.secondaryResultValueUnit, 'plural'),
+        }
+      }
 
-    this.activityService.findMyStats(request).subscribe((activityStatsResponse: HttpResponse<PersonalActivityStats>) => {
-      this.activityStats = activityStatsResponse.body;
-      this.createChartData(this.activityStats, this.activityResult);
-    });
+    ];
   }
 
   createChartData(activityStats: PersonalActivityStats, activityResult: IActivityResult) {
 
-
+    const primaryPlacement = activityStats.personalActivityResultsStats.primaryPlacement;
+    const primaryCount = activityStats.activityResultsStats.primaryResultsCount;
 
     this.myPrimaryResultCardData = [
       {
         name: 'Můj výsledek',
         value: activityResult.primaryResultValue,
         extra: {
-          unit: this.enumTranslatorService.translate(this.activity.primaryResultValueUnit, 'plural')
+          unit: this.enumTranslatorService.translate(this.activity.primaryResultValueUnit, 'plural'),
         }
       },
       {
         name: 'Pořadí v testu',
-        value: Math.floor(activityStats.personalActivityResultsStats.primaryPlacement * 100 / activityStats.activityResultsStats.primaryResultsCount),
+        value: Math.floor(primaryPlacement * 100 / primaryCount),
         extra: {
-          unit: '%'
+          unit: '%',
+          subtitle: primaryPlacement + ' z ' + primaryCount
         }
-      },
+      }
     ];
 
     if (this.activityResult.secondaryResultValue) {
-      this.mySecondaryResultCardData = [
+
+      const secondaryPlacement = activityStats.personalActivityResultsStats.secondaryPlacement;
+      const secondaryCount = activityStats.activityResultsStats.secondaryResultsCount;
+
+        this.mySecondaryResultCardData = [
         {
           name: 'Můj vedlejší výsledek',
           value: activityResult.secondaryResultValue,
@@ -89,11 +105,12 @@ export class UserActivityResultComponent implements OnInit {
         },
         {
           name: 'Pořadí v testu',
-          value: Math.floor(activityStats.personalActivityResultsStats.secondaryPlacement * 100 / activityStats.activityResultsStats.secondaryResultsCount),
+          value: Math.floor(secondaryPlacement * 100 / secondaryCount),
           extra: {
-            unit: '%'
+            unit: '%',
+            subtitle: secondaryPlacement + ' z ' + secondaryCount
           }
-        },
+        }
         ];
     }
 
@@ -204,6 +221,22 @@ export class UserActivityResultComponent implements OnInit {
     this.xLabel = this.enumTranslatorService.translate(this.activity.primaryResultValueUnit, 'plural');
   }
 
+  afterExpand(event: any) {
+    this.loadStats();
+  }
+
+  loadStats() {
+    const request = new ActivityStatsRequest();
+    request.activityId = this.activityResult.activityId;
+    request.testId = this.test ? this.test.id : null;
+    request.eventId = this.event ? this.event.id : null;
+
+    this.activityService.findMyStats(request).subscribe((activityStatsResponse: HttpResponse<PersonalActivityStats>) => {
+      this.activityStats = activityStatsResponse.body;
+      this.createChartData(this.activityStats, this.activityResult);
+    });
+  }
+
   onLegendLabelClick(event: any) {
 
   }
@@ -225,6 +258,10 @@ export class UserActivityResultComponent implements OnInit {
 
 
   statusLabelFormat(c): string {
-    return `${c.label}<br/><small class="number-card-label">This week</small>`;
+    if (c.data && c.data.extra && c.data.extra.subtitle) {
+      return `${c.label}<br/><small class="number-card-label">${c.data.extra.subtitle}</small>`;
+    } else {
+      return c.label;
+    }
   }
 }

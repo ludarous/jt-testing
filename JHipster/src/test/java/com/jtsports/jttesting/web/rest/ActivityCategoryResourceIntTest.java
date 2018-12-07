@@ -6,6 +6,8 @@ import com.jtsports.jttesting.domain.ActivityCategory;
 import com.jtsports.jttesting.repository.ActivityCategoryRepository;
 import com.jtsports.jttesting.repository.search.ActivityCategorySearchRepository;
 import com.jtsports.jttesting.service.ActivityCategoryService;
+import com.jtsports.jttesting.service.PersonService;
+import com.jtsports.jttesting.service.UserService;
 import com.jtsports.jttesting.service.dto.ActivityCategoryDTO;
 import com.jtsports.jttesting.service.mapper.ActivityCategoryMapper;
 import com.jtsports.jttesting.web.rest.errors.ExceptionTranslator;
@@ -77,6 +79,12 @@ public class ActivityCategoryResourceIntTest {
     private ActivityCategorySearchRepository mockActivityCategorySearchRepository;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
+    private PersonService personService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -95,7 +103,7 @@ public class ActivityCategoryResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ActivityCategoryResource activityCategoryResource = new ActivityCategoryResource(activityCategoryService);
+        final ActivityCategoryResource activityCategoryResource = new ActivityCategoryResource(activityCategoryService, userService, personService);
         this.restActivityCategoryMockMvc = MockMvcBuilders.standaloneSetup(activityCategoryResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

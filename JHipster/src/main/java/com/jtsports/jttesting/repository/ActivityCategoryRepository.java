@@ -4,6 +4,8 @@ import com.jtsports.jttesting.domain.ActivityCategory;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 /**
  * Spring Data  repository for the ActivityCategory entity.
@@ -12,4 +14,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ActivityCategoryRepository extends JpaRepository<ActivityCategory, Long> {
 
+    List<ActivityCategory> findAllByParentId(Long parentId);
 }

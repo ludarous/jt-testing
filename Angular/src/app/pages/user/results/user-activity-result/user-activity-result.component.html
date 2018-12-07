@@ -1,14 +1,14 @@
-<mat-expansion-panel class="activity-result-panel">
-  <mat-expansion-panel-header>
+<mat-expansion-panel class="activity-result-panel" (afterExpand)="afterExpand($event)">
+  <mat-expansion-panel-header [collapsedHeight]="'100px'" [expandedHeight]="'100px'">
     <mat-panel-title>
       <div>{{activityResult.activityName}}</div>
     </mat-panel-title>
     <mat-panel-description>
-      <div><span class="info-label" translate>Hlavní výsledek aktivity: </span> {{activityResult.primaryResultValue}}
-        {{activity.primaryResultValueUnit | enumTranslator: 'abbr'}}
+      <div class="header-cards-container">
+        {{activityResult.primaryResultValue + ' ' + (activity.primaryResultValueUnit | enumTranslator: 'plural')}}
       </div>
-      <div><span class="info-label" translate>Vedlejší výsledek aktivity: </span>
-        {{activityResult.secondaryResultValue}} {{activity.secondaryResultValueUnit | enumTranslator: 'abbr'}}
+      <div class="header-cards-container" *ngIf="activityResult.secondaryResultValue">
+        {{activityResult.secondaryResultValue + ' ' + (activity.secondaryResultValueUnit | enumTranslator: 'plural')}}
       </div>
     </mat-panel-description>
   </mat-expansion-panel-header>
@@ -27,7 +27,7 @@
         <div *ngIf="activityStats">
           <div class="result-charts dark">
             <div class="row">
-              <div class="col-7">
+              <div [ngClass]="{'col-7': activityResult.secondaryResultValue, 'col-12': !activityResult.secondaryResultValue}">
                 <div class="chart-container" *ngIf="myPrimaryResultCardData">
                   <ngx-charts-number-card class="chart-container"
                                           [scheme]="getColorScheme('cool')"
@@ -38,7 +38,7 @@
                                           [valueFormatting]="valueFormat"
                                           [labelFormatting]="statusLabelFormat"
                                           (legendLabelClick)="onLegendLabelClick($event)"
-                                          (select)="select($event)">
+                                          (select)="onSelect($event)">
                   </ngx-charts-number-card>
                 </div>
                 <div class="chart-container" *ngIf="primaryCardsData">
@@ -51,43 +51,8 @@
                                           [valueFormatting]="valueFormat"
                                           [labelFormatting]="statusLabelFormat"
                                           (legendLabelClick)="onLegendLabelClick($event)"
-                                          (select)="select($event)">
+                                          (select)="onSelect($event)">
                   </ngx-charts-number-card>
-                </div>
-                <div class="chart-container">
-                  <ngx-charts-linear-gauge
-                    [scheme]="getColorScheme('cool')"
-                    [animations]="true"
-                    [min]="activityStats.activityResultsStats.primaryMin"
-                    [max]="activityStats.activityResultsStats.primaryMax"
-                    [value]="activityResult.primaryResultValue"
-                    [previousValue]="activityStats.activityResultsStats.primaryAverage"
-                    [units]="activity.primaryResultValueUnit | enumTranslator: 'plural'"
-                    (select)="onSelect($event)">
-                  </ngx-charts-linear-gauge>
-                  <ngx-charts-bar-vertical-2d *ngIf="primaryChartData"
-                                              class="chart-container"
-                                              [scheme]="getColorScheme('cool')"
-                                              [results]="primaryChartData"
-                                              [animations]="true"
-                                              [gradient]="false"
-                                              [tooltipDisabled]="false"
-                                              [xAxis]="true"
-                                              [yAxis]="true"
-                                              [legend]="true"
-                                              [legendPosition]="'below'"
-                                              [showXAxisLabel]="true"
-                                              [showYAxisLabel]="true"
-                                              [xAxisLabel]="xLabel"
-                                              [showGridLines]="true"
-                                              [barPadding]="8"
-                                              [groupPadding]="10"
-                                              [roundEdges]="true"
-                                              [yScaleMax]="activityStats.activityResultsStats.primaryMax"
-                                              [showDataLabel]="false"
-                                              (legendLabelClick)="onLegendLabelClick($event)"
-                                              (select)="select($event)">
-                  </ngx-charts-bar-vertical-2d>
                 </div>
               </div>
               <div *ngIf="activityResult.secondaryResultValue" class="col-5">
@@ -101,7 +66,7 @@
                                           [valueFormatting]="valueFormat"
                                           [labelFormatting]="statusLabelFormat"
                                           (legendLabelClick)="onLegendLabelClick($event)"
-                                          (select)="select($event)">
+                                          (select)="onSelect($event)">
                   </ngx-charts-number-card>
                 </div>
                 <div class="chart-container" *ngIf="secondaryCardsData">
@@ -114,38 +79,11 @@
                                           [valueFormatting]="valueFormat"
                                           [labelFormatting]="statusLabelFormat"
                                           (legendLabelClick)="onLegendLabelClick($event)"
-                                          (select)="select($event)">
+                                          (select)="onSelect($event)">
                   </ngx-charts-number-card>
-                </div>
-                <div class="chart-container">
-                  <ngx-charts-bar-vertical-2d *ngIf="secondaryChartData"
-                                              class="chart-container"
-                                              [scheme]="getColorScheme('cool')"
-                                              [results]="secondaryChartData"
-                                              [animations]="true"
-                                              [gradient]="false"
-                                              [tooltipDisabled]="false"
-                                              [xAxis]="true"
-                                              [yAxis]="true"
-                                              [legend]="true"
-                                              [legendPosition]="'below'"
-                                              [showXAxisLabel]="true"
-                                              [showYAxisLabel]="true"
-                                              [xAxisLabel]="xLabel"
-                                              [showGridLines]="true"
-                                              [barPadding]="8"
-                                              [groupPadding]="10"
-                                              [roundEdges]="true"
-                                              [yScaleMax]="activityStats.activityResultsStats.secondaryMax"
-                                              [showDataLabel]="true"
-                                              (legendLabelClick)="onLegendLabelClick($event)"
-                                              (select)="select($event)">
-                  </ngx-charts-bar-vertical-2d>
                 </div>
               </div>
             </div>
-
-
           </div>
         </div>
       </div>

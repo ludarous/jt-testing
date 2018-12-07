@@ -2,6 +2,48 @@
   <div class="user-test-result-info">
     <div class="user-test-name">{{testResult.testName}}</div>
     <span class="info-label" translate>Poznámka: </span>{{testResult.note}}
+    <div class="polar-chart-container">
+      <div class="row">
+        <div class="col-6">
+          <ngx-charts-polar-chart *ngIf="primaryChartData"
+                                  class="chart-container dark"
+                                  [scheme]="getColorScheme('cool')"
+                                  [results]="primaryChartData"
+                                  [animations]="true"
+                                  [legend]="false"
+                                  (legendLabelClick)="onLegendLabelClick($event)"
+                                  [gradient]="true"
+                                  [xAxis]="true"
+                                  [yAxis]="true"
+                                  [autoScale]="false"
+                                  [showGridLines]="true"
+                                  [rangeFillOpacity]="rangeFillOpacity"
+                                  [showSeriesOnHover]="true"
+                                  [yAxisMinScale]="100"
+                                  (select)="select($event)">
+          </ngx-charts-polar-chart>
+        </div>
+        <div class="col-6">
+          <ngx-charts-polar-chart *ngIf="secondaryChartData"
+                                  class="chart-container dark"
+                                  [scheme]="getColorScheme('cool')"
+                                  [results]="secondaryChartData"
+                                  [animations]="true"
+                                  [legend]="false"
+                                  (legendLabelClick)="onLegendLabelClick($event)"
+                                  [gradient]="true"
+                                  [xAxis]="true"
+                                  [yAxis]="true"
+                                  [autoScale]="false"
+                                  [showGridLines]="true"
+                                  [rangeFillOpacity]="rangeFillOpacity"
+                                  [showSeriesOnHover]="true"
+                                  [yAxisMinScale]="100"
+                                  (select)="select($event)">
+          </ngx-charts-polar-chart>
+        </div>
+      </div>
+    </div>
   </div>
   <div *ngFor="let activityResult of testResult.activitiesResults">
     <app-user-activity-result [activity]="getActivityForActivityResult(activityResult)"

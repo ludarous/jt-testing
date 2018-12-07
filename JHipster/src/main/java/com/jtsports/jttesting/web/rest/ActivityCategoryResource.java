@@ -1,7 +1,14 @@
 package com.jtsports.jttesting.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.jtsports.jttesting.domain.User;
 import com.jtsports.jttesting.service.ActivityCategoryService;
+import com.jtsports.jttesting.service.PersonService;
+import com.jtsports.jttesting.service.UserService;
+import com.jtsports.jttesting.service.dto.Activity.PersonalActivityStatsDTO;
+import com.jtsports.jttesting.service.dto.Category.CategoryStatsRequestDTO;
+import com.jtsports.jttesting.service.dto.Category.PersonalCategoryStatsDTO;
+import com.jtsports.jttesting.service.dto.PersonFullDTO;
 import com.jtsports.jttesting.web.rest.errors.BadRequestAlertException;
 import com.jtsports.jttesting.web.rest.util.HeaderUtil;
 import com.jtsports.jttesting.web.rest.util.PaginationUtil;
@@ -22,9 +29,6 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing ActivityCategory.
@@ -39,8 +43,14 @@ public class ActivityCategoryResource {
 
     private final ActivityCategoryService activityCategoryService;
 
-    public ActivityCategoryResource(ActivityCategoryService activityCategoryService) {
+    private final UserService userService;
+
+    private final PersonService personService;
+
+    public ActivityCategoryResource(ActivityCategoryService activityCategoryService, UserService userService, PersonService personService) {
         this.activityCategoryService = activityCategoryService;
+        this.userService = userService;
+        this.personService = personService;
     }
 
     /**
@@ -143,6 +153,28 @@ public class ActivityCategoryResource {
         Page<ActivityCategoryDTO> page = activityCategoryService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/activity-categories");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * POST  /activity-categories/my-stats : get the "id" activity.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the activityDTO, or with status 404 (Not Found)
+     */
+    @PostMapping("/activity-categories/my-stats")
+    @Timed
+    public ResponseEntity<PersonalCategoryStatsDTO> getPersonalCategoryStats(@RequestBody CategoryStatsRequestDTO categoryStatsRequestDTO) {
+        log.debug("REST request to get Category stats : {}", categoryStatsRequestDTO.getParentCategoryId());
+        Optional<User> user = userService.getUserWithAuthorities();
+        if(user.isPresent()) {
+            Optional<PersonFullDTO> personFullDTO = this.personService.findOneByUserId(user.get().getId());
+            if (personFullDTO.isPresent()) {
+
+                PersonalCategoryStatsDTO categoryStatsDTO = activityCategoryService.findPersonalStats(personFullDTO.get().getId(), categoryStatsRequestDTO);
+                return ResponseEntity.ok(categoryStatsDTO);
+            }
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }

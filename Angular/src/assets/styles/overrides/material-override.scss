@@ -206,3 +206,10 @@ textarea.autosize-textarea {
     border-bottom: none;
   }
 }
+
+/* Expansion panel */
+
+.mat-expansion-panel-header-title {
+  width: 250px;
+  flex-grow: 0 !important;
+}

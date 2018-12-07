@@ -1,14 +1,11 @@
 package com.jtsports.jttesting.service.impl;
 
-import com.jtsports.jttesting.domain.EventResult;
-import com.jtsports.jttesting.domain.Person;
 import com.jtsports.jttesting.repository.EventResultRepository;
 import com.jtsports.jttesting.repository.PersonRepository;
 import com.jtsports.jttesting.service.EventService;
 import com.jtsports.jttesting.domain.Event;
 import com.jtsports.jttesting.repository.EventRepository;
 import com.jtsports.jttesting.repository.search.EventSearchRepository;
-import com.jtsports.jttesting.service.dto.Event.PersonalEventStatsDTO;
 import com.jtsports.jttesting.service.dto.EventDTO;
 import com.jtsports.jttesting.service.mapper.EventMapper;
 import com.jtsports.jttesting.service.mapper.EventMapperCustom;

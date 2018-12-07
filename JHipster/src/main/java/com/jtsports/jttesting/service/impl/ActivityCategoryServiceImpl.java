@@ -1,10 +1,20 @@
 package com.jtsports.jttesting.service.impl;
 
+import com.jtsports.jttesting.domain.Activity;
+import com.jtsports.jttesting.domain.JTTest;
+import com.jtsports.jttesting.repository.ActivityRepository;
+import com.jtsports.jttesting.repository.JTTestRepository;
 import com.jtsports.jttesting.service.ActivityCategoryService;
 import com.jtsports.jttesting.domain.ActivityCategory;
 import com.jtsports.jttesting.repository.ActivityCategoryRepository;
 import com.jtsports.jttesting.repository.search.ActivityCategorySearchRepository;
+import com.jtsports.jttesting.service.ActivityService;
+import com.jtsports.jttesting.service.dto.Activity.ActivityStatsRequestDTO;
+import com.jtsports.jttesting.service.dto.Activity.PersonalActivityStatsDTO;
 import com.jtsports.jttesting.service.dto.ActivityCategoryDTO;
+import com.jtsports.jttesting.service.dto.Category.CategoryStatsRequestDTO;
+import com.jtsports.jttesting.service.dto.Category.PersonalCategoryResultsStatsDTO;
+import com.jtsports.jttesting.service.dto.Category.PersonalCategoryStatsDTO;
 import com.jtsports.jttesting.service.mapper.ActivityCategoryMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +25,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -34,10 +47,19 @@ public class ActivityCategoryServiceImpl implements ActivityCategoryService {
 
     private final ActivityCategorySearchRepository activityCategorySearchRepository;
 
-    public ActivityCategoryServiceImpl(ActivityCategoryRepository activityCategoryRepository, ActivityCategoryMapper activityCategoryMapper, ActivityCategorySearchRepository activityCategorySearchRepository) {
+    private final ActivityService activityService;
+
+    private final ActivityRepository activityRepository;
+
+    private final JTTestRepository testRepository;
+
+    public ActivityCategoryServiceImpl(ActivityCategoryRepository activityCategoryRepository, ActivityCategoryMapper activityCategoryMapper, ActivityCategorySearchRepository activityCategorySearchRepository, ActivityService activityService, ActivityRepository activityRepository, JTTestRepository testRepository) {
         this.activityCategoryRepository = activityCategoryRepository;
         this.activityCategoryMapper = activityCategoryMapper;
         this.activityCategorySearchRepository = activityCategorySearchRepository;
+        this.activityService = activityService;
+        this.activityRepository = activityRepository;
+        this.testRepository = testRepository;
     }
 
     /**
@@ -111,4 +133,116 @@ public class ActivityCategoryServiceImpl implements ActivityCategoryService {
         return activityCategorySearchRepository.search(queryStringQuery(query), pageable)
             .map(activityCategoryMapper::toDto);
     }
+
+    @Override
+    public PersonalCategoryStatsDTO findPersonalStats(Long personId, CategoryStatsRequestDTO categoryStatsRequest) {
+        PersonalCategoryStatsDTO personalCategoryStatsDTO = new PersonalCategoryStatsDTO();
+
+        if(categoryStatsRequest.getParentCategoryId() != null) {
+            personalCategoryStatsDTO.setParentCategory(this.activityCategoryMapper.toDto(this.activityCategoryRepository.getOne(categoryStatsRequest.getParentCategoryId())));
+        }
+
+        List<ActivityCategory> categories = this.activityCategoryRepository.findAllByParentId(categoryStatsRequest.getParentCategoryId());
+
+        List<PersonalCategoryResultsStatsDTO> personalCategoryResultsStatsDTOList = new ArrayList<>();
+        for(ActivityCategory category : categories) {
+            PersonalCategoryResultsStatsDTO personalCategoryResultsStatsDTO = this.findPersonalCategoryResultStats(personId, category, categoryStatsRequest);
+            if(personalCategoryResultsStatsDTO != null) {
+                personalCategoryResultsStatsDTOList.add(this.findPersonalCategoryResultStats(personId, category, categoryStatsRequest));
+            }
+        }
+        personalCategoryStatsDTO.setPersonalCategoriesResultsStats(personalCategoryResultsStatsDTOList);
+
+        return  personalCategoryStatsDTO;
+    }
+
+    public PersonalCategoryResultsStatsDTO findPersonalCategoryResultStats(Long personId, ActivityCategory category, CategoryStatsRequestDTO categoryStatsRequest) {
+
+        List<Activity> activities = this.findByCategoryId(category.getId(), categoryStatsRequest.getEventId(), categoryStatsRequest.getTestId());
+        if(activities.size() > 0) {
+            PersonalCategoryResultsStatsDTO personalCategoryResultsStatsDTO = new PersonalCategoryResultsStatsDTO();
+            List<PersonalActivityStatsDTO> personalActivityStatsDTOList = new ArrayList<>();
+            for (Activity activity : activities) {
+
+                ActivityStatsRequestDTO activityStatsRequestDTO = new ActivityStatsRequestDTO();
+                activityStatsRequestDTO.setActivityId(activity.getId());
+                activityStatsRequestDTO.setEventId(categoryStatsRequest.getEventId());
+                activityStatsRequestDTO.setTestId(categoryStatsRequest.getTestId());
+                activityStatsRequestDTO.setDateFrom(categoryStatsRequest.getDateFrom());
+                activityStatsRequestDTO.setDateTo(categoryStatsRequest.getDateTo());
+                activityStatsRequestDTO.setUsersBirthdayFrom(categoryStatsRequest.getUsersBirthdayFrom());
+                activityStatsRequestDTO.setUsersBirthDayTo(categoryStatsRequest.getUsersBirthDayTo());
+                activityStatsRequestDTO.setVirtual(categoryStatsRequest.getVirtual());
+
+
+                PersonalActivityStatsDTO personalActivityStatsDTO = activityService.findPersonalStats(personId, activityStatsRequestDTO);
+                personalActivityStatsDTOList.add(personalActivityStatsDTO);
+            }
+
+
+            Float primaryPlacementInPercents = 0F;
+            Float secondaryPlacementInPercents = 0F;
+
+            int primaryDelimiter = 0;
+            int secondaryDelimiter = 0;
+
+            for (PersonalActivityStatsDTO personalActivityStats : personalActivityStatsDTOList) {
+                if (personalActivityStats.getPrimaryPlacementInPercents() != null) {
+                    primaryDelimiter++;
+                    primaryPlacementInPercents += personalActivityStats.getPrimaryPlacementInPercents();
+                }
+
+                if (personalActivityStats.getSecondaryPlacementInPercents() != null) {
+                    secondaryDelimiter++;
+                    secondaryPlacementInPercents += personalActivityStats.getSecondaryPlacementInPercents();
+                }
+            }
+
+            primaryPlacementInPercents = primaryPlacementInPercents / primaryDelimiter;
+            secondaryPlacementInPercents = secondaryPlacementInPercents / secondaryDelimiter;
+
+            personalCategoryResultsStatsDTO.setPrimaryPlacement(primaryPlacementInPercents);
+            personalCategoryResultsStatsDTO.setSecondaryPlacement(secondaryPlacementInPercents);
+            personalCategoryResultsStatsDTO.setCategory(this.activityCategoryMapper.toDto(category));
+            return personalCategoryResultsStatsDTO;
+        }
+        return null;
+    }
+
+    @Override
+    public List<ActivityCategory> findOneWithSubcategories(Long categoryId) {
+        List<ActivityCategory> allCategories = new ArrayList<>();
+
+        if(categoryId != null) {
+            allCategories.add(this.activityCategoryRepository.getOne(categoryId));
+        }
+
+        List<ActivityCategory> subCategories = this.activityCategoryRepository.findAllByParentId(categoryId);
+
+        for(ActivityCategory activitySubCategory : subCategories) {
+            allCategories.addAll(this.findOneWithSubcategories(activitySubCategory.getId()));
+        }
+
+        return allCategories;
+    }
+
+    @Override
+    public List<Activity> findByCategoryId(Long categoryId, Long eventId, Long testId) {
+
+        List<ActivityCategory> categories = this.findOneWithSubcategories(categoryId);
+        List<Long> categoriesIds = categories.stream().map(c -> c.getId()).collect(Collectors.toList());
+        List<Activity> activities = new ArrayList<>();
+
+        if(eventId != null && testId != null) {
+            activities = this.activityRepository.findActivityByCategoriesAndEventIdAndTestId(categoriesIds, eventId, testId);
+        } else if(eventId != null) {
+            activities = this.activityRepository.findActivityByCategoriesAndEventId(categoriesIds, eventId);
+        } else {
+            activities = this.activityRepository.findActivityByCategories(categoriesIds);
+        }
+
+        return activities;
+
+    }
+
 }

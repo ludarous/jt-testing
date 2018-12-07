@@ -2,6 +2,8 @@ package com.jtsports.jttesting.repository;
 
 import com.jtsports.jttesting.domain.Activity;
 import com.jtsports.jttesting.domain.ActivityResult;
+import com.jtsports.jttesting.domain.Event;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -35,5 +37,24 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
         "inner join eventResult.person person " +
         "where activity.id = :id")
     List<ActivityResult> findActivityResults(@Param("id") Long id);
+
+    @Query("select activity from Activity activity " +
+        "inner join activity.categories category " +
+        "where category.id in :ids")
+    List<Activity> findActivityByCategories(@Param("ids") List<Long> ids);
+
+    @Query("select activity from Event event " +
+        "inner join event.tests test " +
+        "inner join test.activities activity " +
+        "inner join activity.categories category " +
+        "where category.id in :ids and event.id = :eventId")
+    List<Activity> findActivityByCategoriesAndEventId(@Param("ids") List<Long> ids, @Param("eventId") Long eventId);
+
+    @Query("select activity from Event event " +
+        "inner join event.tests test " +
+        "inner join test.activities activity " +
+        "inner join activity.categories category " +
+        "where category.id in :ids and event.id = :eventId and test.id = :testId")
+    List<Activity> findActivityByCategoriesAndEventIdAndTestId(@Param("ids") List<Long> ids, @Param("eventId") Long eventId, @Param("testId") Long testId);
 
 }

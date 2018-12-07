@@ -1,3 +1,5 @@
+@import "app-colors";
+
 .user-activity-result-container {
   flex: 1;
   display: flex;
@@ -43,9 +45,20 @@
 .result-charts {
   display: flex;
   flex-direction: column;
-  margin-bottom: 80px;
 }
 
 .chart-container {
-  height: 200px;
+  height: 150px;
 }
+
+.header-cards-container {
+  background-color: $chart-color;
+  height: 60px;
+  border-radius: 4px;
+  font-size: 24px;
+  padding: 10px 40px;
+  margin: 0px 20px;
+  text-align: center;
+  width: 300px;
+}
+

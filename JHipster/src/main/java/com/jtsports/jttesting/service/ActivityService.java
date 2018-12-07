@@ -1,5 +1,6 @@
 package com.jtsports.jttesting.service;
 
+import com.jtsports.jttesting.domain.Activity;
 import com.jtsports.jttesting.service.dto.Activity.ActivityStatsDTO;
 import com.jtsports.jttesting.service.dto.Activity.ActivityStatsRequestDTO;
 import com.jtsports.jttesting.service.dto.Activity.PersonalActivityStatsDTO;
@@ -8,6 +9,7 @@ import com.jtsports.jttesting.service.dto.ActivityDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -66,4 +68,5 @@ public interface ActivityService {
     ActivityStatsDTO findStats(ActivityStatsRequestDTO activityStatsRequest);
 
     PersonalActivityStatsDTO findPersonalStats(Long personId, ActivityStatsRequestDTO activityStatsRequest);
+
 }

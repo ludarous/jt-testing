@@ -1,6 +1,9 @@
 package com.jtsports.jttesting.service.impl;
 
+import com.jtsports.jttesting.domain.ActivityCategory;
 import com.jtsports.jttesting.domain.ActivityResult;
+import com.jtsports.jttesting.repository.ActivityCategoryRepository;
+import com.jtsports.jttesting.service.ActivityCategoryService;
 import com.jtsports.jttesting.service.ActivityService;
 import com.jtsports.jttesting.domain.Activity;
 import com.jtsports.jttesting.repository.ActivityRepository;
@@ -9,7 +12,6 @@ import com.jtsports.jttesting.service.dto.Activity.*;
 import com.jtsports.jttesting.service.dto.ActivityDTO;
 import com.jtsports.jttesting.service.mapper.ActivityMapper;
 import com.jtsports.jttesting.service.util.StatsUtil;
-import javafx.collections.transformation.SortedList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,11 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import javax.swing.text.html.Option;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -41,11 +39,14 @@ public class ActivityServiceImpl implements ActivityService {
 
     private final ActivityMapper activityMapper;
 
+    private final ActivityCategoryRepository activityCategoryRepository;
+
     private final ActivitySearchRepository activitySearchRepository;
 
-    public ActivityServiceImpl(ActivityRepository activityRepository, ActivityMapper activityMapper, ActivitySearchRepository activitySearchRepository) {
+    public ActivityServiceImpl(ActivityRepository activityRepository, ActivityMapper activityMapper, ActivityCategoryRepository activityCategoryRepository, ActivitySearchRepository activitySearchRepository) {
         this.activityRepository = activityRepository;
         this.activityMapper = activityMapper;
+        this.activityCategoryRepository = activityCategoryRepository;
         this.activitySearchRepository = activitySearchRepository;
     }
 

@@ -17,8 +17,9 @@ import {
   ChartCommonModule, GaugeModule,
   LinearGaugeComponent,
   LineChartModule,
-  NumberCardModule
+  NumberCardModule, PolarChartModule
 } from '@swimlane/ngx-charts';
+import {ActivityCategoryService} from '../../../services/activity-category.service';
 
 @NgModule({
   declarations: [
@@ -37,11 +38,13 @@ import {
     LineChartModule,
     NumberCardModule,
     GaugeModule,
+    PolarChartModule,
   ],
   providers: [
     EventResultService,
     EventService,
     ActivityService,
+    ActivityCategoryService
   ],
   exports: [
     UserResultsComponent,
