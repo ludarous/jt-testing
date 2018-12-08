@@ -1,10 +1,16 @@
 package com.jtsports.jttesting.service.impl;
 
+import com.jtsports.jttesting.domain.Activity;
+import com.jtsports.jttesting.service.ActivityCategoryService;
+import com.jtsports.jttesting.service.ActivityService;
 import com.jtsports.jttesting.service.JTTestService;
 import com.jtsports.jttesting.domain.JTTest;
 import com.jtsports.jttesting.repository.JTTestRepository;
 import com.jtsports.jttesting.repository.search.JTTestSearchRepository;
+import com.jtsports.jttesting.service.dto.Activity.PersonalActivityStatsDTO;
+import com.jtsports.jttesting.service.dto.StatsRequestDTO;
 import com.jtsports.jttesting.service.dto.JTTestDTO;
+import com.jtsports.jttesting.service.dto.Test.PersonalTestsStatsDTO;
 import com.jtsports.jttesting.service.mapper.JTTestMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +21,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -34,10 +43,16 @@ public class JTTestServiceImpl implements JTTestService {
 
     private final JTTestSearchRepository jTTestSearchRepository;
 
-    public JTTestServiceImpl(JTTestRepository jTTestRepository, JTTestMapper jTTestMapper, JTTestSearchRepository jTTestSearchRepository) {
+    private final ActivityService activityService;
+
+    private final ActivityCategoryService activityCategoryService;
+
+    public JTTestServiceImpl(JTTestRepository jTTestRepository, JTTestMapper jTTestMapper, JTTestSearchRepository jTTestSearchRepository, ActivityService activityService, ActivityCategoryService activityCategoryService) {
         this.jTTestRepository = jTTestRepository;
         this.jTTestMapper = jTTestMapper;
         this.jTTestSearchRepository = jTTestSearchRepository;
+        this.activityService = activityService;
+        this.activityCategoryService = activityCategoryService;
     }
 
     /**
@@ -78,7 +93,7 @@ public class JTTestServiceImpl implements JTTestService {
     public Page<JTTestDTO> findAllWithEagerRelationships(Pageable pageable) {
         return jTTestRepository.findAllWithEagerRelationships(pageable).map(jTTestMapper::toDto);
     }
-    
+
 
     /**
      * Get one jTTest by id.
@@ -109,7 +124,7 @@ public class JTTestServiceImpl implements JTTestService {
     /**
      * Search for the jTTest corresponding to the query.
      *
-     * @param query the query of the search
+     * @param query    the query of the search
      * @param pageable the pagination information
      * @return the list of entities
      */
@@ -119,5 +134,22 @@ public class JTTestServiceImpl implements JTTestService {
         log.debug("Request to search for a page of JTTests for query {}", query);
         return jTTestSearchRepository.search(queryStringQuery(query), pageable)
             .map(jTTestMapper::toDto);
+    }
+
+    @Override
+    public PersonalTestsStatsDTO findPersonalStats(Long personId, Long parentCategoryId, StatsRequestDTO statsRequest) {
+        PersonalTestsStatsDTO personalTestsStats = new PersonalTestsStatsDTO();
+        personalTestsStats.setPersonalCategoryStats(this.activityCategoryService.findPersonalStats(personId, parentCategoryId, statsRequest));
+
+        List<PersonalActivityStatsDTO> personalActivitiesStats = new ArrayList<>();
+        Optional<JTTest> testOptional = this.jTTestRepository.findOneWithEagerRelationships(statsRequest.getTestId());
+        if (testOptional.isPresent()) {
+            Set<Activity> testActivities = testOptional.get().getActivities();
+            for (Activity activity : testActivities) {
+                personalActivitiesStats.add(this.activityService.findPersonalStats(personId, activity.getId(), statsRequest));
+            }
+            personalTestsStats.setPersonalActivitiesStats(personalActivitiesStats);
+        }
+        return personalTestsStats;
     }
 }

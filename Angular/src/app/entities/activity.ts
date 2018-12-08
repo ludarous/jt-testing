@@ -55,16 +55,6 @@ export class Activity implements IActivity {
   }
 }
 
-export class ActivityStatsRequest {
-  activityId: number | string;
-  testId: number | string;
-  eventId: number | string;
-  dateFrom?: string;
-  dateTo?: string;
-  usersBirthdayFrom?: string;
-  usersBirthdayTo?: string;
-}
-
 export class ActivityStats {
   activity: IActivity;
   activityResultsStats: ActivityResultStats;
@@ -86,6 +76,9 @@ export class ActivityResultStats {
 export class PersonalActivityResultsStats {
   primaryPlacement: number;
   secondaryPlacement: number;
+
+  totalPrimaryResults: number;
+  totalSecondaryResults: number;
 }
 
 export class PersonalActivityStats extends ActivityStats {

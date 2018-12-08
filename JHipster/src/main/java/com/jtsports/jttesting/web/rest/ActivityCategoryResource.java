@@ -5,10 +5,9 @@ import com.jtsports.jttesting.domain.User;
 import com.jtsports.jttesting.service.ActivityCategoryService;
 import com.jtsports.jttesting.service.PersonService;
 import com.jtsports.jttesting.service.UserService;
-import com.jtsports.jttesting.service.dto.Activity.PersonalActivityStatsDTO;
-import com.jtsports.jttesting.service.dto.Category.CategoryStatsRequestDTO;
 import com.jtsports.jttesting.service.dto.Category.PersonalCategoryStatsDTO;
 import com.jtsports.jttesting.service.dto.PersonFullDTO;
+import com.jtsports.jttesting.service.dto.StatsRequestDTO;
 import com.jtsports.jttesting.web.rest.errors.BadRequestAlertException;
 import com.jtsports.jttesting.web.rest.util.HeaderUtil;
 import com.jtsports.jttesting.web.rest.util.PaginationUtil;
@@ -162,14 +161,14 @@ public class ActivityCategoryResource {
      */
     @PostMapping("/activity-categories/my-stats")
     @Timed
-    public ResponseEntity<PersonalCategoryStatsDTO> getPersonalCategoryStats(@RequestBody CategoryStatsRequestDTO categoryStatsRequestDTO) {
-        log.debug("REST request to get Category stats : {}", categoryStatsRequestDTO.getParentCategoryId());
+    public ResponseEntity<PersonalCategoryStatsDTO> getPersonalCategoryStats(@RequestParam(required = false) Long parentCategoryId, @RequestBody StatsRequestDTO statsRequestDTO) {
+        log.debug("REST request to get Category stats : {}", parentCategoryId);
         Optional<User> user = userService.getUserWithAuthorities();
         if(user.isPresent()) {
             Optional<PersonFullDTO> personFullDTO = this.personService.findOneByUserId(user.get().getId());
             if (personFullDTO.isPresent()) {
 
-                PersonalCategoryStatsDTO categoryStatsDTO = activityCategoryService.findPersonalStats(personFullDTO.get().getId(), categoryStatsRequestDTO);
+                PersonalCategoryStatsDTO categoryStatsDTO = activityCategoryService.findPersonalStats(personFullDTO.get().getId(), parentCategoryId, statsRequestDTO);
                 return ResponseEntity.ok(categoryStatsDTO);
             }
             return ResponseEntity.notFound().build();

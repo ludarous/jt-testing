@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ActivityStats, ActivityStatsRequest, IActivity, PersonalActivityStats} from '../../../../entities/activity';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {ActivityStats, IActivity, PersonalActivityStats} from '../../../../entities/activity';
 import {IActivityResult} from '../../../../entities/activity-result';
 import {ActivityService} from '../../../../services/activity.service';
 import {HttpResponse} from '@angular/common/http';
@@ -8,6 +8,9 @@ import {EnumTranslatorService} from '../../../../shared/pipes/enum-translator/en
 import {ITest} from '../../../../entities/test';
 import {IEvent} from '../../../../entities/event';
 import {ActivityResultUnits} from '../../../../entities/enums/activity-result-units';
+import {StatsRequest} from '../../../../entities/stats-request';
+import {EventManager} from '../../../../services/event.manager';
+import {MatExpansionModule, MatExpansionPanel} from '@angular/material';
 
 @Component({
   selector: 'app-user-activity-result',
@@ -17,7 +20,8 @@ import {ActivityResultUnits} from '../../../../entities/enums/activity-result-un
 export class UserActivityResultComponent implements OnInit {
 
   constructor(private activityService: ActivityService,
-              private enumTranslatorService: EnumTranslatorService) {
+              private enumTranslatorService: EnumTranslatorService,
+              private eventManager: EventManager) {
   }
 
   @Input()
@@ -31,6 +35,9 @@ export class UserActivityResultComponent implements OnInit {
 
   @Input()
   event: IEvent;
+
+  @ViewChild('expansionPanel')
+  expansionPanel: MatExpansionPanel;
 
   activityStats: PersonalActivityStats;
 
@@ -65,6 +72,14 @@ export class UserActivityResultComponent implements OnInit {
       }
 
     ];
+
+    this.eventManager.subscribe('activityStatsSelected', message => {
+      const activity = <IActivity>message.content;
+      if (activity.id === this.activity.id) {
+        this.expansionPanel.expanded = true;
+        this.expansionPanel._body.nativeElement.scrollIntoView({ block: 'start',  behavior: 'smooth' });
+      }
+    });
   }
 
   createChartData(activityStats: PersonalActivityStats, activityResult: IActivityResult) {
@@ -226,12 +241,11 @@ export class UserActivityResultComponent implements OnInit {
   }
 
   loadStats() {
-    const request = new ActivityStatsRequest();
-    request.activityId = this.activityResult.activityId;
+    const request = new StatsRequest();
     request.testId = this.test ? this.test.id : null;
     request.eventId = this.event ? this.event.id : null;
 
-    this.activityService.findMyStats(request).subscribe((activityStatsResponse: HttpResponse<PersonalActivityStats>) => {
+    this.activityService.findMyStats(this.activityResult.activityId, request).subscribe((activityStatsResponse: HttpResponse<PersonalActivityStats>) => {
       this.activityStats = activityStatsResponse.body;
       this.createChartData(this.activityStats, this.activityResult);
     });

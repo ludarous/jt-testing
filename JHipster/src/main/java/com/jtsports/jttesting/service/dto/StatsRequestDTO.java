@@ -1,10 +1,8 @@
-package com.jtsports.jttesting.service.dto.Activity;
+package com.jtsports.jttesting.service.dto;
 
 import java.time.ZonedDateTime;
 
-public class ActivityStatsRequestDTO {
-
-    private Long activityId;
+public class StatsRequestDTO {
 
     private Long testId;
 
@@ -50,14 +48,6 @@ public class ActivityStatsRequestDTO {
 
     public void setUsersBirthDayTo(ZonedDateTime usersBirthDayTo) {
         this.usersBirthDayTo = usersBirthDayTo;
-    }
-
-    public Long getActivityId() {
-        return activityId;
-    }
-
-    public void setActivityId(Long activityId) {
-        this.activityId = activityId;
     }
 
     public Long getTestId() {

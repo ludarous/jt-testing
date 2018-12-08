@@ -32,15 +32,31 @@
   }
 }
 
-.polar-chart-container {
-  height: 300px;
+.test-chart-container {
+  height: 600px;
   background-color: $chart-color;
   border-radius: 4px;
   margin-bottom: 20px;
   display: flex;
   justify-content: stretch;
+  flex-direction: column;
+}
 
-  .row {
+.polar-charts-container {
+  flex: 1;
+  display: flex;
+  justify-content: stretch;
+  flex-direction: row;
+
+  .primary-polar-chart-container {
     flex: 1;
   }
+
+  .secondary-polar-chart-container {
+    flex: 1;
+  }
+}
+
+.vertical-bar-chart-container {
+  flex: 1;
 }

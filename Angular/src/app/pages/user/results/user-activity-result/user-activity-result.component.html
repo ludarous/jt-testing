@@ -1,4 +1,4 @@
-<mat-expansion-panel class="activity-result-panel" (afterExpand)="afterExpand($event)">
+<mat-expansion-panel #expansionPanel class="activity-result-panel" (afterExpand)="afterExpand($event)">
   <mat-expansion-panel-header [collapsedHeight]="'100px'" [expandedHeight]="'100px'">
     <mat-panel-title>
       <div>{{activityResult.activityName}}</div>

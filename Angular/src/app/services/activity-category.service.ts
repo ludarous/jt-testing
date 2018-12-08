@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {CrudBaseService} from './crud-base.service';
 import {HttpClient, HttpResponse} from '@angular/common/http';
-import {ActivityCategoryStatsRequest, IActivityCategory, PersonalCategoryStats} from '../entities/activity-category';
-import {ActivityStatsRequest, PersonalActivityStats} from '../entities/activity';
+import {IActivityCategory, PersonalCategoryStats} from '../entities/activity-category';
+import {PersonalActivityStats} from '../entities/activity';
 import {Observable} from 'rxjs';
+import {StatsRequest} from '../entities/stats-request';
 
 @Injectable()
 export class ActivityCategoryService extends CrudBaseService<IActivityCategory> {
@@ -11,7 +12,7 @@ export class ActivityCategoryService extends CrudBaseService<IActivityCategory> 
     super(httpClient, '/activity-categories');
   }
 
-  findMyStats(categoryStatsRequest: ActivityCategoryStatsRequest): Observable<HttpResponse<PersonalCategoryStats>> {
+  findMyStats(parentCategoryId: number, categoryStatsRequest: StatsRequest): Observable<HttpResponse<PersonalCategoryStats>> {
     return this.httpClient.post<PersonalCategoryStats>(`${this.resourceUrl}/my-stats`, categoryStatsRequest, { observe: 'response' });
   }
 }

@@ -2,6 +2,8 @@ package com.jtsports.jttesting.service;
 
 import com.jtsports.jttesting.service.dto.JTTestDTO;
 
+import com.jtsports.jttesting.service.dto.StatsRequestDTO;
+import com.jtsports.jttesting.service.dto.Test.PersonalTestsStatsDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -59,4 +61,6 @@ public interface JTTestService {
      * @return the list of entities
      */
     Page<JTTestDTO> search(String query, Pageable pageable);
+
+    PersonalTestsStatsDTO findPersonalStats(Long personId, Long parentCategoryId, StatsRequestDTO statsRequest);
 }

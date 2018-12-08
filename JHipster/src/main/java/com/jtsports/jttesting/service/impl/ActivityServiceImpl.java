@@ -1,15 +1,14 @@
 package com.jtsports.jttesting.service.impl;
 
-import com.jtsports.jttesting.domain.ActivityCategory;
 import com.jtsports.jttesting.domain.ActivityResult;
 import com.jtsports.jttesting.repository.ActivityCategoryRepository;
-import com.jtsports.jttesting.service.ActivityCategoryService;
 import com.jtsports.jttesting.service.ActivityService;
 import com.jtsports.jttesting.domain.Activity;
 import com.jtsports.jttesting.repository.ActivityRepository;
 import com.jtsports.jttesting.repository.search.ActivitySearchRepository;
 import com.jtsports.jttesting.service.dto.Activity.*;
 import com.jtsports.jttesting.service.dto.ActivityDTO;
+import com.jtsports.jttesting.service.dto.StatsRequestDTO;
 import com.jtsports.jttesting.service.mapper.ActivityMapper;
 import com.jtsports.jttesting.service.util.StatsUtil;
 import org.slf4j.Logger;
@@ -132,17 +131,16 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public ActivityStatsDTO findStats(ActivityStatsRequestDTO activityStatsRequest) {
-        Optional<Activity> activity = activityRepository.findOneWithEagerRelationships(activityStatsRequest.getActivityId());
+    public ActivityStatsDTO findStats(Long activityId, StatsRequestDTO statsRequest) {
+        Optional<Activity> activity = activityRepository.findOneWithEagerRelationships(activityId);
         ActivityStatsDTO activityStatsDTO = new ActivityStatsDTO();
 
         if(activity.isPresent()) {
 
-            List<ActivityResult> allActivityResults = activityRepository.findActivityResults(activityStatsRequest.getActivityId());
-            List<ActivityResult> filteredResults = this.filterResults(allActivityResults, activityStatsRequest);
+            List<ActivityResult> filteredResults = this.getFilterActivityResults(activityId, statsRequest);
 
             activityStatsDTO.setActivity(activityMapper.toDto(activity.get()));
-            ActivityResultsStatsDTO resultsStatsDTO = this.getActivityResultStats(filteredResults, activityStatsRequest);
+            ActivityResultsStatsDTO resultsStatsDTO = this.getActivityResultStats(filteredResults, statsRequest);
             activityStatsDTO.setActivityResultsStats(resultsStatsDTO);
 
             return activityStatsDTO;
@@ -151,17 +149,17 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public PersonalActivityStatsDTO findPersonalStats(Long personId, ActivityStatsRequestDTO activityStatsRequest) {
-        Optional<Activity> activity = activityRepository.findOneWithEagerRelationships(activityStatsRequest.getActivityId());
+    public PersonalActivityStatsDTO findPersonalStats(Long personId, Long activityId, StatsRequestDTO statsRequest) {
+        Optional<Activity> activity = activityRepository.findOneWithEagerRelationships(activityId);
         PersonalActivityStatsDTO personalActivityStatsDTO = new PersonalActivityStatsDTO();
 
         if(activity.isPresent()) {
 
-            List<ActivityResult> allActivityResults = activityRepository.findActivityResults(activityStatsRequest.getActivityId());
-            List<ActivityResult> filteredResults = this.filterResults(allActivityResults, activityStatsRequest);
+            List<ActivityResult> filteredResults = this.getFilterActivityResults(activityId, statsRequest);
 
             personalActivityStatsDTO.setActivity(activityMapper.toDto(activity.get()));
-            ActivityResultsStatsDTO resultsStatsDTO = this.getActivityResultStats(filteredResults, activityStatsRequest);
+
+            ActivityResultsStatsDTO resultsStatsDTO = this.getActivityResultStats(filteredResults, statsRequest);
             personalActivityStatsDTO.setActivityResultsStats(resultsStatsDTO);
 
             PersonalActivityResultsStatsDTO personalActivityResultsStatsDTO = this.getPersonalActivityResultStats(filteredResults, personId);
@@ -175,6 +173,12 @@ public class ActivityServiceImpl implements ActivityService {
 
     private PersonalActivityResultsStatsDTO getPersonalActivityResultStats(List<ActivityResult> filteredResults, Long personId) {
         PersonalActivityResultsStatsDTO personalActivityResultsStatsDTO = new PersonalActivityResultsStatsDTO();
+        List<Float> primaryResults = filteredResults.stream().filter(r -> r.getPrimaryResultValue() != null).map(r -> r.getPrimaryResultValue()).collect(Collectors.toList());
+        List<Float> secondaryResults = filteredResults.stream().filter(r -> r.getSecondaryResultValue() != null).map(r -> r.getSecondaryResultValue()).collect(Collectors.toList());
+
+        personalActivityResultsStatsDTO.setTotalPrimaryResults(primaryResults.size());
+        personalActivityResultsStatsDTO.setTotalSecondaryResults(secondaryResults.size());
+
         Optional<ActivityResult> personResultOptional = this.filterPersonResults(filteredResults, personId).stream().findFirst();
         if(personResultOptional.isPresent()) {
 
@@ -199,35 +203,37 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
 
-    private List<ActivityResult> filterResults(List<ActivityResult> results, ActivityStatsRequestDTO activityStatsRequest) {
-        List<ActivityResult> filteredResults = results;
+    private List<ActivityResult> getFilterActivityResults(Long activityId, StatsRequestDTO statsRequest) {
 
-        if(activityStatsRequest.getTestId() != null) {
-            filteredResults = filteredResults.stream().filter(r -> r.getTestResult().getTest().getId().longValue() == activityStatsRequest.getTestId().longValue()).collect(Collectors.toList());
+        List<ActivityResult> allActivityResults = activityRepository.findActivityResults(activityId);
+        List<ActivityResult> filteredResults = allActivityResults;
+
+        if(statsRequest.getTestId() != null) {
+            filteredResults = filteredResults.stream().filter(r -> r.getTestResult().getTest().getId().longValue() == statsRequest.getTestId().longValue()).collect(Collectors.toList());
         }
 
-        if(activityStatsRequest.getEventId() != null) {
-            filteredResults = filteredResults.stream().filter(r -> r.getTestResult().getEventResult().getEvent().getId().longValue() == activityStatsRequest.getEventId().longValue()).collect(Collectors.toList());
+        if(statsRequest.getEventId() != null) {
+            filteredResults = filteredResults.stream().filter(r -> r.getTestResult().getEventResult().getEvent().getId().longValue() == statsRequest.getEventId().longValue()).collect(Collectors.toList());
         }
 
-        if(activityStatsRequest.getDateFrom() != null) {
-            filteredResults = filteredResults.stream().filter(r -> r.getTestResult().getEventResult().getEvent().getDate().isAfter(activityStatsRequest.getDateFrom())).collect(Collectors.toList());
+        if(statsRequest.getDateFrom() != null) {
+            filteredResults = filteredResults.stream().filter(r -> r.getTestResult().getEventResult().getEvent().getDate().isAfter(statsRequest.getDateFrom())).collect(Collectors.toList());
         }
 
-        if(activityStatsRequest.getDateTo() != null) {
-            filteredResults = filteredResults.stream().filter(r -> r.getTestResult().getEventResult().getEvent().getDate().isBefore(activityStatsRequest.getDateTo())).collect(Collectors.toList());
+        if(statsRequest.getDateTo() != null) {
+            filteredResults = filteredResults.stream().filter(r -> r.getTestResult().getEventResult().getEvent().getDate().isBefore(statsRequest.getDateTo())).collect(Collectors.toList());
         }
 
-        if(activityStatsRequest.getUsersBirthdayFrom() != null) {
-            filteredResults = filteredResults.stream().filter(r -> r.getTestResult().getEventResult().getPerson().getPersonalData().getBirthDate().isAfter(activityStatsRequest.getUsersBirthdayFrom())).collect(Collectors.toList());
+        if(statsRequest.getUsersBirthdayFrom() != null) {
+            filteredResults = filteredResults.stream().filter(r -> r.getTestResult().getEventResult().getPerson().getPersonalData().getBirthDate().isAfter(statsRequest.getUsersBirthdayFrom())).collect(Collectors.toList());
         }
 
-        if(activityStatsRequest.getUsersBirthDayTo() != null) {
-            filteredResults = filteredResults.stream().filter(r -> r.getTestResult().getEventResult().getPerson().getPersonalData().getBirthDate().isBefore(activityStatsRequest.getUsersBirthDayTo())).collect(Collectors.toList());
+        if(statsRequest.getUsersBirthDayTo() != null) {
+            filteredResults = filteredResults.stream().filter(r -> r.getTestResult().getEventResult().getPerson().getPersonalData().getBirthDate().isBefore(statsRequest.getUsersBirthDayTo())).collect(Collectors.toList());
         }
 
-        if(activityStatsRequest.getVirtual() != null) {
-            filteredResults = filteredResults.stream().filter(r -> r.getTestResult().getEventResult().getPerson().isVirtual().booleanValue() == activityStatsRequest.getVirtual().booleanValue()).collect(Collectors.toList());
+        if(statsRequest.getVirtual() != null) {
+            filteredResults = filteredResults.stream().filter(r -> r.getTestResult().getEventResult().getPerson().isVirtual().booleanValue() == statsRequest.getVirtual().booleanValue()).collect(Collectors.toList());
         }
 
         return filteredResults;
@@ -244,9 +250,7 @@ public class ActivityServiceImpl implements ActivityService {
         return filteredResults;
     }
 
-
-
-    private ActivityResultsStatsDTO getActivityResultStats(List<ActivityResult> filteredResults, ActivityStatsRequestDTO activityStatsRequest) {
+    private ActivityResultsStatsDTO getActivityResultStats(List<ActivityResult> filteredResults, StatsRequestDTO activityStatsRequest) {
 
         List<Float> primaryResults = filteredResults.stream().filter(r -> r.getPrimaryResultValue() != null).map(r -> r.getPrimaryResultValue()).collect(Collectors.toList());
         List<Float> secondaryResults = filteredResults.stream().filter(r -> r.getSecondaryResultValue() != null).map(r -> r.getSecondaryResultValue()).collect(Collectors.toList());

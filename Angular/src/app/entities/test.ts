@@ -1,8 +1,9 @@
 import {ITestCategory} from './test-category';
 import {ISport} from './sport';
-import {Activity, IActivity} from './activity';
+import {Activity, IActivity, PersonalActivityStats} from './activity';
 import {HttpResponse} from '@angular/common/http';
 import {ActivityResultUnits} from './enums/activity-result-units';
+import {PersonalActivityCategoryResultsStats, PersonalCategoryStats} from './activity-category';
 
 export interface ITest {
   id?: number;
@@ -49,5 +50,10 @@ export class Test implements ITest {
     }
     return tests;
   }
+}
+
+export class PersonalTestStats {
+  personalCategoryStats: PersonalCategoryStats;
+  personalActivitiesStats: Array<PersonalActivityStats>;
 }
 

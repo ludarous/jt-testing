@@ -4,8 +4,8 @@ import com.jtsports.jttesting.domain.Activity;
 import com.jtsports.jttesting.domain.ActivityCategory;
 import com.jtsports.jttesting.service.dto.ActivityCategoryDTO;
 
-import com.jtsports.jttesting.service.dto.Category.CategoryStatsRequestDTO;
 import com.jtsports.jttesting.service.dto.Category.PersonalCategoryStatsDTO;
+import com.jtsports.jttesting.service.dto.StatsRequestDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -59,7 +59,7 @@ public interface ActivityCategoryService {
      */
     Page<ActivityCategoryDTO> search(String query, Pageable pageable);
 
-    PersonalCategoryStatsDTO findPersonalStats(Long personId, CategoryStatsRequestDTO categoryStatsRequest);
+    PersonalCategoryStatsDTO findPersonalStats(Long personId, Long parentCategoryId, StatsRequestDTO statsRequest);
 
     List<ActivityCategory> findOneWithSubcategories(Long categoryId);
 

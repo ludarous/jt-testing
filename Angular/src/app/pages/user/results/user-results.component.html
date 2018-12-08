@@ -1,5 +1,7 @@
 <mat-tab-group mat-stretch-tabs class="flex-grow-1">
   <mat-tab [label]="event.name" *ngFor="let event of myEvents">
-    <app-user-event-result [event]="event" [eventResults]="event.eventResults"></app-user-event-result>
+    <ng-template matTabContent>
+      <app-user-event-result [event]="event" [eventResults]="event.eventResults"></app-user-event-result>
+    </ng-template>
   </mat-tab>
 </mat-tab-group>

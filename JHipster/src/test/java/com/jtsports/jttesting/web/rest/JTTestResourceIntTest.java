@@ -6,6 +6,8 @@ import com.jtsports.jttesting.domain.JTTest;
 import com.jtsports.jttesting.repository.JTTestRepository;
 import com.jtsports.jttesting.repository.search.JTTestSearchRepository;
 import com.jtsports.jttesting.service.JTTestService;
+import com.jtsports.jttesting.service.PersonService;
+import com.jtsports.jttesting.service.UserService;
 import com.jtsports.jttesting.service.dto.JTTestDTO;
 import com.jtsports.jttesting.service.mapper.JTTestMapper;
 import com.jtsports.jttesting.web.rest.errors.ExceptionTranslator;
@@ -76,6 +78,12 @@ public class JTTestResourceIntTest {
     @Autowired
     private JTTestService jTTestService;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private PersonService personService;
+
     /**
      * This repository is mocked in the com.jtsports.jttesting.repository.search test package.
      *
@@ -103,7 +111,7 @@ public class JTTestResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final JTTestResource jTTestResource = new JTTestResource(jTTestService);
+        final JTTestResource jTTestResource = new JTTestResource(jTTestService, userService, personService);
         this.restJTTestMockMvc = MockMvcBuilders.standaloneSetup(jTTestResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -216,7 +224,7 @@ public class JTTestResourceIntTest {
     }
     
     public void getAllJTTestsWithEagerRelationshipsIsEnabled() throws Exception {
-        JTTestResource jTTestResource = new JTTestResource(jTTestServiceMock);
+        JTTestResource jTTestResource = new JTTestResource(jTTestServiceMock, userService, personService);
         when(jTTestServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         MockMvc restJTTestMockMvc = MockMvcBuilders.standaloneSetup(jTTestResource)
@@ -232,7 +240,7 @@ public class JTTestResourceIntTest {
     }
 
     public void getAllJTTestsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        JTTestResource jTTestResource = new JTTestResource(jTTestServiceMock);
+        JTTestResource jTTestResource = new JTTestResource(jTTestServiceMock, userService, personService);
             when(jTTestServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
             MockMvc restJTTestMockMvc = MockMvcBuilders.standaloneSetup(jTTestResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)

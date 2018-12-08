@@ -2,9 +2,9 @@
   <div class="user-test-result-info">
     <div class="user-test-name">{{testResult.testName}}</div>
     <span class="info-label" translate>Poznámka: </span>{{testResult.note}}
-    <div class="polar-chart-container">
-      <div class="row">
-        <div class="col-6">
+    <div class="test-chart-container">
+      <div class="polar-charts-container">
+        <div class="primary-polar-chart-container">
           <ngx-charts-polar-chart *ngIf="primaryChartData"
                                   class="chart-container dark"
                                   [scheme]="getColorScheme('cool')"
@@ -23,9 +23,8 @@
                                   (select)="select($event)">
           </ngx-charts-polar-chart>
         </div>
-        <div class="col-6">
-          <ngx-charts-polar-chart *ngIf="secondaryChartData"
-                                  class="chart-container dark"
+        <div *ngIf="secondaryChartData" class="secondary-polar-chart-container">
+          <ngx-charts-polar-chart class="chart-container dark"
                                   [scheme]="getColorScheme('cool')"
                                   [results]="secondaryChartData"
                                   [animations]="true"
@@ -43,10 +42,32 @@
           </ngx-charts-polar-chart>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12">
-
-        </div>
+      <div class="vertical-bar-chart-container">
+        <ngx-charts-bar-vertical *ngIf="activitiesChartData"
+                                 class="chart-container dark"
+                                 [scheme]="getColorScheme('cool')"
+                                 [results]="activitiesChartData"
+                                 [animations]="true"
+                                 [gradient]="false"
+                                 [xAxis]="true"
+                                 [yAxis]="true"
+                                 [legend]="false"
+                                 [legendTitle]="'Aktivity'"
+                                 [legendPosition]="'above'"
+                                 [showXAxisLabel]="true"
+                                 [showYAxisLabel]="true"
+                                 [tooltipDisabled]="false"
+                                 [xAxisLabel]="'Aktivity'"
+                                 [yAxisLabel]="'Pořadí v testu (%)'"
+                                 [showGridLines]="true"
+                                 [barPadding]="8"
+                                 [roundDomains]="true"
+                                 [roundEdges]="true"
+                                 [yScaleMax]="100"
+                                 [showDataLabel]="true"
+                                 (select)="selectActivity($event)"
+                                 (legendLabelClick)="onLegendLabelClick($event)">
+        </ngx-charts-bar-vertical>
       </div>
     </div>
   </div>

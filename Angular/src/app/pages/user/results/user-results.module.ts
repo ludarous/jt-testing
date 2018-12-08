@@ -20,6 +20,7 @@ import {
   NumberCardModule, PolarChartModule
 } from '@swimlane/ngx-charts';
 import {ActivityCategoryService} from '../../../services/activity-category.service';
+import {TestService} from '../../../services/test.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {ActivityCategoryService} from '../../../services/activity-category.servi
     EventResultService,
     EventService,
     ActivityService,
-    ActivityCategoryService
+    ActivityCategoryService,
+    TestService
   ],
   exports: [
     UserResultsComponent,

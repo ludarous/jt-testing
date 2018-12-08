@@ -1,7 +1,14 @@
 package com.jtsports.jttesting.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.jtsports.jttesting.domain.User;
 import com.jtsports.jttesting.service.JTTestService;
+import com.jtsports.jttesting.service.PersonService;
+import com.jtsports.jttesting.service.UserService;
+import com.jtsports.jttesting.service.dto.Activity.PersonalActivityStatsDTO;
+import com.jtsports.jttesting.service.dto.PersonFullDTO;
+import com.jtsports.jttesting.service.dto.StatsRequestDTO;
+import com.jtsports.jttesting.service.dto.Test.PersonalTestsStatsDTO;
 import com.jtsports.jttesting.web.rest.errors.BadRequestAlertException;
 import com.jtsports.jttesting.web.rest.util.HeaderUtil;
 import com.jtsports.jttesting.web.rest.util.PaginationUtil;
@@ -20,11 +27,9 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing JTTest.
@@ -39,8 +44,14 @@ public class JTTestResource {
 
     private final JTTestService jTTestService;
 
-    public JTTestResource(JTTestService jTTestService) {
+    private final UserService userService;
+
+    private final PersonService personService;
+
+    public JTTestResource(JTTestService jTTestService, UserService userService, PersonService personService) {
         this.jTTestService = jTTestService;
+        this.userService = userService;
+        this.personService = personService;
     }
 
     /**
@@ -149,6 +160,28 @@ public class JTTestResource {
         Page<JTTestDTO> page = jTTestService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/jt-tests");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * POST  /tests/my-stats : get the tests stats
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the activityDTO, or with status 404 (Not Found)
+     */
+    @PostMapping("/jt-tests/my-stats")
+    @Timed
+    public ResponseEntity<PersonalTestsStatsDTO> getPersonalTestStats(@RequestBody StatsRequestDTO statsRequestDTO) {
+        log.debug("REST request to get Personal Activities stats");
+        Optional<User> user = userService.getUserWithAuthorities();
+        if(user.isPresent()) {
+            Optional<PersonFullDTO> personFullDTO = this.personService.findOneByUserId(user.get().getId());
+            if (personFullDTO.isPresent()) {
+
+                PersonalTestsStatsDTO personalTestsStatsDTO = jTTestService.findPersonalStats(personFullDTO.get().getId(), null, statsRequestDTO);
+                return ResponseEntity.ok(personalTestsStatsDTO);
+            }
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }

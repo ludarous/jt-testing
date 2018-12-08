@@ -1,7 +1,6 @@
 package com.jtsports.jttesting.service.impl;
 
 import com.jtsports.jttesting.domain.Activity;
-import com.jtsports.jttesting.domain.JTTest;
 import com.jtsports.jttesting.repository.ActivityRepository;
 import com.jtsports.jttesting.repository.JTTestRepository;
 import com.jtsports.jttesting.service.ActivityCategoryService;
@@ -9,10 +8,9 @@ import com.jtsports.jttesting.domain.ActivityCategory;
 import com.jtsports.jttesting.repository.ActivityCategoryRepository;
 import com.jtsports.jttesting.repository.search.ActivityCategorySearchRepository;
 import com.jtsports.jttesting.service.ActivityService;
-import com.jtsports.jttesting.service.dto.Activity.ActivityStatsRequestDTO;
 import com.jtsports.jttesting.service.dto.Activity.PersonalActivityStatsDTO;
+import com.jtsports.jttesting.service.dto.StatsRequestDTO;
 import com.jtsports.jttesting.service.dto.ActivityCategoryDTO;
-import com.jtsports.jttesting.service.dto.Category.CategoryStatsRequestDTO;
 import com.jtsports.jttesting.service.dto.Category.PersonalCategoryResultsStatsDTO;
 import com.jtsports.jttesting.service.dto.Category.PersonalCategoryStatsDTO;
 import com.jtsports.jttesting.service.mapper.ActivityCategoryMapper;
@@ -135,20 +133,20 @@ public class ActivityCategoryServiceImpl implements ActivityCategoryService {
     }
 
     @Override
-    public PersonalCategoryStatsDTO findPersonalStats(Long personId, CategoryStatsRequestDTO categoryStatsRequest) {
+    public PersonalCategoryStatsDTO findPersonalStats(Long personId, Long parentCategoryId, StatsRequestDTO statsRequest) {
         PersonalCategoryStatsDTO personalCategoryStatsDTO = new PersonalCategoryStatsDTO();
 
-        if(categoryStatsRequest.getParentCategoryId() != null) {
-            personalCategoryStatsDTO.setParentCategory(this.activityCategoryMapper.toDto(this.activityCategoryRepository.getOne(categoryStatsRequest.getParentCategoryId())));
+        if(parentCategoryId != null) {
+            personalCategoryStatsDTO.setParentCategory(this.activityCategoryMapper.toDto(this.activityCategoryRepository.getOne(parentCategoryId)));
         }
 
-        List<ActivityCategory> categories = this.activityCategoryRepository.findAllByParentId(categoryStatsRequest.getParentCategoryId());
+        List<ActivityCategory> categories = this.activityCategoryRepository.findAllByParentId(parentCategoryId);
 
         List<PersonalCategoryResultsStatsDTO> personalCategoryResultsStatsDTOList = new ArrayList<>();
         for(ActivityCategory category : categories) {
-            PersonalCategoryResultsStatsDTO personalCategoryResultsStatsDTO = this.findPersonalCategoryResultStats(personId, category, categoryStatsRequest);
+            PersonalCategoryResultsStatsDTO personalCategoryResultsStatsDTO = this.findPersonalCategoryResultStats(personId, category, statsRequest);
             if(personalCategoryResultsStatsDTO != null) {
-                personalCategoryResultsStatsDTOList.add(this.findPersonalCategoryResultStats(personId, category, categoryStatsRequest));
+                personalCategoryResultsStatsDTOList.add(this.findPersonalCategoryResultStats(personId, category, statsRequest));
             }
         }
         personalCategoryStatsDTO.setPersonalCategoriesResultsStats(personalCategoryResultsStatsDTOList);
@@ -156,26 +154,25 @@ public class ActivityCategoryServiceImpl implements ActivityCategoryService {
         return  personalCategoryStatsDTO;
     }
 
-    public PersonalCategoryResultsStatsDTO findPersonalCategoryResultStats(Long personId, ActivityCategory category, CategoryStatsRequestDTO categoryStatsRequest) {
+    public PersonalCategoryResultsStatsDTO findPersonalCategoryResultStats(Long personId, ActivityCategory category, StatsRequestDTO statsRequest) {
 
-        List<Activity> activities = this.findByCategoryId(category.getId(), categoryStatsRequest.getEventId(), categoryStatsRequest.getTestId());
+        List<Activity> activities = this.findByCategoryId(category.getId(), statsRequest.getEventId(), statsRequest.getTestId());
         if(activities.size() > 0) {
             PersonalCategoryResultsStatsDTO personalCategoryResultsStatsDTO = new PersonalCategoryResultsStatsDTO();
             List<PersonalActivityStatsDTO> personalActivityStatsDTOList = new ArrayList<>();
             for (Activity activity : activities) {
 
-                ActivityStatsRequestDTO activityStatsRequestDTO = new ActivityStatsRequestDTO();
-                activityStatsRequestDTO.setActivityId(activity.getId());
-                activityStatsRequestDTO.setEventId(categoryStatsRequest.getEventId());
-                activityStatsRequestDTO.setTestId(categoryStatsRequest.getTestId());
-                activityStatsRequestDTO.setDateFrom(categoryStatsRequest.getDateFrom());
-                activityStatsRequestDTO.setDateTo(categoryStatsRequest.getDateTo());
-                activityStatsRequestDTO.setUsersBirthdayFrom(categoryStatsRequest.getUsersBirthdayFrom());
-                activityStatsRequestDTO.setUsersBirthDayTo(categoryStatsRequest.getUsersBirthDayTo());
-                activityStatsRequestDTO.setVirtual(categoryStatsRequest.getVirtual());
+                StatsRequestDTO statsRequestDTO = new StatsRequestDTO();
+                statsRequestDTO.setEventId(statsRequest.getEventId());
+                statsRequestDTO.setTestId(statsRequest.getTestId());
+                statsRequestDTO.setDateFrom(statsRequest.getDateFrom());
+                statsRequestDTO.setDateTo(statsRequest.getDateTo());
+                statsRequestDTO.setUsersBirthdayFrom(statsRequest.getUsersBirthdayFrom());
+                statsRequestDTO.setUsersBirthDayTo(statsRequest.getUsersBirthDayTo());
+                statsRequestDTO.setVirtual(statsRequest.getVirtual());
 
 
-                PersonalActivityStatsDTO personalActivityStatsDTO = activityService.findPersonalStats(personId, activityStatsRequestDTO);
+                PersonalActivityStatsDTO personalActivityStatsDTO = activityService.findPersonalStats(personId, activity.getId(), statsRequestDTO);
                 personalActivityStatsDTOList.add(personalActivityStatsDTO);
             }
 
