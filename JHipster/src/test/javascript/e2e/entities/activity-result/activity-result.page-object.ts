@@ -20,6 +20,7 @@ export class ActivityResultUpdatePage {
     primaryResultValueInput = element(by.id('field_primaryResultValue'));
     secondaryResultValueInput = element(by.id('field_secondaryResultValue'));
     noteInput = element(by.id('field_note'));
+    eventDateInput = element(by.id('field_eventDate'));
     testResultSelect = element(by.id('field_testResult'));
     activitySelect = element(by.id('field_activity'));
 
@@ -49,6 +50,14 @@ export class ActivityResultUpdatePage {
 
     getNoteInput() {
         return this.noteInput.getAttribute('value');
+    }
+
+    setEventDateInput(eventDate): promise.Promise<void> {
+        return this.eventDateInput.sendKeys(eventDate);
+    }
+
+    getEventDateInput() {
+        return this.eventDateInput.getAttribute('value');
     }
 
     testResultSelectLastOption(): promise.Promise<void> {

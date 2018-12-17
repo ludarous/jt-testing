@@ -1,5 +1,7 @@
 package com.jtsports.jttesting.service.dto.Activity;
 
+import java.time.ZonedDateTime;
+
 public class PersonalActivityResultsStatsDTO {
 
     private Integer primaryPlacement;
@@ -9,6 +11,8 @@ public class PersonalActivityResultsStatsDTO {
     private Integer totalPrimaryResults;
 
     private Integer totalSecondaryResults;
+
+    private ZonedDateTime resultDate;
 
     public Integer getPrimaryPlacement() {
         return primaryPlacement;
@@ -40,5 +44,13 @@ public class PersonalActivityResultsStatsDTO {
 
     public void setTotalSecondaryResults(Integer totalSecondaryResults) {
         this.totalSecondaryResults = totalSecondaryResults;
+    }
+
+    public ZonedDateTime getResultDate() {
+        return resultDate;
+    }
+
+    public void setResultDate(ZonedDateTime resultDate) {
+        this.resultDate = resultDate;
     }
 }

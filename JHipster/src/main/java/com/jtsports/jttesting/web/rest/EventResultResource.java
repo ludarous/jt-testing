@@ -178,7 +178,6 @@ public class EventResultResource {
         }
 
         return ResponseEntity.notFound().build();
-
     }
 
 }

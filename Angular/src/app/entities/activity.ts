@@ -2,6 +2,7 @@ import {ActivityResultUnits} from './enums/activity-result-units';
 import {IActivityCategory} from './activity-category';
 import {HttpResponse} from '@angular/common/http';
 import {ITest} from './test';
+import {IActivityResult} from './activity-result';
 
 export interface IActivity {
   id?: number;
@@ -58,6 +59,38 @@ export class Activity implements IActivity {
 export class ActivityStats {
   activity: IActivity;
   activityResultsStats: ActivityResultStats;
+
+  static resolveResponse(response: HttpResponse<ActivityStats>): ActivityStats {
+    const activityStats = this.parseItemEnums(response.body);
+    return activityStats;
+  }
+
+  static resolveArrayResponse(response: HttpResponse<Array<ActivityStats>>): Array<ActivityStats> {
+    const activitiesStats = this.parseItemsEnums(response.body);
+    return activitiesStats;
+  }
+
+  static parseItemEnums(activityStats: any): ActivityStats {
+    if (activityStats && activityStats.activity) {
+      if (activityStats.activity.primaryResultValueUnit != null) {
+        activityStats.activity.primaryResultValueUnit = new ActivityResultUnits(<string>activityStats.activity.primaryResultValueUnit);
+      }
+      if (activityStats.activity.secondaryResultValueUnit != null) {
+        activityStats.activity.secondaryResultValueUnit = new ActivityResultUnits(<string>activityStats.activity.secondaryResultValueUnit);
+      }
+    }
+    return activityStats;
+  }
+
+  static parseItemsEnums(activitiesStats: Array<any>): Array<ActivityStats> {
+    if (activitiesStats) {
+      for (const activity of activitiesStats) {
+        ActivityStats.parseItemEnums(activity);
+      }
+    }
+    return activitiesStats;
+  }
+
 }
 
 export class ActivityResultStats {
@@ -82,5 +115,6 @@ export class PersonalActivityResultsStats {
 }
 
 export class PersonalActivityStats extends ActivityStats {
-  personalActivityResultsStats?: PersonalActivityResultsStats;
+  personalActivityResultsStats?: Array<PersonalActivityResultsStats>;
+  personalActivityResults?: Array<IActivityResult>;
 }

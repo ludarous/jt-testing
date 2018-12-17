@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -142,6 +143,13 @@ public class EventResultServiceImpl implements EventResultService {
         log.debug("Request to get all EventResults");
         return eventResultRepository.findAllByEventIdWithEagerRelationships(pageable, eventId)
             .map(eventResultMapper::toDto);
+    }
+
+    @Override
+    public List<EventResultDTO> findAllByPersonIdAndEventId(Long personId, Long eventId) {
+        log.debug("Request to get all EventResults");
+        return eventResultRepository.findAllByEventIdAndPersonIdWithEagerRelationships(personId, eventId).stream()
+            .map(eventResultMapper::toDto).collect(Collectors.toList());
     }
 
     @Override

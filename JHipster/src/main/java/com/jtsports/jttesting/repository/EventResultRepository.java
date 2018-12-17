@@ -33,4 +33,9 @@ public interface EventResultRepository extends JpaRepository<EventResult, Long> 
     @Query(value = "select distinct eventResult from EventResult eventResult " +
         "left join fetch eventResult.testResults where eventResult.person.id = :personId and eventResult.event.id = :eventId")
     List<EventResult> findAllByPersonAndEventIdWithEagerRelationships(@Param("personId") Long personId, @Param("eventId") Long eventId);
+
+    @Query(value = "select distinct eventResult from EventResult eventResult " +
+        "left join fetch eventResult.testResults " +
+        "where eventResult.event.id = :eventId and eventResult.person.id = :personId")
+    List<EventResult> findAllByEventIdAndPersonIdWithEagerRelationships(@Param("personId") Long personId, @Param("eventId") Long eventId);
 }

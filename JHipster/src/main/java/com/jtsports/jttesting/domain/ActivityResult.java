@@ -8,6 +8,7 @@ import javax.validation.constraints.*;
 import com.jtsports.jttesting.domain.util.RandomNumbers;
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -33,6 +34,10 @@ public class ActivityResult implements Serializable {
 
     @Column(name = "note")
     private String note;
+
+    @NotNull
+    @Column(name = "event_date", nullable = false)
+    private ZonedDateTime eventDate;
 
     @ManyToOne
     @JsonIgnoreProperties("activitiesResults")
@@ -91,6 +96,19 @@ public class ActivityResult implements Serializable {
         this.note = note;
     }
 
+    public ZonedDateTime getEventDate() {
+        return eventDate;
+    }
+
+    public ActivityResult eventDate(ZonedDateTime eventDate) {
+        this.eventDate = eventDate;
+        return this;
+    }
+
+    public void setEventDate(ZonedDateTime eventDate) {
+        this.eventDate = eventDate;
+    }
+
     public TestResult getTestResult() {
         return testResult;
     }
@@ -145,15 +163,17 @@ public class ActivityResult implements Serializable {
             ", primaryResultValue=" + getPrimaryResultValue() +
             ", secondaryResultValue=" + getSecondaryResultValue() +
             ", note='" + getNote() + "'" +
+            ", eventDate='" + getEventDate() + "'" +
             "}";
     }
 
-    public static ActivityResult craeteActivityResult(Activity activity, TestResult testResult) {
+    public static ActivityResult craeteActivityResult(Activity activity, TestResult testResult, Event event) {
         String personName =  testResult.getEventResult().getPerson().getPersonalData().getFirstName() + " " + testResult.getEventResult().getPerson().getPersonalData().getLastName();
         ActivityResult activityResult = new ActivityResult();
         activityResult.setTestResult(testResult);
         activityResult.setActivity(activity);
         activityResult.setNote("Poznámka k aktivitě " + activity.getName() + ". Osooba: " + personName);
+        activityResult.setEventDate(event.getDate());
 
         activityResult.setPrimaryResultValue(new Float(RandomNumbers.getRandomNumberInRange(20,100)));
 
@@ -162,4 +182,10 @@ public class ActivityResult implements Serializable {
         }
         return activityResult;
     }
+
+    public static ActivityResult activityResultWithDate(ActivityResult activityResult, ZonedDateTime resultDate) {
+        activityResult.setEventDate(resultDate);
+        return activityResult;
+    }
+
 }

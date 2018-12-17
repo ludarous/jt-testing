@@ -28,10 +28,15 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.util.Collections;
 import java.util.List;
 
 
+import static com.jtsports.jttesting.web.rest.TestUtil.sameInstant;
 import static com.jtsports.jttesting.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
@@ -57,6 +62,9 @@ public class ActivityResultResourceIntTest {
 
     private static final String DEFAULT_NOTE = "AAAAAAAAAA";
     private static final String UPDATED_NOTE = "BBBBBBBBBB";
+
+    private static final ZonedDateTime DEFAULT_EVENT_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_EVENT_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     @Autowired
     private ActivityResultRepository activityResultRepository;
@@ -114,7 +122,8 @@ public class ActivityResultResourceIntTest {
         ActivityResult activityResult = new ActivityResult()
             .primaryResultValue(DEFAULT_PRIMARY_RESULT_VALUE)
             .secondaryResultValue(DEFAULT_SECONDARY_RESULT_VALUE)
-            .note(DEFAULT_NOTE);
+            .note(DEFAULT_NOTE)
+            .eventDate(DEFAULT_EVENT_DATE);
         // Add required entity
         Activity activity = ActivityResourceIntTest.createEntity(em);
         em.persist(activity);
@@ -147,6 +156,7 @@ public class ActivityResultResourceIntTest {
         assertThat(testActivityResult.getPrimaryResultValue()).isEqualTo(DEFAULT_PRIMARY_RESULT_VALUE);
         assertThat(testActivityResult.getSecondaryResultValue()).isEqualTo(DEFAULT_SECONDARY_RESULT_VALUE);
         assertThat(testActivityResult.getNote()).isEqualTo(DEFAULT_NOTE);
+        assertThat(testActivityResult.getEventDate()).isEqualTo(DEFAULT_EVENT_DATE);
 
         // Validate the ActivityResult in Elasticsearch
         verify(mockActivityResultSearchRepository, times(1)).save(testActivityResult);
@@ -177,10 +187,10 @@ public class ActivityResultResourceIntTest {
 
     @Test
     @Transactional
-    public void checkPrimaryResultValueIsRequired() throws Exception {
+    public void checkEventDateIsRequired() throws Exception {
         int databaseSizeBeforeTest = activityResultRepository.findAll().size();
         // set the field null
-        activityResult.setPrimaryResultValue(null);
+        activityResult.setEventDate(null);
 
         // Create the ActivityResult, which fails.
         ActivityResultDTO activityResultDTO = activityResultMapper.toDto(activityResult);
@@ -207,7 +217,8 @@ public class ActivityResultResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(activityResult.getId().intValue())))
             .andExpect(jsonPath("$.[*].primaryResultValue").value(hasItem(DEFAULT_PRIMARY_RESULT_VALUE.doubleValue())))
             .andExpect(jsonPath("$.[*].secondaryResultValue").value(hasItem(DEFAULT_SECONDARY_RESULT_VALUE.doubleValue())))
-            .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())));
+            .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())))
+            .andExpect(jsonPath("$.[*].eventDate").value(hasItem(sameInstant(DEFAULT_EVENT_DATE))));
     }
     
 
@@ -224,7 +235,8 @@ public class ActivityResultResourceIntTest {
             .andExpect(jsonPath("$.id").value(activityResult.getId().intValue()))
             .andExpect(jsonPath("$.primaryResultValue").value(DEFAULT_PRIMARY_RESULT_VALUE.doubleValue()))
             .andExpect(jsonPath("$.secondaryResultValue").value(DEFAULT_SECONDARY_RESULT_VALUE.doubleValue()))
-            .andExpect(jsonPath("$.note").value(DEFAULT_NOTE.toString()));
+            .andExpect(jsonPath("$.note").value(DEFAULT_NOTE.toString()))
+            .andExpect(jsonPath("$.eventDate").value(sameInstant(DEFAULT_EVENT_DATE)));
     }
     @Test
     @Transactional
@@ -249,7 +261,8 @@ public class ActivityResultResourceIntTest {
         updatedActivityResult
             .primaryResultValue(UPDATED_PRIMARY_RESULT_VALUE)
             .secondaryResultValue(UPDATED_SECONDARY_RESULT_VALUE)
-            .note(UPDATED_NOTE);
+            .note(UPDATED_NOTE)
+            .eventDate(UPDATED_EVENT_DATE);
         ActivityResultDTO activityResultDTO = activityResultMapper.toDto(updatedActivityResult);
 
         restActivityResultMockMvc.perform(put("/api/activity-results")
@@ -264,6 +277,7 @@ public class ActivityResultResourceIntTest {
         assertThat(testActivityResult.getPrimaryResultValue()).isEqualTo(UPDATED_PRIMARY_RESULT_VALUE);
         assertThat(testActivityResult.getSecondaryResultValue()).isEqualTo(UPDATED_SECONDARY_RESULT_VALUE);
         assertThat(testActivityResult.getNote()).isEqualTo(UPDATED_NOTE);
+        assertThat(testActivityResult.getEventDate()).isEqualTo(UPDATED_EVENT_DATE);
 
         // Validate the ActivityResult in Elasticsearch
         verify(mockActivityResultSearchRepository, times(1)).save(testActivityResult);
@@ -326,7 +340,8 @@ public class ActivityResultResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(activityResult.getId().intValue())))
             .andExpect(jsonPath("$.[*].primaryResultValue").value(hasItem(DEFAULT_PRIMARY_RESULT_VALUE.doubleValue())))
             .andExpect(jsonPath("$.[*].secondaryResultValue").value(hasItem(DEFAULT_SECONDARY_RESULT_VALUE.doubleValue())))
-            .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())));
+            .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())))
+            .andExpect(jsonPath("$.[*].eventDate").value(hasItem(sameInstant(DEFAULT_EVENT_DATE))));
     }
 
     @Test

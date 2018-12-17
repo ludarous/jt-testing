@@ -10,6 +10,7 @@ import com.jtsports.jttesting.service.dto.TestResultDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -67,6 +68,13 @@ public interface EventResultService {
      * @return the list of entities
      */
     Page<EventResultDTO> findAllByEventId(Pageable pageable, Long eventId);
+
+    /**
+     * Get all the eventResults by eventId and personId.
+     *
+     * @return the list of entities
+     */
+    List<EventResultDTO> findAllByPersonIdAndEventId(Long personId, Long eventId);
 
     Page<EventResultDTO> findAllByPersonId(Pageable pageable, Long id);
 

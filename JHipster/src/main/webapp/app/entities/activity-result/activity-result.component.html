@@ -33,6 +33,7 @@
             <th jhiSortBy="primaryResultValue"><span jhiTranslate="jtTestingApp.activityResult.primaryResultValue">Primary Result Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="secondaryResultValue"><span jhiTranslate="jtTestingApp.activityResult.secondaryResultValue">Secondary Result Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="note"><span jhiTranslate="jtTestingApp.activityResult.note">Note</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="eventDate"><span jhiTranslate="jtTestingApp.activityResult.eventDate">Event Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="testResultId"><span jhiTranslate="jtTestingApp.activityResult.testResult">Test Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="activityName"><span jhiTranslate="jtTestingApp.activityResult.activity">Activity</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
@@ -44,6 +45,7 @@
                 <td>{{activityResult.primaryResultValue}}</td>
                 <td>{{activityResult.secondaryResultValue}}</td>
                 <td>{{activityResult.note}}</td>
+                <td>{{activityResult.eventDate | date:'medium'}}</td>
                 <td>
                     <div *ngIf="activityResult.testResultId">
                         <a [routerLink]="['../test-result', activityResult.testResultId , 'view' ]" >{{activityResult.testResultId}}</a>

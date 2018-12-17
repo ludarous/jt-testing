@@ -71,11 +71,12 @@
       </div>
     </div>
   </div>
-  <div *ngFor="let activityResult of testResult.activitiesResults">
-    <app-user-activity-result [activity]="getActivityForActivityResult(activityResult)"
-                              [activityResult]="activityResult"
-                              [test]="test"
-                              [event]="event">
-    </app-user-activity-result>
-  </div>
+  <ng-container *ngIf="testStats">
+    <div *ngFor="let activityStats of testStats.personalActivitiesStats">
+      <app-user-activity-result [activityStats]="activityStats"
+                                [test]="test"
+                                [event]="event">
+      </app-user-activity-result>
+    </div>
+  </ng-container>
 </div>

@@ -180,6 +180,28 @@ public class EventResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    /**
+     * GET  /events/my/:id/results : get the "id" event results.
+     *
+     * @param id the id of the event EventResultDTOs to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the eventDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/events/my/{id}/results")
+    @Timed
+    public ResponseEntity<List<EventResultDTO>> getEventMyEventResults(@PathVariable Long id) {
+        log.debug("REST request to get Event EventResults : {}", id);
+        Optional<User> user = userService.getUserWithAuthorities();
+        if(user.isPresent()) {
+            Optional<PersonFullDTO> personFullDTO = this.personService.findOneByUserId(user.get().getId());
+            if (personFullDTO.isPresent()) {
+                List<EventResultDTO> eventResultDTOs = eventResultService.findAllByPersonIdAndEventId(personFullDTO.get().getId(), id);
+                return new ResponseEntity<>(eventResultDTOs, null, HttpStatus.OK);
+            }
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     /*------------------------- MY EVENTS --------------------------------- */
 
 

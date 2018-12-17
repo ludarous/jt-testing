@@ -8,6 +8,7 @@ import com.jtsports.jttesting.service.dto.ActivityDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -65,6 +66,7 @@ public interface ActivityService {
 
     ActivityStatsDTO findStats(Long activityId, StatsRequestDTO statsRequest);
 
-    PersonalActivityStatsDTO findPersonalStats(Long personId, Long activityId, StatsRequestDTO statsRequest);
+    PersonalActivityStatsDTO findPersonalActivityStats(Long personId, Long activityId, StatsRequestDTO statsRequest);
 
+    List<PersonalActivityStatsDTO> findPersonalActivitiesStats(Long personId, StatsRequestDTO statsRequest);
 }

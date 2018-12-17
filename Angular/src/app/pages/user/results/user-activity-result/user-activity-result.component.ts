@@ -11,6 +11,8 @@ import {ActivityResultUnits} from '../../../../entities/enums/activity-result-un
 import {StatsRequest} from '../../../../entities/stats-request';
 import {EventManager} from '../../../../services/event.manager';
 import {MatExpansionModule, MatExpansionPanel} from '@angular/material';
+import {StatsUtils} from '../../../../utils/stats-utils';
+import {ChartUtils} from '../../../../utils/chart-utils';
 
 @Component({
   selector: 'app-user-activity-result',
@@ -25,21 +27,19 @@ export class UserActivityResultComponent implements OnInit {
   }
 
   @Input()
-  activity: IActivity;
-
-  @Input()
-  activityResult: IActivityResult;
-
-  @Input()
   test: ITest;
 
   @Input()
   event: IEvent;
 
+  @Input()
+  activityStats: PersonalActivityStats;
+
   @ViewChild('expansionPanel')
   expansionPanel: MatExpansionPanel;
 
-  activityStats: PersonalActivityStats;
+  activity: IActivity;
+  activityResult: IActivityResult;
 
   headerResultCardData: object[];
 
@@ -55,6 +55,13 @@ export class UserActivityResultComponent implements OnInit {
   xLabel: string;
 
   ngOnInit() {
+
+    if (this.activityStats.personalActivityResults && this.activityStats.personalActivityResults.length > 0) {
+      this.activityResult = this.activityStats.personalActivityResults[0];
+      this.activity = this.activityStats.activity;
+      this.createChartData(this.activityStats, this.activityResult);
+    }
+
     this.headerResultCardData = [
       {
         name: 'Výsledek',
@@ -84,7 +91,8 @@ export class UserActivityResultComponent implements OnInit {
 
   createChartData(activityStats: PersonalActivityStats, activityResult: IActivityResult) {
 
-    const primaryPlacement = activityStats.personalActivityResultsStats.primaryPlacement;
+    const primaryPlacements = activityStats.personalActivityResultsStats.map(par => par.primaryPlacement);
+    const primaryPlacementAverage = StatsUtils.average(primaryPlacements);
     const primaryCount = activityStats.activityResultsStats.primaryResultsCount;
 
     this.myPrimaryResultCardData = [
@@ -97,17 +105,18 @@ export class UserActivityResultComponent implements OnInit {
       },
       {
         name: 'Pořadí v testu',
-        value: Math.floor(primaryPlacement * 100 / primaryCount),
+        value: Math.floor(primaryPlacementAverage * 100 / primaryCount),
         extra: {
           unit: '%',
-          subtitle: primaryPlacement + ' z ' + primaryCount
+          subtitle: primaryPlacementAverage + ' z ' + primaryCount
         }
       }
     ];
 
     if (this.activityResult.secondaryResultValue) {
 
-      const secondaryPlacement = activityStats.personalActivityResultsStats.secondaryPlacement;
+      const secondaryPlacements = activityStats.personalActivityResultsStats.map(par => par.secondaryPlacement);
+      const secondaryPlacementAverage = StatsUtils.average(secondaryPlacements);
       const secondaryCount = activityStats.activityResultsStats.secondaryResultsCount;
 
         this.mySecondaryResultCardData = [
@@ -120,10 +129,10 @@ export class UserActivityResultComponent implements OnInit {
         },
         {
           name: 'Pořadí v testu',
-          value: Math.floor(secondaryPlacement * 100 / secondaryCount),
+          value: Math.floor(secondaryPlacementAverage * 100 / secondaryCount),
           extra: {
             unit: '%',
-            subtitle: secondaryPlacement + ' z ' + secondaryCount
+            subtitle: secondaryPlacementAverage + ' z ' + secondaryCount
           }
         }
         ];
@@ -244,11 +253,6 @@ export class UserActivityResultComponent implements OnInit {
     const request = new StatsRequest();
     request.testId = this.test ? this.test.id : null;
     request.eventId = this.event ? this.event.id : null;
-
-    this.activityService.findMyStats(this.activityResult.activityId, request).subscribe((activityStatsResponse: HttpResponse<PersonalActivityStats>) => {
-      this.activityStats = activityStatsResponse.body;
-      this.createChartData(this.activityStats, this.activityResult);
-    });
   }
 
   onLegendLabelClick(event: any) {
@@ -260,7 +264,7 @@ export class UserActivityResultComponent implements OnInit {
   }
 
   getColorScheme(name): any {
-    return colorSets.find(s => s.name === name);
+    return ChartUtils.getColorScheme(name);
   }
 
   valueFormat(c): string {

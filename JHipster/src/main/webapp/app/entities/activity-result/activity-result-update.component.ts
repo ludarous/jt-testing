@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { IActivityResult } from 'app/shared/model/activity-result.model';
@@ -22,6 +24,7 @@ export class ActivityResultUpdateComponent implements OnInit {
     testresults: ITestResult[];
 
     activities: IActivity[];
+    eventDate: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -56,6 +59,7 @@ export class ActivityResultUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.activityResult.eventDate = moment(this.eventDate, DATE_TIME_FORMAT);
         if (this.activityResult.id !== undefined) {
             this.subscribeToSaveResponse(this.activityResultService.update(this.activityResult));
         } else {
@@ -93,5 +97,6 @@ export class ActivityResultUpdateComponent implements OnInit {
 
     set activityResult(activityResult: IActivityResult) {
         this._activityResult = activityResult;
+        this.eventDate = moment(activityResult.eventDate).format(DATE_TIME_FORMAT);
     }
 }

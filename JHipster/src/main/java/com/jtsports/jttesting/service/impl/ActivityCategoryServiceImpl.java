@@ -162,17 +162,7 @@ public class ActivityCategoryServiceImpl implements ActivityCategoryService {
             List<PersonalActivityStatsDTO> personalActivityStatsDTOList = new ArrayList<>();
             for (Activity activity : activities) {
 
-                StatsRequestDTO statsRequestDTO = new StatsRequestDTO();
-                statsRequestDTO.setEventId(statsRequest.getEventId());
-                statsRequestDTO.setTestId(statsRequest.getTestId());
-                statsRequestDTO.setDateFrom(statsRequest.getDateFrom());
-                statsRequestDTO.setDateTo(statsRequest.getDateTo());
-                statsRequestDTO.setUsersBirthdayFrom(statsRequest.getUsersBirthdayFrom());
-                statsRequestDTO.setUsersBirthDayTo(statsRequest.getUsersBirthDayTo());
-                statsRequestDTO.setVirtual(statsRequest.getVirtual());
-
-
-                PersonalActivityStatsDTO personalActivityStatsDTO = activityService.findPersonalStats(personId, activity.getId(), statsRequestDTO);
+                PersonalActivityStatsDTO personalActivityStatsDTO = activityService.findPersonalActivityStats(personId, activity.getId(), statsRequest);
                 personalActivityStatsDTOList.add(personalActivityStatsDTO);
             }
 
@@ -184,14 +174,14 @@ public class ActivityCategoryServiceImpl implements ActivityCategoryService {
             int secondaryDelimiter = 0;
 
             for (PersonalActivityStatsDTO personalActivityStats : personalActivityStatsDTOList) {
-                if (personalActivityStats.getPrimaryPlacementInPercents() != null) {
+                if (personalActivityStats.returnAveragePrimaryPlacementInPercents() != null) {
                     primaryDelimiter++;
-                    primaryPlacementInPercents += personalActivityStats.getPrimaryPlacementInPercents();
+                    primaryPlacementInPercents += personalActivityStats.returnAveragePrimaryPlacementInPercents();
                 }
 
-                if (personalActivityStats.getSecondaryPlacementInPercents() != null) {
+                if (personalActivityStats.returnAverageSecondaryPlacementInPercents() != null) {
                     secondaryDelimiter++;
-                    secondaryPlacementInPercents += personalActivityStats.getSecondaryPlacementInPercents();
+                    secondaryPlacementInPercents += personalActivityStats.returnAverageSecondaryPlacementInPercents();
                 }
             }
 

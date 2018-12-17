@@ -146,7 +146,7 @@ public class JTTestServiceImpl implements JTTestService {
         if (testOptional.isPresent()) {
             Set<Activity> testActivities = testOptional.get().getActivities();
             for (Activity activity : testActivities) {
-                personalActivitiesStats.add(this.activityService.findPersonalStats(personId, activity.getId(), statsRequest));
+                personalActivitiesStats.add(this.activityService.findPersonalActivityStats(personId, activity.getId(), statsRequest));
             }
             personalTestsStats.setPersonalActivitiesStats(personalActivitiesStats);
         }

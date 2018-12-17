@@ -1,19 +1,6 @@
 {
-    "name": "ActivityResult",
-    "fields": [
-        {
-            "fieldName": "primaryResultValue",
-            "fieldType": "Float"
-        },
-        {
-            "fieldName": "secondaryResultValue",
-            "fieldType": "Float"
-        },
-        {
-            "fieldName": "note",
-            "fieldType": "String"
-        }
-    ],
+    "fluentMethods": true,
+    "clientRootFolder": "",
     "relationships": [
         {
             "relationshipName": "testResult",
@@ -29,14 +16,32 @@
             "otherEntityField": "name"
         }
     ],
+    "fields": [
+        {
+            "fieldName": "primaryResultValue",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "secondaryResultValue",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "note",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "eventDate",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
     "changelogDate": "20180919081356",
-    "entityTableName": "activity_result",
     "dto": "mapstruct",
-    "pagination": "pagination",
+    "searchEngine": "elasticsearch",
     "service": "serviceImpl",
+    "entityTableName": "activity_result",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*",
-    "searchEngine": "elasticsearch"
+    "pagination": "pagination"
 }

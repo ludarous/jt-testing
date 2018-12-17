@@ -10,6 +10,8 @@ export interface IActivityResult {
   testResultId?: number;
   activityId?: number;
   activityName?: number;
+
+  eventDate?: string;
 }
 
 export class ActivityResult implements IActivityResult {
@@ -21,6 +23,8 @@ export class ActivityResult implements IActivityResult {
   testResultId: number;
   activityId: number;
   activityName: number;
+
+  eventDate: string;
 
   constructor(activity: IActivity) {
     this.activityId = activity.id;

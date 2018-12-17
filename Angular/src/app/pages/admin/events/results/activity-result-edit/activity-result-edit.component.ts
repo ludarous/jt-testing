@@ -3,6 +3,7 @@ import {IActivity} from '../../../../../entities/activity';
 import {ActivityResult, IActivityResult} from '../../../../../entities/activity-result';
 import {ITestResult} from '../../../../../entities/test-result';
 import {FormControl, FormGroup} from '@angular/forms';
+import {IEvent} from '../../../../../entities/event';
 
 @Component({
   selector: 'app-activity-result-edit',
@@ -46,6 +47,16 @@ export class ActivityResultEditComponent implements OnInit {
     this._testResult = value;
   }
 
+  private _testEvent: IEvent;
+  @Input()
+  get testEvent(): IEvent {
+    return this._testEvent;
+  }
+
+  set testEvent(value: IEvent) {
+    this._testEvent = value;
+  }
+
   activityResultForm: FormGroup;
 
   ngOnInit() {
@@ -63,6 +74,7 @@ export class ActivityResultEditComponent implements OnInit {
       secondaryResultValue: new FormControl(activityResult.secondaryResultValue),
       testResultId: new FormControl(activityResult.testResultId),
       activityId: new FormControl(activityResult.activityId),
+      eventDate: new FormControl(this.testEvent.date)
     });
   }
 

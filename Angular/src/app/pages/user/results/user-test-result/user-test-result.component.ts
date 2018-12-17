@@ -12,6 +12,7 @@ import {colorSets} from '@swimlane/ngx-charts/release/utils';
 import {StatsRequest} from '../../../../entities/stats-request';
 import {TestService} from '../../../../services/test.service';
 import {EventManager} from '../../../../services/event.manager';
+import {StatsUtils} from '../../../../utils/stats-utils';
 
 @Component({
   selector: 'app-user-test-result',
@@ -52,7 +53,7 @@ export class UserTestResultComponent implements OnInit {
 
     this.testService.findMyStats(request).subscribe((testStatsResponse: HttpResponse<PersonalTestStats>) => {
       console.log(testStatsResponse.body);
-      this.testStats = testStatsResponse.body;
+      this.testStats = PersonalTestStats.resolveResponse(testStatsResponse);
       this.categoryStats = this.testStats.personalCategoryStats;
       this.createChartData();
     });
@@ -96,13 +97,16 @@ export class UserTestResultComponent implements OnInit {
     this.activitiesChartData = [];
 
     for (const activityStats of this.testStats.personalActivitiesStats) {
-      const primaryPlacement = activityStats.personalActivityResultsStats.primaryPlacement;
-      const totalPrimaryCounts = activityStats.personalActivityResultsStats.totalPrimaryResults;
+      const primaryPlacements = activityStats.personalActivityResultsStats.map(par => par.primaryPlacement);
+      const primaryPlacementsAverage = StatsUtils.average(primaryPlacements);
+
+      const totalPrimaryCounts = activityStats.personalActivityResultsStats.map(par => par.totalPrimaryResults);
+      const totalPrimaryCountsAverage = StatsUtils.average(totalPrimaryCounts);
 
       this.activitiesChartData.push(
         {
           name: activityStats.activity.name,
-          value: primaryPlacement * 100 / totalPrimaryCounts,
+          value: primaryPlacementsAverage * 100 / totalPrimaryCountsAverage,
           extra: {
             activity: activityStats.activity
           }

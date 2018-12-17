@@ -188,7 +188,7 @@ public class EventResult implements Serializable {
 
         HashSet<TestResult> testResults = new HashSet<>();
         for(JTTest test : event.getTests()) {
-            testResults.add(TestResult.createTestResult(test, eventResult));
+            testResults.add(TestResult.createTestResult(test, eventResult, event));
         }
         eventResult.setTestResults(testResults);
         return  eventResult;

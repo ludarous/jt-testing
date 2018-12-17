@@ -55,5 +55,12 @@ export class Test implements ITest {
 export class PersonalTestStats {
   personalCategoryStats: PersonalCategoryStats;
   personalActivitiesStats: Array<PersonalActivityStats>;
+
+  static resolveResponse(response: HttpResponse<PersonalTestStats>): PersonalTestStats {
+    for (const activityStats of response.body.personalActivitiesStats) {
+      activityStats.activity = Activity.parseItemEnums(activityStats.activity);
+    }
+    return response.body;
+  }
 }
 

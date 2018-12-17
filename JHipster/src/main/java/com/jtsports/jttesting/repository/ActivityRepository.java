@@ -4,12 +4,14 @@ import com.jtsports.jttesting.domain.Activity;
 import com.jtsports.jttesting.domain.ActivityResult;
 import com.jtsports.jttesting.domain.Event;
 
+import com.jtsports.jttesting.service.dto.StatsRequestDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,12 +33,57 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
     Optional<Activity> findOneWithEagerRelationships(@Param("id") Long id);
 
     @Query("select activityResult from ActivityResult activityResult " +
-        "inner join fetch activityResult.activity activity " +
-        "inner join activityResult.testResult testResult " +
-        "inner join testResult.eventResult eventResult " +
-        "inner join eventResult.person person " +
-        "where activity.id = :id")
+        "join activityResult.activity activity " +
+        "join activityResult.testResult testResult " +
+        "join testResult.eventResult eventResult " +
+        "join eventResult.event event " +
+        "join eventResult.person person " +
+        "where activityResult.activity.id = :id")
     List<ActivityResult> findActivityResults(@Param("id") Long id);
+
+    @Query("select activityResult from ActivityResult activityResult " +
+        "join activityResult.activity activity " +
+        "join activityResult.testResult testResult " +
+        "join testResult.test test " +
+        "join testResult.eventResult eventResult " +
+        "join eventResult.person person " +
+        "where activityResult.activity.id = :id " +
+        "and ((:testId is null) or (:testId = test.id)) " +
+        "and ((:eventId is null) or (:eventId = eventResult.event.id)) " +
+        "and ((cast(:dateFrom as timestamp) is null) or (:dateFrom <= activityResult.eventDate)) " +
+        "and ((cast(:dateTo as timestamp) is null) or (:dateTo >= activityResult.eventDate)) " +
+        "and ((cast(:usersBirthdayFrom as timestamp) is null) or (:usersBirthdayFrom <= person.personalData.birthDate)) " +
+        "and ((cast(:usersBirthdayTo as timestamp) is null) or (:usersBirthdayTo >= person.personalData.birthDate))")
+    List<ActivityResult> findActivityResultsWithRequest(
+        @Param("id") Long id,
+        @Param("testId") Long testId,
+        @Param("eventId") Long eventId,
+        @Param("dateFrom") ZonedDateTime dateFrom,
+        @Param("dateTo") ZonedDateTime dateTo,
+        @Param("usersBirthdayFrom") ZonedDateTime usersBirthdayFrom,
+        @Param("usersBirthdayTo") ZonedDateTime usersBirthdayTo
+        );
+
+    @Query("select activityResult from ActivityResult activityResult " +
+        "join activityResult.activity activity " +
+        "join activityResult.testResult testResult " +
+        "join testResult.test test " +
+        "join testResult.eventResult eventResult " +
+        "join eventResult.person person " +
+        "where ((:testId is null) or (:testId = test.id)) " +
+        "and ((:eventId is null) or (:eventId = eventResult.event.id)) " +
+        "and ((cast(:dateFrom as timestamp) is null) or (:dateFrom <= activityResult.eventDate)) " +
+        "and ((cast(:dateTo as timestamp) is null) or (:dateTo >= activityResult.eventDate)) " +
+        "and ((cast(:usersBirthdayFrom as timestamp) is null) or (:usersBirthdayFrom <= person.personalData.birthDate)) " +
+        "and ((cast(:usersBirthdayTo as timestamp) is null) or (:usersBirthdayTo >= person.personalData.birthDate))")
+    List<ActivityResult> findAllActivitiesResultsWithRequest(
+        @Param("testId") Long testId,
+        @Param("eventId") Long eventId,
+        @Param("dateFrom") ZonedDateTime dateFrom,
+        @Param("dateTo") ZonedDateTime dateTo,
+        @Param("usersBirthdayFrom") ZonedDateTime usersBirthdayFrom,
+        @Param("usersBirthdayTo") ZonedDateTime usersBirthdayTo
+    );
 
     @Query("select activity from Activity activity " +
         "inner join activity.categories category " +

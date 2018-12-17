@@ -190,7 +190,7 @@ public class ActivityResource {
             Optional<PersonFullDTO> personFullDTO = this.personService.findOneByUserId(user.get().getId());
             if (personFullDTO.isPresent()) {
 
-                PersonalActivityStatsDTO activityStatsDTO = activityService.findPersonalStats(personFullDTO.get().getId(), activityId, statsRequestDTO);
+                PersonalActivityStatsDTO activityStatsDTO = activityService.findPersonalActivityStats(personFullDTO.get().getId(), activityId, statsRequestDTO);
                 return ResponseEntity.ok(activityStatsDTO);
             }
             return ResponseEntity.notFound().build();
@@ -205,14 +205,14 @@ public class ActivityResource {
      */
     @PostMapping("/activities/my-stats")
     @Timed
-    public ResponseEntity<List<PersonalActivityStatsDTO>> getPersonalActivityStats(@RequestBody StatsRequestDTO activityStatsRequestDTO) {
+    public ResponseEntity<List<PersonalActivityStatsDTO>> getPersonalActivitiesStats(@RequestBody StatsRequestDTO statsRequestDTO) {
         log.debug("REST request to get Personal Activities stats");
         Optional<User> user = userService.getUserWithAuthorities();
         if(user.isPresent()) {
             Optional<PersonFullDTO> personFullDTO = this.personService.findOneByUserId(user.get().getId());
             if (personFullDTO.isPresent()) {
 
-                List<PersonalActivityStatsDTO> personalActivitiesStats = new ArrayList<>();
+                List<PersonalActivityStatsDTO> personalActivitiesStats = activityService.findPersonalActivitiesStats(personFullDTO.get().getId(), statsRequestDTO);
                 return ResponseEntity.ok(personalActivitiesStats);
             }
             return ResponseEntity.notFound().build();

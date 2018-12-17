@@ -1,7 +1,6 @@
 package com.jtsports.jttesting.service.dto;
 
-import com.jtsports.jttesting.service.dto.Activity.ActivityStatsDTO;
-
+import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -18,6 +17,9 @@ public class ActivityResultDTO implements Serializable {
     private Float secondaryResultValue;
 
     private String note;
+
+    @NotNull
+    private ZonedDateTime eventDate;
 
     private Long testResultId;
 
@@ -55,6 +57,14 @@ public class ActivityResultDTO implements Serializable {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public ZonedDateTime getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(ZonedDateTime eventDate) {
+        this.eventDate = eventDate;
     }
 
     public Long getTestResultId() {
@@ -109,6 +119,7 @@ public class ActivityResultDTO implements Serializable {
             ", primaryResultValue=" + getPrimaryResultValue() +
             ", secondaryResultValue=" + getSecondaryResultValue() +
             ", note='" + getNote() + "'" +
+            ", eventDate='" + getEventDate() + "'" +
             ", testResult=" + getTestResultId() +
             ", activity=" + getActivityId() +
             ", activity='" + getActivityName() + "'" +
