@@ -21,8 +21,12 @@ export class ActivityResultUpdatePage {
     secondaryResultValueInput = element(by.id('field_secondaryResultValue'));
     noteInput = element(by.id('field_note'));
     eventDateInput = element(by.id('field_eventDate'));
+    personBirthDateInput = element(by.id('field_personBirthDate'));
     testResultSelect = element(by.id('field_testResult'));
     activitySelect = element(by.id('field_activity'));
+    testSelect = element(by.id('field_test'));
+    eventSelect = element(by.id('field_event'));
+    personSelect = element(by.id('field_person'));
 
     getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -58,6 +62,14 @@ export class ActivityResultUpdatePage {
 
     getEventDateInput() {
         return this.eventDateInput.getAttribute('value');
+    }
+
+    setPersonBirthDateInput(personBirthDate): promise.Promise<void> {
+        return this.personBirthDateInput.sendKeys(personBirthDate);
+    }
+
+    getPersonBirthDateInput() {
+        return this.personBirthDateInput.getAttribute('value');
     }
 
     testResultSelectLastOption(): promise.Promise<void> {
@@ -96,6 +108,63 @@ export class ActivityResultUpdatePage {
 
     getActivitySelectedOption() {
         return this.activitySelect.element(by.css('option:checked')).getText();
+    }
+
+    testSelectLastOption(): promise.Promise<void> {
+        return this.testSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    testSelectOption(option): promise.Promise<void> {
+        return this.testSelect.sendKeys(option);
+    }
+
+    getTestSelect(): ElementFinder {
+        return this.testSelect;
+    }
+
+    getTestSelectedOption() {
+        return this.testSelect.element(by.css('option:checked')).getText();
+    }
+
+    eventSelectLastOption(): promise.Promise<void> {
+        return this.eventSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    eventSelectOption(option): promise.Promise<void> {
+        return this.eventSelect.sendKeys(option);
+    }
+
+    getEventSelect(): ElementFinder {
+        return this.eventSelect;
+    }
+
+    getEventSelectedOption() {
+        return this.eventSelect.element(by.css('option:checked')).getText();
+    }
+
+    personSelectLastOption(): promise.Promise<void> {
+        return this.personSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    personSelectOption(option): promise.Promise<void> {
+        return this.personSelect.sendKeys(option);
+    }
+
+    getPersonSelect(): ElementFinder {
+        return this.personSelect;
+    }
+
+    getPersonSelectedOption() {
+        return this.personSelect.element(by.css('option:checked')).getText();
     }
 
     save(): promise.Promise<void> {

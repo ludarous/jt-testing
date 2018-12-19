@@ -15,7 +15,7 @@ import java.util.Objects;
  * A ActivityResult.
  */
 @Entity
-@Table(name = "activity_result")
+@Table(name = "activity_result", indexes = {@Index(name = "filter_index", columnList = "event_date,person_birth_date,activity_id,test_id,event_id,person_id")})
 @Document(indexName = "activityresult")
 public class ActivityResult implements Serializable {
 
@@ -39,6 +39,9 @@ public class ActivityResult implements Serializable {
     @Column(name = "event_date", nullable = false)
     private ZonedDateTime eventDate;
 
+    @Column(name = "person_birth_date")
+    private ZonedDateTime personBirthDate;
+
     @ManyToOne
     @JsonIgnoreProperties("activitiesResults")
     private TestResult testResult;
@@ -47,6 +50,18 @@ public class ActivityResult implements Serializable {
     @NotNull
     @JsonIgnoreProperties("")
     private Activity activity;
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private JTTest test;
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private Event event;
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private Person person;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -109,6 +124,19 @@ public class ActivityResult implements Serializable {
         this.eventDate = eventDate;
     }
 
+    public ZonedDateTime getPersonBirthDate() {
+        return personBirthDate;
+    }
+
+    public ActivityResult personBirthDate(ZonedDateTime personBirthDate) {
+        this.personBirthDate = personBirthDate;
+        return this;
+    }
+
+    public void setPersonBirthDate(ZonedDateTime personBirthDate) {
+        this.personBirthDate = personBirthDate;
+    }
+
     public TestResult getTestResult() {
         return testResult;
     }
@@ -133,6 +161,45 @@ public class ActivityResult implements Serializable {
 
     public void setActivity(Activity activity) {
         this.activity = activity;
+    }
+
+    public JTTest getTest() {
+        return test;
+    }
+
+    public ActivityResult test(JTTest jtTest) {
+        this.test = jtTest;
+        return this;
+    }
+
+    public void setTest(JTTest jtTest) {
+        this.test = jtTest;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public ActivityResult event(Event event) {
+        this.event = event;
+        return this;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public ActivityResult person(Person person) {
+        this.person = person;
+        return this;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -164,16 +231,22 @@ public class ActivityResult implements Serializable {
             ", secondaryResultValue=" + getSecondaryResultValue() +
             ", note='" + getNote() + "'" +
             ", eventDate='" + getEventDate() + "'" +
+            ", personBirthDate='" + getPersonBirthDate() + "'" +
             "}";
     }
 
-    public static ActivityResult craeteActivityResult(Activity activity, TestResult testResult, Event event) {
+    public static ActivityResult craeteActivityResult(Activity activity, TestResult testResult, JTTest test, Event event, Person person) {
         String personName =  testResult.getEventResult().getPerson().getPersonalData().getFirstName() + " " + testResult.getEventResult().getPerson().getPersonalData().getLastName();
         ActivityResult activityResult = new ActivityResult();
         activityResult.setTestResult(testResult);
         activityResult.setActivity(activity);
         activityResult.setNote("Poznámka k aktivitě " + activity.getName() + ". Osooba: " + personName);
         activityResult.setEventDate(event.getDate());
+        activityResult.setEvent(event);
+        activityResult.setTest(test);
+        activityResult.setPerson(person);
+        activityResult.setPersonBirthDate(person.getPersonalData().getBirthDate());
+
 
         activityResult.setPrimaryResultValue(new Float(RandomNumbers.getRandomNumberInRange(20,100)));
 

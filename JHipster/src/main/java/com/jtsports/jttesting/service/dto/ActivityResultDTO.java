@@ -21,11 +21,25 @@ public class ActivityResultDTO implements Serializable {
     @NotNull
     private ZonedDateTime eventDate;
 
+    private ZonedDateTime personBirthDate;
+
     private Long testResultId;
 
     private Long activityId;
 
     private String activityName;
+
+    private Long testId;
+
+    private String testName;
+
+    private Long eventId;
+
+    private String eventName;
+
+    private Long personId;
+
+    private String personEmail;
 
     public Long getId() {
         return id;
@@ -67,6 +81,14 @@ public class ActivityResultDTO implements Serializable {
         this.eventDate = eventDate;
     }
 
+    public ZonedDateTime getPersonBirthDate() {
+        return personBirthDate;
+    }
+
+    public void setPersonBirthDate(ZonedDateTime personBirthDate) {
+        this.personBirthDate = personBirthDate;
+    }
+
     public Long getTestResultId() {
         return testResultId;
     }
@@ -89,6 +111,54 @@ public class ActivityResultDTO implements Serializable {
 
     public void setActivityName(String activityName) {
         this.activityName = activityName;
+    }
+
+    public Long getTestId() {
+        return testId;
+    }
+
+    public void setTestId(Long jtTestId) {
+        this.testId = jtTestId;
+    }
+
+    public String getTestName() {
+        return testName;
+    }
+
+    public void setTestName(String jtTestName) {
+        this.testName = jtTestName;
+    }
+
+    public Long getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public Long getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Long personId) {
+        this.personId = personId;
+    }
+
+    public String getPersonEmail() {
+        return personEmail;
+    }
+
+    public void setPersonEmail(String personEmail) {
+        this.personEmail = personEmail;
     }
 
     @Override
@@ -120,9 +190,16 @@ public class ActivityResultDTO implements Serializable {
             ", secondaryResultValue=" + getSecondaryResultValue() +
             ", note='" + getNote() + "'" +
             ", eventDate='" + getEventDate() + "'" +
+            ", personBirthDate='" + getPersonBirthDate() + "'" +
             ", testResult=" + getTestResultId() +
             ", activity=" + getActivityId() +
             ", activity='" + getActivityName() + "'" +
+            ", test=" + getTestId() +
+            ", test='" + getTestName() + "'" +
+            ", event=" + getEventId() +
+            ", event='" + getEventName() + "'" +
+            ", person=" + getPersonId() +
+            ", person='" + getPersonEmail() + "'" +
             "}";
     }
 }

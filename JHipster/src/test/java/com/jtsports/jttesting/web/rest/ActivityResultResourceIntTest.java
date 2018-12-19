@@ -66,6 +66,9 @@ public class ActivityResultResourceIntTest {
     private static final ZonedDateTime DEFAULT_EVENT_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_EVENT_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
+    private static final ZonedDateTime DEFAULT_PERSON_BIRTH_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_PERSON_BIRTH_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+
     @Autowired
     private ActivityResultRepository activityResultRepository;
 
@@ -123,7 +126,8 @@ public class ActivityResultResourceIntTest {
             .primaryResultValue(DEFAULT_PRIMARY_RESULT_VALUE)
             .secondaryResultValue(DEFAULT_SECONDARY_RESULT_VALUE)
             .note(DEFAULT_NOTE)
-            .eventDate(DEFAULT_EVENT_DATE);
+            .eventDate(DEFAULT_EVENT_DATE)
+            .personBirthDate(DEFAULT_PERSON_BIRTH_DATE);
         // Add required entity
         Activity activity = ActivityResourceIntTest.createEntity(em);
         em.persist(activity);
@@ -157,6 +161,7 @@ public class ActivityResultResourceIntTest {
         assertThat(testActivityResult.getSecondaryResultValue()).isEqualTo(DEFAULT_SECONDARY_RESULT_VALUE);
         assertThat(testActivityResult.getNote()).isEqualTo(DEFAULT_NOTE);
         assertThat(testActivityResult.getEventDate()).isEqualTo(DEFAULT_EVENT_DATE);
+        assertThat(testActivityResult.getPersonBirthDate()).isEqualTo(DEFAULT_PERSON_BIRTH_DATE);
 
         // Validate the ActivityResult in Elasticsearch
         verify(mockActivityResultSearchRepository, times(1)).save(testActivityResult);
@@ -218,7 +223,8 @@ public class ActivityResultResourceIntTest {
             .andExpect(jsonPath("$.[*].primaryResultValue").value(hasItem(DEFAULT_PRIMARY_RESULT_VALUE.doubleValue())))
             .andExpect(jsonPath("$.[*].secondaryResultValue").value(hasItem(DEFAULT_SECONDARY_RESULT_VALUE.doubleValue())))
             .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())))
-            .andExpect(jsonPath("$.[*].eventDate").value(hasItem(sameInstant(DEFAULT_EVENT_DATE))));
+            .andExpect(jsonPath("$.[*].eventDate").value(hasItem(sameInstant(DEFAULT_EVENT_DATE))))
+            .andExpect(jsonPath("$.[*].personBirthDate").value(hasItem(sameInstant(DEFAULT_PERSON_BIRTH_DATE))));
     }
     
 
@@ -236,7 +242,8 @@ public class ActivityResultResourceIntTest {
             .andExpect(jsonPath("$.primaryResultValue").value(DEFAULT_PRIMARY_RESULT_VALUE.doubleValue()))
             .andExpect(jsonPath("$.secondaryResultValue").value(DEFAULT_SECONDARY_RESULT_VALUE.doubleValue()))
             .andExpect(jsonPath("$.note").value(DEFAULT_NOTE.toString()))
-            .andExpect(jsonPath("$.eventDate").value(sameInstant(DEFAULT_EVENT_DATE)));
+            .andExpect(jsonPath("$.eventDate").value(sameInstant(DEFAULT_EVENT_DATE)))
+            .andExpect(jsonPath("$.personBirthDate").value(sameInstant(DEFAULT_PERSON_BIRTH_DATE)));
     }
     @Test
     @Transactional
@@ -262,7 +269,8 @@ public class ActivityResultResourceIntTest {
             .primaryResultValue(UPDATED_PRIMARY_RESULT_VALUE)
             .secondaryResultValue(UPDATED_SECONDARY_RESULT_VALUE)
             .note(UPDATED_NOTE)
-            .eventDate(UPDATED_EVENT_DATE);
+            .eventDate(UPDATED_EVENT_DATE)
+            .personBirthDate(UPDATED_PERSON_BIRTH_DATE);
         ActivityResultDTO activityResultDTO = activityResultMapper.toDto(updatedActivityResult);
 
         restActivityResultMockMvc.perform(put("/api/activity-results")
@@ -278,6 +286,7 @@ public class ActivityResultResourceIntTest {
         assertThat(testActivityResult.getSecondaryResultValue()).isEqualTo(UPDATED_SECONDARY_RESULT_VALUE);
         assertThat(testActivityResult.getNote()).isEqualTo(UPDATED_NOTE);
         assertThat(testActivityResult.getEventDate()).isEqualTo(UPDATED_EVENT_DATE);
+        assertThat(testActivityResult.getPersonBirthDate()).isEqualTo(UPDATED_PERSON_BIRTH_DATE);
 
         // Validate the ActivityResult in Elasticsearch
         verify(mockActivityResultSearchRepository, times(1)).save(testActivityResult);
@@ -341,7 +350,8 @@ public class ActivityResultResourceIntTest {
             .andExpect(jsonPath("$.[*].primaryResultValue").value(hasItem(DEFAULT_PRIMARY_RESULT_VALUE.doubleValue())))
             .andExpect(jsonPath("$.[*].secondaryResultValue").value(hasItem(DEFAULT_SECONDARY_RESULT_VALUE.doubleValue())))
             .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE.toString())))
-            .andExpect(jsonPath("$.[*].eventDate").value(hasItem(sameInstant(DEFAULT_EVENT_DATE))));
+            .andExpect(jsonPath("$.[*].eventDate").value(hasItem(sameInstant(DEFAULT_EVENT_DATE))))
+            .andExpect(jsonPath("$.[*].personBirthDate").value(hasItem(sameInstant(DEFAULT_PERSON_BIRTH_DATE))));
     }
 
     @Test

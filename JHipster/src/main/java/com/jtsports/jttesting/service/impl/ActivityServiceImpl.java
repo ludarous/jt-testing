@@ -2,6 +2,7 @@ package com.jtsports.jttesting.service.impl;
 
 import com.jtsports.jttesting.domain.ActivityResult;
 import com.jtsports.jttesting.repository.ActivityCategoryRepository;
+import com.jtsports.jttesting.repository.DAO.ActivityResultDAO;
 import com.jtsports.jttesting.service.ActivityService;
 import com.jtsports.jttesting.domain.Activity;
 import com.jtsports.jttesting.repository.ActivityRepository;
@@ -21,6 +22,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -182,9 +185,13 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public List<PersonalActivityStatsDTO> findPersonalActivitiesStats(Long personId, StatsRequestDTO statsRequest) {
+        long calculateStartTime = System.currentTimeMillis();
+
         List<PersonalActivityStatsDTO> personalActivityStatsDTOList = new ArrayList<>();
 
         List<ActivityResult> filteredResults = this.getFilterAllActivitieResults(statsRequest);
+
+        log.info("Get filtered results duration: " + (System.currentTimeMillis() - calculateStartTime) + " ms, activities results count: " + filteredResults.size());
         List<Activity> activities = filteredResults.stream().map(r -> r.getActivity()).distinct().collect(Collectors.toList());
         for(Activity activity : activities) {
 
@@ -209,6 +216,7 @@ public class ActivityServiceImpl implements ActivityService {
             personalActivityStatsDTO.setPersonalActivityResults(personalResults.stream().map(activityResultMapper::toDto).collect(Collectors.toList()));
 
         }
+        log.info("Get all activities stats: " + (System.currentTimeMillis() - calculateStartTime) + " ms, activities count: " + activities.size());
         return personalActivityStatsDTOList;
 
     }

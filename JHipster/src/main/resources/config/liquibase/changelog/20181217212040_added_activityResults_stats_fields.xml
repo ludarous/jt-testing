@@ -1,0 +1,32 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="RLU (generated)" id="1545081647288-1">
+        <addColumn tableName="activity_result">
+            <column name="event_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1545081647288-2">
+        <addColumn tableName="activity_result">
+            <column name="person_birth_date" type="datetime"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1545081647288-3">
+        <addColumn tableName="activity_result">
+            <column name="person_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1545081647288-4">
+        <addColumn tableName="activity_result">
+            <column name="test_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1545081647288-5">
+        <addForeignKeyConstraint baseColumnNames="person_id" baseTableName="activity_result" constraintName="FKbvddel0kqefqb2cbfyk5b8h1a" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="person"/>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1545081647288-6">
+        <addForeignKeyConstraint baseColumnNames="test_id" baseTableName="activity_result" constraintName="FKipbqegmh7qoia8ah6tgoene1s" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jt_test"/>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1545081647288-7">
+        <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="activity_result" constraintName="FKopx45p3m6dw4ixv94dpyxvuea" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="event"/>
+    </changeSet>
+</databaseChangeLog>

@@ -34,8 +34,12 @@
             <th jhiSortBy="secondaryResultValue"><span jhiTranslate="jtTestingApp.activityResult.secondaryResultValue">Secondary Result Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="note"><span jhiTranslate="jtTestingApp.activityResult.note">Note</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="eventDate"><span jhiTranslate="jtTestingApp.activityResult.eventDate">Event Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="personBirthDate"><span jhiTranslate="jtTestingApp.activityResult.personBirthDate">Person Birth Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="testResultId"><span jhiTranslate="jtTestingApp.activityResult.testResult">Test Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="activityName"><span jhiTranslate="jtTestingApp.activityResult.activity">Activity</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="testName"><span jhiTranslate="jtTestingApp.activityResult.test">Test</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="eventName"><span jhiTranslate="jtTestingApp.activityResult.event">Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="personEmail"><span jhiTranslate="jtTestingApp.activityResult.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -46,6 +50,7 @@
                 <td>{{activityResult.secondaryResultValue}}</td>
                 <td>{{activityResult.note}}</td>
                 <td>{{activityResult.eventDate | date:'medium'}}</td>
+                <td>{{activityResult.personBirthDate | date:'medium'}}</td>
                 <td>
                     <div *ngIf="activityResult.testResultId">
                         <a [routerLink]="['../test-result', activityResult.testResultId , 'view' ]" >{{activityResult.testResultId}}</a>
@@ -54,6 +59,21 @@
                 <td>
                     <div *ngIf="activityResult.activityId">
                         <a [routerLink]="['../activity', activityResult.activityId , 'view' ]" >{{activityResult.activityName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="activityResult.testId">
+                        <a [routerLink]="['../jt-test', activityResult.testId , 'view' ]" >{{activityResult.testName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="activityResult.eventId">
+                        <a [routerLink]="['../event', activityResult.eventId , 'view' ]" >{{activityResult.eventName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="activityResult.personId">
+                        <a [routerLink]="['../person', activityResult.personId , 'view' ]" >{{activityResult.personEmail}}</a>
                     </div>
                 </td>
                 <td class="text-right">

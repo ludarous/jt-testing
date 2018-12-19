@@ -21,6 +21,10 @@
                 <dd>
                     <span>{{activityResult.eventDate}}</span>
                 </dd>
+                <dt><span jhiTranslate="jtTestingApp.activityResult.personBirthDate">Person Birth Date</span></dt>
+                <dd>
+                    <span>{{activityResult.personBirthDate}}</span>
+                </dd>
                 <dt><span jhiTranslate="jtTestingApp.activityResult.testResult">Test Result</span></dt>
                 <dd>
                     <div *ngIf="activityResult.testResultId">
@@ -31,6 +35,24 @@
                 <dd>
                     <div *ngIf="activityResult.activityId">
                         <a [routerLink]="['/activity', activityResult.activityId, 'view']">{{activityResult.activityName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jtTestingApp.activityResult.test">Test</span></dt>
+                <dd>
+                    <div *ngIf="activityResult.testId">
+                        <a [routerLink]="['/jt-test', activityResult.testId, 'view']">{{activityResult.testName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jtTestingApp.activityResult.event">Event</span></dt>
+                <dd>
+                    <div *ngIf="activityResult.eventId">
+                        <a [routerLink]="['/event', activityResult.eventId, 'view']">{{activityResult.eventName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jtTestingApp.activityResult.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="activityResult.personId">
+                        <a [routerLink]="['/person', activityResult.personId, 'view']">{{activityResult.personEmail}}</a>
                     </div>
                 </dd>
             </dl>

@@ -21,8 +21,12 @@
             "secondaryResultValue": "Secondary Result Value",
             "note": "Note",
             "eventDate": "Event Date",
+            "personBirthDate": "Person Birth Date",
             "testResult": "Test Result",
-            "activity": "Activity"
+            "activity": "Activity",
+            "test": "Test",
+            "event": "Event",
+            "person": "Person"
         }
     }
 }

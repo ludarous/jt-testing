@@ -144,7 +144,7 @@ public class TestResult implements Serializable {
             "}";
     }
 
-    public static TestResult createTestResult(JTTest test, EventResult eventResult, Event event) {
+    public static TestResult createTestResult(JTTest test, EventResult eventResult, Event event, Person person) {
         String personName =  eventResult.getPerson().getPersonalData().getFirstName() + " " + eventResult.getPerson().getPersonalData().getLastName();
         TestResult testResult = new TestResult();
         testResult.setTest(test);
@@ -153,7 +153,7 @@ public class TestResult implements Serializable {
 
         HashSet<ActivityResult> activitiesResults = new HashSet<>();
         for(Activity activity : test.getActivities()) {
-            activitiesResults.add(ActivityResult.craeteActivityResult(activity, testResult, event));
+            activitiesResults.add(ActivityResult.craeteActivityResult(activity, testResult, test, event, person));
         }
         testResult.setActivitiesResults(activitiesResults);
 

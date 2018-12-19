@@ -14,6 +14,24 @@
             "relationshipName": "activity",
             "otherEntityName": "activity",
             "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "test",
+            "otherEntityName": "jtTest",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "event",
+            "otherEntityName": "event",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "person",
+            "otherEntityName": "person",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "email"
         }
     ],
     "fields": [
@@ -35,6 +53,10 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "personBirthDate",
+            "fieldType": "ZonedDateTime"
         }
     ],
     "changelogDate": "20180919081356",
