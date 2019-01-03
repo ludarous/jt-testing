@@ -2,13 +2,13 @@ package com.jtsports.jttesting.service.impl;
 
 import com.jtsports.jttesting.domain.ActivityResult;
 import com.jtsports.jttesting.repository.ActivityCategoryRepository;
-import com.jtsports.jttesting.repository.DAO.ActivityResultDAO;
 import com.jtsports.jttesting.service.ActivityService;
 import com.jtsports.jttesting.domain.Activity;
 import com.jtsports.jttesting.repository.ActivityRepository;
 import com.jtsports.jttesting.repository.search.ActivitySearchRepository;
 import com.jtsports.jttesting.service.dto.Activity.*;
 import com.jtsports.jttesting.service.dto.ActivityDTO;
+import com.jtsports.jttesting.service.dto.ActivityResultDTO;
 import com.jtsports.jttesting.service.dto.StatsRequestDTO;
 import com.jtsports.jttesting.service.mapper.ActivityMapper;
 import com.jtsports.jttesting.service.mapper.ActivityResultMapper;
@@ -189,7 +189,7 @@ public class ActivityServiceImpl implements ActivityService {
 
         List<PersonalActivityStatsDTO> personalActivityStatsDTOList = new ArrayList<>();
 
-        List<ActivityResult> filteredResults = this.getFilterAllActivitieResults(statsRequest);
+        List<ActivityResult> filteredResults = this.getFilterActivitiesResults(statsRequest);
 
         log.info("Get filtered results duration: " + (System.currentTimeMillis() - calculateStartTime) + " ms, activities results count: " + filteredResults.size());
         List<Activity> activities = filteredResults.stream().map(r -> r.getActivity()).distinct().collect(Collectors.toList());
@@ -275,16 +275,16 @@ public class ActivityServiceImpl implements ActivityService {
         return filteredResults;
     }
 
-    private List<ActivityResult> getFilterAllActivitieResults(StatsRequestDTO statsRequest) {
+    private List<ActivityResult> getFilterActivitiesResults(StatsRequestDTO statsRequest) {
 
-        List<ActivityResult> allActivityResults = activityRepository.findAllActivitiesResultsWithRequest(
+        List<ActivityResultDTO> allActivityResults = activityRepository.findAllActivitiesResultsWithRequest(
             statsRequest.getTestId(),
             statsRequest.getEventId(),
             statsRequest.getDateFrom(),
             statsRequest.getDateTo(),
             statsRequest.getUsersBirthdayFrom(),
             statsRequest.getUsersBirthDayTo());
-        List<ActivityResult> filteredResults = allActivityResults;
+        List<ActivityResult> filteredResults = new ArrayList<>();
 
         return filteredResults;
     }

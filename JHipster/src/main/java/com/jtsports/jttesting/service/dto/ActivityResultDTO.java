@@ -1,6 +1,10 @@
 package com.jtsports.jttesting.service.dto;
 
 import java.time.ZonedDateTime;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.SqlResultSetMapping;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -8,7 +12,17 @@ import java.util.Objects;
 /**
  * A DTO for the ActivityResult entity.
  */
+
 public class ActivityResultDTO implements Serializable {
+
+    public ActivityResultDTO() {
+
+    }
+
+    public ActivityResultDTO(Long id, Float primaryResultValue) {
+        this.id = id;
+        this.primaryResultValue = primaryResultValue;
+    }
 
     private Long id;
 

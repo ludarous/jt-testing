@@ -4,6 +4,7 @@ import com.jtsports.jttesting.domain.Activity;
 import com.jtsports.jttesting.domain.ActivityResult;
 import com.jtsports.jttesting.domain.Event;
 
+import com.jtsports.jttesting.service.dto.ActivityResultDTO;
 import com.jtsports.jttesting.service.dto.StatsRequestDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +12,10 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.SqlResultSetMapping;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -64,19 +69,21 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
         @Param("usersBirthdayTo") ZonedDateTime usersBirthdayTo
         );
 
-    @Query("select activityResult from ActivityResult activityResult " +
-        "join activityResult.activity activity " +
-        "join activityResult.testResult testResult " +
-        "join testResult.test test " +
-        "join testResult.eventResult eventResult " +
-        "join eventResult.person person " +
-        "where ((:testId is null) or (:testId = test.id)) " +
-        "and ((:eventId is null) or (:eventId = eventResult.event.id)) " +
-        "and ((cast(:dateFrom as timestamp) is null) or (:dateFrom <= activityResult.eventDate)) " +
-        "and ((cast(:dateTo as timestamp) is null) or (:dateTo >= activityResult.eventDate)) " +
-        "and ((cast(:usersBirthdayFrom as timestamp) is null) or (:usersBirthdayFrom <= person.personalData.birthDate)) " +
-        "and ((cast(:usersBirthdayTo as timestamp) is null) or (:usersBirthdayTo >= person.personalData.birthDate))")
-    List<ActivityResult> findAllActivitiesResultsWithRequest(
+
+    @Query(name = "activityResults", nativeQuery = true)
+//    @Query("select activityResult from ActivityResult activityResult " +
+//        "join activityResult.activity activity " +
+//        "join activityResult.testResult testResult " +
+//        "join testResult.test test " +
+//        "join testResult.eventResult eventResult " +
+//        "join eventResult.person person " +
+//        "where ((:testId is null) or (:testId = test.id)) " +
+//        "and ((:eventId is null) or (:eventId = eventResult.event.id)) " +
+//        "and ((cast(:dateFrom as timestamp) is null) or (:dateFrom <= activityResult.eventDate)) " +
+//        "and ((cast(:dateTo as timestamp) is null) or (:dateTo >= activityResult.eventDate)) " +
+//        "and ((cast(:usersBirthdayFrom as timestamp) is null) or (:usersBirthdayFrom <= person.personalData.birthDate)) " +
+//        "and ((cast(:usersBirthdayTo as timestamp) is null) or (:usersBirthdayTo >= person.personalData.birthDate))")
+    List<ActivityResultDTO> findAllActivitiesResultsWithRequest(
         @Param("testId") Long testId,
         @Param("eventId") Long eventId,
         @Param("dateFrom") ZonedDateTime dateFrom,
