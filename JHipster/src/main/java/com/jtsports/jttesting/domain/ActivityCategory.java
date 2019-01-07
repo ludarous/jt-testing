@@ -41,7 +41,7 @@ public class ActivityCategory implements Serializable {
     @JsonIgnore
     private ActivityCategory parent;
 
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER)
     private Set<ActivityCategory> children = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

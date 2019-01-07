@@ -46,44 +46,25 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
         "where activityResult.activity.id = :id")
     List<ActivityResult> findActivityResults(@Param("id") Long id);
 
+    //@Query(name = "activityResults", nativeQuery = true)
     @Query("select activityResult from ActivityResult activityResult " +
-        "join activityResult.activity activity " +
-        "join activityResult.testResult testResult " +
-        "join testResult.test test " +
-        "join testResult.eventResult eventResult " +
-        "join eventResult.person person " +
-        "where activityResult.activity.id = :id " +
+        "join fetch activityResult.activity activity " +
+        "join fetch activityResult.testResult testResult " +
+        "join fetch testResult.test test " +
+        "join fetch testResult.eventResult eventResult " +
+        "join fetch eventResult.person person " +
+        "join fetch activity.categories categories " +
+        "where ((:personId is null) or (:personId = person.id)) " +
+        "and ((:activityId is null) or (:activityId = activity.id)) " +
         "and ((:testId is null) or (:testId = test.id)) " +
         "and ((:eventId is null) or (:eventId = eventResult.event.id)) " +
         "and ((cast(:dateFrom as timestamp) is null) or (:dateFrom <= activityResult.eventDate)) " +
         "and ((cast(:dateTo as timestamp) is null) or (:dateTo >= activityResult.eventDate)) " +
         "and ((cast(:usersBirthdayFrom as timestamp) is null) or (:usersBirthdayFrom <= person.personalData.birthDate)) " +
         "and ((cast(:usersBirthdayTo as timestamp) is null) or (:usersBirthdayTo >= person.personalData.birthDate))")
-    List<ActivityResult> findActivityResultsWithRequest(
-        @Param("id") Long id,
-        @Param("testId") Long testId,
-        @Param("eventId") Long eventId,
-        @Param("dateFrom") ZonedDateTime dateFrom,
-        @Param("dateTo") ZonedDateTime dateTo,
-        @Param("usersBirthdayFrom") ZonedDateTime usersBirthdayFrom,
-        @Param("usersBirthdayTo") ZonedDateTime usersBirthdayTo
-        );
-
-
-    @Query(name = "activityResults", nativeQuery = true)
-//    @Query("select activityResult from ActivityResult activityResult " +
-//        "join activityResult.activity activity " +
-//        "join activityResult.testResult testResult " +
-//        "join testResult.test test " +
-//        "join testResult.eventResult eventResult " +
-//        "join eventResult.person person " +
-//        "where ((:testId is null) or (:testId = test.id)) " +
-//        "and ((:eventId is null) or (:eventId = eventResult.event.id)) " +
-//        "and ((cast(:dateFrom as timestamp) is null) or (:dateFrom <= activityResult.eventDate)) " +
-//        "and ((cast(:dateTo as timestamp) is null) or (:dateTo >= activityResult.eventDate)) " +
-//        "and ((cast(:usersBirthdayFrom as timestamp) is null) or (:usersBirthdayFrom <= person.personalData.birthDate)) " +
-//        "and ((cast(:usersBirthdayTo as timestamp) is null) or (:usersBirthdayTo >= person.personalData.birthDate))")
-    List<ActivityResultDTO> findAllActivitiesResultsWithRequest(
+    List<ActivityResult> findAllActivitiesResultsWithRequest(
+        @Param("personId") Long personId,
+        @Param("activityId") Long activityId,
         @Param("testId") Long testId,
         @Param("eventId") Long eventId,
         @Param("dateFrom") ZonedDateTime dateFrom,

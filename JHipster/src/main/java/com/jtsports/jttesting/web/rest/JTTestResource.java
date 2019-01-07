@@ -1,11 +1,12 @@
 package com.jtsports.jttesting.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.jtsports.jttesting.domain.ActivityResult;
 import com.jtsports.jttesting.domain.User;
 import com.jtsports.jttesting.service.JTTestService;
 import com.jtsports.jttesting.service.PersonService;
+import com.jtsports.jttesting.service.StatsService;
 import com.jtsports.jttesting.service.UserService;
-import com.jtsports.jttesting.service.dto.Activity.PersonalActivityStatsDTO;
 import com.jtsports.jttesting.service.dto.PersonFullDTO;
 import com.jtsports.jttesting.service.dto.StatsRequestDTO;
 import com.jtsports.jttesting.service.dto.Test.PersonalTestsStatsDTO;
@@ -27,7 +28,6 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,10 +48,13 @@ public class JTTestResource {
 
     private final PersonService personService;
 
-    public JTTestResource(JTTestService jTTestService, UserService userService, PersonService personService) {
+    private final StatsService statsService;
+
+    public JTTestResource(JTTestService jTTestService, UserService userService, PersonService personService, StatsService statsService) {
         this.jTTestService = jTTestService;
         this.userService = userService;
         this.personService = personService;
+        this.statsService = statsService;
     }
 
     /**
@@ -175,8 +178,8 @@ public class JTTestResource {
         if(user.isPresent()) {
             Optional<PersonFullDTO> personFullDTO = this.personService.findOneByUserId(user.get().getId());
             if (personFullDTO.isPresent()) {
-
-                PersonalTestsStatsDTO personalTestsStatsDTO = jTTestService.findPersonalStats(personFullDTO.get().getId(), null, statsRequestDTO);
+                List<ActivityResult> filteredActivityResult = statsService.getFilterActivitiesResults(statsRequestDTO);
+                PersonalTestsStatsDTO personalTestsStatsDTO = statsService.getPersonalTestStats(personFullDTO.get().getId(), null, filteredActivityResult);
                 return ResponseEntity.ok(personalTestsStatsDTO);
             }
             return ResponseEntity.notFound().build();

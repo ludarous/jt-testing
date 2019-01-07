@@ -64,9 +64,4 @@ public interface ActivityService {
      */
     Page<ActivityDTO> search(String query, Pageable pageable);
 
-    ActivityStatsDTO findStats(Long activityId, StatsRequestDTO statsRequest);
-
-    PersonalActivityStatsDTO findPersonalActivityStats(Long personId, Long activityId, StatsRequestDTO statsRequest);
-
-    List<PersonalActivityStatsDTO> findPersonalActivitiesStats(Long personId, StatsRequestDTO statsRequest);
 }

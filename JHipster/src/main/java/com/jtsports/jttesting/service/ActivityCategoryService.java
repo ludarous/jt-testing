@@ -59,9 +59,10 @@ public interface ActivityCategoryService {
      */
     Page<ActivityCategoryDTO> search(String query, Pageable pageable);
 
-    PersonalCategoryStatsDTO findPersonalStats(Long personId, Long parentCategoryId, StatsRequestDTO statsRequest);
 
     List<ActivityCategory> findOneWithSubcategories(Long categoryId);
 
     List<Activity> findByCategoryId(Long categoryId, Long eventId, Long testId);
+
+    List<ActivityCategory> getAllSubcategories(ActivityCategory activityCategory);
 }

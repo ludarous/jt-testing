@@ -1,9 +1,13 @@
 package com.jtsports.jttesting.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.jtsports.jttesting.domain.Activity;
+import com.jtsports.jttesting.domain.ActivityResult;
 import com.jtsports.jttesting.domain.User;
+import com.jtsports.jttesting.repository.ActivityRepository;
 import com.jtsports.jttesting.service.ActivityService;
 import com.jtsports.jttesting.service.PersonService;
+import com.jtsports.jttesting.service.StatsService;
 import com.jtsports.jttesting.service.UserService;
 import com.jtsports.jttesting.service.dto.Activity.ActivityStatsDTO;
 import com.jtsports.jttesting.service.dto.Activity.PersonalActivityStatsDTO;
@@ -27,7 +31,6 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,14 +47,20 @@ public class ActivityResource {
 
     private final ActivityService activityService;
 
+    private final ActivityRepository activityRepository;
+
     private final UserService userService;
 
     private final PersonService personService;
 
-    public ActivityResource(ActivityService activityService, UserService userService, PersonService personService) {
+    private final StatsService statsService;
+
+    public ActivityResource(ActivityService activityService, ActivityRepository activityRepository, UserService userService, PersonService personService, StatsService statsService) {
         this.activityService = activityService;
+        this.activityRepository = activityRepository;
         this.userService = userService;
         this.personService = personService;
+        this.statsService = statsService;
     }
 
     /**
@@ -171,7 +180,7 @@ public class ActivityResource {
     @Timed
     public ResponseEntity<ActivityStatsDTO> getActivityStats(@PathVariable Long activityId, @RequestBody StatsRequestDTO statsRequestDTO) {
         log.debug("REST request to get Activity stats : {}", activityId);
-        ActivityStatsDTO activityStatsDTO = activityService.findStats(activityId, statsRequestDTO);
+        ActivityStatsDTO activityStatsDTO = statsService.findStats(activityId, statsRequestDTO);
         return ResponseEntity.ok(activityStatsDTO);
     }
 
@@ -190,7 +199,10 @@ public class ActivityResource {
             Optional<PersonFullDTO> personFullDTO = this.personService.findOneByUserId(user.get().getId());
             if (personFullDTO.isPresent()) {
 
-                PersonalActivityStatsDTO activityStatsDTO = activityService.findPersonalActivityStats(personFullDTO.get().getId(), activityId, statsRequestDTO);
+                List<ActivityResult> filteredActivityResult = statsService.getFilterActivitiesResults(statsRequestDTO);
+                Activity activity = activityRepository.getOne(activityId);
+
+                PersonalActivityStatsDTO activityStatsDTO = statsService.getPersonalActivityStats(personFullDTO.get().getId(), activity, filteredActivityResult);
                 return ResponseEntity.ok(activityStatsDTO);
             }
             return ResponseEntity.notFound().build();
@@ -212,7 +224,8 @@ public class ActivityResource {
             Optional<PersonFullDTO> personFullDTO = this.personService.findOneByUserId(user.get().getId());
             if (personFullDTO.isPresent()) {
 
-                List<PersonalActivityStatsDTO> personalActivitiesStats = activityService.findPersonalActivitiesStats(personFullDTO.get().getId(), statsRequestDTO);
+                List<ActivityResult> filteredActivityResult = statsService.getFilterActivitiesResults(statsRequestDTO);
+                List<PersonalActivityStatsDTO> personalActivitiesStats = statsService.getPersonalActivitiesStats(personFullDTO.get().getId(), filteredActivityResult);
                 return ResponseEntity.ok(personalActivitiesStats);
             }
             return ResponseEntity.notFound().build();

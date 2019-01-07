@@ -62,5 +62,4 @@ public interface JTTestService {
      */
     Page<JTTestDTO> search(String query, Pageable pageable);
 
-    PersonalTestsStatsDTO findPersonalStats(Long personId, Long parentCategoryId, StatsRequestDTO statsRequest);
 }

@@ -132,69 +132,6 @@ public class ActivityCategoryServiceImpl implements ActivityCategoryService {
             .map(activityCategoryMapper::toDto);
     }
 
-    @Override
-    public PersonalCategoryStatsDTO findPersonalStats(Long personId, Long parentCategoryId, StatsRequestDTO statsRequest) {
-        PersonalCategoryStatsDTO personalCategoryStatsDTO = new PersonalCategoryStatsDTO();
-
-        if(parentCategoryId != null) {
-            personalCategoryStatsDTO.setParentCategory(this.activityCategoryMapper.toDto(this.activityCategoryRepository.getOne(parentCategoryId)));
-        }
-
-        List<ActivityCategory> categories = this.activityCategoryRepository.findAllByParentId(parentCategoryId);
-
-        List<PersonalCategoryResultsStatsDTO> personalCategoryResultsStatsDTOList = new ArrayList<>();
-        for(ActivityCategory category : categories) {
-            PersonalCategoryResultsStatsDTO personalCategoryResultsStatsDTO = this.findPersonalCategoryResultStats(personId, category, statsRequest);
-            if(personalCategoryResultsStatsDTO != null) {
-                personalCategoryResultsStatsDTOList.add(this.findPersonalCategoryResultStats(personId, category, statsRequest));
-            }
-        }
-        personalCategoryStatsDTO.setPersonalCategoriesResultsStats(personalCategoryResultsStatsDTOList);
-
-        return  personalCategoryStatsDTO;
-    }
-
-    public PersonalCategoryResultsStatsDTO findPersonalCategoryResultStats(Long personId, ActivityCategory category, StatsRequestDTO statsRequest) {
-
-        List<Activity> activities = this.findByCategoryId(category.getId(), statsRequest.getEventId(), statsRequest.getTestId());
-        if(activities.size() > 0) {
-            PersonalCategoryResultsStatsDTO personalCategoryResultsStatsDTO = new PersonalCategoryResultsStatsDTO();
-            List<PersonalActivityStatsDTO> personalActivityStatsDTOList = new ArrayList<>();
-            for (Activity activity : activities) {
-
-                PersonalActivityStatsDTO personalActivityStatsDTO = activityService.findPersonalActivityStats(personId, activity.getId(), statsRequest);
-                personalActivityStatsDTOList.add(personalActivityStatsDTO);
-            }
-
-
-            Float primaryPlacementInPercents = 0F;
-            Float secondaryPlacementInPercents = 0F;
-
-            int primaryDelimiter = 0;
-            int secondaryDelimiter = 0;
-
-            for (PersonalActivityStatsDTO personalActivityStats : personalActivityStatsDTOList) {
-                if (personalActivityStats.returnAveragePrimaryPlacementInPercents() != null) {
-                    primaryDelimiter++;
-                    primaryPlacementInPercents += personalActivityStats.returnAveragePrimaryPlacementInPercents();
-                }
-
-                if (personalActivityStats.returnAverageSecondaryPlacementInPercents() != null) {
-                    secondaryDelimiter++;
-                    secondaryPlacementInPercents += personalActivityStats.returnAverageSecondaryPlacementInPercents();
-                }
-            }
-
-            primaryPlacementInPercents = primaryPlacementInPercents / primaryDelimiter;
-            secondaryPlacementInPercents = secondaryPlacementInPercents / secondaryDelimiter;
-
-            personalCategoryResultsStatsDTO.setPrimaryPlacement(primaryPlacementInPercents);
-            personalCategoryResultsStatsDTO.setSecondaryPlacement(secondaryPlacementInPercents);
-            personalCategoryResultsStatsDTO.setCategory(this.activityCategoryMapper.toDto(category));
-            return personalCategoryResultsStatsDTO;
-        }
-        return null;
-    }
 
     @Override
     public List<ActivityCategory> findOneWithSubcategories(Long categoryId) {
@@ -230,6 +167,16 @@ public class ActivityCategoryServiceImpl implements ActivityCategoryService {
 
         return activities;
 
+    }
+
+    @Override
+    public List<ActivityCategory> getAllSubcategories(ActivityCategory activityCategory) {
+        List<ActivityCategory> allSubcategories = new ArrayList<>();
+        allSubcategories.add(activityCategory);
+        for(ActivityCategory ac : activityCategory.getChildren()) {
+            allSubcategories.addAll(getAllSubcategories(ac));
+        }
+        return allSubcategories;
     }
 
 }

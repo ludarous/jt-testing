@@ -1,9 +1,11 @@
 package com.jtsports.jttesting.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.jtsports.jttesting.domain.ActivityResult;
 import com.jtsports.jttesting.domain.User;
 import com.jtsports.jttesting.service.ActivityCategoryService;
 import com.jtsports.jttesting.service.PersonService;
+import com.jtsports.jttesting.service.StatsService;
 import com.jtsports.jttesting.service.UserService;
 import com.jtsports.jttesting.service.dto.Category.PersonalCategoryStatsDTO;
 import com.jtsports.jttesting.service.dto.PersonFullDTO;
@@ -46,10 +48,13 @@ public class ActivityCategoryResource {
 
     private final PersonService personService;
 
-    public ActivityCategoryResource(ActivityCategoryService activityCategoryService, UserService userService, PersonService personService) {
+    private final StatsService statsService;
+
+    public ActivityCategoryResource(ActivityCategoryService activityCategoryService, UserService userService, PersonService personService, StatsService statsService) {
         this.activityCategoryService = activityCategoryService;
         this.userService = userService;
         this.personService = personService;
+        this.statsService = statsService;
     }
 
     /**
@@ -168,7 +173,8 @@ public class ActivityCategoryResource {
             Optional<PersonFullDTO> personFullDTO = this.personService.findOneByUserId(user.get().getId());
             if (personFullDTO.isPresent()) {
 
-                PersonalCategoryStatsDTO categoryStatsDTO = activityCategoryService.findPersonalStats(personFullDTO.get().getId(), parentCategoryId, statsRequestDTO);
+                List<ActivityResult> filteredActivityResult = statsService.getFilterActivitiesResults(statsRequestDTO);
+                PersonalCategoryStatsDTO categoryStatsDTO = statsService.getPersonalCategoryStats(personFullDTO.get().getId(), parentCategoryId, filteredActivityResult);
                 return ResponseEntity.ok(categoryStatsDTO);
             }
             return ResponseEntity.notFound().build();

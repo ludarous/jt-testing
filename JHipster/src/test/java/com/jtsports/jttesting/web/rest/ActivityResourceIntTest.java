@@ -7,6 +7,7 @@ import com.jtsports.jttesting.repository.ActivityRepository;
 import com.jtsports.jttesting.repository.search.ActivitySearchRepository;
 import com.jtsports.jttesting.service.ActivityService;
 import com.jtsports.jttesting.service.PersonService;
+import com.jtsports.jttesting.service.StatsService;
 import com.jtsports.jttesting.service.UserService;
 import com.jtsports.jttesting.service.dto.ActivityDTO;
 import com.jtsports.jttesting.service.mapper.ActivityMapper;
@@ -116,6 +117,9 @@ public class ActivityResourceIntTest {
     private PersonService personService;
 
     @Autowired
+    private StatsService statsService;
+
+    @Autowired
     private EntityManager em;
 
     private MockMvc restActivityMockMvc;
@@ -125,7 +129,7 @@ public class ActivityResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ActivityResource activityResource = new ActivityResource(activityService, userService, personService);
+        final ActivityResource activityResource = new ActivityResource(activityService, activityRepository, userService, personService, statsService);
         this.restActivityMockMvc = MockMvcBuilders.standaloneSetup(activityResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -269,7 +273,7 @@ public class ActivityResourceIntTest {
     }
     
     public void getAllActivitiesWithEagerRelationshipsIsEnabled() throws Exception {
-        ActivityResource activityResource = new ActivityResource(activityServiceMock, userService, personService);
+        ActivityResource activityResource = new ActivityResource(activityServiceMock, activityRepository, userService, personService, statsService);
         when(activityServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         MockMvc restActivityMockMvc = MockMvcBuilders.standaloneSetup(activityResource)
@@ -285,7 +289,7 @@ public class ActivityResourceIntTest {
     }
 
     public void getAllActivitiesWithEagerRelationshipsIsNotEnabled() throws Exception {
-        ActivityResource activityResource = new ActivityResource(activityServiceMock, userService, personService);
+        ActivityResource activityResource = new ActivityResource(activityServiceMock, activityRepository, userService, personService, statsService);
             when(activityServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
             MockMvc restActivityMockMvc = MockMvcBuilders.standaloneSetup(activityResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)

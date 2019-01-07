@@ -1,8 +1,13 @@
 package com.jtsports.jttesting.service.dto;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 public class StatsRequestDTO {
+
+    private Long personId;
+
+    private Long activityId;
 
     private Long testId;
 
@@ -15,6 +20,8 @@ public class StatsRequestDTO {
     private ZonedDateTime usersBirthdayFrom;
 
     private ZonedDateTime usersBirthDayTo;
+
+    private List<Long> categoriesId;
 
     private Boolean virtual;
 
@@ -72,5 +79,29 @@ public class StatsRequestDTO {
 
     public void setVirtual(Boolean virtual) {
         this.virtual = virtual;
+    }
+
+    public Long getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Long personId) {
+        this.personId = personId;
+    }
+
+    public Long getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(Long activityId) {
+        this.activityId = activityId;
+    }
+
+    public List<Long> getCategoriesId() {
+        return categoriesId;
+    }
+
+    public void setCategoriesId(List<Long> categoriesId) {
+        this.categoriesId = categoriesId;
     }
 }

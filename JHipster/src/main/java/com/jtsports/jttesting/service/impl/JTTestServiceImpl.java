@@ -136,20 +136,4 @@ public class JTTestServiceImpl implements JTTestService {
             .map(jTTestMapper::toDto);
     }
 
-    @Override
-    public PersonalTestsStatsDTO findPersonalStats(Long personId, Long parentCategoryId, StatsRequestDTO statsRequest) {
-        PersonalTestsStatsDTO personalTestsStats = new PersonalTestsStatsDTO();
-        personalTestsStats.setPersonalCategoryStats(this.activityCategoryService.findPersonalStats(personId, parentCategoryId, statsRequest));
-
-        List<PersonalActivityStatsDTO> personalActivitiesStats = new ArrayList<>();
-        Optional<JTTest> testOptional = this.jTTestRepository.findOneWithEagerRelationships(statsRequest.getTestId());
-        if (testOptional.isPresent()) {
-            Set<Activity> testActivities = testOptional.get().getActivities();
-            for (Activity activity : testActivities) {
-                personalActivitiesStats.add(this.activityService.findPersonalActivityStats(personId, activity.getId(), statsRequest));
-            }
-            personalTestsStats.setPersonalActivitiesStats(personalActivitiesStats);
-        }
-        return personalTestsStats;
-    }
 }
