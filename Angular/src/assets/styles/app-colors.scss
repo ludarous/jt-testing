@@ -6,18 +6,23 @@ $app-gray-color: rgba(91,91,91,1) !default;
 $app-danger-color: rgba(217,83,79,1) !default;
 $app-danger-color-2: rgba(201,48,44,1) !default;
 
-$primary-color-0: rgb(105, 105, 105) !default;
-$primary-color-1: rgb(135, 135, 135) !default;
-$primary-color-2: rgba(206,226,245,1) !default;
-$primary-color-3: rgba(157,193,224,1) !default;
-$primary-color-4: rgba(133,174,210,1) !default;
-$primary-color-5: rgba( 92,149,201,1) !default;
+$primary-color-0: rgba( 35, 40, 55,1);	// Main Hlavní barva */
+$primary-color-1: rgba(110,116,134,1);
+$primary-color-2: rgba( 69, 76, 94,1);
+$primary-color-3: rgba( 20, 26, 46,1);
+$primary-color-4: rgba(  5, 11, 28,1);
 
-$accent-color-0: rgba(240, 248, 236,1) !default;
-$accent-color-1: rgba(212,	235,	198,1) !default;
-$accent-color-2: rgba(169,	216,	142,1) !default;
-$accent-color-3: rgba(141,	203,	105,1) !default;
-$accent-color-4: rgba(90,152,54,1);
+$accent-color-0: rgba( 45, 68, 40,1);	// Main Vedlejší barva (1) */
+$accent-color-1: rgba(139,166,133,1);
+$accent-color-2: rgba( 88,116, 82,1);
+$accent-color-3: rgba( 27, 57, 20,1);
+$accent-color-4: rgba(  9, 35,  3,1);
+
+$secondary-color-2-0: rgba( 50, 32, 54,1);	// Main Vedlejší barva (2) */
+$secondary-color-2-1: rgba(127,105,131,1);
+$secondary-color-2-2: rgba( 87, 65, 91,1);
+$secondary-color-2-3: rgba( 41, 17, 45,1);
+$secondary-color-2-4: rgba( 24,  3, 27,1);
 
 $text-body-color: rgba( 0,  0,  0,1) !default;
 $text-body-invert-color: rgba(255,255,255,1) !default;
@@ -26,7 +31,7 @@ $text-accent-color: rgba(255,255,255,1) !default;
 
 $light-color: rgba(255,255,255,1) !default;
 $light-color-fill-50: rgba(255, 255, 255, 0.5) !default;
-$light-color-fill-10: rgba(255, 255, 255, 0.1) !default;
+$light-color-fill0: rgba(255, 255, 255, 0.1) !default;
 
 $button-disabled: #a7a7a7;
 $input-border-color: rgba(210,210,210,1);

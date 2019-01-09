@@ -1,9 +1,10 @@
+@import "app-colors";
 
 .menu-container {
   display: flex;
   align-items: stretch;
   justify-content: flex-start;
-  background-color: dimgray;
+  background-color: $primary-color-2;
   padding: 10px;
   z-index: 2;
 

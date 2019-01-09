@@ -1,11 +1,78 @@
 @import '~@angular/material/theming';
 //We import our custom scss component here
 @import 'styles';
+@import "app-colors";
 
 @include mat-core();
 
-$theme-primary: mat-palette($mat-indigo);
-$theme-accent:  mat-palette($mat-blue-gray, A200, A100, A400);
+$mat-jt-primary: (
+  50 : $primary-color-0,
+  100 : $primary-color-0,
+  200 : $primary-color-0,
+  300 : $primary-color-0,
+  400 : $primary-color-0,
+  500 : $primary-color-0,
+  600 : $primary-color-0,
+  700 : $primary-color-0,
+  800 : $primary-color-0,
+  900 : $primary-color-0,
+  A100 : lighten($primary-color-1, 50),
+  A200 : lighten($primary-color-2, 50),
+  A400 : lighten($primary-color-0, 50),
+  A700 : lighten($primary-color-3, 50),
+  contrast: (
+    50 : $primary-color-0,
+    100 : $primary-color-0,
+    200 : $primary-color-0,
+    300 : $primary-color-0,
+    400 : $primary-color-0,
+    500 : $primary-color-0,
+    600 : $primary-color-0,
+    700 : $primary-color-0,
+    800 : $primary-color-0,
+    900 : $primary-color-0,
+    A100 : #000000,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+$mat-jt-secondary: (
+  50 : $accent-color-0,
+  100 : $accent-color-0,
+  200 : $accent-color-0,
+  300 : $accent-color-0,
+  400 : $accent-color-0,
+  500 : $accent-color-0,
+  600 : $accent-color-0,
+  700 : $accent-color-0,
+  800 : $accent-color-0,
+  900 : $accent-color-0,
+  A100 : $accent-color-1,
+  A200 : $accent-color-2,
+  A400 : $accent-color-0,
+  A700 : $accent-color-3,
+  contrast: (
+    50 : $accent-color-0,
+    100 : $accent-color-0,
+    200 : $accent-color-0,
+    300 : $accent-color-0,
+    400 : $accent-color-0,
+    500 : $accent-color-0,
+    600 : $accent-color-0,
+    700 : $accent-color-0,
+    800 : $accent-color-0,
+    900 : $accent-color-0,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$theme-primary: mat-palette($mat-jt-primary, A200, A100, A400);
+$theme-accent:  mat-palette($mat-jt-secondary, A200, A100, A400);
 $theme-warn:    mat-palette($mat-red);
 $theme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
 
