@@ -77,6 +77,19 @@
                     <input type="number" class="form-control" name="maxAge" id="field_maxAge"
                         [(ngModel)]="activity.maxAge" />
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activity.primaryResultType" for="field_primaryResultType">Primary Result Type</label>
+                    <select class="form-control" name="primaryResultType" [(ngModel)]="activity.primaryResultType" id="field_primaryResultType" >
+                        <option value="LESS_IS_BETTER">{{'jtTestingApp.ResultType.LESS_IS_BETTER' | translate}}</option>
+                        <option value="MORE_IS_BETTER">{{'jtTestingApp.ResultType.MORE_IS_BETTER' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activity.secondaryResultType" for="field_secondaryResultType">Secondary Result Type</label>
+                    <select class="form-control" name="secondaryResultType" [(ngModel)]="activity.secondaryResultType" id="field_secondaryResultType" >
+                        <option value="">{{'jtTestingApp.ResultType.' | translate}}</option>
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <label jhiTranslate="jtTestingApp.activity.categories" for="field_categories">Categories</label>

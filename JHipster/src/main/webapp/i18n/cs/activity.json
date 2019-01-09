@@ -25,6 +25,8 @@
             "secondaryResultValueUnit": "Secondary Result Value Unit",
             "minAge": "Min Age",
             "maxAge": "Max Age",
+            "primaryResultType": "Primary Result Type",
+            "secondaryResultType": "Secondary Result Type",
             "categories": "Categories"
         }
     }

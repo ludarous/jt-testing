@@ -11,6 +11,11 @@ export const enum ActivityResultUnits {
     PERCENTS = 'PERCENTS'
 }
 
+export const enum ResultType {
+    LESS_IS_BETTER = 'LESS_IS_BETTER',
+    MORE_IS_BETTER = 'MORE_IS_BETTER'
+}
+
 export interface IActivity {
     id?: number;
     name?: string;
@@ -21,6 +26,8 @@ export interface IActivity {
     secondaryResultValueUnit?: ActivityResultUnits;
     minAge?: number;
     maxAge?: number;
+    primaryResultType?: ResultType;
+    secondaryResultType?: ResultType;
     categories?: IActivityCategory[];
 }
 
@@ -35,6 +42,8 @@ export class Activity implements IActivity {
         public secondaryResultValueUnit?: ActivityResultUnits,
         public minAge?: number,
         public maxAge?: number,
+        public primaryResultType?: ResultType,
+        public secondaryResultType?: ResultType,
         public categories?: IActivityCategory[]
     ) {}
 }

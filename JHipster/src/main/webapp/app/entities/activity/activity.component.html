@@ -38,6 +38,8 @@
             <th jhiSortBy="secondaryResultValueUnit"><span jhiTranslate="jtTestingApp.activity.secondaryResultValueUnit">Secondary Result Value Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="minAge"><span jhiTranslate="jtTestingApp.activity.minAge">Min Age</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="maxAge"><span jhiTranslate="jtTestingApp.activity.maxAge">Max Age</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="primaryResultType"><span jhiTranslate="jtTestingApp.activity.primaryResultType">Primary Result Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="secondaryResultType"><span jhiTranslate="jtTestingApp.activity.secondaryResultType">Secondary Result Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -52,6 +54,8 @@
                 <td jhiTranslate="{{'jtTestingApp.ActivityResultUnits.' + activity.secondaryResultValueUnit}}">{{activity.secondaryResultValueUnit}}</td>
                 <td>{{activity.minAge}}</td>
                 <td>{{activity.maxAge}}</td>
+                <td jhiTranslate="{{'jtTestingApp.ResultType.' + activity.primaryResultType}}">{{activity.primaryResultType}}</td>
+                <td jhiTranslate="{{'jtTestingApp.ResultType.' + activity.secondaryResultType}}">{{activity.secondaryResultType}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

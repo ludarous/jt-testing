@@ -37,6 +37,14 @@
                 <dd>
                     <span>{{activity.maxAge}}</span>
                 </dd>
+                <dt><span jhiTranslate="jtTestingApp.activity.primaryResultType">Primary Result Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jtTestingApp.ResultType.' + activity.primaryResultType}}">{{activity.primaryResultType}}</span>
+                </dd>
+                <dt><span jhiTranslate="jtTestingApp.activity.secondaryResultType">Secondary Result Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jtTestingApp.ResultType.' + activity.secondaryResultType}}">{{activity.secondaryResultType}}</span>
+                </dd>
                 <dt><span jhiTranslate="jtTestingApp.activity.categories">Categories</span></dt>
                 <dd>
                     <span *ngFor="let categories of activity.categories; let last = last">

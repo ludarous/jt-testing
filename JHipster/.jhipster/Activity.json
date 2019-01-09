@@ -1,5 +1,16 @@
 {
-    "name": "Activity",
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "categories",
+            "otherEntityName": "activityCategory",
+            "otherEntityField": "name",
+            "ownerSide": true
+        }
+    ],
     "fields": [
         {
             "fieldName": "name",
@@ -40,26 +51,23 @@
         {
             "fieldName": "maxAge",
             "fieldType": "Integer"
-        }
-    ],
-    "relationships": [
+        },
         {
-            "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "",
-            "relationshipName": "categories",
-            "otherEntityName": "activityCategory",
-            "otherEntityField": "name",
-            "ownerSide": true
+            "fieldName": "primaryResultType",
+            "fieldType": "ResultType",
+            "fieldValues": "LESS_IS_BETTER,MORE_IS_BETTER"
+        },
+        {
+            "fieldName": "secondaryResultType",
+            "fieldType": "ResultType",
+            "fieldValues": ""
         }
     ],
     "changelogDate": "20180919081351",
-    "entityTableName": "activity",
     "dto": "mapstruct",
-    "pagination": "pagination",
+    "searchEngine": "elasticsearch",
     "service": "serviceImpl",
+    "entityTableName": "activity",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*",
-    "searchEngine": "elasticsearch"
+    "pagination": "pagination"
 }

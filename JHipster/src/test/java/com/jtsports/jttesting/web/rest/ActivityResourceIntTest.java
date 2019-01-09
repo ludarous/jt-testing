@@ -45,7 +45,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.jtsports.jttesting.domain.enumeration.ActivityResultUnits;
-
+import com.jtsports.jttesting.domain.enumeration.ActivityResultUnits;
+import com.jtsports.jttesting.domain.enumeration.ResultType;
+import com.jtsports.jttesting.domain.enumeration.ResultType;
 /**
  * Test class for the ActivityResource REST controller.
  *
@@ -78,6 +80,12 @@ public class ActivityResourceIntTest {
 
     private static final Integer DEFAULT_MAX_AGE = 1;
     private static final Integer UPDATED_MAX_AGE = 2;
+
+    private static final ResultType DEFAULT_PRIMARY_RESULT_TYPE = ResultType.LESS_IS_BETTER;
+    private static final ResultType UPDATED_PRIMARY_RESULT_TYPE = ResultType.MORE_IS_BETTER;
+
+    private static final ResultType DEFAULT_SECONDARY_RESULT_TYPE = ResultType.;
+    private static final ResultType UPDATED_SECONDARY_RESULT_TYPE = ResultType.;
 
     @Autowired
     private ActivityRepository activityRepository;
@@ -152,7 +160,9 @@ public class ActivityResourceIntTest {
             .primaryResultValueUnit(DEFAULT_PRIMARY_RESULT_VALUE_UNIT)
             .secondaryResultValueUnit(DEFAULT_SECONDARY_RESULT_VALUE_UNIT)
             .minAge(DEFAULT_MIN_AGE)
-            .maxAge(DEFAULT_MAX_AGE);
+            .maxAge(DEFAULT_MAX_AGE)
+            .primaryResultType(DEFAULT_PRIMARY_RESULT_TYPE)
+            .secondaryResultType(DEFAULT_SECONDARY_RESULT_TYPE);
         return activity;
     }
 
@@ -185,6 +195,8 @@ public class ActivityResourceIntTest {
         assertThat(testActivity.getSecondaryResultValueUnit()).isEqualTo(DEFAULT_SECONDARY_RESULT_VALUE_UNIT);
         assertThat(testActivity.getMinAge()).isEqualTo(DEFAULT_MIN_AGE);
         assertThat(testActivity.getMaxAge()).isEqualTo(DEFAULT_MAX_AGE);
+        assertThat(testActivity.getPrimaryResultType()).isEqualTo(DEFAULT_PRIMARY_RESULT_TYPE);
+        assertThat(testActivity.getSecondaryResultType()).isEqualTo(DEFAULT_SECONDARY_RESULT_TYPE);
 
         // Validate the Activity in Elasticsearch
         verify(mockActivitySearchRepository, times(1)).save(testActivity);
@@ -269,11 +281,13 @@ public class ActivityResourceIntTest {
             .andExpect(jsonPath("$.[*].primaryResultValueUnit").value(hasItem(DEFAULT_PRIMARY_RESULT_VALUE_UNIT.toString())))
             .andExpect(jsonPath("$.[*].secondaryResultValueUnit").value(hasItem(DEFAULT_SECONDARY_RESULT_VALUE_UNIT.toString())))
             .andExpect(jsonPath("$.[*].minAge").value(hasItem(DEFAULT_MIN_AGE)))
-            .andExpect(jsonPath("$.[*].maxAge").value(hasItem(DEFAULT_MAX_AGE)));
+            .andExpect(jsonPath("$.[*].maxAge").value(hasItem(DEFAULT_MAX_AGE)))
+            .andExpect(jsonPath("$.[*].primaryResultType").value(hasItem(DEFAULT_PRIMARY_RESULT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].secondaryResultType").value(hasItem(DEFAULT_SECONDARY_RESULT_TYPE.toString())));
     }
     
     public void getAllActivitiesWithEagerRelationshipsIsEnabled() throws Exception {
-        ActivityResource activityResource = new ActivityResource(activityServiceMock, activityRepository, userService, personService, statsService);
+        ActivityResource activityResource = new ActivityResource(activityServiceMock);
         when(activityServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         MockMvc restActivityMockMvc = MockMvcBuilders.standaloneSetup(activityResource)
@@ -289,7 +303,7 @@ public class ActivityResourceIntTest {
     }
 
     public void getAllActivitiesWithEagerRelationshipsIsNotEnabled() throws Exception {
-        ActivityResource activityResource = new ActivityResource(activityServiceMock, activityRepository, userService, personService, statsService);
+        ActivityResource activityResource = new ActivityResource(activityServiceMock);
             when(activityServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
             MockMvc restActivityMockMvc = MockMvcBuilders.standaloneSetup(activityResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
@@ -321,7 +335,9 @@ public class ActivityResourceIntTest {
             .andExpect(jsonPath("$.primaryResultValueUnit").value(DEFAULT_PRIMARY_RESULT_VALUE_UNIT.toString()))
             .andExpect(jsonPath("$.secondaryResultValueUnit").value(DEFAULT_SECONDARY_RESULT_VALUE_UNIT.toString()))
             .andExpect(jsonPath("$.minAge").value(DEFAULT_MIN_AGE))
-            .andExpect(jsonPath("$.maxAge").value(DEFAULT_MAX_AGE));
+            .andExpect(jsonPath("$.maxAge").value(DEFAULT_MAX_AGE))
+            .andExpect(jsonPath("$.primaryResultType").value(DEFAULT_PRIMARY_RESULT_TYPE.toString()))
+            .andExpect(jsonPath("$.secondaryResultType").value(DEFAULT_SECONDARY_RESULT_TYPE.toString()));
     }
     @Test
     @Transactional
@@ -351,7 +367,9 @@ public class ActivityResourceIntTest {
             .primaryResultValueUnit(UPDATED_PRIMARY_RESULT_VALUE_UNIT)
             .secondaryResultValueUnit(UPDATED_SECONDARY_RESULT_VALUE_UNIT)
             .minAge(UPDATED_MIN_AGE)
-            .maxAge(UPDATED_MAX_AGE);
+            .maxAge(UPDATED_MAX_AGE)
+            .primaryResultType(UPDATED_PRIMARY_RESULT_TYPE)
+            .secondaryResultType(UPDATED_SECONDARY_RESULT_TYPE);
         ActivityDTO activityDTO = activityMapper.toDto(updatedActivity);
 
         restActivityMockMvc.perform(put("/api/activities")
@@ -371,6 +389,8 @@ public class ActivityResourceIntTest {
         assertThat(testActivity.getSecondaryResultValueUnit()).isEqualTo(UPDATED_SECONDARY_RESULT_VALUE_UNIT);
         assertThat(testActivity.getMinAge()).isEqualTo(UPDATED_MIN_AGE);
         assertThat(testActivity.getMaxAge()).isEqualTo(UPDATED_MAX_AGE);
+        assertThat(testActivity.getPrimaryResultType()).isEqualTo(UPDATED_PRIMARY_RESULT_TYPE);
+        assertThat(testActivity.getSecondaryResultType()).isEqualTo(UPDATED_SECONDARY_RESULT_TYPE);
 
         // Validate the Activity in Elasticsearch
         verify(mockActivitySearchRepository, times(1)).save(testActivity);
@@ -438,7 +458,9 @@ public class ActivityResourceIntTest {
             .andExpect(jsonPath("$.[*].primaryResultValueUnit").value(hasItem(DEFAULT_PRIMARY_RESULT_VALUE_UNIT.toString())))
             .andExpect(jsonPath("$.[*].secondaryResultValueUnit").value(hasItem(DEFAULT_SECONDARY_RESULT_VALUE_UNIT.toString())))
             .andExpect(jsonPath("$.[*].minAge").value(hasItem(DEFAULT_MIN_AGE)))
-            .andExpect(jsonPath("$.[*].maxAge").value(hasItem(DEFAULT_MAX_AGE)));
+            .andExpect(jsonPath("$.[*].maxAge").value(hasItem(DEFAULT_MAX_AGE)))
+            .andExpect(jsonPath("$.[*].primaryResultType").value(hasItem(DEFAULT_PRIMARY_RESULT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].secondaryResultType").value(hasItem(DEFAULT_SECONDARY_RESULT_TYPE.toString())));
     }
 
     @Test

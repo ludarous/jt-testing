@@ -25,6 +25,8 @@ export class ActivityUpdatePage {
     secondaryResultValueUnitSelect = element(by.id('field_secondaryResultValueUnit'));
     minAgeInput = element(by.id('field_minAge'));
     maxAgeInput = element(by.id('field_maxAge'));
+    primaryResultTypeSelect = element(by.id('field_primaryResultType'));
+    secondaryResultTypeSelect = element(by.id('field_secondaryResultType'));
     categoriesSelect = element(by.id('field_categories'));
 
     getPageTitle() {
@@ -107,6 +109,34 @@ export class ActivityUpdatePage {
         return this.maxAgeInput.getAttribute('value');
     }
 
+    setPrimaryResultTypeSelect(primaryResultType): promise.Promise<void> {
+        return this.primaryResultTypeSelect.sendKeys(primaryResultType);
+    }
+
+    getPrimaryResultTypeSelect() {
+        return this.primaryResultTypeSelect.element(by.css('option:checked')).getText();
+    }
+
+    primaryResultTypeSelectLastOption(): promise.Promise<void> {
+        return this.primaryResultTypeSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+    setSecondaryResultTypeSelect(secondaryResultType): promise.Promise<void> {
+        return this.secondaryResultTypeSelect.sendKeys(secondaryResultType);
+    }
+
+    getSecondaryResultTypeSelect() {
+        return this.secondaryResultTypeSelect.element(by.css('option:checked')).getText();
+    }
+
+    secondaryResultTypeSelectLastOption(): promise.Promise<void> {
+        return this.secondaryResultTypeSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
     categoriesSelectLastOption(): promise.Promise<void> {
         return this.categoriesSelect
             .all(by.tagName('option'))

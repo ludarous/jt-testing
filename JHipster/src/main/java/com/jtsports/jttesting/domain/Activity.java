@@ -4,8 +4,6 @@ package com.jtsports.jttesting.domain;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import com.jtsports.jttesting.domain.util.RandomNumbers;
-import com.jtsports.jttesting.service.dto.ActivityResultDTO;
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -14,24 +12,14 @@ import java.util.Objects;
 
 import com.jtsports.jttesting.domain.enumeration.ActivityResultUnits;
 
+import com.jtsports.jttesting.domain.enumeration.ResultType;
+
 /**
  * A Activity.
  */
 @Entity
 @Table(name = "activity")
 @Document(indexName = "activity")
-@SqlResultSetMapping(name = "ActivityResultDTOMapping", classes = {
-    @ConstructorResult(targetClass = ActivityResultDTO.class,
-        columns = {
-            @ColumnResult(name = "id", type = Long.class),
-            @ColumnResult(name = "primary_result_value", type = Float.class)
-        })
-})
-@NamedNativeQuery(name = "activityResults",
-    resultClass = ActivityResultDTO.class,
-    query = "select id, primary_result_value from activity_result",
-    resultSetMapping ="ActivityResultDTOMapping"
-)
 public class Activity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -68,6 +56,14 @@ public class Activity implements Serializable {
 
     @Column(name = "max_age")
     private Integer maxAge;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "primary_result_type")
+    private ResultType primaryResultType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "secondary_result_type")
+    private ResultType secondaryResultType;
 
     @ManyToMany
     @JoinTable(name = "activity_categories",
@@ -188,6 +184,32 @@ public class Activity implements Serializable {
         this.maxAge = maxAge;
     }
 
+    public ResultType getPrimaryResultType() {
+        return primaryResultType;
+    }
+
+    public Activity primaryResultType(ResultType primaryResultType) {
+        this.primaryResultType = primaryResultType;
+        return this;
+    }
+
+    public void setPrimaryResultType(ResultType primaryResultType) {
+        this.primaryResultType = primaryResultType;
+    }
+
+    public ResultType getSecondaryResultType() {
+        return secondaryResultType;
+    }
+
+    public Activity secondaryResultType(ResultType secondaryResultType) {
+        this.secondaryResultType = secondaryResultType;
+        return this;
+    }
+
+    public void setSecondaryResultType(ResultType secondaryResultType) {
+        this.secondaryResultType = secondaryResultType;
+    }
+
     public Set<ActivityCategory> getCategories() {
         return categories;
     }
@@ -244,6 +266,8 @@ public class Activity implements Serializable {
             ", secondaryResultValueUnit='" + getSecondaryResultValueUnit() + "'" +
             ", minAge=" + getMinAge() +
             ", maxAge=" + getMaxAge() +
+            ", primaryResultType='" + getPrimaryResultType() + "'" +
+            ", secondaryResultType='" + getSecondaryResultType() + "'" +
             "}";
     }
 }

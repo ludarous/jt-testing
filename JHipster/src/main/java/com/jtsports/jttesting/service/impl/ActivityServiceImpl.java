@@ -1,18 +1,11 @@
 package com.jtsports.jttesting.service.impl;
 
-import com.jtsports.jttesting.domain.ActivityResult;
-import com.jtsports.jttesting.repository.ActivityCategoryRepository;
 import com.jtsports.jttesting.service.ActivityService;
 import com.jtsports.jttesting.domain.Activity;
 import com.jtsports.jttesting.repository.ActivityRepository;
 import com.jtsports.jttesting.repository.search.ActivitySearchRepository;
-import com.jtsports.jttesting.service.dto.Activity.*;
 import com.jtsports.jttesting.service.dto.ActivityDTO;
-import com.jtsports.jttesting.service.dto.ActivityResultDTO;
-import com.jtsports.jttesting.service.dto.StatsRequestDTO;
 import com.jtsports.jttesting.service.mapper.ActivityMapper;
-import com.jtsports.jttesting.service.mapper.ActivityResultMapper;
-import com.jtsports.jttesting.service.util.StatsUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,10 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -42,17 +32,11 @@ public class ActivityServiceImpl implements ActivityService {
 
     private final ActivityMapper activityMapper;
 
-    private final ActivityResultMapper activityResultMapper;
-
-    private final ActivityCategoryRepository activityCategoryRepository;
-
     private final ActivitySearchRepository activitySearchRepository;
 
-    public ActivityServiceImpl(ActivityRepository activityRepository, ActivityMapper activityMapper, ActivityResultMapper activityResultMapper, ActivityCategoryRepository activityCategoryRepository, ActivitySearchRepository activitySearchRepository) {
+    public ActivityServiceImpl(ActivityRepository activityRepository, ActivityMapper activityMapper, ActivitySearchRepository activitySearchRepository) {
         this.activityRepository = activityRepository;
         this.activityMapper = activityMapper;
-        this.activityResultMapper = activityResultMapper;
-        this.activityCategoryRepository = activityCategoryRepository;
         this.activitySearchRepository = activitySearchRepository;
     }
 
@@ -136,5 +120,4 @@ public class ActivityServiceImpl implements ActivityService {
         return activitySearchRepository.search(queryStringQuery(query), pageable)
             .map(activityMapper::toDto);
     }
-
 }

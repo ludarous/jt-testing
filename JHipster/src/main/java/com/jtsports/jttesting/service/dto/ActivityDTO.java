@@ -7,6 +7,8 @@ import java.util.Set;
 import java.util.Objects;
 import com.jtsports.jttesting.domain.enumeration.ActivityResultUnits;
 import com.jtsports.jttesting.domain.enumeration.ActivityResultUnits;
+import com.jtsports.jttesting.domain.enumeration.ResultType;
+import com.jtsports.jttesting.domain.enumeration.ResultType;
 
 /**
  * A DTO for the Activity entity.
@@ -32,6 +34,10 @@ public class ActivityDTO implements Serializable {
     private Integer minAge;
 
     private Integer maxAge;
+
+    private ResultType primaryResultType;
+
+    private ResultType secondaryResultType;
 
     private Set<ActivityCategoryDTO> categories = new HashSet<>();
 
@@ -107,6 +113,22 @@ public class ActivityDTO implements Serializable {
         this.maxAge = maxAge;
     }
 
+    public ResultType getPrimaryResultType() {
+        return primaryResultType;
+    }
+
+    public void setPrimaryResultType(ResultType primaryResultType) {
+        this.primaryResultType = primaryResultType;
+    }
+
+    public ResultType getSecondaryResultType() {
+        return secondaryResultType;
+    }
+
+    public void setSecondaryResultType(ResultType secondaryResultType) {
+        this.secondaryResultType = secondaryResultType;
+    }
+
     public Set<ActivityCategoryDTO> getCategories() {
         return categories;
     }
@@ -148,6 +170,8 @@ public class ActivityDTO implements Serializable {
             ", secondaryResultValueUnit='" + getSecondaryResultValueUnit() + "'" +
             ", minAge=" + getMinAge() +
             ", maxAge=" + getMaxAge() +
+            ", primaryResultType='" + getPrimaryResultType() + "'" +
+            ", secondaryResultType='" + getSecondaryResultType() + "'" +
             "}";
     }
 }

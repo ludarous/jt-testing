@@ -44,6 +44,8 @@ describe('Activity e2e test', () => {
         expect(activityUpdatePage.getMinAgeInput()).toMatch('5');
         activityUpdatePage.setMaxAgeInput('5');
         expect(activityUpdatePage.getMaxAgeInput()).toMatch('5');
+        activityUpdatePage.primaryResultTypeSelectLastOption();
+        activityUpdatePage.secondaryResultTypeSelectLastOption();
         // activityUpdatePage.categoriesSelectLastOption();
         activityUpdatePage.save();
         expect(activityUpdatePage.getSaveButton().isPresent()).toBeFalsy();
