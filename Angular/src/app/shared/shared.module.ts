@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {TranslateDirective, TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MenuComponent} from './components/menu/menu.component';
+import {TranslateService} from '@ngx-translate/core';
 import {KeysPipe} from './pipes/keys.pipe';
+import {DatexPipe} from './pipes/datex/datex.pipe';
 
 @NgModule({
   declarations: [
-    KeysPipe
+    KeysPipe,
+    DatexPipe
   ],
   imports: [
 
@@ -16,7 +15,8 @@ import {KeysPipe} from './pipes/keys.pipe';
     TranslateService,
   ],
   exports: [
-    KeysPipe
+    KeysPipe,
+    DatexPipe
   ]
 })
 export class SharedModule { }
