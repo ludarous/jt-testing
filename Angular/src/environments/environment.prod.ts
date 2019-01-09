@@ -1,4 +1,4 @@
 export const environment = {
-  backendUrl: 'http://localhost:8090/api',
+  backendUrl: 'http://backend.jttest.ludarous.com/api',
   production: true
 };

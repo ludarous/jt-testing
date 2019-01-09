@@ -1,10 +1,8 @@
 package com.jtsports.jttesting.service;
 
 import com.jtsports.jttesting.domain.*;
-import com.jtsports.jttesting.repository.AuthorityRepository;
+import com.jtsports.jttesting.repository.*;
 import com.jtsports.jttesting.config.Constants;
-import com.jtsports.jttesting.repository.PersonRepository;
-import com.jtsports.jttesting.repository.UserRepository;
 import com.jtsports.jttesting.repository.search.PersonSearchRepository;
 import com.jtsports.jttesting.repository.search.UserSearchRepository;
 import com.jtsports.jttesting.security.AuthoritiesConstants;
@@ -48,13 +46,19 @@ public class UserService {
 
     private final PersonSearchRepository personSearchRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserSearchRepository userSearchRepository, AuthorityRepository authorityRepository, PersonRepository personRepository, PersonSearchRepository personSearchRepository) {
+    private final PersonalDataRepository personalDataRepository;
+
+    private final AddressRepository addressRepository;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserSearchRepository userSearchRepository, AuthorityRepository authorityRepository, PersonRepository personRepository, PersonSearchRepository personSearchRepository, PersonalDataRepository personalDataRepository, AddressRepository addressRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.userSearchRepository = userSearchRepository;
         this.authorityRepository = authorityRepository;
         this.personRepository = personRepository;
         this.personSearchRepository = personSearchRepository;
+        this.personalDataRepository = personalDataRepository;
+        this.addressRepository = addressRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -197,9 +201,12 @@ public class UserService {
         PersonalData personalData = new PersonalData();
         personalData.setFirstName(user.getFirstName());
         personalData.setLastName(user.getLastName());
-
+        personalData = personalDataRepository.save(personalData);
         person.setPersonalData(personalData);
-        person.setAddress(new Address());
+
+
+        Address address = addressRepository.save(new Address());
+        person.setAddress(address);
         person.setUser(user);
 
         person.setEmail(user.getEmail());
