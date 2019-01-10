@@ -4,6 +4,7 @@ import com.jtsports.jttesting.domain.Activity;
 import com.jtsports.jttesting.domain.ActivityCategory;
 import com.jtsports.jttesting.domain.ActivityResult;
 import com.jtsports.jttesting.domain.JTTest;
+import com.jtsports.jttesting.domain.enumeration.ResultType;
 import com.jtsports.jttesting.repository.ActivityCategoryRepository;
 import com.jtsports.jttesting.repository.ActivityRepository;
 import com.jtsports.jttesting.repository.ActivityResultRepository;
@@ -121,11 +122,7 @@ public class StatsServiceImpl implements StatsService {
 
             personalActivityStatsDTO.setActivity(activityMapper.toDto(activity));
 
-            ActivityResultsStatsDTO resultsStatsDTO = this.getActivityResultStats(activityResults);
-            personalActivityStatsDTO.setActivityResultsStats(resultsStatsDTO);
-
-            List<PersonalActivityResultsStatsDTO> personalActivityResultsStatsDTOs = this.getPersonalActivityResultStats(activityResults, personId);
-            personalActivityStatsDTO.setPersonalActivityResultsStats(personalActivityResultsStatsDTOs);
+            this.setStats(personalActivityStatsDTO, personId, activityResults, activity);
             personalActivityStatsDTO.setPersonalActivityResults(personalResults.stream().map(activityResultMapper::toDto).collect(Collectors.toList()));
 
 
@@ -155,11 +152,7 @@ public class StatsServiceImpl implements StatsService {
                 .filter(ar -> ar.getTestResult().getEventResult().getPerson().getId().longValue() == personId.longValue())
                 .collect(Collectors.toList());
 
-            ActivityResultsStatsDTO resultsStatsDTO = this.getActivityResultStats(activityFilteredResults);
-            personalActivityStatsDTO.setActivityResultsStats(resultsStatsDTO);
-
-            List<PersonalActivityResultsStatsDTO> personalActivityResultsStatsDTOs = this.getPersonalActivityResultStats(activityFilteredResults, personId);
-            personalActivityStatsDTO.setPersonalActivityResultsStats(personalActivityResultsStatsDTOs);
+            this.setStats(personalActivityStatsDTO, personId, activityFilteredResults, activity);
 
             personalActivityStatsDTOList.add(personalActivityStatsDTO);
             personalActivityStatsDTO.setPersonalActivityResults(personalResults.stream().map(activityResultMapper::toDto).collect(Collectors.toList()));
@@ -299,12 +292,15 @@ public class StatsServiceImpl implements StatsService {
         return allActivityResults;
     }
 
-    private List<PersonalActivityResultsStatsDTO> getPersonalActivityResultStats(List<ActivityResult> filteredResults, Long personId) {
+    private List<PersonalActivityResultsStatsDTO> getPersonalActivityResultStats(Long personId, List<ActivityResult> filteredResults, Activity activity) {
 
         List<PersonalActivityResultsStatsDTO> personalActivityResultsStatsDTOList = new ArrayList<>();
 
         List<Float> primaryResults = filteredResults.stream().filter(r -> r.getPrimaryResultValue() != null).map(r -> r.getPrimaryResultValue()).collect(Collectors.toList());
         List<Float> secondaryResults = filteredResults.stream().filter(r -> r.getSecondaryResultValue() != null).map(r -> r.getSecondaryResultValue()).collect(Collectors.toList());
+
+        Comparator<ActivityResult> resultPrimaryComparator = Comparator.comparing(ActivityResult::getPrimaryResultValue, Comparator.nullsLast(Float::compareTo));
+        Comparator<ActivityResult> resultSecondaryComparator = Comparator.comparing(ActivityResult::getSecondaryResultValue, Comparator.nullsLast(Float::compareTo));
 
         List<ActivityResult> personalResults = this.filterPersonResults(filteredResults, personId);
 
@@ -314,16 +310,14 @@ public class StatsServiceImpl implements StatsService {
             personalActivityResultsStatsDTO.setTotalPrimaryResults(primaryResults.size());
             personalActivityResultsStatsDTO.setTotalSecondaryResults(secondaryResults.size());
 
-            Comparator<ActivityResult> resultPrimaryComparator = Comparator.comparing(ActivityResult::getPrimaryResultValue, Comparator.nullsLast(Float::compareTo));
-            Collections.sort(filteredResults, resultPrimaryComparator);
+            this.sortActivityResults(filteredResults, activity.getPrimaryResultType(), resultPrimaryComparator);
 
             int primaryPlacement = filteredResults.indexOf(personalActivityResult);
             personalActivityResultsStatsDTO.setPrimaryPlacement(primaryPlacement);
 
             if (personalActivityResult.getSecondaryResultValue() != null) {
 
-                Comparator<ActivityResult> resultSecondaryComparator = Comparator.comparing(ActivityResult::getSecondaryResultValue, Comparator.nullsLast(Float::compareTo));
-                Collections.sort(filteredResults, resultSecondaryComparator);
+                this.sortActivityResults(filteredResults, activity.getSecondaryResultType(), resultSecondaryComparator);
 
                 int secondaryPlacement = filteredResults.indexOf(personalActivityResult);
                 personalActivityResultsStatsDTO.setSecondaryPlacement(secondaryPlacement);
@@ -372,6 +366,25 @@ public class StatsServiceImpl implements StatsService {
         }
 
         return resultsStatsDTO;
+    }
+
+    private void sortActivityResults(List<ActivityResult> results, ResultType resultType, Comparator<ActivityResult> comparator) {
+        if(ResultType.MORE_IS_BETTER.equals(resultType)) {
+            Collections.sort(results, comparator.reversed());
+        } else if (ResultType.LESS_IS_BETTER.equals(resultType)) {
+            Collections.sort(results, comparator);
+        } else {
+            Collections.sort(results, comparator);
+        }
+    }
+
+    private void setStats(PersonalActivityStatsDTO personalActivityStatsDTO, Long personId, List<ActivityResult> results, Activity activity ) {
+
+        ActivityResultsStatsDTO resultsStatsDTO = this.getActivityResultStats(results);
+        personalActivityStatsDTO.setActivityResultsStats(resultsStatsDTO);
+
+        List<PersonalActivityResultsStatsDTO> personalActivityResultsStatsDTOs = this.getPersonalActivityResultStats(personId, results, activity);
+        personalActivityStatsDTO.setPersonalActivityResultsStats(personalActivityResultsStatsDTOs);
     }
 
     private boolean activityIsInCategories(Activity activity, List<Long> categoryIds) {

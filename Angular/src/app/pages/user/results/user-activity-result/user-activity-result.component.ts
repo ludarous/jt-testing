@@ -13,6 +13,7 @@ import {EventManager} from '../../../../services/event.manager';
 import {MatExpansionModule, MatExpansionPanel} from '@angular/material';
 import {StatsUtils} from '../../../../utils/stats-utils';
 import {ChartUtils} from '../../../../utils/chart-utils';
+import {ResultType} from '../../../../entities/enums/result-type';
 
 @Component({
   selector: 'app-user-activity-result',
@@ -91,9 +92,9 @@ export class UserActivityResultComponent implements OnInit {
 
   createChartData(activityStats: PersonalActivityStats, activityResult: IActivityResult) {
 
-    const primaryPlacements = activityStats.personalActivityResultsStats.map(par => par.primaryPlacement);
-    const primaryPlacementAverage = StatsUtils.average(primaryPlacements);
     const primaryCount = activityStats.activityResultsStats.primaryResultsCount;
+    const primaryPlacements = activityStats.personalActivityResultsStats.map(par => primaryCount - par.primaryPlacement);
+    const primaryPlacementAverage = StatsUtils.average(primaryPlacements);
 
     this.myPrimaryResultCardData = [
       {
@@ -115,9 +116,9 @@ export class UserActivityResultComponent implements OnInit {
 
     if (this.activityResult.secondaryResultValue) {
 
-      const secondaryPlacements = activityStats.personalActivityResultsStats.map(par => par.secondaryPlacement);
-      const secondaryPlacementAverage = StatsUtils.average(secondaryPlacements);
       const secondaryCount = activityStats.activityResultsStats.secondaryResultsCount;
+      const secondaryPlacements = activityStats.personalActivityResultsStats.map(par => secondaryCount - par.secondaryPlacement);
+      const secondaryPlacementAverage = StatsUtils.average(secondaryPlacements);
 
         this.mySecondaryResultCardData = [
         {
@@ -148,14 +149,18 @@ export class UserActivityResultComponent implements OnInit {
       },
       {
         name: 'Nejlepší výsledek v testu',
-        value: activityStats.activityResultsStats.primaryMax,
+        value: ResultType.MORE_IS_BETTER.equals(this.activity.primaryResultType) ?
+          activityStats.activityResultsStats.primaryMax :
+          activityStats.activityResultsStats.primaryMin,
         extra: {
           unit: this.enumTranslatorService.translate(this.activity.primaryResultValueUnit, 'plural')
         }
       },
       {
         name: 'Nejhorší výsledek v testu',
-        value: activityStats.activityResultsStats.primaryMin,
+        value: ResultType.MORE_IS_BETTER.equals(this.activity.secondaryResultType) ?
+          activityStats.activityResultsStats.primaryMin :
+          activityStats.activityResultsStats.primaryMax,
         extra: {
           unit: this.enumTranslatorService.translate(this.activity.primaryResultValueUnit, 'plural')
         }
@@ -173,14 +178,18 @@ export class UserActivityResultComponent implements OnInit {
         },
         {
           name: 'Nejlepší výsledek v testu',
-          value: activityStats.activityResultsStats.secondaryMax,
+          value: ResultType.MORE_IS_BETTER.equals(this.activity.secondaryResultType) ?
+            activityStats.activityResultsStats.secondaryMax :
+            activityStats.activityResultsStats.secondaryMin,
           extra: {
             unit: this.enumTranslatorService.translate(this.activity.secondaryResultValueUnit, 'plural')
           }
         },
         {
           name: 'Nejhorší výsledek v testu',
-          value: activityStats.activityResultsStats.secondaryMin,
+          value: ResultType.MORE_IS_BETTER.equals(this.activity.secondaryResultType) ?
+            activityStats.activityResultsStats.secondaryMin :
+            activityStats.activityResultsStats.secondaryMax,
           extra: {
             unit: this.enumTranslatorService.translate(this.activity.secondaryResultValueUnit, 'plural')
           }
@@ -203,11 +212,15 @@ export class UserActivityResultComponent implements OnInit {
           },
           {
             name: 'Nejlepší výsledek v testu',
-            value: activityStats.activityResultsStats.primaryMax
+            value: ResultType.MORE_IS_BETTER.equals(this.activity.primaryResultType) ?
+              activityStats.activityResultsStats.primaryMax :
+              activityStats.activityResultsStats.primaryMin
           },
           {
             name: 'Nejhorší výsledek v testu',
-            value: activityStats.activityResultsStats.primaryMin
+            value: ResultType.MORE_IS_BETTER.equals(this.activity.secondaryResultType) ?
+              activityStats.activityResultsStats.primaryMin :
+              activityStats.activityResultsStats.primaryMax
           }
         ]
       }
@@ -229,11 +242,15 @@ export class UserActivityResultComponent implements OnInit {
             },
             {
               name: 'Nejlepší výsledek v testu',
-              value: activityStats.activityResultsStats.secondaryMax
+              value: ResultType.MORE_IS_BETTER.equals(this.activity.secondaryResultType) ?
+                activityStats.activityResultsStats.secondaryMax :
+                activityStats.activityResultsStats.secondaryMin
             },
             {
               name: 'Nejhorší výsledek v testu',
-              value: activityStats.activityResultsStats.secondaryMin
+              value: ResultType.MORE_IS_BETTER.equals(this.activity.secondaryResultType) ?
+                activityStats.activityResultsStats.secondaryMin :
+                activityStats.activityResultsStats.secondaryMax
             }
           ]
         }

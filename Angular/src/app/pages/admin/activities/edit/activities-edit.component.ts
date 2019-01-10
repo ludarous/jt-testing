@@ -11,6 +11,7 @@ import {ActivityCategoryService} from '../../../../services/activity-category.se
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {RxjsUtils} from '../../../../utils/rxjs.utils';
+import {ResultType} from '../../../../entities/enums/result-type';
 
 @Component({
   selector: 'app-edit',
@@ -24,6 +25,7 @@ export class ActivitiesEditComponent implements OnInit {
   activityId: number;
 
   units: Array<ActivityResultUnits>;
+  resultTypes: Array<ResultType>;
   activityCategories: Array<IActivityCategory>;
 
   selectedCategories: Array<IActivityCategory>;
@@ -35,6 +37,7 @@ export class ActivitiesEditComponent implements OnInit {
   ngOnInit() {
 
     this.units = ActivityResultUnits.getAll();
+    this.resultTypes = ResultType.getAll();
 
     const params$ = this.activatedRoute.params;
     params$.subscribe((params) => {
@@ -83,7 +86,9 @@ export class ActivitiesEditComponent implements OnInit {
       primaryResultValueUnit: new FormControl(activity.primaryResultValueUnit ? activity.primaryResultValueUnit.ordinal : null),
       secondaryResultValueUnit: new FormControl(activity.secondaryResultValueUnit ? activity.secondaryResultValueUnit.ordinal : null),
       minAge: new FormControl(activity.minAge, [CustomValidators.integerPositive, Validators.min(0), Validators.max(120)]),
-      maxAge: new FormControl(activity.maxAge, [CustomValidators.integerPositive, Validators.min(0), Validators.max(120)])
+      maxAge: new FormControl(activity.maxAge, [CustomValidators.integerPositive, Validators.min(0), Validators.max(120)]),
+      primaryResultType: new FormControl(activity.primaryResultType ? activity.primaryResultType.ordinal : null),
+      secondaryResultType: new FormControl(activity.secondaryResultType ? activity.secondaryResultType.ordinal : null),
     });
 
     if (activity.categories) {

@@ -84,8 +84,8 @@ public class ActivityResourceIntTest {
     private static final ResultType DEFAULT_PRIMARY_RESULT_TYPE = ResultType.LESS_IS_BETTER;
     private static final ResultType UPDATED_PRIMARY_RESULT_TYPE = ResultType.MORE_IS_BETTER;
 
-    private static final ResultType DEFAULT_SECONDARY_RESULT_TYPE = ResultType.;
-    private static final ResultType UPDATED_SECONDARY_RESULT_TYPE = ResultType.;
+    private static final ResultType DEFAULT_SECONDARY_RESULT_TYPE = ResultType.LESS_IS_BETTER;
+    private static final ResultType UPDATED_SECONDARY_RESULT_TYPE = ResultType.MORE_IS_BETTER;
 
     @Autowired
     private ActivityRepository activityRepository;
@@ -287,7 +287,7 @@ public class ActivityResourceIntTest {
     }
     
     public void getAllActivitiesWithEagerRelationshipsIsEnabled() throws Exception {
-        ActivityResource activityResource = new ActivityResource(activityServiceMock);
+        ActivityResource activityResource = new ActivityResource(activityServiceMock, activityRepository, userService, personService, statsService);
         when(activityServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         MockMvc restActivityMockMvc = MockMvcBuilders.standaloneSetup(activityResource)
@@ -303,7 +303,7 @@ public class ActivityResourceIntTest {
     }
 
     public void getAllActivitiesWithEagerRelationshipsIsNotEnabled() throws Exception {
-        ActivityResource activityResource = new ActivityResource(activityServiceMock);
+        ActivityResource activityResource = new ActivityResource(activityServiceMock, activityRepository, userService, personService, statsService);
             when(activityServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
             MockMvc restActivityMockMvc = MockMvcBuilders.standaloneSetup(activityResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)

@@ -97,11 +97,12 @@ export class UserTestResultComponent implements OnInit {
     this.activitiesChartData = [];
 
     for (const activityStats of this.testStats.personalActivitiesStats) {
-      const primaryPlacements = activityStats.personalActivityResultsStats.map(par => par.primaryPlacement);
-      const primaryPlacementsAverage = StatsUtils.average(primaryPlacements);
 
       const totalPrimaryCounts = activityStats.personalActivityResultsStats.map(par => par.totalPrimaryResults);
       const totalPrimaryCountsAverage = StatsUtils.average(totalPrimaryCounts);
+
+      const primaryPlacements = activityStats.personalActivityResultsStats.map(par => totalPrimaryCountsAverage - par.primaryPlacement);
+      const primaryPlacementsAverage = StatsUtils.average(primaryPlacements);
 
       this.activitiesChartData.push(
         {

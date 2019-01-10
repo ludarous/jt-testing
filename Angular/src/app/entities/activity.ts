@@ -3,6 +3,7 @@ import {IActivityCategory} from './activity-category';
 import {HttpResponse} from '@angular/common/http';
 import {ITest} from './test';
 import {IActivityResult} from './activity-result';
+import {ResultType} from './enums/result-type';
 
 export interface IActivity {
   id?: number;
@@ -14,6 +15,8 @@ export interface IActivity {
   secondaryResultValueUnit?: ActivityResultUnits;
   minAge?: number;
   maxAge?: number;
+  primaryResultType?: ResultType;
+  secondaryResultType?: ResultType;
   categories?: Array<IActivityCategory>;
 }
 
@@ -27,6 +30,8 @@ export class Activity implements IActivity {
   secondaryResultValueUnit: ActivityResultUnits;
   minAge: number;
   maxAge: number;
+  primaryResultType: ResultType;
+  secondaryResultType: ResultType;
   categories: Array<IActivityCategory>;
 
   static resolveResponse(response: HttpResponse<IActivity>): IActivity {
@@ -41,6 +46,12 @@ export class Activity implements IActivity {
       }
       if (activity.secondaryResultValueUnit != null) {
         activity.secondaryResultValueUnit = new ActivityResultUnits(<string>activity.secondaryResultValueUnit);
+      }
+      if (activity.primaryResultType != null) {
+        activity.primaryResultType = new ResultType(<string>activity.primaryResultType);
+      }
+      if (activity.secondaryResultType != null) {
+        activity.secondaryResultType = new ResultType(<string>activity.secondaryResultType);
       }
     }
     return activity;

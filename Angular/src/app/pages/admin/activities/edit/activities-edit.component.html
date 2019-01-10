@@ -10,27 +10,53 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <textarea matInput cdkTextareaAutosize [placeholder]="'Popis' | translate" name="description"
+        <textarea class="textarea-min-height"
+                  matInput
+                  cdkTextareaAutosize
+                  cdkAutosizeMinRows="2"
+                  cdkAutosizeMaxRows="5"
+                  [placeholder]="'Popis' | translate"
+                  name="description"
                   formControlName="description"></textarea>
       </mat-form-field>
       <mat-form-field>
-        <textarea matInput cdkTextareaAutosize [placeholder]="'Nápověda' | translate" name="help"
+        <textarea class="textarea-min-height"
+                  matInput
+                  cdkTextareaAutosize
+                  cdkAutosizeMinRows="2"
+                  cdkAutosizeMaxRows="5"
+                  [placeholder]="'Nápověda' | translate"
+                  name="help"
                   formControlName="help"></textarea>
       </mat-form-field>
       <mat-form-field>
         <input matInput [placeholder]="'Klíč' | translate" name="key" formControlName="key"/>
       </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="Jednotky výsledku 1" formControlName="primaryResultValueUnit">
+        <mat-select placeholder="Jednotky hlavního výsledku" formControlName="primaryResultValueUnit">
           <mat-option *ngFor="let unit of units" [value]="unit.ordinal">
             {{unit.value}}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="Jednotky výsledku 2" formControlName="secondaryResultValueUnit">
+        <mat-select placeholder="Typ hlavního výsledku" formControlName="primaryResultType">
+          <mat-option *ngFor="let resultType of resultTypes" [value]="resultType.ordinal">
+            {{resultType.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Jednotky vedlejšího výsledku" formControlName="secondaryResultValueUnit">
           <mat-option *ngFor="let unit of units" [value]="unit.ordinal">
             {{unit.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Typ vedlejšího výsledku" formControlName="secondaryResultType">
+          <mat-option *ngFor="let resultType of resultTypes" [value]="resultType.ordinal">
+            {{resultType.value}}
           </mat-option>
         </mat-select>
       </mat-form-field>
