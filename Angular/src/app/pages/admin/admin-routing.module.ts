@@ -12,6 +12,10 @@ const routes: Routes = [
         redirectTo: 'activities'
       },
       {
+        path: 'activity-categories',
+        loadChildren: 'app/pages/admin/activity-categories/activity-categories.module#ActivityCategoriesModule',
+      },
+      {
         path: 'activities',
         loadChildren: 'app/pages/admin/activities/activities.module#ActivitiesModule',
       },

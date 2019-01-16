@@ -8,7 +8,7 @@ export interface IActivityCategory {
   parentId?: number;
 
   parent?: ActivityCategory;
-  chidlren?: Array<ActivityCategory>;
+  children?: Array<ActivityCategory>;
 }
 
 export class ActivityCategory implements IActivityCategory {
@@ -20,7 +20,7 @@ export class ActivityCategory implements IActivityCategory {
 
 
   parent: ActivityCategory;
-  chidlren: Array<ActivityCategory>;
+  children: Array<ActivityCategory>;
 }
 
 export class PersonalActivityCategoryResultsStats {

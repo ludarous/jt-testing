@@ -6,6 +6,8 @@ import {PersonService} from '../../../services/person.service';
 import {IPersonFull} from '../../../entities/person-full';
 import {IPerson} from '../../../entities/person';
 import {HttpResponse} from '@angular/common/http';
+import {AuthServerProvider} from '../../../core/auth/auth-jwt.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -22,13 +24,18 @@ export class MenuComponent implements OnInit {
 
   constructor(private principal: Principal,
               private eventManager: EventManager,
-              private personService: PersonService) {
+              private personService: PersonService,
+              private authProvider: AuthServerProvider,
+              private router: Router) {
   }
 
   ngOnInit() {
 
     this.updateIdentity();
     this.registerAuthenticationSuccess();
+    this.principal.getAuthenticationState().subscribe((account) => {
+      this.updateAccount(account);
+    });
 
   }
 
@@ -36,6 +43,15 @@ export class MenuComponent implements OnInit {
     this.eventManager.subscribe('authenticationSuccess', message => {
       this.updateIdentity(true);
     });
+  }
+
+  logout() {
+    this.authProvider.logout().subscribe();
+    this.principal.authenticate(null);
+  }
+
+  login() {
+    this.router.navigate(['/account/login']);
   }
 
   showUserName(): string {
@@ -51,23 +67,35 @@ export class MenuComponent implements OnInit {
 
   updateIdentity(force = false) {
     this.principal.identity(force).then(account => {
-
-      if (account) {
-        this.account = account;
-
-        this.principal.hasAnyAuthority(['ROLE_ADMIN']).then((value) => {
-          this.showAdminMenuItem = value;
-        });
-
-        this.personService.findByUserId(this.account.id).subscribe((person: HttpResponse<IPerson>) => {
-            this.person = person.body;
-          },
-          (error: HttpResponse<any>) => {
-            this.person = null;
-          });
-      }
-
+     this.updateAccount(account);
     });
+  }
+
+  updateAccount(account: IUser) {
+    if (account) {
+      this.account = account;
+
+      this.principal.hasAnyAuthority(['ROLE_ADMIN']).then((value) => {
+        if (value) {
+          this.showAdminMenuItem = value;
+          if (this.router.url.includes('/account/login')) this.router.navigate(['/admin']);
+        } else {
+          if (this.router.url.includes('/account/login')) this.router.navigate(['/my-results']);
+        }
+      });
+
+      this.personService.findByUserId(this.account.id).subscribe((person: HttpResponse<IPerson>) => {
+          this.person = person.body;
+        },
+        (error: HttpResponse<any>) => {
+          this.person = null;
+        });
+    } else {
+      this.showAdminMenuItem = false;
+      this.account = null;
+      this.person = null;
+      this.router.navigate(['/account/login']);
+    }
   }
 
 

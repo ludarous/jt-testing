@@ -115,6 +115,19 @@ public class ActivityCategoryResource {
     }
 
     /**
+     * GET  /activity-categories/main : get all main activityCategories.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of main activityCategories in body
+     */
+    @GetMapping("/activity-categories/main")
+    @Timed
+    public ResponseEntity<List<ActivityCategoryDTO>> getAllMainActivityCategories() {
+        log.debug("REST request to get a page of ActivityCategories");
+        List<ActivityCategoryDTO> categories = activityCategoryService.getAllMainCategories();
+        return new ResponseEntity<>(categories, null, HttpStatus.OK);
+    }
+
+    /**
      * GET  /activity-categories/:id : get the "id" activityCategory.
      *
      * @param id the id of the activityCategoryDTO to retrieve

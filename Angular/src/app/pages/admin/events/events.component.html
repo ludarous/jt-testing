@@ -1,11 +1,13 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav mode="side" opened>
-    <div class="sidenav-menu">
-      <a [routerLink]="['list']" routerLinkActive="sidenav-link-active">Seznam událostí</a>
-      <a [routerLink]="['create']" routerLinkActive="sidenav-link-active">Vytvořit událost</a>
-    </div>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <router-outlet class="outlet-container"></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<!--<mat-sidenav-container class="sidenav-container">-->
+  <!--<mat-sidenav mode="side" opened>-->
+    <!--<div class="sidenav-menu">-->
+      <!--<a [routerLink]="['list']" routerLinkActive="sidenav-link-active">Seznam událostí</a>-->
+      <!--<a [routerLink]="['create']" routerLinkActive="sidenav-link-active">Vytvořit událost</a>-->
+    <!--</div>-->
+  <!--</mat-sidenav>-->
+  <!--<mat-sidenav-content>-->
+    <!--<router-outlet class="outlet-container"></router-outlet>-->
+  <!--</mat-sidenav-content>-->
+<!--</mat-sidenav-container>-->
+
+<router-outlet class="outlet-container"></router-outlet>

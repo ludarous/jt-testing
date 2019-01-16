@@ -100,6 +100,13 @@ app-root {
   box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
 }
 
+/*table*/
+.table-top-margin {
+  .ui-widget {
+    margin-top: 20px;
+  }
+}
+
 /*textarea*/
 .textarea-min-height {
   //min-height: 50px;
@@ -153,9 +160,8 @@ app-root {
 .component-container-center {
   flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: stretch;
   padding: 20px;
-  background-color: rgba(110,110,110,1);
 }
 
 .component-container-left {
@@ -174,6 +180,13 @@ app-root {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
+  .form-button-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
 }
 
 .multiselect-dropdown {

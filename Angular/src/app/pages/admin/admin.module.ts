@@ -17,6 +17,7 @@ import {PersonService} from '../../services/person.service';
 import {PersonalDataService} from '../../services/personal-data.service';
 import {AddressService} from '../../services/address.service';
 import {EventService} from '../../services/event.service';
+import {ActivityCategoriesModule} from './activity-categories/activity-categories.module';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import {EventService} from '../../services/event.service';
     PrimeNgComponentsModule,
 
     ActivitiesModule,
+    ActivityCategoriesModule,
   ],
   providers: [
     EventService,

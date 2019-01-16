@@ -20,6 +20,8 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {EventManager} from './services/event.manager';
 import {MAT_DATE_LOCALE} from '@angular/material';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {PrimeNgComponentsModule} from './shared/primeng-components.module';
+import {MessageService} from 'primeng/api';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -44,7 +46,8 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    AppRoutingModule
+    AppRoutingModule,
+    PrimeNgComponentsModule
   ],
   providers: [
     {
@@ -61,6 +64,7 @@ export function createTranslateLoader(http: HttpClient) {
     StateStorageService,
     AuthServerProvider,
     UserService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

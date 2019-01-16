@@ -54,6 +54,7 @@ spring:
             hibernate.generate_statistics: true
     data:
         elasticsearch:
+            # note: run by "docker-compose -f src/main/docker/elasticsearch.yml up -d"
             cluster-name:
             cluster-nodes: localhost:9300
             properties:

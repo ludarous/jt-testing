@@ -179,4 +179,12 @@ public class ActivityCategoryServiceImpl implements ActivityCategoryService {
         return allSubcategories;
     }
 
+    @Override
+    public List<ActivityCategoryDTO> getAllMainCategories() {
+        return activityCategoryRepository.findAllMainCategories()
+            .stream()
+            .map(activityCategoryMapper::toDto)
+            .collect(Collectors.toList());
+    }
+
 }

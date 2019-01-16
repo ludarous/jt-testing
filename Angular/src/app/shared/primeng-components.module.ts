@@ -1,11 +1,32 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  DataTableModule, DialogModule, TooltipModule, GrowlModule, ConfirmDialogModule, DragDropModule, PanelModule,
-  AccordionModule, PanelMenu, MenuModule, PanelMenuModule, DataListModule, OverlayPanelModule, FileUploadModule,
-  TreeModule, ConfirmationService,
+  DataTableModule,
+  DialogModule,
+  TooltipModule,
+  GrowlModule,
+  ConfirmDialogModule,
+  DragDropModule,
+  PanelModule,
+  AccordionModule,
+  PanelMenu,
+  MenuModule,
+  PanelMenuModule,
+  DataListModule,
+  OverlayPanelModule,
+  FileUploadModule,
+  TreeModule,
+  ConfirmationService,
+  TreeTableModule,
+  InputTextareaModule,
+  InputTextModule,
+  MessagesModule,
+  MessageModule,
+  KeyFilterModule,
+  SelectButtonModule, AutoCompleteModule,
 } from 'primeng/primeng';
 import {TableModule} from 'primeng/table';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   imports: [
@@ -32,7 +53,16 @@ import {TableModule} from 'primeng/table';
     PanelMenuModule,
     OverlayPanelModule,
     FileUploadModule,
-    TreeModule
+    TreeModule,
+    TreeTableModule,
+    ToastModule,
+    InputTextareaModule,
+    InputTextModule,
+    MessagesModule,
+    MessageModule,
+    KeyFilterModule,
+    SelectButtonModule,
+    AutoCompleteModule,
   ],
 })
 export class PrimeNgComponentsModule { }

@@ -5,7 +5,7 @@ import {IActivityResult} from '../../../../entities/activity-result';
 import {IActivity} from '../../../../entities/activity';
 import {IEvent} from '../../../../entities/event';
 import {ActivityCategoryService} from '../../../../services/activity-category.service';
-import {CategoriesComponent} from '../../../admin/activities/categories/categories.component';
+import {ActivityCategoriesComponent} from '../../../admin/activity-categories/activity-categories.component';
 import {PersonalCategoryStats} from '../../../../entities/activity-category';
 import {HttpResponse} from '@angular/common/http';
 import {colorSets} from '@swimlane/ngx-charts/release/utils';

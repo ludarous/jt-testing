@@ -15,4 +15,8 @@ import java.util.List;
 public interface ActivityCategoryRepository extends JpaRepository<ActivityCategory, Long> {
 
     List<ActivityCategory> findAllByParentId(Long parentId);
+
+    @Query("select category from ActivityCategory category " +
+        "where category.parent is null")
+    List<ActivityCategory> findAllMainCategories();
 }

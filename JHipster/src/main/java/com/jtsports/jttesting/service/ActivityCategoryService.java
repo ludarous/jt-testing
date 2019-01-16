@@ -65,4 +65,6 @@ public interface ActivityCategoryService {
     List<Activity> findByCategoryId(Long categoryId, Long eventId, Long testId);
 
     List<ActivityCategory> getAllSubcategories(ActivityCategory activityCategory);
+
+    List<ActivityCategoryDTO> getAllMainCategories();
 }

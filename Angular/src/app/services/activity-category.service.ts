@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CrudBaseService} from './crud-base.service';
 import {HttpClient, HttpResponse} from '@angular/common/http';
-import {IActivityCategory, PersonalCategoryStats} from '../entities/activity-category';
+import {ActivityCategory, IActivityCategory, PersonalCategoryStats} from '../entities/activity-category';
 import {PersonalActivityStats} from '../entities/activity';
 import {Observable} from 'rxjs';
 import {StatsRequest} from '../entities/stats-request';
@@ -14,5 +14,9 @@ export class ActivityCategoryService extends CrudBaseService<IActivityCategory> 
 
   findMyStats(parentCategoryId: number, categoryStatsRequest: StatsRequest): Observable<HttpResponse<PersonalCategoryStats>> {
     return this.httpClient.post<PersonalCategoryStats>(`${this.resourceUrl}/my-stats`, categoryStatsRequest, { observe: 'response' });
+  }
+
+  findMainCategories(): Observable<HttpResponse<Array<IActivityCategory>>> {
+    return this.httpClient.get<Array<IActivityCategory>>(`${this.resourceUrl}/main`, { observe: 'response' });
   }
 }

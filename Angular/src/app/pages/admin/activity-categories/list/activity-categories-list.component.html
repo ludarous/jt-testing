@@ -1,0 +1,20 @@
+<div class="component-container-center">
+  <!--<button mat-raised-button (click)="addCategory()">{{'Přidat kategorii' | translate}}</button>-->
+  <p-treeTable class="table-top-margin" *ngIf="categoriesNodes" [value]="categoriesNodes">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Název</th>
+        <th>Popis</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+      <tr>
+        <td>
+          <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+          {{rowData.name}}
+        </td>
+        <td>{{rowData.description}}</td>
+      </tr>
+    </ng-template>
+  </p-treeTable>
+</div>

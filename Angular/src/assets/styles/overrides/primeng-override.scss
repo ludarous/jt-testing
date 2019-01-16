@@ -1,3 +1,29 @@
+/* input group (form)*/
+
+.ui-inputgroup {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  align-content: stretch;
+
+  .ui-autocomplete, .ui-autocomplete-multiple-container {
+    width: 100%;
+  }
+
+  input, textarea, p-autoComplete {
+    width: 100%;
+    flex: 4;
+  }
+
+  p-message {
+    margin-left: 10px;
+    flex: 1;
+
+  }
+}
+
+
 /* Growl component */
 .ui-growl {
   top: 160px;
@@ -351,190 +377,190 @@ p-table.table-without-row-lines {
 }
 
 /* Panel Menu component */
-.vertical-menu {
-  margin-top: $element-margin-from-header;
-  background-color: $light-color-fill-50;
-  .nav-link.active {
-    color: $accent-color;
-  }
-  .nav-link:nth-child(n+2) {
-    border-top: 1px solid $primary-color-2;
-  }
-}
-
-.ui-panelmenu .ui-panelmenu-header.ui-state-active, .ui-panelmenu .ui-panelmenu-header.ui-state-active a {
-  background: transparent;
-  border: 0;
-}
-
-.ui-panelmenu {
-
-  .menu-item-badge {
-    margin-top: 4px;
-    padding: 3px 3px 3px 3px;
-    border-radius: 5px;
-    background-color: $app-danger-color;
-    color: white;
-    font-size: 10px;
-    display: inline;
-    float: right;
-  }
-
-
-  .ui-panelmenu-content {
-
-    & .drag-over {
-      & * {
-        color: $accent-color !important;
-        cursor: move;
-      }
-    }
-
-    &.ui-widget-content {
-      background-color: transparent;
-    }
-
-    .ui-menuitem {
-      &:nth-child(n+1) {
-        //border-bottom: 1px solid $primary-color-2;
-      }
-
-      font-size: 14px;
-    }
-
-    .ui-menuitem-link {
-      color: $primary-color;
-
-      &:hover {
-        color: $primary-color-5;
-      }
-
-      &.ui-state-active {
-        border: 0;
-        background: transparent;
-        color: $accent-color-4;
-
-        &:hover {
-          color: $accent-color-3;
-        }
-      }
-
-      &:not(.ui-state-active) {
-        background: transparent;
-        border: 0;
-        color: $primary-color;
-
-        &:hover {
-          color: $primary-color-5;
-        }
-      }
-    }
-  }
-
-  .ui-panelmenu-panel {
-    padding: .5rem 1rem;
-
-    .ui-panelmenu-icon {
-      display: none;
-    }
-  }
-
-  .ui-panelmenu-header {
-    padding: $header-nav-padding;
-    font-size: 16px;
-    margin: 0;
-    & a {
-      padding: 0;
-    }
-
-    &.ui-state-active {
-      border: 0;
-      background: transparent;
-      color: $accent-color-4;
-      & a {
-        color: $accent-color-4;
-
-        &.ui-state-active {
-          color: $accent-color-4;
-
-          &:hover {
-            background: transparent;
-            color: $accent-color-3;
-          }
-        }
-
-        &:not(.ui-state-active) {
-          color: $accent-color-3;
-
-          &:hover {
-            background: transparent;
-            color: $primary-color-5;
-          }
-        }
-      }
-
-      &:hover {
-        background: transparent;
-      }
-    }
-
-    &:not(.ui-state-active) {
-      border: 0;
-      background: transparent;
-      color: $primary-color;
-      & a {
-        color: $primary-color;
-
-        &.ui-state-active {
-          color: $accent-color-4;
-
-          &:hover {
-            background: transparent;
-            color: $accent-color-3;
-          }
-        }
-
-        &:not(.ui-state-active) {
-          color: $primary-color;
-
-          &:hover {
-            background: transparent;
-            color: $primary-color-5;
-          }
-        }
-      }
-
-      &:hover {
-        background: transparent;
-      }
-    }
-  }
-
-  .ui-panelmenu-panel:nth-child(n+2) {
-    border-top: 1px solid $primary-color-2;
-  }
-
-  .ui-state-default {
-    border: 0;
-    background: transparent;
-    color: $primary-color;
-    //& a {
-    //  color: $primary-color;
-    //  &:hover {
-    //    color: $accent-color;
-    //    text-decoration: underline;
-    //  }
-    //
-    //}
-  }
-
-  .ui-state-active {
-    border: 0;
-    background: transparent;
-    color: $accent-color;
-  }
-
-}
+//.vertical-menu {
+//  margin-top: $element-margin-from-header;
+//  background-color: $light-color-fill-50;
+//  .nav-link.active {
+//    color: $accent-color;
+//  }
+//  .nav-link:nth-child(n+2) {
+//    border-top: 1px solid $primary-color-2;
+//  }
+//}
+//
+//.ui-panelmenu .ui-panelmenu-header.ui-state-active, .ui-panelmenu .ui-panelmenu-header.ui-state-active a {
+//  background: transparent;
+//  border: 0;
+//}
+//
+//.ui-panelmenu {
+//
+//  .menu-item-badge {
+//    margin-top: 4px;
+//    padding: 3px 3px 3px 3px;
+//    border-radius: 5px;
+//    background-color: $app-danger-color;
+//    color: white;
+//    font-size: 10px;
+//    display: inline;
+//    float: right;
+//  }
+//
+//
+//  .ui-panelmenu-content {
+//
+//    & .drag-over {
+//      & * {
+//        color: $accent-color !important;
+//        cursor: move;
+//      }
+//    }
+//
+//    &.ui-widget-content {
+//      background-color: transparent;
+//    }
+//
+//    .ui-menuitem {
+//      &:nth-child(n+1) {
+//        //border-bottom: 1px solid $primary-color-2;
+//      }
+//
+//      font-size: 14px;
+//    }
+//
+//    .ui-menuitem-link {
+//      color: $primary-color;
+//
+//      &:hover {
+//        color: $primary-color-5;
+//      }
+//
+//      &.ui-state-active {
+//        border: 0;
+//        background: transparent;
+//        color: $accent-color-4;
+//
+//        &:hover {
+//          color: $accent-color-3;
+//        }
+//      }
+//
+//      &:not(.ui-state-active) {
+//        background: transparent;
+//        border: 0;
+//        color: $primary-color;
+//
+//        &:hover {
+//          color: $primary-color-5;
+//        }
+//      }
+//    }
+//  }
+//
+//  .ui-panelmenu-panel {
+//    padding: .5rem 1rem;
+//
+//    .ui-panelmenu-icon {
+//      display: none;
+//    }
+//  }
+//
+//  .ui-panelmenu-header {
+//    padding: $header-nav-padding;
+//    font-size: 16px;
+//    margin: 0;
+//    & a {
+//      padding: 0;
+//    }
+//
+//    &.ui-state-active {
+//      border: 0;
+//      background: transparent;
+//      color: $accent-color-4;
+//      & a {
+//        color: $accent-color-4;
+//
+//        &.ui-state-active {
+//          color: $accent-color-4;
+//
+//          &:hover {
+//            background: transparent;
+//            color: $accent-color-3;
+//          }
+//        }
+//
+//        &:not(.ui-state-active) {
+//          color: $accent-color-3;
+//
+//          &:hover {
+//            background: transparent;
+//            color: $primary-color-5;
+//          }
+//        }
+//      }
+//
+//      &:hover {
+//        background: transparent;
+//      }
+//    }
+//
+//    &:not(.ui-state-active) {
+//      border: 0;
+//      background: transparent;
+//      color: $primary-color;
+//      & a {
+//        color: $primary-color;
+//
+//        &.ui-state-active {
+//          color: $accent-color-4;
+//
+//          &:hover {
+//            background: transparent;
+//            color: $accent-color-3;
+//          }
+//        }
+//
+//        &:not(.ui-state-active) {
+//          color: $primary-color;
+//
+//          &:hover {
+//            background: transparent;
+//            color: $primary-color-5;
+//          }
+//        }
+//      }
+//
+//      &:hover {
+//        background: transparent;
+//      }
+//    }
+//  }
+//
+//  .ui-panelmenu-panel:nth-child(n+2) {
+//    border-top: 1px solid $primary-color-2;
+//  }
+//
+//  .ui-state-default {
+//    border: 0;
+//    background: transparent;
+//    color: $primary-color;
+//    //& a {
+//    //  color: $primary-color;
+//    //  &:hover {
+//    //    color: $accent-color;
+//    //    text-decoration: underline;
+//    //  }
+//    //
+//    //}
+//  }
+//
+//  .ui-state-active {
+//    border: 0;
+//    background: transparent;
+//    color: $accent-color;
+//  }
+//
+//}
 
 
 /* Activities panel overlay */

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Activity, IActivity} from '../../../../entities/activity';
 import {ActivityCategory, IActivityCategory} from '../../../../entities/activity-category';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {HttpResponse} from '@angular/common/http';
 import {ActivityService} from '../../../../services/activity.service';
 import {ActivityResultUnits} from '../../../../entities/enums/activity-result-units';
@@ -12,6 +12,10 @@ import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {RxjsUtils} from '../../../../utils/rxjs.utils';
 import {ResultType} from '../../../../entities/enums/result-type';
+import {MessageService, SelectItem} from 'primeng/api';
+import {ArrayUtils} from '../../../../utils/array.utils';
+import {TranslateService} from '@ngx-translate/core';
+import {EnumTranslatorService} from '../../../../shared/pipes/enum-translator/enum-translator';
 
 @Component({
   selector: 'app-edit',
@@ -25,19 +29,32 @@ export class ActivitiesEditComponent implements OnInit {
   activityId: number;
 
   units: Array<ActivityResultUnits>;
-  resultTypes: Array<ResultType>;
-  activityCategories: Array<IActivityCategory>;
+  unitsOptions: Array<SelectItem>;
 
+  resultTypes: Array<ResultType>;
+  resultTypesOptions: Array<SelectItem>;
+
+  activityCategories: Array<IActivityCategory>;
+  suggestedCategories: Array<IActivityCategory>;
   selectedCategories: Array<IActivityCategory>;
 
   constructor(private activatedRoute: ActivatedRoute,
               private activityService: ActivityService,
-              private activityCategoryService: ActivityCategoryService) { }
+              private activityCategoryService: ActivityCategoryService,
+              private enumTranslateService: EnumTranslatorService,
+              private messageService: MessageService,
+              private router: Router) {
+  }
 
   ngOnInit() {
 
     this.units = ActivityResultUnits.getAll();
     this.resultTypes = ResultType.getAll();
+
+    this.unitsOptions = this.units.map(u => ({label: this.enumTranslateService.translate(u, 'plural-1p'), value: u.ordinal}));
+    ArrayUtils.insertItem(this.unitsOptions, {label: 'NONE', value: null}, 0);
+
+    this.resultTypesOptions = this.resultTypes.map(rt => ({label: this.enumTranslateService.translate(rt, 'plural'), value: rt.ordinal}));
 
     const params$ = this.activatedRoute.params;
     params$.subscribe((params) => {
@@ -71,6 +88,7 @@ export class ActivitiesEditComponent implements OnInit {
   onItemSelect(item: any) {
     console.log(item);
   }
+
   onSelectAll(items: any) {
     console.log(items);
   }
@@ -79,7 +97,7 @@ export class ActivitiesEditComponent implements OnInit {
 
     this.activityForm = new FormGroup({
       id: new FormControl(activity.id),
-      name: new FormControl(activity.name),
+      name: new FormControl(activity.name, Validators.required),
       description: new FormControl(activity.description),
       help: new FormControl(activity.help),
       key: new FormControl(activity.key),
@@ -110,10 +128,16 @@ export class ActivitiesEditComponent implements OnInit {
       activityToSave.categories = new Array<IActivityCategory>();
       activityToSave.categories = this.selectedCategories;
 
-      saveActivity$.subscribe((activityResponse: HttpResponse<IActivity>) => {
+      saveActivity$.subscribe(
+        (activityResponse: HttpResponse<IActivity>) => {
         this.activity = Activity.resolveResponse(activityResponse);
         this.setActivityForm(this.activity, this.activityCategories);
-      });
+          this.messageService.add({severity: 'success', summary: 'Aktivita uložena'});
+          this.router.navigate(['/admin/activity-categories/list']);
+      },
+        (error: HttpResponse<any>) => {
+          this.messageService.add({severity: 'error', summary: 'Aktivita nebyla uložena', detail: error.body});
+        });
     }
   }
 
@@ -127,4 +151,10 @@ export class ActivitiesEditComponent implements OnInit {
       return RxjsUtils.create(new Activity());
     }
   }
+
+  search(event) {
+    const filteredCategories = this.activityCategories.filter(c => c.name.includes(event.query));
+    this.suggestedCategories = filteredCategories;
+  }
 }
+

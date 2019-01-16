@@ -2,6 +2,7 @@ import {Injectable, Pipe, PipeTransform} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {EnumWrapper} from '../../../entities/enums/enum-wrapper';
 import {ActivityResultUnits} from '../../../entities/enums/activity-result-units';
+import {ResultType} from '../../../entities/enums/result-type';
 
 @Injectable()
 export class EnumTranslatorService {
@@ -63,6 +64,27 @@ export class EnumTranslatorService {
                 return this.translateService.instant('procent');
             }
           }
+
+          if (argsArray.some(a => a === 'plural-1p')) {
+            switch (enumObj.value) {
+              case 'SECONDS':
+                return this.translateService.instant('sekundy');
+              case 'MINUTES':
+                return this.translateService.instant('minuty');
+              case 'CENTIMETERS':
+                return this.translateService.instant('centimetry');
+              case 'METERS':
+                return this.translateService.instant('metry');
+              case 'COUNTS':
+                return this.translateService.instant('opakování');
+              case 'GOALS':
+                return this.translateService.instant('góly');
+              case 'POINTS':
+                return this.translateService.instant('body');
+              case 'PERCENTS':
+                return this.translateService.instant('procenta');
+            }
+          }
         }
 
         switch (enumObj.value) {
@@ -82,6 +104,17 @@ export class EnumTranslatorService {
             return this.translateService.instant('bod');
           case 'PERCENTS':
             return this.translateService.instant('procento');
+        }
+
+      } else if (enumObj instanceof ResultType) {
+
+        switch (enumObj.value) {
+          case 'LESS_IS_BETTER':
+            return this.translateService.instant('Méně jé lépe');
+          case 'MORE_IS_BETTER':
+            return this.translateService.instant('Více je lépe');
+          case 'NONE':
+            return this.translateService.instant('Neurčeno');
         }
 
       } else {

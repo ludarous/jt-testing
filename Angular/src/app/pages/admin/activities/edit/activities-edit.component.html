@@ -1,77 +1,51 @@
-<div class="component-container-center">
-  <div class="form-container">
-    <form class="form" *ngIf="activityForm" [formGroup]="activityForm" (submit)="saveActivity()">
-      <mat-form-field>
-        <input matInput [placeholder]="'Název' | translate" name="name"
-               formControlName="name"
-               required/>
-        <mat-error *ngIf="activityForm.controls['name'].hasError('required')">
-          {{'Název musí být vyplněn' | translate }}
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <textarea class="textarea-min-height"
-                  matInput
-                  cdkTextareaAutosize
-                  cdkAutosizeMinRows="2"
-                  cdkAutosizeMaxRows="5"
-                  [placeholder]="'Popis' | translate"
-                  name="description"
-                  formControlName="description"></textarea>
-      </mat-form-field>
-      <mat-form-field>
-        <textarea class="textarea-min-height"
-                  matInput
-                  cdkTextareaAutosize
-                  cdkAutosizeMinRows="2"
-                  cdkAutosizeMaxRows="5"
-                  [placeholder]="'Nápověda' | translate"
-                  name="help"
-                  formControlName="help"></textarea>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput [placeholder]="'Klíč' | translate" name="key" formControlName="key"/>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-select placeholder="Jednotky hlavního výsledku" formControlName="primaryResultValueUnit">
-          <mat-option *ngFor="let unit of units" [value]="unit.ordinal">
-            {{unit.value}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-select placeholder="Typ hlavního výsledku" formControlName="primaryResultType">
-          <mat-option *ngFor="let resultType of resultTypes" [value]="resultType.ordinal">
-            {{resultType.value}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-select placeholder="Jednotky vedlejšího výsledku" formControlName="secondaryResultValueUnit">
-          <mat-option *ngFor="let unit of units" [value]="unit.ordinal">
-            {{unit.value}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-select placeholder="Typ vedlejšího výsledku" formControlName="secondaryResultType">
-          <mat-option *ngFor="let resultType of resultTypes" [value]="resultType.ordinal">
-            {{resultType.value}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput [placeholder]="'Minimální věk' | translate" name="minAge" formControlName="minAge"/>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput [placeholder]="'Maximální věk' | translate" name="maxAge" formControlName="maxAge"/>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-select placeholder="Kategorie" [(ngModel)]="selectedCategories"  [ngModelOptions]="{standalone: true}" multiple>
-          <mat-option *ngFor="let category of activityCategories" [value]="category">{{category.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <button mat-raised-button>{{'Uložit' | translate}}</button>
-    </form>
-  </div>
+<div class="activity-edit-container">
+  <form class="form" *ngIf="activityForm" [formGroup]="activityForm" (submit)="saveActivity()">
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Název" formControlName="name" required>
+      <p-message severity="error" text="Název kategorie je povinný"
+                 *ngIf="!activityForm.controls['name'].valid && activityForm.controls['name'].touched"></p-message>
+    </div>
+    <div class="ui-inputgroup">
+      <textarea type="text" pInputTextarea placeholder="Popis" formControlName="description"
+                autoResize="autoResize"></textarea>
+    </div>
+    <div class="ui-inputgroup">
+      <textarea type="text" pInputTextarea placeholder="Nápověda" formControlName="help"
+                autoResize="autoResize"></textarea>
+    </div>
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Klíč" formControlName="key">
+    </div>
+    <div class="ui-inputgroup">
+      <p-selectButton [options]="unitsOptions" formControlName="primaryResultValueUnit"></p-selectButton>
+    </div>
+    <div class="ui-inputgroup">
+      <p-selectButton [options]="resultTypesOptions" formControlName="primaryResultType"></p-selectButton>
+    </div>
+    <div class="ui-inputgroup">
+      <p-selectButton [options]="unitsOptions" formControlName="secondaryResultValueUnit"></p-selectButton>
+    </div>
+    <div class="ui-inputgroup">
+      <p-selectButton [options]="resultTypesOptions" formControlName="secondaryResultType"></p-selectButton>
+    </div>
+
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Minimální věk" formControlName="minAge">
+    </div>
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Maximální věk" formControlName="maxAge">
+    </div>
+    <div class="ui-inputgroup">
+      <p-autoComplete
+        placeholder="Napiš kategorie aktivity"
+        [multiple]="true"
+        [suggestions]="suggestedCategories"
+        (completeMethod)="search($event)"
+        [(ngModel)]="selectedCategories"
+        [ngModelOptions]="{standalone: true}"
+        [forceSelection]="true"
+        field="name"></p-autoComplete>
+    </div>
+    <button mat-raised-button>{{'Uložit' | translate}}</button>
+  </form>
 </div>

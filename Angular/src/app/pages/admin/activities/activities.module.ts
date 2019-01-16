@@ -10,15 +10,14 @@ import {ActivitiesEditComponent} from './edit/activities-edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {SharedModule} from '../../../shared/shared.module';
-import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
-import { CategoriesComponent } from './categories/categories.component';
+import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown'
+import {EnumTranslationsModule} from '../../../shared/pipes/enum-translator/enum-translations.module';
 
 @NgModule({
   declarations: [
     ActivitiesComponent,
     ActivitiesListComponent,
-    ActivitiesEditComponent,
-    CategoriesComponent,
+    ActivitiesEditComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +28,8 @@ import { CategoriesComponent } from './categories/categories.component';
     PrimeNgComponentsModule,
     TranslateModule,
     SharedModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    EnumTranslationsModule
   ],
   exports: [
     ActivitiesComponent,

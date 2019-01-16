@@ -3,7 +3,6 @@ import {Routes, RouterModule} from '@angular/router';
 import {ActivitiesListComponent} from './list/activities-list.component';
 import {ActivitiesComponent} from './activities.component';
 import {ActivitiesEditComponent} from './edit/activities-edit.component';
-import {CategoriesComponent} from './categories/categories.component';
 
 const routes: Routes = [
   {
@@ -25,11 +24,7 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: ActivitiesEditComponent
-      },
-      {
-        path: 'categories',
-        component: CategoriesComponent
-      },
+      }
     ]
   }
 ];
