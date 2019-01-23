@@ -1,38 +1,55 @@
 <div class="component-container-center">
-  <div class="form-container">
-    <form class="form" *ngIf="testForm" [formGroup]="testForm" (submit)="saveTest()">
-      <mat-form-field>
-        <input matInput [placeholder]="'Název' | translate" name="name"
-               formControlName="name"
-               required/>
-        <mat-error *ngIf="testForm.controls['name'].hasError('required')">
-          {{'Název musí být vyplněn' | translate }}
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput [placeholder]="'Minimální věk' | translate" name="minAge" formControlName="minAge"/>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput [placeholder]="'Maximální věk' | translate" name="maxAge" formControlName="maxAge"/>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-select placeholder="Activity" [(ngModel)]="selectedActivities"  [ngModelOptions]="{standalone: true}" multiple>
-          <mat-option *ngFor="let activity of testActivities" [value]="activity">{{activity.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-select placeholder="Kategorie" [(ngModel)]="selectedCategories"  [ngModelOptions]="{standalone: true}" multiple>
-          <mat-option *ngFor="let category of testCategories" [value]="category">{{category.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-select placeholder="Sporty" [(ngModel)]="selectedSports"  [ngModelOptions]="{standalone: true}" multiple>
-          <mat-option *ngFor="let sport of sports" [value]="sport">{{sport.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <button mat-raised-button>{{'Uložit' | translate}}</button>
-      <br>
-      <button type="button" mat-raised-button (click)="duplicateTest()">{{'Vytvořit kopii' | translate}}</button>
-    </form>
-  </div>
+  <form class="form" *ngIf="testForm" [formGroup]="testForm" (submit)="saveTest()">
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Název" formControlName="name" required>
+      <p-message severity="error" text="Název testu je povinný"
+                 *ngIf="!testForm.controls['name'].valid && testForm.controls['name'].touched"></p-message>
+    </div>
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Minimální věk" formControlName="minAge" required>
+    </div>
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Maximální věk" formControlName="maxAge" required>
+    </div>
+    <div class="ui-inputgroup">
+      <p-autoComplete
+        placeholder="Napiš kategorie testu"
+        [multiple]="true"
+        [suggestions]="suggestedCategories"
+        (completeMethod)="search($event)"
+        [(ngModel)]="selectedCategories"
+        [ngModelOptions]="{standalone: true}"
+        [forceSelection]="true"
+        field="name"></p-autoComplete>
+    </div>
+    <div *ngIf="testActivities" class="ui-inputgroup">
+      <p-pickList styleClass="edit-picklist"
+                  [source]="testActivities"
+                  [target]="selectedActivities"
+                  sourceHeader="Aktivity"
+                  targetHeader="Vybrané aktivity"
+                  filterBy="name"
+                  dragdrop="true">
+        <ng-template let-activity pTemplate="item">
+          <div class="ui-helper-clearfix">
+            {{activity.name}}
+          </div>
+        </ng-template>
+      </p-pickList>
+    </div>
+    <!--<mat-form-field>-->
+      <!--<mat-select placeholder="Kategorie" [(ngModel)]="selectedCategories" [ngModelOptions]="{standalone: true}"-->
+                  <!--multiple>-->
+        <!--<mat-option *ngFor="let category of testCategories" [value]="category">{{category.name}}</mat-option>-->
+      <!--</mat-select>-->
+    <!--</mat-form-field>-->
+    <!--<mat-form-field>-->
+      <!--<mat-select placeholder="Sporty" [(ngModel)]="selectedSports" [ngModelOptions]="{standalone: true}" multiple>-->
+        <!--<mat-option *ngFor="let sport of sports" [value]="sport">{{sport.name}}</mat-option>-->
+      <!--</mat-select>-->
+    <!--</mat-form-field>-->
+    <button mat-raised-button>{{'Uložit' | translate}}</button>
+    <br>
+    <button type="button" mat-raised-button (click)="duplicateTest()">{{'Vytvořit kopii' | translate}}</button>
+  </form>
 </div>

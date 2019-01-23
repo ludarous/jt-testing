@@ -1,7 +1,7 @@
 import {ITestCategory} from './test-category';
 import {ISport} from './sport';
 import {Activity, IActivity, PersonalActivityStats} from './activity';
-import {HttpResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivityResultUnits} from './enums/activity-result-units';
 import {PersonalActivityCategoryResultsStats, PersonalCategoryStats} from './activity-category';
 

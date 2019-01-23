@@ -8,6 +8,13 @@ import {MaterialComponentsModule} from '../../shared/material-components.module'
 import {SharedModule} from '../../shared/shared.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {PrimeNgComponentsModule} from '../../shared/primeng-components.module';
+import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './profile/profile.component';
+import {AddressService} from '../../services/address.service';
+import {UserService} from '../../services/user.service';
+import {PersonService} from '../../services/person.service';
+import {PersonalDataService} from '../../services/personal-data.service';
 
 @NgModule({
   imports: [
@@ -16,14 +23,24 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     MaterialComponentsModule,
+    PrimeNgComponentsModule,
     TranslateModule,
     AccountRoutingModule,
   ],
+  providers: [
+    UserService,
+    PersonService,
+    PersonalDataService,
+    AddressService,
+  ],
   declarations: [
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent
   ],
   exports: [
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ]
 })
 export class AccountModule { }

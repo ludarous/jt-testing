@@ -4,6 +4,8 @@ import {environment} from '../../../../environments/environment';
 import {CustomValidators} from '../../../shared/validators/custom-validators';
 import {AuthServerProvider} from '../../../core/auth/auth-jwt.service';
 import {EventManager} from '../../../services/event.manager';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +24,8 @@ export class LoginComponent implements OnInit {
   env = environment;
 
   constructor(private authProvider: AuthServerProvider,
-              private eventManager: EventManager) {
+              private eventManager: EventManager,
+              private messageService: MessageService) {
     this.form = new FormGroup({
       username: new FormControl('', [Validators.compose([Validators.required, Validators.minLength(3), CustomValidators.loginOrEmail])]),
       password: new FormControl('', [Validators.compose([Validators.required, Validators.minLength(4)])]),
@@ -43,7 +46,10 @@ export class LoginComponent implements OnInit {
         name: 'authenticationSuccess',
         content: 'Sending Authentication Success'
       });
-    });
+    },
+      (error: HttpErrorResponse) => {
+        this.messageService.add({severity: 'error', summary: 'Nepodařilo se přihlásit! Podrobnosti:', detail: error.error.detail});
+      });
   }
 
 }

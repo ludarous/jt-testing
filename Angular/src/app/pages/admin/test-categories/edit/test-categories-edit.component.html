@@ -1,0 +1,15 @@
+<div class="test-category-edit-container">
+  <form class="form" *ngIf="testCategoryForm" [formGroup]="testCategoryForm" (submit)="saveCategory()">
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Název" formControlName="name" required>
+      <p-message severity="error" text="Název kategorie je povinný" *ngIf="!testCategoryForm.controls['name'].valid && testCategoryForm.controls['name'].touched"></p-message>
+    </div>
+    <div class="ui-inputgroup">
+      <textarea type="text" pInputTextarea placeholder="Popis" formControlName="description" autoResize="autoResize"></textarea>
+    </div>
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Klíč" formControlName="key">
+    </div>
+    <button mat-raised-button>{{'Uložit' | translate}}</button>
+  </form>
+</div>

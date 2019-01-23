@@ -23,10 +23,12 @@ import {
   MessagesModule,
   MessageModule,
   KeyFilterModule,
-  SelectButtonModule, AutoCompleteModule,
+  SelectButtonModule, AutoCompleteModule, PickListModule, CalendarModule, DropdownModule, CheckboxModule, ButtonModule,
 } from 'primeng/primeng';
 import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
+import {DataViewModule} from 'primeng/dataview';
+import {FullCalendarModule} from 'primeng/fullcalendar';
 
 @NgModule({
   imports: [
@@ -63,6 +65,13 @@ import {ToastModule} from 'primeng/toast';
     KeyFilterModule,
     SelectButtonModule,
     AutoCompleteModule,
+    PickListModule,
+    DataViewModule,
+    CalendarModule,
+    FullCalendarModule,
+    DropdownModule,
+    CheckboxModule,
+    ButtonModule,
   ],
 })
 export class PrimeNgComponentsModule { }

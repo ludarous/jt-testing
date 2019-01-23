@@ -71,6 +71,9 @@ public class EventResultServiceImpl implements EventResultService {
 
             for(ActivityResult activityResult : testResult.getActivitiesResults()) {
                 activityResult.setTestResult(testResult);
+                activityResult.setPerson(eventResult.getPerson());
+                activityResult.setEvent(eventResult.getEvent());
+                activityResult.setTest(testResult.getTest());
                 activityResultRepository.save(activityResult);
             }
 

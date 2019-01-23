@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {IActivity} from '../../../../entities/activity';
 import {ActivityService} from '../../../../services/activity.service';
 import {Router} from '@angular/router';
@@ -33,6 +33,6 @@ export class UsersListComponent implements OnInit {
   }
 
   rowSelect(person: IPerson) {
-    this.router.navigate(['/admin/users/person-edit', person.id]);
+    this.router.navigate(['/admin/users/edit', person.id]);
   }
 }

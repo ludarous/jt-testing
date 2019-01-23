@@ -1,0 +1,38 @@
+<div class="component-container-center">
+  <div class="row">
+    <div class="ui-inputgroup col-6">
+      <p-dropdown [options]="eventSelectItems"
+                  [(ngModel)]="selectedEvent"
+                  [filter]="true"
+                  filterBy="label,value.name,value.date"
+                  [autoWidth]="false">
+        <ng-template let-event pTemplate="item">
+          {{event.label}}
+        </ng-template>
+      </p-dropdown>
+    </div>
+    <div class="ui-inputgroup col-6">
+      <p-dropdown *ngIf="selectedEvent"
+                  [options]="personSelectItems"
+                  [(ngModel)]="selectedPerson"
+                  [filter]="true"
+                  (onChange)="personChanged($event)"
+                  filterBy="label,value.firstName,value.lastName"
+                  [autoWidth]="false">
+        <ng-template let-person pTemplate="item">
+          {{person.label}}
+        </ng-template>
+      </p-dropdown>
+    </div>
+  </div>
+  <div class="event-result-edit">
+    <div *ngIf="selectedEvent && selectedPerson && !selectedPersonalEventResult">
+      <button mat-raised-button (click)="createEventResult()">{{'Vytvoř výsledek' | translate}}</button>
+    </div>
+    <div *ngIf="selectedEvent && selectedPerson && selectedPersonalEventResult">
+      <app-event-result-edit [eventResult]="selectedPersonalEventResult" [person]="selectedPerson"
+                             [testEvent]="selectedEvent"></app-event-result-edit>
+    </div>
+  </div>
+</div>
+

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {IActivityCategory} from '../../../../entities/activity-category';
-import {TreeNode} from 'primeng/api';
-import {HttpResponse} from '@angular/common/http';
+import {MessageService, TreeNode} from 'primeng/api';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivityCategoryService} from '../../../../services/activity-category.service';
 
 @Component({
@@ -17,7 +17,8 @@ export class ActivityCategoriesListComponent implements OnInit {
 
   categoriesNodes: Array<TreeNode>;
 
-  constructor(private activityCategoryService: ActivityCategoryService) { }
+  constructor(private activityCategoryService: ActivityCategoryService,
+              private messageService: MessageService) { }
 
   ngOnInit() {
 
@@ -64,6 +65,19 @@ export class ActivityCategoriesListComponent implements OnInit {
     };
 
     return treeNode;
+  }
+
+  delete(event, category: IActivityCategory) {
+    event.stopPropagation();
+
+    if (confirm('Opravdu chceš smazat categorii ' + category.name)) {
+      this.activityCategoryService.delete(category.id).subscribe(() => {
+        this.load();
+      }, (errorResponse: HttpErrorResponse) => {
+        this.messageService.add({severity: 'error', summary: 'Kategorii se nepodařilo smazat', detail: errorResponse.error.detail});
+      });
+    }
+
   }
 
 }

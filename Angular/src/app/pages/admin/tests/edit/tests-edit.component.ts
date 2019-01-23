@@ -1,13 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Activity, IActivity} from '../../../../entities/activity';
-import {ActivityCategory, IActivityCategory} from '../../../../entities/activity-category';
-import {ActivatedRoute} from '@angular/router';
-import {HttpResponse} from '@angular/common/http';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {IActivity} from '../../../../entities/activity';
+import {IActivityCategory} from '../../../../entities/activity-category';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivityService} from '../../../../services/activity.service';
-import {ActivityResultUnits} from '../../../../entities/enums/activity-result-units';
-import {CustomValidators} from '../../../../shared/validators/custom-validators';
-import {ActivityCategoryService} from '../../../../services/activity-category.service';
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {RxjsUtils} from '../../../../utils/rxjs.utils';
@@ -16,11 +13,14 @@ import {ISport} from '../../../../entities/sport';
 import {TestService} from '../../../../services/test.service';
 import {TestCategoryService} from '../../../../services/test-category.service';
 import {SportService} from '../../../../services/sport.service';
+import {ITestCategory} from '../../../../entities/test-category';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-tests-edit',
   templateUrl: './tests-edit.component.html',
-  styleUrls: ['./tests-edit.component.scss']
+  styleUrls: ['./tests-edit.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TestsEditComponent implements OnInit {
 
@@ -29,10 +29,12 @@ export class TestsEditComponent implements OnInit {
   testId: number;
 
   testActivities: Array<IActivity>;
-  selectedActivities: Array<IActivity>;
+  suggestedActivities: Array<IActivity> = new Array<IActivity>();
+  selectedActivities: Array<IActivity> = new Array<IActivity>();
 
-  testCategories: Array<IActivityCategory>;
-  selectedCategories: Array<IActivityCategory>;
+  testCategories: Array<ITestCategory>;
+  suggestedCategories: Array<ITestCategory>;
+  selectedCategories: Array<ITestCategory>;
 
   sports: Array<ISport>;
   selectedSports: Array<ISport>;
@@ -41,7 +43,9 @@ export class TestsEditComponent implements OnInit {
               private activityService: ActivityService,
               private testService: TestService,
               private testCategoryService: TestCategoryService,
-              private sportService: SportService) { }
+              private sportService: SportService,
+              private messageService: MessageService,
+              private router: Router) { }
 
   ngOnInit() {
 
@@ -93,6 +97,7 @@ export class TestsEditComponent implements OnInit {
 
     if (test.activities) {
       this.selectedActivities = activities.filter((a) => test.activities.some((sa) => sa.id === a.id));
+      this.suggestedActivities = activities.filter((a) => !this.selectedActivities.some((sa) => sa.id === a.id));
     }
 
     if (test.sports) {
@@ -120,10 +125,16 @@ export class TestsEditComponent implements OnInit {
       testToSave.activities = this.selectedActivities;
       testToSave.sports = this.selectedSports;
 
-      saveTest$.subscribe((testResponse: HttpResponse<ITest>) => {
+      saveTest$.subscribe(
+        (testResponse: HttpResponse<ITest>) => {
         this.test = testResponse.body;
         this.setTestForm(this.test, this.testActivities, this.testCategories, this.sports);
-      });
+          this.messageService.add({severity: 'success', summary: 'Test uložen'});
+          this.router.navigate(['/admin/tests/list']);
+      },
+        (errorResponse: HttpErrorResponse) => {
+          this.messageService.add({severity: 'error', summary: 'Test nebyl uložen', detail: errorResponse.error.detail});
+        });
     }
   }
 
@@ -144,5 +155,10 @@ export class TestsEditComponent implements OnInit {
     this.testForm.controls['name'].setValue(testName + ' kopie');
 
     this.saveTest();
+  }
+
+  search(event) {
+    const filteredCategories = this.testCategories.filter(c => c.name.includes(event.query));
+    this.suggestedCategories = filteredCategories;
   }
 }

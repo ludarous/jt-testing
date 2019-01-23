@@ -1,3 +1,4 @@
+# buiild command: mvn package -Pprod,swagger -DskipTests
 # ===================================================================
 # Spring Boot configuration.
 #

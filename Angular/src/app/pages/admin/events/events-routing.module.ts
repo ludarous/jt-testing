@@ -24,10 +24,6 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: EventEditComponent,
-      },
-      {
-        path: 'edit/:id/results',
-        loadChildren: 'app/pages/admin/events/results/results.module#ResultsModule',
       }
     ]
   }

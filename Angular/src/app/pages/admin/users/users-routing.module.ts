@@ -11,18 +11,18 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'person-list'
+        redirectTo: 'list'
       },
       {
-        path: 'person-list',
+        path: 'list',
         component: UsersListComponent
       },
       {
-        path: 'person-edit/:id',
+        path: 'edit/:id',
         component: PersonEditComponent
       },
       {
-        path: 'person-edit',
+        path: 'create',
         component: PersonEditComponent
       },
     ]

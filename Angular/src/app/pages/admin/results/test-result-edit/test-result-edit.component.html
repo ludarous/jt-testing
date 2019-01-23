@@ -1,0 +1,18 @@
+<div class="test-result-container">
+  <div
+    class="test-name">{{'Výsledky testu ' + test.name + ' uživatele ' + person.personalData.firstName + ' ' + person.personalData.lastName}}
+  </div>
+
+  <p-accordion styleClass="activities-results-accordion">
+    <ng-container *ngFor="let activityResult of testsResult.activitiesResults">
+      <p-accordionTab [header]="activityResult.activityName">
+        <app-activity-result-edit [activity]="getActivityForActivityResult(activityResult)" [testResult]="testsResult"
+                                  [activityResult]="activityResult" [testEvent]="testEvent"></app-activity-result-edit>
+      </p-accordionTab>
+    </ng-container>
+  </p-accordion>
+  <!--<div class="flex-fill" *ngFor="let activityResult of testsResult.activitiesResults">-->
+    <!--<app-activity-result-edit [activity]="getActivityForActivityResult(activityResult)" [testResult]="testsResult"-->
+                              <!--[activityResult]="activityResult" [testEvent]="testEvent"></app-activity-result-edit>-->
+  <!--</div>-->
+</div>

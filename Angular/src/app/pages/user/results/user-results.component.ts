@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {EventResultService} from '../../../services/event-result.service';
 import {EventService} from '../../../services/event.service';
 import {IEventResult} from '../../../entities/event-result';

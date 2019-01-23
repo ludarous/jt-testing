@@ -11,9 +11,17 @@
     width: 100%;
   }
 
-  input, textarea, p-autoComplete {
+  input, textarea, p-autoComplete, p-pickList, p-dropdown {
     width: 100%;
     flex: 4;
+  }
+
+  p-pickList .ui-picklist {
+    width: 100%;
+  }
+
+  p-dropdown .ui-dropdown {
+    width: 100%;
   }
 
   p-message {
@@ -23,6 +31,39 @@
   }
 }
 
+/* picklist */
+.ui-picklist .ui-picklist-list {
+  width: auto;
+  border: 1px solid #333333 !important;
+}
+
+.edit-picklist {
+  display: flex;
+
+  .ui-picklist-listwrapper {
+    flex: 1;
+  }
+
+  .ui-picklist-source-wrapper {
+    margin-right: 5px;
+  }
+
+  .ui-picklist-target-wrapper {
+    margin-left: 5px;
+  }
+
+  .ui-picklist-source-controls {
+    display: none;
+  }
+
+  .ui-picklist-buttons {
+    display: none;
+  }
+
+  .ui-picklist-target-controls {
+    display: none;
+  }
+}
 
 /* Growl component */
 .ui-growl {
@@ -36,6 +77,11 @@
 
 
 /* Table component */
+
+.table-action-column {
+  width: 60px;
+  max-width: 60px;
+}
 
 p-table th {
   font-size: 16px;

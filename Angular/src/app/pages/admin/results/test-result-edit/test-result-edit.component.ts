@@ -1,16 +1,17 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ITest} from '../../../../../entities/test';
-import {IEvent} from '../../../../../entities/event';
-import {IPersonFull} from '../../../../../entities/person-full';
-import {ITestResult, TestResult} from '../../../../../entities/test-result';
-import {IEventResult} from '../../../../../entities/event-result';
-import {IActivityResult} from '../../../../../entities/activity-result';
-import {IActivity} from '../../../../../entities/activity';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {ITest} from '../../../../entities/test';
+import {IEvent} from '../../../../entities/event';
+import {IPersonFull} from '../../../../entities/person-full';
+import {ITestResult} from '../../../../entities/test-result';
+import {IEventResult} from '../../../../entities/event-result';
+import {IActivityResult} from '../../../../entities/activity-result';
+import {IActivity} from '../../../../entities/activity';
 
 @Component({
   selector: 'app-test-result-edit',
   templateUrl: './test-result-edit.component.html',
-  styleUrls: ['./test-result-edit.component.scss']
+  styleUrls: ['./test-result-edit.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TestResultEditComponent implements OnInit {
 
@@ -69,7 +70,7 @@ export class TestResultEditComponent implements OnInit {
 
 
   ngOnInit() {
-
+    console.log(this.testEvent);
   }
 
   getActivityForActivityResult(activityResult: IActivityResult): IActivity {

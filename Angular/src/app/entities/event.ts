@@ -1,7 +1,7 @@
 import {ITest, Test} from './test';
 import {IPerson} from './person';
 import {IPersonFull} from './person-full';
-import {HttpResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Activity} from './activity';
 import {IEventResult} from './event-result';
 import {forEach} from '@angular/router/src/utils/collection';

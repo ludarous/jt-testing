@@ -5,12 +5,16 @@
         <th *ngFor="let col of tableCols">
           {{col.header}}
         </th>
+        <th class="table-action-column"></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-activity>
       <tr (click)="rowSelect(activity)">
         <td *ngFor="let col of tableCols">
           {{activity[col.field]}}
+        </td>
+        <td class="table-action-column">
+          <button pButton type="button" icon="pi pi-times" (click)="delete($event, activity)" class="ui-button-danger"></button>
         </td>
       </tr>
     </ng-template>

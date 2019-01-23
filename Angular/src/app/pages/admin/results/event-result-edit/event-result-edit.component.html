@@ -1,0 +1,31 @@
+<div *ngIf="testEvent && person">
+
+  <div class="personal-event-data-container">
+    <div class="row">
+      <div class="ui-inputgroup col-6">
+        <input type="text" pInputText placeholder="Váha v době testu" [(ngModel)]="eventResult.actualWeightInKg"
+               required>
+        <span class="ui-inputgroup-addon">Kg</span>
+      </div>
+
+      <div class="ui-inputgroup col-6">
+        <input type="text" pInputText placeholder="Výška v době testu" [(ngModel)]="eventResult.actualHeightInCm"
+               required>
+        <span class="ui-inputgroup-addon">Cm</span>
+      </div>
+
+      <div class="ui-inputgroup col-12">
+      <textarea type="text" pInputTextarea placeholder="Poznámka"
+                autoResize="autoResize" [(ngModel)]="eventResult.note"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="eventResult">
+    <div *ngFor="let testResult of eventResult.testResults">
+      <app-test-result-edit [eventResult]="eventResult" [testEvent]="testEvent" [testsResult]="testResult"
+                            [test]="getTestForTestResult(testResult)" [person]="person"></app-test-result-edit>
+    </div>
+    <button mat-raised-button (click)="saveEventResults()">{{'Uložit' | translate}}</button>
+  </div>
+</div>

@@ -7,7 +7,7 @@ import {IEvent} from '../../../../entities/event';
 import {ActivityCategoryService} from '../../../../services/activity-category.service';
 import {ActivityCategoriesComponent} from '../../../admin/activity-categories/activity-categories.component';
 import {PersonalCategoryStats} from '../../../../entities/activity-category';
-import {HttpResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {colorSets} from '@swimlane/ngx-charts/release/utils';
 import {StatsRequest} from '../../../../entities/stats-request';
 import {TestService} from '../../../../services/test.service';

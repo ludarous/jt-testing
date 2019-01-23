@@ -4,7 +4,7 @@
     <a *ngIf="person" mat-raised-button [routerLink]="['my-results']">Moje výsledky</a>
     <a *ngIf="person" mat-raised-button [routerLink]="['my-stats']">Moje statistiky</a>
   </nav>
-  <div *ngIf="account" class="profile">{{showUserName()}}</div>
+  <div *ngIf="account" class="profile" [routerLink]="['/account/profile']">{{showUserName()}}</div>
   <div *ngIf="account" class="logout" (click)="logout()">odhlásit</div>
   <div *ngIf="!account" class="logout" (click)="login()">přihlásit</div>
 </div>

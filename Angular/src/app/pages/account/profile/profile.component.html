@@ -1,0 +1,52 @@
+<div class="component-container-center">
+  <div class="form-container">
+    <form *ngIf="personForm" [formGroup]="personForm" class="form" (submit)="savePerson()">
+      <div formGroupName="personalData">
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [placeholder]="'Křestní jméno' | translate" formControlName="firstName"
+                 required>
+          <p-message severity="error" text="Křestní jméno je povinné"
+                     *ngIf="!personForm.controls['personalData'].controls['firstName'].valid &&
+                     personForm.controls['personalData'].controls['firstName'].touched">
+          </p-message>
+        </div>
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [placeholder]="'Příjmení' | translate" formControlName="lastName"
+                 required>
+          <p-message severity="error" text="Příjmení je povinné"
+                     *ngIf="!personForm.controls['personalData'].controls['lastName'].valid &&
+                     personForm.controls['personalData'].controls['lastName'].touched">
+          </p-message>
+        </div>
+        <div class="ui-inputgroup">
+          <p-calendar [placeholder]="'Datum narození' | translate"
+                      [(ngModel)]="personBirthDate"
+                      [ngModelOptions]="{standalone: true}"
+                      dateFormat="dd.mm.yy"
+                      yearNavigator="true"
+                      yearRange="1900:2019"
+          ></p-calendar>
+        </div>
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [placeholder]="'Národnost' | translate" formControlName="nationality">
+        </div>
+      </div>
+
+      <div formGroupName="address">
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [placeholder]="'Země' | translate" formControlName="country">
+        </div>
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [placeholder]="'Město' | translate" formControlName="city">
+        </div>
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [placeholder]="'Ulice' | translate" formControlName="street">
+        </div>
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [placeholder]="'PSČ' | translate" formControlName="zipCode">
+        </div>
+      </div>
+      <button mat-raised-button>{{'Uložit' | translate}}</button>
+    </form>
+  </div>
+</div>

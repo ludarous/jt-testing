@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {StatsRequest} from '../../../entities/stats-request';
-import {HttpResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivityStats, PersonalActivityStats} from '../../../entities/activity';
 import {ActivityService} from '../../../services/activity.service';
 import {ChartUtils} from '../../../utils/chart-utils';

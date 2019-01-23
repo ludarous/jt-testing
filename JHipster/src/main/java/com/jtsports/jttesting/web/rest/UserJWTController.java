@@ -2,6 +2,7 @@ package com.jtsports.jttesting.web.rest;
 
 import com.jtsports.jttesting.security.jwt.JWTConfigurer;
 import com.jtsports.jttesting.security.jwt.TokenProvider;
+import com.jtsports.jttesting.service.UserService;
 import com.jtsports.jttesting.web.rest.vm.LoginVM;
 
 import com.codahale.metrics.annotation.Timed;
@@ -29,9 +30,12 @@ public class UserJWTController {
 
     private final AuthenticationManager authenticationManager;
 
-    public UserJWTController(TokenProvider tokenProvider, AuthenticationManager authenticationManager) {
+    private final UserService userService;
+
+    public UserJWTController(TokenProvider tokenProvider, AuthenticationManager authenticationManager, UserService userService) {
         this.tokenProvider = tokenProvider;
         this.authenticationManager = authenticationManager;
+        this.userService = userService;
     }
 
     @PostMapping("/authenticate")
@@ -47,6 +51,7 @@ public class UserJWTController {
         String jwt = tokenProvider.createToken(authentication, rememberMe);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JWTConfigurer.AUTHORIZATION_HEADER, "Bearer " + jwt);
+        this.userService.attachPerson(loginVM.getUsername());
         return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
     }
 

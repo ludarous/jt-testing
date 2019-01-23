@@ -1,45 +1,57 @@
 <div class="component-container-center">
   <div class="form-container">
     <form *ngIf="personForm" [formGroup]="personForm" class="form" (submit)="savePerson()">
-      <mat-form-field>
-        <input matInput [placeholder]="'email' | translate" name="email" formControlName="email" disabled/>
-      </mat-form-field>
-
-      <mat-checkbox matInput formControlName="virtual">{{'Virtuální uživatel' | translate}}</mat-checkbox>
-
+      <div class="ui-inputgroup">
+        <input type="text" pInputText placeholder="E-mail" formControlName="email" required>
+        <p-message severity="error" text="E-mail je povinný"
+                   *ngIf="!personForm.controls['email'].valid && personForm.controls['email'].touched"></p-message>
+      </div>
+      <p-checkbox [label]="'Virtuální uživatel' | translate" name="virtual" formControlName="virtual"
+                  binary="true"></p-checkbox>
       <div formGroupName="personalData">
-        <mat-form-field>
-          <input matInput [placeholder]="'Křestní jméno' | translate" name="country" formControlName="firstName"/>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput [placeholder]="'Příjmení' | translate" name="city" formControlName="lastName"/>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput
-                 formControlName="birthDate"
-                 placeholder="{{'Datum narození' | translate}}"
-                 [matDatepicker]="dateFromDatePicker">
-          <mat-datepicker-toggle matSuffix [for]="dateFromDatePicker"></mat-datepicker-toggle>
-          <mat-datepicker #dateFromDatePicker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput [placeholder]="'Národnost' | translate" name="zipCode" formControlName="nationality"/>
-        </mat-form-field>
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [placeholder]="'Křestní jméno' | translate" formControlName="firstName"
+                 required>
+          <p-message severity="error" text="Křestní jméno je povinné"
+                     *ngIf="!personForm.controls['personalData'].controls['firstName'].valid &&
+                     personForm.controls['personalData'].controls['firstName'].touched">
+          </p-message>
+        </div>
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [placeholder]="'Příjmení' | translate" formControlName="lastName"
+                 required>
+          <p-message severity="error" text="Příjmení je povinné"
+                     *ngIf="!personForm.controls['personalData'].controls['lastName'].valid &&
+                     personForm.controls['personalData'].controls['lastName'].touched">
+          </p-message>
+        </div>
+        <div class="ui-inputgroup">
+          <p-calendar [placeholder]="'Datum narození' | translate"
+                      [(ngModel)]="personBirthDate"
+                      [ngModelOptions]="{standalone: true}"
+                      dateFormat="dd.mm.yy"
+                      yearNavigator="true"
+                      yearRange="1900:2019"
+          ></p-calendar>
+        </div>
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [placeholder]="'Národnost' | translate" formControlName="nationality">
+        </div>
       </div>
 
       <div formGroupName="address">
-        <mat-form-field>
-          <input matInput [placeholder]="'Země' | translate" name="country" formControlName="country"/>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput [placeholder]="'Město' | translate" name="city" formControlName="city"/>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput [placeholder]="'Ulice' | translate" name="street" formControlName="street"/>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput [placeholder]="'PSČ' | translate" name="zipCode" formControlName="zipCode"/>
-        </mat-form-field>
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [placeholder]="'Země' | translate" formControlName="country">
+        </div>
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [placeholder]="'Město' | translate" formControlName="city">
+        </div>
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [placeholder]="'Ulice' | translate" formControlName="street">
+        </div>
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [placeholder]="'PSČ' | translate" formControlName="zipCode">
+        </div>
       </div>
       <button mat-raised-button>{{'Uložit' | translate}}</button>
       <br>

@@ -1,4 +1,4 @@
 export const environment = {
-  backendUrl: 'http://backend.jttest.ludarous.com/api',
+  backendUrl: 'http://backend.sportstalent.ludarous.com/api',
   production: true
 };

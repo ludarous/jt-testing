@@ -11,7 +11,7 @@ import {EventEditComponent} from './edit/event-edit.component';
 import {EventsRoutingModule} from './events-routing.module';
 import {MaterialComponentsModule} from '../../../shared/material-components.module';
 import {PrimeNgComponentsModule} from '../../../shared/primeng-components.module';
-import {ResultsModule} from './results/results.module';
+import {ResultsModule} from '../results/results.module';
 import {EnumTranslationsModule} from '../../../shared/pipes/enum-translator/enum-translations.module';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 

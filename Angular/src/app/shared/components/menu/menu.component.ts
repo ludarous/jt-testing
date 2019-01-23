@@ -5,7 +5,7 @@ import {IUser, User} from '../../../entities/user';
 import {PersonService} from '../../../services/person.service';
 import {IPersonFull} from '../../../entities/person-full';
 import {IPerson} from '../../../entities/person';
-import {HttpResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {AuthServerProvider} from '../../../core/auth/auth-jwt.service';
 import {Router} from '@angular/router';
 
@@ -87,7 +87,7 @@ export class MenuComponent implements OnInit {
       this.personService.findByUserId(this.account.id).subscribe((person: HttpResponse<IPerson>) => {
           this.person = person.body;
         },
-        (error: HttpResponse<any>) => {
+        (errorResponse: HttpErrorResponse) => {
           this.person = null;
         });
     } else {

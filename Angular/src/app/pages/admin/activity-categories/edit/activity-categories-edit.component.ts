@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivityCategory, IActivityCategory} from '../../../../entities/activity-category';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {HttpResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivityCategoryService} from '../../../../services/activity-category.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, zip} from 'rxjs';
@@ -102,8 +102,8 @@ export class ActivityCategoriesEditComponent implements OnInit {
           this.messageService.add({severity: 'success', summary: 'Kategorie uložena'});
           this.router.navigate(['/admin/activity-categories/list']);
         },
-        (error: HttpResponse<any>) => {
-          this.messageService.add({severity: 'error', summary: 'Kategorie nebyla uložena', detail: error.body});
+        (errorResponse: HttpErrorResponse) => {
+          this.messageService.add({severity: 'error', summary: 'Kategorie nebyla uložena', detail: errorResponse.error.detail});
         });
     }
   }

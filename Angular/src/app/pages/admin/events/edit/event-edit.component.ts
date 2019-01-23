@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import { IActivity} from '../../../../entities/activity';
 import {IActivityCategory} from '../../../../entities/activity-category';
-import {ActivatedRoute} from '@angular/router';
-import {HttpResponse} from '@angular/common/http';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {RxjsUtils} from '../../../../utils/rxjs.utils';
@@ -17,6 +17,7 @@ import {PersonService} from '../../../../services/person.service';
 import {Person} from '../../../../entities/person';
 import {Moment} from 'moment';
 import * as moment from 'moment';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-events-edit',
@@ -32,9 +33,21 @@ export class EventEditComponent implements OnInit {
   tests: Array<ITest>;
   persons: Array<IPersonFull>;
 
-  selectedTests: Array<ITest>;
-  selectedPersons: Array<IPersonFull>;
+  suggestedTests: Array<ITest> = new Array<ITest>();
+  suggestedPerson: Array<IPersonFull> = new Array<IPersonFull>();
 
+  selectedTests: Array<ITest> = new Array<ITest>();
+  selectedPersons: Array<IPersonFull> = new Array<IPersonFull>();
+
+
+  private _eventDateClassic: Date;
+  get eventDateClassic(): Date {
+    return this._eventDateClassic;
+  }
+
+  set eventDateClassic(value: Date) {
+    this._eventDateClassic = value;
+  }
 
   private _eventDate: Moment;
   get eventDate(): Moment {
@@ -62,7 +75,9 @@ export class EventEditComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private eventService: EventService,
               private personService: PersonService,
-              private testService: TestService) { }
+              private testService: TestService,
+              private messageService: MessageService,
+              private router: Router) { }
 
   ngOnInit() {
 
@@ -105,10 +120,12 @@ export class EventEditComponent implements OnInit {
 
     if (event.tests) {
       this.selectedTests = tests.filter((t) => event.tests.some((st) => st.id === t.id));
+      this.suggestedTests = tests.filter((t) => !this.selectedTests.some((st) => st.id === t.id));
     }
 
     if (event.tests) {
       this.selectedPersons = persons.filter((p) => event.attachedPersons.some((sp) => sp.id === p.id));
+      this.suggestedPerson = persons.filter((p) => !this.selectedPersons.some((sp) => sp.id === p.id));
     }
     
   }
@@ -130,10 +147,16 @@ export class EventEditComponent implements OnInit {
         eventToSave.attachedPersons = this.selectedPersons.map(pf => Person.createPerson(pf));
       }
 
-      saveEvent$.subscribe((eventResponse: HttpResponse<IEvent>) => {
+      saveEvent$.subscribe(
+        (eventResponse: HttpResponse<IEvent>) => {
         this.event = eventResponse.body;
         this.setEventForm(this.event, this.tests, this.persons);
-      });
+        this.messageService.add({severity: 'success', summary: 'Událost uložena'});
+        this.router.navigate(['/admin/events/list']);
+      },
+        (errorResponse: HttpErrorResponse) => {
+          this.messageService.add({severity: 'error', summary: 'Událost nebyla uložena', detail: errorResponse.error.detail});
+        });
     }
   }
 

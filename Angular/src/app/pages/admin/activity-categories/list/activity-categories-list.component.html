@@ -5,6 +5,7 @@
       <tr>
         <th>Název</th>
         <th>Popis</th>
+        <th class="table-action-column"></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
@@ -14,6 +15,9 @@
           {{rowData.name}}
         </td>
         <td>{{rowData.description}}</td>
+        <td class="table-action-column">
+          <button pButton type="button" icon="pi pi-times" (click)="delete($event, rowData)" class="ui-button-danger"></button>
+        </td>
       </tr>
     </ng-template>
   </p-treeTable>

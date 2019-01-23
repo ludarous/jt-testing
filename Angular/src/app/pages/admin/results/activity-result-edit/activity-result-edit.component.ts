@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IActivity} from '../../../../../entities/activity';
-import {ActivityResult, IActivityResult} from '../../../../../entities/activity-result';
-import {ITestResult} from '../../../../../entities/test-result';
+import {IActivity} from '../../../../entities/activity';
+import {ActivityResult, IActivityResult} from '../../../../entities/activity-result';
+import {ITestResult} from '../../../../entities/test-result';
 import {FormControl, FormGroup} from '@angular/forms';
-import {IEvent} from '../../../../../entities/event';
+import {IEvent} from '../../../../entities/event';
 
 @Component({
   selector: 'app-activity-result-edit',
@@ -33,7 +33,7 @@ export class ActivityResultEditComponent implements OnInit {
   set activityResult(value: IActivityResult) {
     if (value) {
       this._activityResult = value;
-      this.setActivityResultForm(this._activityResult);
+      //this.setActivityResultForm(this._activityResult);
     }
   }
 

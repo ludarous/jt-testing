@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {IActivity} from '../../../../entities/activity';
 import {Router} from '@angular/router';
 import {TestService} from '../../../../services/test.service';
 import {ITest} from '../../../../entities/test';
 import {IEvent} from '../../../../entities/event';
 import {EventService} from '../../../../services/event.service';
+import {IActivityCategory} from '../../../../entities/activity-category';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-tests-list',
@@ -18,7 +20,8 @@ export class EventListComponent implements OnInit {
   events: Array<IEvent>;
 
   constructor(private eventService: EventService,
-              private router: Router) { }
+              private router: Router,
+              private messageService: MessageService) { }
 
   ngOnInit() {
 
@@ -26,6 +29,10 @@ export class EventListComponent implements OnInit {
       { field: 'name', header: 'Název' },
     ];
 
+    this.load();
+  }
+
+  load() {
     this.eventService.query().subscribe((eventsResponse: HttpResponse<Array<ITest>>) => {
       this.events = eventsResponse.body;
     });
@@ -33,5 +40,18 @@ export class EventListComponent implements OnInit {
 
   rowSelect(event: IEvent) {
     this.router.navigate(['/admin/events/edit', event.id]);
+  }
+
+  delete(event, testEvent: IEvent) {
+    event.stopPropagation();
+
+    if (confirm('Opravdu chceš smazat událost ' + testEvent.name)) {
+      this.eventService.delete(testEvent.id).subscribe(() => {
+        this.load();
+      }, (errorResponse: HttpErrorResponse) => {
+        this.messageService.add({severity: 'error', summary: 'Událost se nepodařilo smazat', detail: errorResponse.error.detail});
+      });
+    }
+
   }
 }

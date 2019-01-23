@@ -1,15 +1,16 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {IEvent} from '../../../../../entities/event';
-import {EventService} from '../../../../../services/event.service';
-import {HttpResponse} from '@angular/common/http';
-import {IPerson} from '../../../../../entities/person';
-import {IPersonFull} from '../../../../../entities/person-full';
-import {EventResult, IEventResult} from '../../../../../entities/event-result';
-import {EventResultService} from '../../../../../services/event-result.service';
-import {ITestResult} from '../../../../../entities/test-result';
-import {ITest} from '../../../../../entities/test';
-import {EventManager} from '../../../../../services/event.manager';
+import {ActivatedRoute, Router} from '@angular/router';
+import {IEvent} from '../../../../entities/event';
+import {EventService} from '../../../../services/event.service';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {IPerson} from '../../../../entities/person';
+import {IPersonFull} from '../../../../entities/person-full';
+import {EventResult, IEventResult} from '../../../../entities/event-result';
+import {EventResultService} from '../../../../services/event-result.service';
+import {ITestResult} from '../../../../entities/test-result';
+import {ITest} from '../../../../entities/test';
+import {EventManager} from '../../../../services/event.manager';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-event-result-edit',
@@ -57,7 +58,9 @@ export class EventResultEditComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private eventService: EventService,
               private eventManager: EventManager,
-              private eventResultService: EventResultService) { }
+              private eventResultService: EventResultService,
+              private messageService: MessageService,
+              private router: Router) { }
 
   ngOnInit() {
     console.log(this._person);
@@ -69,28 +72,19 @@ export class EventResultEditComponent implements OnInit {
     }
   }
 
-  createEventResult() {
-
-    const eventResult = new EventResult(this.testEvent, this._person);
-
-    this.eventResultService
-      .create(eventResult)
-      .subscribe((eventResultResponse: HttpResponse<IEventResult>) => {
-      this.eventResult = eventResultResponse.body;
-        this.eventManager.broadcast({
-          name: 'eventResultCreated',
-          content: this.eventResult
-        });
-    });
-  }
-
   saveEventResults() {
 
     this.eventResultService
       .update(this.eventResult)
-      .subscribe((eventResultResponse: HttpResponse<IEventResult>) => {
+      .subscribe(
+        (eventResultResponse: HttpResponse<IEventResult>) => {
         this.eventResult = eventResultResponse.body;
-      });
+          this.messageService.add({severity: 'success', summary: 'Výsledky uloženy'});
+          this.router.navigate(['/admin/results']);
+      },
+        (errorResponse: HttpErrorResponse) => {
+          this.messageService.add({severity: 'error', summary: 'Výsledky nebyly uloženy', detail: errorResponse.error.detail});
+        });
   }
 
 }

@@ -5,7 +5,7 @@ import {ITestResult} from '../../../../entities/test-result';
 import {ITest} from '../../../../entities/test';
 import {EventResultService} from '../../../../services/event-result.service';
 import {EventService} from '../../../../services/event.service';
-import {HttpResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-user-event-result',

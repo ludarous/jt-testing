@@ -79,7 +79,8 @@ public class EventServiceImpl implements EventService {
     @Transactional(readOnly = true)
     public Page<EventDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Events");
-        return eventRepository.findAll(pageable)
+        Page<Event> allEvents = eventRepository.findAll(pageable);
+        return allEvents
             .map(eventMapper::toDto);
     }
 

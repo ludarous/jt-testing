@@ -3,7 +3,7 @@ import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@a
 import {Activity, IActivity} from '../../../../entities/activity';
 import {ActivityCategory, IActivityCategory} from '../../../../entities/activity-category';
 import {ActivatedRoute, Router} from '@angular/router';
-import {HttpResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivityService} from '../../../../services/activity.service';
 import {ActivityResultUnits} from '../../../../entities/enums/activity-result-units';
 import {CustomValidators} from '../../../../shared/validators/custom-validators';
@@ -133,10 +133,10 @@ export class ActivitiesEditComponent implements OnInit {
         this.activity = Activity.resolveResponse(activityResponse);
         this.setActivityForm(this.activity, this.activityCategories);
           this.messageService.add({severity: 'success', summary: 'Aktivita uložena'});
-          this.router.navigate(['/admin/activity-categories/list']);
+          this.router.navigate(['/admin/activities/list']);
       },
-        (error: HttpResponse<any>) => {
-          this.messageService.add({severity: 'error', summary: 'Aktivita nebyla uložena', detail: error.body});
+        (errorResponse: HttpErrorResponse) => {
+          this.messageService.add({severity: 'error', summary: 'Aktivita nebyla uložena', detail: errorResponse.error.detail});
         });
     }
   }

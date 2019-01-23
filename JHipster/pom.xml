@@ -336,6 +336,7 @@
     </dependencies>
 
     <build>
+        <finalName>SportsTalent-be</finalName>
         <defaultGoal>spring-boot:run</defaultGoal>
         <plugins>
             <plugin>

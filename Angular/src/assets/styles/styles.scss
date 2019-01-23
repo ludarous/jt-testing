@@ -103,7 +103,7 @@ app-root {
 /*table*/
 .table-top-margin {
   .ui-widget {
-    margin-top: 20px;
+    //margin-top: 20px;
   }
 }
 
@@ -159,6 +159,7 @@ app-root {
 
 .component-container-center {
   flex: 1;
+  flex-direction: column;
   display: flex;
   justify-content: stretch;
   padding: 20px;
@@ -175,6 +176,7 @@ app-root {
 }
 
 .form {
+  flex: 1;
   padding: 20px;
   min-width: 500px;
   display: flex;

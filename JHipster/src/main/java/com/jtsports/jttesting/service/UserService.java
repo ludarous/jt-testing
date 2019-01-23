@@ -114,7 +114,7 @@ public class UserService {
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
-        newUser.setActivated(false);
+        newUser.setActivated(true); //TODO: Set activated to false, after email get works
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
@@ -197,23 +197,38 @@ public class UserService {
             return;
         }
 
-        Person person = new Person();
-        PersonalData personalData = new PersonalData();
-        personalData.setFirstName(user.getFirstName());
-        personalData.setLastName(user.getLastName());
-        personalData = personalDataRepository.save(personalData);
-        person.setPersonalData(personalData);
+//        Person person = new Person();
+//        PersonalData personalData = new PersonalData();
+//        personalData.setFirstName(user.getFirstName());
+//        personalData.setLastName(user.getLastName());
+//        personalData = personalDataRepository.save(personalData);
+//        person.setPersonalData(personalData);
+//
+//
+//        Address address = addressRepository.save(new Address());
+//        person.setAddress(address);
+//        person.setUser(user);
+//
+//        person.setEmail(user.getEmail());
+//
+//        person = personRepository.save(person);
+//        personSearchRepository.save(person);
 
+    }
 
-        Address address = addressRepository.save(new Address());
-        person.setAddress(address);
-        person.setUser(user);
+    public void attachPerson(String login) {
+        Optional<User> userOptional = this.userRepository.findOneByLogin(login);
+        if (!userOptional.isPresent()) {
+            log.info("User for login by login not found: {}", login);
 
-        person.setEmail(user.getEmail());
+            userOptional = this.userRepository.findOneByEmailIgnoreCase(login);
+            if (!userOptional.isPresent()) {
+                log.info("User for login by email not found: {}", login);
+                return;
+            }
+        }
 
-        person = personRepository.save(person);
-        personSearchRepository.save(person);
-
+        this.attachPerson(userOptional.get());
     }
 
     /**

@@ -2,7 +2,7 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {ActivityStats, IActivity, PersonalActivityStats} from '../../../../entities/activity';
 import {IActivityResult} from '../../../../entities/activity-result';
 import {ActivityService} from '../../../../services/activity.service';
-import {HttpResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {colorSets} from '@swimlane/ngx-charts/release/utils';
 import {EnumTranslatorService} from '../../../../shared/pipes/enum-translator/enum-translator';
 import {ITest} from '../../../../entities/test';
@@ -158,7 +158,7 @@ export class UserActivityResultComponent implements OnInit {
       },
       {
         name: 'Nejhorší výsledek v testu',
-        value: ResultType.MORE_IS_BETTER.equals(this.activity.secondaryResultType) ?
+        value: ResultType.MORE_IS_BETTER.equals(this.activity.primaryResultType) ?
           activityStats.activityResultsStats.primaryMin :
           activityStats.activityResultsStats.primaryMax,
         extra: {

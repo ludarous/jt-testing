@@ -3,7 +3,6 @@ import {Routes, RouterModule} from '@angular/router';
 import {TestsComponent} from './tests.component';
 import {TestsListComponent} from './list/tests-list.component';
 import {TestsEditComponent} from './edit/tests-edit.component';
-import {TestCategoriesComponent} from './categories/test-categories.component';
 
 const routes: Routes = [
   {
@@ -25,11 +24,7 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: TestsEditComponent
-      },
-      {
-        path: 'categories',
-        component: TestCategoriesComponent
-      },
+      }
     ]
   }
 ];

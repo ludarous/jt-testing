@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div *ngIf="form" class="col-4">
+      <form [formGroup]="form" (submit)="onSubmit()">
+
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [placeholder]="'Přihlašovací jméno' | translate"
+                 formControlName="login" required>
+          <p-message severity="error" text="Pole musí obsahovat platný email nebo přihlašovací jméno."
+                     *ngIf="form.controls['login'].hasError('loginOrEmail')"></p-message>
+        </div>
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [placeholder]="'E-mail' | translate"
+                 formControlName="email" required>
+          <p-message severity="error" text="Pole musí obsahovat platný email."
+                     *ngIf="form.controls['email'].hasError('email')"></p-message>
+        </div>
+        <div class="ui-inputgroup">
+          <input type="password" pInputText [placeholder]="'Heslo' | translate" formControlName="password">
+        </div>
+        <div class="ui-inputgroup">
+          <input type="password" pInputText [placeholder]="'Potvrzení hesla' | translate" [(ngModel)]="confirmPassword" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div>
+          <button mat-raised-button id="loginBtn" type="submit" [innerHtml]="'Registrovat se' | translate"></button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+

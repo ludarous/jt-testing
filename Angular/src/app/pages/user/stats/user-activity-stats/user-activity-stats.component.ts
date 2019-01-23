@@ -16,6 +16,7 @@ export class UserActivityStatsComponent implements OnInit {
   activityStats: PersonalActivityStats;
 
   activityStatsChartData: ActivityStatsData;
+  yScaleMax: number;
 
   ngOnInit() {
     this.createChartData(this.activityStats);
@@ -38,6 +39,8 @@ export class UserActivityStatsComponent implements OnInit {
         name: 'Průměr'
       }
     ];
+
+    this.yScaleMax = activityStats.activityResultsStats.primaryMax * 1.2;
 
     const series = [];
     for (const activityResult of activityStats.personalActivityResults) {

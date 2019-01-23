@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Angular": {
+    "SportsTalent-fe": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Angular",
+            "outputPath": "dist/SportsTalent-fe",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -64,19 +64,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Angular:build",
+            "browserTarget": "SportsTalent-fe:build",
             "port": 4444
           },
           "configurations": {
             "production": {
-              "browserTarget": "Angular:build:production"
+              "browserTarget": "SportsTalent-fe:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Angular:build"
+            "browserTarget": "SportsTalent-fe:build"
           }
         },
         "test": {
@@ -110,7 +110,7 @@
         }
       }
     },
-    "Angular-e2e": {
+    "SportsTalent-fe-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -138,7 +138,7 @@
       }
     }
   },
-  "defaultProject": "Angular",
+  "defaultProject": "SportsTalent-fe",
   "schematics": {
     "@schematics/angular:component": {
       "styleext": "scss"

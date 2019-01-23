@@ -1,7 +1,0 @@
-<div class="test-result-container">
-  <div class="test-name">{{test.name}}</div>
-  <div class="flex-fill" *ngFor="let activityResult of testsResult.activitiesResults">
-    <app-activity-result-edit [activity]="getActivityForActivityResult(activityResult)" [testResult]="testsResult"
-                              [activityResult]="activityResult" [testEvent]="testEvent"></app-activity-result-edit>
-  </div>
-</div>

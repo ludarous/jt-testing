@@ -1,29 +1,25 @@
 <div class="container">
-  <div *ngIf="form" class="login-page">
-    <form [formGroup]="form" (submit)="onSubmit()">
-      <div class="login-form">
-        <div class="heading" translate>Přihlášení</div>
-        <div class="content">
-          <mat-form-field>
-            <input [formControl]="username" type="text" matInput
-                   [placeholder]="'Email / Přihlašovací jméno' | translate" name="username"
-                   autofocus="autofocus">
-            <mat-error *ngIf="form.controls['username'].hasError('loginOrEmail')">
-              <span translate>Pole musí obsahovat platný email nebo přihlašovací jméno.</span>
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field>
-            <input [formControl]="password" type="password" matInput [placeholder]="'Heslo' | translate"
-                   name="password">
-            <mat-hint align="end"><a routerLink="/reset-password/request" translate>Zapomněli jste heslo?</a></mat-hint>
-          </mat-form-field>
-          <a routerLink="/register" class="register-link">Nemáte účet? Zaregistrujte se!</a>
+  <div class="row justify-content-center">
+    <div *ngIf="form" class="col-4">
+      <form [formGroup]="form" (submit)="onSubmit()">
+
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [placeholder]="'Email / Přihlašovací jméno' | translate"
+                 formControlName="username" required>
+          <p-message severity="error" text="Pole musí obsahovat platný email nebo přihlašovací jméno."
+                     *ngIf="form.controls['username'].hasError('loginOrEmail')"></p-message>
         </div>
-        <div>
-          <button mat-raised-button color="accent" id="loginBtn" type="submit" [innerHtml]="'Přihlásit se' | translate"></button>
+        <div class="ui-inputgroup">
+          <input type="password" pInputText [placeholder]="'Heslo' | translate" formControlName="password">
         </div>
-      </div>
-    </form>
+
+        <div class="d-flex justify-content-between">
+          <button mat-raised-button id="loginBtn" type="submit" [innerHtml]="'Přihlásit se' | translate"></button>
+          <button mat-raised-button id="registerBtn" type="button" [innerHtml]="'Zaregistrovat' | translate" [routerLink]="['/account/register']"></button>
+        </div>
+
+      </form>
+    </div>
   </div>
 </div>
 

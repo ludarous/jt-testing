@@ -35,8 +35,7 @@ public class ActivityResult implements Serializable {
     @Column(name = "note")
     private String note;
 
-    @NotNull
-    @Column(name = "event_date", nullable = false)
+    @Column(name = "event_date")
     private ZonedDateTime eventDate;
 
     @Column(name = "person_birth_date")

@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../../services/user.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {HttpResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {RxjsUtils} from '../../../../utils/rxjs.utils';
 import {AddressService} from '../../../../services/address.service';
 import {PersonalDataService} from '../../../../services/personal-data.service';
@@ -12,6 +12,7 @@ import {Address, IAddress} from '../../../../entities/address';
 import {IPersonalData, PersonalData} from '../../../../entities/personal-data';
 import {PersonService} from '../../../../services/person.service';
 import {IPersonFull, PersonFull} from '../../../../entities/person-full';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-person-edit',
@@ -24,11 +25,25 @@ export class PersonEditComponent implements OnInit {
   person: IPersonFull;
   personForm: FormGroup;
 
+  private _personBirthDate: Date;
+  get personBirthDate(): Date {
+    return this._personBirthDate;
+  }
+
+  set personBirthDate(value: Date) {
+    this._personBirthDate = value;
+    if (this.personForm) {
+      (<FormGroup>this.personForm.controls['personalData']).controls['birthDate'].setValue(value.toISOString());
+    }
+  }
+
   constructor(private activatedRoute: ActivatedRoute,
               private userService: UserService,
               private addressService: AddressService,
               private personalDataService: PersonalDataService,
-              private personService: PersonService) {
+              private personService: PersonService,
+              private messageService: MessageService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -50,7 +65,7 @@ export class PersonEditComponent implements OnInit {
     this.personForm = new FormGroup({
       id: new FormControl(person.id),
       email: new FormControl(person.email),
-      virtual: new FormControl(person.virtual)
+      virtual: new FormControl(person.virtual ? person.virtual : false)
     });
 
     if (!person.address) person.address = new Address();
@@ -105,9 +120,15 @@ export class PersonEditComponent implements OnInit {
         savePerson$ = this.personService.saveFull(personToSave);
       }
 
-      savePerson$.subscribe((personResponse: HttpResponse<PersonFull>) => {
+      savePerson$.subscribe(
+        (personResponse: HttpResponse<PersonFull>) => {
         this.person = personResponse.body;
-      });
+          this.messageService.add({severity: 'success', summary: 'Výsledky uloženy'});
+          this.router.navigate(['/admin/users/list']);
+      },
+        (errorResponse: HttpErrorResponse) => {
+          this.messageService.add({severity: 'error', summary: 'Výsledky nebyly uloženy', detail: errorResponse.error.detail});
+        });
     }
   }
 

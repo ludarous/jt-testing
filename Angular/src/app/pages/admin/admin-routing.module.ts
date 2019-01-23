@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: 'app/pages/admin/activities/activities.module#ActivitiesModule',
       },
       {
+        path: 'test-categories',
+        loadChildren: 'app/pages/admin/test-categories/test-categories.module#TestCategoriesModule',
+      },
+      {
         path: 'tests',
         loadChildren: 'app/pages/admin/tests/tests.module#TestsModule',
       },
@@ -28,9 +32,13 @@ const routes: Routes = [
         loadChildren: 'app/pages/admin/events/events.module#EventsModule',
       },
       {
+        path: 'results',
+        loadChildren: 'app/pages/admin/results/results.module#ResultsModule',
+      },
+      {
         path: 'users',
         loadChildren: 'app/pages/admin/users/users.module#UsersModule',
-      },
+      }
     ]
   }
 ];

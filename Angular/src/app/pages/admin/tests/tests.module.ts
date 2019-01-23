@@ -11,14 +11,12 @@ import {TestsEditComponent} from './edit/tests-edit.component';
 import {TestsRoutingModule} from './tests-routing.module';
 import {MaterialComponentsModule} from '../../../shared/material-components.module';
 import {PrimeNgComponentsModule} from '../../../shared/primeng-components.module';
-import {TestCategoriesComponent} from './categories/test-categories.component';
 
 @NgModule({
   declarations: [
     TestsComponent,
     TestsListComponent,
     TestsEditComponent,
-    TestCategoriesComponent,
   ],
   imports: [
     CommonModule,

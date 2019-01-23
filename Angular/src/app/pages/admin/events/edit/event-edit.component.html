@@ -1,50 +1,53 @@
 <div class="component-container-center">
-  <div class="form-container">
-    <form class="form" *ngIf="eventForm" [formGroup]="eventForm" (submit)="saveTest()">
-      <mat-form-field>
-        <input matInput [placeholder]="'Název' | translate" name="name"
-               formControlName="name"
-               required/>
-        <mat-error *ngIf="eventForm.controls['name'].hasError('required')">
-          {{'Název musí být vyplněn' | translate }}
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput [placeholder]="'Minimální věk' | translate" name="minAge" formControlName="minAge"/>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput [placeholder]="'Maximální věk' | translate" name="maxAge" formControlName="maxAge"/>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-select placeholder="Testy" [(ngModel)]="selectedTests"  [ngModelOptions]="{standalone: true}" multiple>
-          <mat-option *ngFor="let test of tests" [value]="test">{{test.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput
-               placeholder="{{'Datum konání' | translate}}"
-               [matDatepicker]="dateFromDatePicker"
-               [(ngModel)]="eventDate" [ngModelOptions]="{standalone: true}">
-        <mat-datepicker-toggle matSuffix [for]="dateFromDatePicker"></mat-datepicker-toggle>
-        <mat-datepicker #dateFromDatePicker></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput
-               placeholder="{{'Čas konání' | translate}}"
-               [format]="24"
-               [ngxTimepicker]="picker"
-               [(ngModel)]="eventTime"
-               [ngModelOptions]="{standalone: true}"
-               readonly>
-        <ngx-material-timepicker #picker></ngx-material-timepicker>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-select placeholder="Uživatelé" [(ngModel)]="selectedPersons"  [ngModelOptions]="{standalone: true}" multiple>
-          <mat-option *ngFor="let person of persons" [value]="person">{{person.personalData.firstName + ' ' + person.personalData.lastName}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <button mat-raised-button>{{'Uložit' | translate}}</button>
-    </form>
-    <button mat-raised-button [routerLink]="['results']">{{'Výsledky' | translate}}</button>
-  </div>
+  <form class="form" *ngIf="eventForm" [formGroup]="eventForm" (submit)="saveTest()">
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Název" formControlName="name" required>
+      <p-message severity="error" text="Název kategorie je povinný"
+                 *ngIf="!eventForm.controls['name'].valid && eventForm.controls['name'].touched"></p-message>
+    </div>
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Minimální věk" formControlName="minAge" required>
+    </div>
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Maximální věk" formControlName="maxAge" required>
+    </div>
+    <p-calendar [(ngModel)]="eventDateClassic"
+                [ngModelOptions]="{standalone: true}"
+                [placeholder]="'Datum události'"
+                showTime="true"
+                hourFormat="24"
+                dateFormat="dd.mm.yy"
+    ></p-calendar>
+    <div *ngIf="tests" class="ui-inputgroup">
+      <p-pickList styleClass="edit-picklist"
+                  [source]="suggestedTests"
+                  [target]="selectedTests"
+                  sourceHeader="Testy"
+                  targetHeader="Vybrané testy"
+                  filterBy="name"
+                  dragdrop="true">
+        <ng-template let-test pTemplate="item">
+          <div class="ui-helper-clearfix">
+            {{test.name}}
+          </div>
+        </ng-template>
+      </p-pickList>
+    </div>
+    <div *ngIf="tests" class="ui-inputgroup">
+      <p-pickList styleClass="edit-picklist"
+                  [source]="suggestedPerson"
+                  [target]="selectedPersons"
+                  sourceHeader="Uživatelé"
+                  targetHeader="Vybraní uživatelé"
+                  filterBy="name"
+                  dragdrop="true">
+        <ng-template let-person pTemplate="item">
+          <div class="ui-helper-clearfix">
+            {{person.personalData.firstName + ' ' + person.personalData.lastName}}
+          </div>
+        </ng-template>
+      </p-pickList>
+    </div>
+    <button mat-raised-button>{{'Uložit' | translate}}</button>
+  </form>
 </div>

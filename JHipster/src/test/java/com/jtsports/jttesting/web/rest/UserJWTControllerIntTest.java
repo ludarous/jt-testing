@@ -4,6 +4,7 @@ import com.jtsports.jttesting.JtTestingApp;
 import com.jtsports.jttesting.domain.User;
 import com.jtsports.jttesting.repository.UserRepository;
 import com.jtsports.jttesting.security.jwt.TokenProvider;
+import com.jtsports.jttesting.service.UserService;
 import com.jtsports.jttesting.web.rest.vm.LoginVM;
 import com.jtsports.jttesting.web.rest.errors.ExceptionTranslator;
 import org.junit.Before;
@@ -45,6 +46,9 @@ public class UserJWTControllerIntTest {
     private UserRepository userRepository;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -54,7 +58,7 @@ public class UserJWTControllerIntTest {
 
     @Before
     public void setup() {
-        UserJWTController userJWTController = new UserJWTController(tokenProvider, authenticationManager);
+        UserJWTController userJWTController = new UserJWTController(tokenProvider, authenticationManager, userService);
         this.mockMvc = MockMvcBuilders.standaloneSetup(userJWTController)
             .setControllerAdvice(exceptionTranslator)
             .build();
