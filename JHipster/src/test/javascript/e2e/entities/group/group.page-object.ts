@@ -18,6 +18,7 @@ export class GroupUpdatePage {
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     nameInput = element(by.id('field_name'));
+    parentSelect = element(by.id('field_parent'));
 
     getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -29,6 +30,25 @@ export class GroupUpdatePage {
 
     getNameInput() {
         return this.nameInput.getAttribute('value');
+    }
+
+    parentSelectLastOption(): promise.Promise<void> {
+        return this.parentSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    parentSelectOption(option): promise.Promise<void> {
+        return this.parentSelect.sendKeys(option);
+    }
+
+    getParentSelect(): ElementFinder {
+        return this.parentSelect;
+    }
+
+    getParentSelectedOption() {
+        return this.parentSelect.element(by.css('option:checked')).getText();
     }
 
     save(): promise.Promise<void> {

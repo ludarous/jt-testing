@@ -31,6 +31,7 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="name"><span jhiTranslate="jtTestingApp.group.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="parentName"><span jhiTranslate="jtTestingApp.group.parent">Parent</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -38,6 +39,11 @@
             <tr *ngFor="let group of groups ;trackBy: trackId">
                 <td><a [routerLink]="['/group', group.id, 'view' ]">{{group.id}}</a></td>
                 <td>{{group.name}}</td>
+                <td>
+                    <div *ngIf="group.parentId">
+                        <a [routerLink]="['../group', group.parentId , 'view' ]" >{{group.parentName}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

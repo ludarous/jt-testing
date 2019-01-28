@@ -14,6 +14,10 @@ public class GroupDTO implements Serializable {
     @NotNull
     private String name;
 
+    private Long parentId;
+
+    private String parentName;
+
     public Long getId() {
         return id;
     }
@@ -28,6 +32,22 @@ public class GroupDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long groupId) {
+        this.parentId = groupId;
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String groupName) {
+        this.parentName = groupName;
     }
 
     @Override
@@ -56,6 +76,8 @@ public class GroupDTO implements Serializable {
         return "GroupDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", parent=" + getParentId() +
+            ", parent='" + getParentName() + "'" +
             "}";
     }
 }

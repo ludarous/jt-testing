@@ -11,7 +11,13 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {})
 public interface GroupMapper extends EntityMapper<GroupDTO, Group> {
 
+    @Mapping(source = "parent.id", target = "parentId")
+    @Mapping(source = "parent.name", target = "parentName")
+    GroupDTO toDto(Group group);
 
+    @Mapping(source = "parentId", target = "parent")
+    @Mapping(target = "children", ignore = true)
+    Group toEntity(GroupDTO groupDTO);
 
     default Group fromId(Long id) {
         if (id == null) {

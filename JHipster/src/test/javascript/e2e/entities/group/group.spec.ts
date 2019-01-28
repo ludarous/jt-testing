@@ -32,6 +32,7 @@ describe('Group e2e test', () => {
         groupComponentsPage.clickOnCreateButton();
         groupUpdatePage.setNameInput('name');
         expect(groupUpdatePage.getNameInput()).toMatch('name');
+        groupUpdatePage.parentSelectLastOption();
         groupUpdatePage.save();
         expect(groupUpdatePage.getSaveButton().isPresent()).toBeFalsy();
     });

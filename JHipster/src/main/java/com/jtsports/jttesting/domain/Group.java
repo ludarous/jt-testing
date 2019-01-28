@@ -1,11 +1,15 @@
 package com.jtsports.jttesting.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -27,6 +31,13 @@ public class Group implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private Group parent;
+
+    @OneToMany(mappedBy = "parent")
+    private Set<Group> children = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -47,6 +58,44 @@ public class Group implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Group getParent() {
+        return parent;
+    }
+
+    public Group parent(Group group) {
+        this.parent = group;
+        return this;
+    }
+
+    public void setParent(Group group) {
+        this.parent = group;
+    }
+
+    public Set<Group> getChildren() {
+        return children;
+    }
+
+    public Group children(Set<Group> groups) {
+        this.children = groups;
+        return this;
+    }
+
+    public Group addChildren(Group group) {
+        this.children.add(group);
+        group.setParent(this);
+        return this;
+    }
+
+    public Group removeChildren(Group group) {
+        this.children.remove(group);
+        group.setParent(null);
+        return this;
+    }
+
+    public void setChildren(Set<Group> groups) {
+        this.children = groups;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

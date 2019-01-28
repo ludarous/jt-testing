@@ -1,7 +1,20 @@
 {
     "fluentMethods": true,
     "clientRootFolder": "",
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "parent",
+            "otherEntityName": "group",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "children",
+            "otherEntityName": "group",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "parent"
+        }
+    ],
     "fields": [
         {
             "fieldName": "name",

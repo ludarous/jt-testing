@@ -21,6 +21,13 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.group.parent" for="field_parent">Parent</label>
+                    <select class="form-control" id="field_parent" name="parent" [(ngModel)]="group.parentId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="groupOption.id" *ngFor="let groupOption of groups; trackBy: trackGroupById">{{groupOption.name}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

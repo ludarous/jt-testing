@@ -9,6 +9,12 @@
                 <dd>
                     <span>{{group.name}}</span>
                 </dd>
+                <dt><span jhiTranslate="jtTestingApp.group.parent">Parent</span></dt>
+                <dd>
+                    <div *ngIf="group.parentId">
+                        <a [routerLink]="['/group', group.parentId, 'view']">{{group.parentName}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"
