@@ -90,11 +90,32 @@
                         <option value="">{{'jtTestingApp.ResultType.' | translate}}</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activity.creationTime" for="field_creationTime">Creation Time</label>
+                    <div class="d-flex">
+                        <input id="field_creationTime" type="datetime-local" class="form-control" name="creationTime" [(ngModel)]="creationTime"
+                        />
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label jhiTranslate="jtTestingApp.activity.categories" for="field_categories">Categories</label>
                     <select class="form-control" id="field_categories" multiple name="categories" [(ngModel)]="activity.categories">
                         <option [ngValue]="getSelected(activity.categories, activityCategoryOption)" *ngFor="let activityCategoryOption of activitycategories; trackBy: trackActivityCategoryById">{{activityCategoryOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activity.author" for="field_author">Author</label>
+                    <select class="form-control" id="field_author" name="author" [(ngModel)]="activity.authorId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="personOption.id" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.email}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activity.group" for="field_group">Group</label>
+                    <select class="form-control" id="field_group" name="group" [(ngModel)]="activity.groupId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="groupOption.id" *ngFor="let groupOption of groups; trackBy: trackGroupById">{{groupOption.name}}</option>
                     </select>
                 </div>
             </div>

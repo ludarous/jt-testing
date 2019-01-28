@@ -2,12 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 
 import { IActivity } from 'app/shared/model/activity.model';
 import { ActivityService } from './activity.service';
 import { IActivityCategory } from 'app/shared/model/activity-category.model';
 import { ActivityCategoryService } from 'app/entities/activity-category';
+import { IPerson } from 'app/shared/model/person.model';
+import { PersonService } from 'app/entities/person';
+import { IGroup } from 'app/shared/model/group.model';
+import { GroupService } from 'app/entities/group';
 
 @Component({
     selector: 'jhi-activity-update',
@@ -19,10 +25,17 @@ export class ActivityUpdateComponent implements OnInit {
 
     activitycategories: IActivityCategory[];
 
+    people: IPerson[];
+
+    groups: IGroup[];
+    creationTime: string;
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private activityService: ActivityService,
         private activityCategoryService: ActivityCategoryService,
+        private personService: PersonService,
+        private groupService: GroupService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -37,6 +50,18 @@ export class ActivityUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+        this.personService.query().subscribe(
+            (res: HttpResponse<IPerson[]>) => {
+                this.people = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.groupService.query().subscribe(
+            (res: HttpResponse<IGroup[]>) => {
+                this.groups = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     previousState() {
@@ -45,6 +70,7 @@ export class ActivityUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.activity.creationTime = moment(this.creationTime, DATE_TIME_FORMAT);
         if (this.activity.id !== undefined) {
             this.subscribeToSaveResponse(this.activityService.update(this.activity));
         } else {
@@ -73,6 +99,14 @@ export class ActivityUpdateComponent implements OnInit {
         return item.id;
     }
 
+    trackPersonById(index: number, item: IPerson) {
+        return item.id;
+    }
+
+    trackGroupById(index: number, item: IGroup) {
+        return item.id;
+    }
+
     getSelected(selectedVals: Array<any>, option: any) {
         if (selectedVals) {
             for (let i = 0; i < selectedVals.length; i++) {
@@ -89,5 +123,6 @@ export class ActivityUpdateComponent implements OnInit {
 
     set activity(activity: IActivity) {
         this._activity = activity;
+        this.creationTime = moment(activity.creationTime).format(DATE_TIME_FORMAT);
     }
 }

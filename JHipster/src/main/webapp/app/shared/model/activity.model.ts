@@ -1,3 +1,4 @@
+import { Moment } from 'moment';
 import { IActivityCategory } from 'app/shared/model//activity-category.model';
 
 export const enum ActivityResultUnits {
@@ -28,7 +29,12 @@ export interface IActivity {
     maxAge?: number;
     primaryResultType?: ResultType;
     secondaryResultType?: ResultType;
+    creationTime?: Moment;
     categories?: IActivityCategory[];
+    authorEmail?: string;
+    authorId?: number;
+    groupName?: string;
+    groupId?: number;
 }
 
 export class Activity implements IActivity {
@@ -44,6 +50,11 @@ export class Activity implements IActivity {
         public maxAge?: number,
         public primaryResultType?: ResultType,
         public secondaryResultType?: ResultType,
-        public categories?: IActivityCategory[]
+        public creationTime?: Moment,
+        public categories?: IActivityCategory[],
+        public authorEmail?: string,
+        public authorId?: number,
+        public groupName?: string,
+        public groupId?: number
     ) {}
 }

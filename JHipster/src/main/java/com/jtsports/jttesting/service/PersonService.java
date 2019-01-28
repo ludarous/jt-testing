@@ -1,5 +1,6 @@
 package com.jtsports.jttesting.service;
 
+import com.jtsports.jttesting.domain.Person;
 import com.jtsports.jttesting.service.dto.PersonDTO;
 
 import com.jtsports.jttesting.service.dto.PersonFullDTO;
@@ -61,6 +62,15 @@ public interface PersonService {
      * @return the entity
      */
     Optional<PersonFullDTO> findOneByUserId(Long userId);
+
+    /**
+     * Get current person.
+     *
+     * @return the entity
+     */
+    Person findCurrentPerson();
+
+
 
     /**
      * Delete the "id" person.

@@ -1,0 +1,35 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="RLU (generated)" id="1548663685849-1">
+        <addColumn tableName="activity">
+            <column name="author_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1548663685849-2">
+        <addColumn tableName="activity">
+            <column name="creation_time" type="datetime"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1548663685849-3">
+        <addColumn tableName="activity">
+            <column name="group_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1548663685849-4">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="activity" constraintName="FK5uiqyj0efmyxdb0w52b184iai" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="person"/>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1548663685849-5">
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="activity" constraintName="FKi38klfuakye3farjp75qw5jsl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_group"/>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1548663685849-6">
+        <dropIndex indexName="filter_index" tableName="activity_result"/>
+        <createIndex indexName="filter_index" tableName="activity_result">
+            <column name="event_date"/>
+            <column name="person_birth_date"/>
+            <column name="activity_id"/>
+            <column name="test_id"/>
+            <column name="event_id"/>
+            <column name="person_id"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

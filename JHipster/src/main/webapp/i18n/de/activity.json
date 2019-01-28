@@ -27,7 +27,10 @@
             "maxAge": "Max Age",
             "primaryResultType": "Primary Result Type",
             "secondaryResultType": "Secondary Result Type",
-            "categories": "Categories"
+            "creationTime": "Creation Time",
+            "categories": "Categories",
+            "author": "Author",
+            "group": "Group"
         }
     }
 }

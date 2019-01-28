@@ -45,6 +45,8 @@ public final class SecurityUtils {
             .map(authentication -> (String) authentication.getCredentials());
     }
 
+
+
     /**
      * Check if a user is authenticated.
      *

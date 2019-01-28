@@ -1,9 +1,11 @@
 package com.jtsports.jttesting.service.impl;
 
+import com.jtsports.jttesting.domain.Person;
 import com.jtsports.jttesting.service.ActivityService;
 import com.jtsports.jttesting.domain.Activity;
 import com.jtsports.jttesting.repository.ActivityRepository;
 import com.jtsports.jttesting.repository.search.ActivitySearchRepository;
+import com.jtsports.jttesting.service.PersonService;
 import com.jtsports.jttesting.service.dto.ActivityDTO;
 import com.jtsports.jttesting.service.mapper.ActivityMapper;
 import org.slf4j.Logger;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -28,13 +31,16 @@ public class ActivityServiceImpl implements ActivityService {
 
     private final Logger log = LoggerFactory.getLogger(ActivityServiceImpl.class);
 
+    private final PersonService personService;
+
     private final ActivityRepository activityRepository;
 
     private final ActivityMapper activityMapper;
 
     private final ActivitySearchRepository activitySearchRepository;
 
-    public ActivityServiceImpl(ActivityRepository activityRepository, ActivityMapper activityMapper, ActivitySearchRepository activitySearchRepository) {
+    public ActivityServiceImpl(PersonService personService, ActivityRepository activityRepository, ActivityMapper activityMapper, ActivitySearchRepository activitySearchRepository) {
+        this.personService = personService;
         this.activityRepository = activityRepository;
         this.activityMapper = activityMapper;
         this.activitySearchRepository = activitySearchRepository;
@@ -50,6 +56,13 @@ public class ActivityServiceImpl implements ActivityService {
     public ActivityDTO save(ActivityDTO activityDTO) {
         log.debug("Request to save Activity : {}", activityDTO);
         Activity activity = activityMapper.toEntity(activityDTO);
+
+        if(activity.getId() == null) {
+            Person currentPerson = this.personService.findCurrentPerson();
+            activity.setAuthor(currentPerson);
+            activity.setCreationTime(ZonedDateTime.now());
+        }
+
         activity = activityRepository.save(activity);
         ActivityDTO result = activityMapper.toDto(activity);
         activitySearchRepository.save(activity);

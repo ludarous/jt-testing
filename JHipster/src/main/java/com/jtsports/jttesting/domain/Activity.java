@@ -1,11 +1,13 @@
 package com.jtsports.jttesting.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -65,11 +67,22 @@ public class Activity implements Serializable {
     @Column(name = "secondary_result_type")
     private ResultType secondaryResultType;
 
+    @Column(name = "creation_time")
+    private ZonedDateTime creationTime;
+
     @ManyToMany
     @JoinTable(name = "activity_categories",
                joinColumns = @JoinColumn(name = "activities_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "categories_id", referencedColumnName = "id"))
     private Set<ActivityCategory> categories = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private Person author;
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private Group group;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -210,6 +223,19 @@ public class Activity implements Serializable {
         this.secondaryResultType = secondaryResultType;
     }
 
+    public ZonedDateTime getCreationTime() {
+        return creationTime;
+    }
+
+    public Activity creationTime(ZonedDateTime creationTime) {
+        this.creationTime = creationTime;
+        return this;
+    }
+
+    public void setCreationTime(ZonedDateTime creationTime) {
+        this.creationTime = creationTime;
+    }
+
     public Set<ActivityCategory> getCategories() {
         return categories;
     }
@@ -231,6 +257,32 @@ public class Activity implements Serializable {
 
     public void setCategories(Set<ActivityCategory> activityCategories) {
         this.categories = activityCategories;
+    }
+
+    public Person getAuthor() {
+        return author;
+    }
+
+    public Activity author(Person person) {
+        this.author = person;
+        return this;
+    }
+
+    public void setAuthor(Person person) {
+        this.author = person;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public Activity group(Group group) {
+        this.group = group;
+        return this;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -268,6 +320,7 @@ public class Activity implements Serializable {
             ", maxAge=" + getMaxAge() +
             ", primaryResultType='" + getPrimaryResultType() + "'" +
             ", secondaryResultType='" + getSecondaryResultType() + "'" +
+            ", creationTime='" + getCreationTime() + "'" +
             "}";
     }
 }

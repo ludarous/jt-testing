@@ -31,11 +31,16 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 
+import static com.jtsports.jttesting.web.rest.TestUtil.sameInstant;
 import static com.jtsports.jttesting.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
@@ -87,8 +92,12 @@ public class ActivityResourceIntTest {
     private static final ResultType DEFAULT_SECONDARY_RESULT_TYPE = ResultType.LESS_IS_BETTER;
     private static final ResultType UPDATED_SECONDARY_RESULT_TYPE = ResultType.MORE_IS_BETTER;
 
+    private static final ZonedDateTime DEFAULT_CREATION_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_CREATION_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+
     @Autowired
     private ActivityRepository activityRepository;
+
     @Mock
     private ActivityRepository activityRepositoryMock;
 
@@ -162,7 +171,8 @@ public class ActivityResourceIntTest {
             .minAge(DEFAULT_MIN_AGE)
             .maxAge(DEFAULT_MAX_AGE)
             .primaryResultType(DEFAULT_PRIMARY_RESULT_TYPE)
-            .secondaryResultType(DEFAULT_SECONDARY_RESULT_TYPE);
+            .secondaryResultType(DEFAULT_SECONDARY_RESULT_TYPE)
+            .creationTime(DEFAULT_CREATION_TIME);
         return activity;
     }
 
@@ -197,6 +207,7 @@ public class ActivityResourceIntTest {
         assertThat(testActivity.getMaxAge()).isEqualTo(DEFAULT_MAX_AGE);
         assertThat(testActivity.getPrimaryResultType()).isEqualTo(DEFAULT_PRIMARY_RESULT_TYPE);
         assertThat(testActivity.getSecondaryResultType()).isEqualTo(DEFAULT_SECONDARY_RESULT_TYPE);
+        assertThat(testActivity.getCreationTime()).isEqualTo(DEFAULT_CREATION_TIME);
 
         // Validate the Activity in Elasticsearch
         verify(mockActivitySearchRepository, times(1)).save(testActivity);
@@ -283,11 +294,12 @@ public class ActivityResourceIntTest {
             .andExpect(jsonPath("$.[*].minAge").value(hasItem(DEFAULT_MIN_AGE)))
             .andExpect(jsonPath("$.[*].maxAge").value(hasItem(DEFAULT_MAX_AGE)))
             .andExpect(jsonPath("$.[*].primaryResultType").value(hasItem(DEFAULT_PRIMARY_RESULT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].secondaryResultType").value(hasItem(DEFAULT_SECONDARY_RESULT_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].secondaryResultType").value(hasItem(DEFAULT_SECONDARY_RESULT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].creationTime").value(hasItem(sameInstant(DEFAULT_CREATION_TIME))));
     }
     
     public void getAllActivitiesWithEagerRelationshipsIsEnabled() throws Exception {
-        ActivityResource activityResource = new ActivityResource(activityServiceMock, activityRepository, userService, personService, statsService);
+        ActivityResource activityResource = new ActivityResource(activityServiceMock, activityRepositoryMock, userService, personService, statsService);
         when(activityServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         MockMvc restActivityMockMvc = MockMvcBuilders.standaloneSetup(activityResource)
@@ -303,7 +315,7 @@ public class ActivityResourceIntTest {
     }
 
     public void getAllActivitiesWithEagerRelationshipsIsNotEnabled() throws Exception {
-        ActivityResource activityResource = new ActivityResource(activityServiceMock, activityRepository, userService, personService, statsService);
+        ActivityResource activityResource = new ActivityResource(activityServiceMock, activityRepositoryMock, userService, personService, statsService);
             when(activityServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
             MockMvc restActivityMockMvc = MockMvcBuilders.standaloneSetup(activityResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
@@ -337,7 +349,8 @@ public class ActivityResourceIntTest {
             .andExpect(jsonPath("$.minAge").value(DEFAULT_MIN_AGE))
             .andExpect(jsonPath("$.maxAge").value(DEFAULT_MAX_AGE))
             .andExpect(jsonPath("$.primaryResultType").value(DEFAULT_PRIMARY_RESULT_TYPE.toString()))
-            .andExpect(jsonPath("$.secondaryResultType").value(DEFAULT_SECONDARY_RESULT_TYPE.toString()));
+            .andExpect(jsonPath("$.secondaryResultType").value(DEFAULT_SECONDARY_RESULT_TYPE.toString()))
+            .andExpect(jsonPath("$.creationTime").value(sameInstant(DEFAULT_CREATION_TIME)));
     }
     @Test
     @Transactional
@@ -369,7 +382,8 @@ public class ActivityResourceIntTest {
             .minAge(UPDATED_MIN_AGE)
             .maxAge(UPDATED_MAX_AGE)
             .primaryResultType(UPDATED_PRIMARY_RESULT_TYPE)
-            .secondaryResultType(UPDATED_SECONDARY_RESULT_TYPE);
+            .secondaryResultType(UPDATED_SECONDARY_RESULT_TYPE)
+            .creationTime(UPDATED_CREATION_TIME);
         ActivityDTO activityDTO = activityMapper.toDto(updatedActivity);
 
         restActivityMockMvc.perform(put("/api/activities")
@@ -391,6 +405,7 @@ public class ActivityResourceIntTest {
         assertThat(testActivity.getMaxAge()).isEqualTo(UPDATED_MAX_AGE);
         assertThat(testActivity.getPrimaryResultType()).isEqualTo(UPDATED_PRIMARY_RESULT_TYPE);
         assertThat(testActivity.getSecondaryResultType()).isEqualTo(UPDATED_SECONDARY_RESULT_TYPE);
+        assertThat(testActivity.getCreationTime()).isEqualTo(UPDATED_CREATION_TIME);
 
         // Validate the Activity in Elasticsearch
         verify(mockActivitySearchRepository, times(1)).save(testActivity);
@@ -460,7 +475,8 @@ public class ActivityResourceIntTest {
             .andExpect(jsonPath("$.[*].minAge").value(hasItem(DEFAULT_MIN_AGE)))
             .andExpect(jsonPath("$.[*].maxAge").value(hasItem(DEFAULT_MAX_AGE)))
             .andExpect(jsonPath("$.[*].primaryResultType").value(hasItem(DEFAULT_PRIMARY_RESULT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].secondaryResultType").value(hasItem(DEFAULT_SECONDARY_RESULT_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].secondaryResultType").value(hasItem(DEFAULT_SECONDARY_RESULT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].creationTime").value(hasItem(sameInstant(DEFAULT_CREATION_TIME))));
     }
 
     @Test

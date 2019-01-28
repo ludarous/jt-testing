@@ -1,5 +1,6 @@
 package com.jtsports.jttesting.service.dto;
 
+import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -39,7 +40,17 @@ public class ActivityDTO implements Serializable {
 
     private ResultType secondaryResultType;
 
+    private ZonedDateTime creationTime;
+
     private Set<ActivityCategoryDTO> categories = new HashSet<>();
+
+    private Long authorId;
+
+    private String authorEmail;
+
+    private Long groupId;
+
+    private String groupName;
 
     public Long getId() {
         return id;
@@ -129,12 +140,52 @@ public class ActivityDTO implements Serializable {
         this.secondaryResultType = secondaryResultType;
     }
 
+    public ZonedDateTime getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(ZonedDateTime creationTime) {
+        this.creationTime = creationTime;
+    }
+
     public Set<ActivityCategoryDTO> getCategories() {
         return categories;
     }
 
     public void setCategories(Set<ActivityCategoryDTO> activityCategories) {
         this.categories = activityCategories;
+    }
+
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Long personId) {
+        this.authorId = personId;
+    }
+
+    public String getAuthorEmail() {
+        return authorEmail;
+    }
+
+    public void setAuthorEmail(String personEmail) {
+        this.authorEmail = personEmail;
+    }
+
+    public Long getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
     @Override
@@ -172,6 +223,11 @@ public class ActivityDTO implements Serializable {
             ", maxAge=" + getMaxAge() +
             ", primaryResultType='" + getPrimaryResultType() + "'" +
             ", secondaryResultType='" + getSecondaryResultType() + "'" +
+            ", creationTime='" + getCreationTime() + "'" +
+            ", author=" + getAuthorId() +
+            ", author='" + getAuthorEmail() + "'" +
+            ", group=" + getGroupId() +
+            ", group='" + getGroupName() + "'" +
             "}";
     }
 }

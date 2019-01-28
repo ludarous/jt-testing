@@ -9,6 +9,18 @@
             "otherEntityName": "activityCategory",
             "otherEntityField": "name",
             "ownerSide": true
+        },
+        {
+            "relationshipName": "author",
+            "otherEntityName": "person",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "email"
+        },
+        {
+            "relationshipName": "group",
+            "otherEntityName": "group",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
         }
     ],
     "fields": [
@@ -61,6 +73,10 @@
             "fieldName": "secondaryResultType",
             "fieldType": "ResultType",
             "fieldValues": ""
+        },
+        {
+            "fieldName": "creationTime",
+            "fieldType": "ZonedDateTime"
         }
     ],
     "changelogDate": "20180919081351",

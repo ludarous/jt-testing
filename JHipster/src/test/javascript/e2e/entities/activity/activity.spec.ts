@@ -1,4 +1,4 @@
-import { browser } from 'protractor';
+import { browser, protractor } from 'protractor';
 import { NavBarPage } from './../../page-objects/jhi-page-objects';
 import { ActivityComponentsPage, ActivityUpdatePage } from './activity.page-object';
 
@@ -46,7 +46,11 @@ describe('Activity e2e test', () => {
         expect(activityUpdatePage.getMaxAgeInput()).toMatch('5');
         activityUpdatePage.primaryResultTypeSelectLastOption();
         activityUpdatePage.secondaryResultTypeSelectLastOption();
+        activityUpdatePage.setCreationTimeInput('01/01/2001' + protractor.Key.TAB + '02:30AM');
+        expect(activityUpdatePage.getCreationTimeInput()).toContain('2001-01-01T02:30');
         // activityUpdatePage.categoriesSelectLastOption();
+        activityUpdatePage.authorSelectLastOption();
+        activityUpdatePage.groupSelectLastOption();
         activityUpdatePage.save();
         expect(activityUpdatePage.getSaveButton().isPresent()).toBeFalsy();
     });

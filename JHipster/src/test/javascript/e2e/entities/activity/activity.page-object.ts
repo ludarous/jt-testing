@@ -27,7 +27,10 @@ export class ActivityUpdatePage {
     maxAgeInput = element(by.id('field_maxAge'));
     primaryResultTypeSelect = element(by.id('field_primaryResultType'));
     secondaryResultTypeSelect = element(by.id('field_secondaryResultType'));
+    creationTimeInput = element(by.id('field_creationTime'));
     categoriesSelect = element(by.id('field_categories'));
+    authorSelect = element(by.id('field_author'));
+    groupSelect = element(by.id('field_group'));
 
     getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -137,6 +140,14 @@ export class ActivityUpdatePage {
             .last()
             .click();
     }
+    setCreationTimeInput(creationTime): promise.Promise<void> {
+        return this.creationTimeInput.sendKeys(creationTime);
+    }
+
+    getCreationTimeInput() {
+        return this.creationTimeInput.getAttribute('value');
+    }
+
     categoriesSelectLastOption(): promise.Promise<void> {
         return this.categoriesSelect
             .all(by.tagName('option'))
@@ -154,6 +165,44 @@ export class ActivityUpdatePage {
 
     getCategoriesSelectedOption() {
         return this.categoriesSelect.element(by.css('option:checked')).getText();
+    }
+
+    authorSelectLastOption(): promise.Promise<void> {
+        return this.authorSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    authorSelectOption(option): promise.Promise<void> {
+        return this.authorSelect.sendKeys(option);
+    }
+
+    getAuthorSelect(): ElementFinder {
+        return this.authorSelect;
+    }
+
+    getAuthorSelectedOption() {
+        return this.authorSelect.element(by.css('option:checked')).getText();
+    }
+
+    groupSelectLastOption(): promise.Promise<void> {
+        return this.groupSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    groupSelectOption(option): promise.Promise<void> {
+        return this.groupSelect.sendKeys(option);
+    }
+
+    getGroupSelect(): ElementFinder {
+        return this.groupSelect;
+    }
+
+    getGroupSelectedOption() {
+        return this.groupSelect.element(by.css('option:checked')).getText();
     }
 
     save(): promise.Promise<void> {

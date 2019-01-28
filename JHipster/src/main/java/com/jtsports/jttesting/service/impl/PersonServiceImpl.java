@@ -2,6 +2,7 @@ package com.jtsports.jttesting.service.impl;
 
 import com.jtsports.jttesting.domain.User;
 import com.jtsports.jttesting.repository.AddressRepository;
+import com.jtsports.jttesting.security.SecurityUtils;
 import com.jtsports.jttesting.service.AddressService;
 import com.jtsports.jttesting.service.PersonService;
 import com.jtsports.jttesting.domain.Person;
@@ -18,6 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.rmi.runtime.Log;
 
 
 import java.util.Optional;
@@ -137,6 +139,27 @@ public class PersonServiceImpl implements PersonService {
         log.debug("Request to get Person by userId : {}", userId);
         return personRepository.findByUserId(userId)
             .map(personFullMapper::toDto);
+    }
+
+    @Override
+    public Person findCurrentPerson() {
+
+        Optional<String> currentLoginOptional = SecurityUtils.getCurrentUserLogin();
+        if(!currentLoginOptional.isPresent()) {
+            log.warn("Current user not found!");
+            return null;
+        }
+
+        String userLogin = currentLoginOptional.get();
+
+        Optional<Person> personOptional = this.personRepository.findByUserLogin(userLogin);
+        if(!personOptional.isPresent()) {
+            log.warn("Current person for user login " + userLogin + " not found!");
+            return null;
+        }
+
+        return personOptional.get();
+
     }
 
     /**

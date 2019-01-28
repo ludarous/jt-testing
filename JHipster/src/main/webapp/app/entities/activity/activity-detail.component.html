@@ -45,11 +45,27 @@
                 <dd>
                     <span jhiTranslate="{{'jtTestingApp.ResultType.' + activity.secondaryResultType}}">{{activity.secondaryResultType}}</span>
                 </dd>
+                <dt><span jhiTranslate="jtTestingApp.activity.creationTime">Creation Time</span></dt>
+                <dd>
+                    <span>{{activity.creationTime}}</span>
+                </dd>
                 <dt><span jhiTranslate="jtTestingApp.activity.categories">Categories</span></dt>
                 <dd>
                     <span *ngFor="let categories of activity.categories; let last = last">
                         <a [routerLink]="['/activity-category', categories?.id, 'view' ]">{{categories.name}}</a>{{last ? '' : ', '}}
                     </span>
+                </dd>
+                <dt><span jhiTranslate="jtTestingApp.activity.author">Author</span></dt>
+                <dd>
+                    <div *ngIf="activity.authorId">
+                        <a [routerLink]="['/person', activity.authorId, 'view']">{{activity.authorEmail}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jtTestingApp.activity.group">Group</span></dt>
+                <dd>
+                    <div *ngIf="activity.groupId">
+                        <a [routerLink]="['/group', activity.groupId, 'view']">{{activity.groupName}}</a>
+                    </div>
                 </dd>
             </dl>
 

@@ -40,6 +40,9 @@
             <th jhiSortBy="maxAge"><span jhiTranslate="jtTestingApp.activity.maxAge">Max Age</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="primaryResultType"><span jhiTranslate="jtTestingApp.activity.primaryResultType">Primary Result Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="secondaryResultType"><span jhiTranslate="jtTestingApp.activity.secondaryResultType">Secondary Result Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="creationTime"><span jhiTranslate="jtTestingApp.activity.creationTime">Creation Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="authorEmail"><span jhiTranslate="jtTestingApp.activity.author">Author</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="groupName"><span jhiTranslate="jtTestingApp.activity.group">Group</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -56,6 +59,17 @@
                 <td>{{activity.maxAge}}</td>
                 <td jhiTranslate="{{'jtTestingApp.ResultType.' + activity.primaryResultType}}">{{activity.primaryResultType}}</td>
                 <td jhiTranslate="{{'jtTestingApp.ResultType.' + activity.secondaryResultType}}">{{activity.secondaryResultType}}</td>
+                <td>{{activity.creationTime | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="activity.authorId">
+                        <a [routerLink]="['../person', activity.authorId , 'view' ]" >{{activity.authorEmail}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="activity.groupId">
+                        <a [routerLink]="['../group', activity.groupId , 'view' ]" >{{activity.groupName}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

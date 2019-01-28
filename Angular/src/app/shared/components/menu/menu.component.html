@@ -1,11 +1,16 @@
 <div class="menu">
   <nav>
-    <a *ngIf="showAdminMenuItem" mat-raised-button [routerLink]="['admin']">Admin</a>
-    <a *ngIf="person" mat-raised-button [routerLink]="['/user/dashboard']">Dashboard</a>
-    <a *ngIf="person" mat-raised-button [routerLink]="['/user/my-results']">Moje výsledky</a>
-    <a *ngIf="person" mat-raised-button [routerLink]="['/user/my-stats']">Moje statistiky</a>
+    <a *ngIf="showAdminMenuItem" [routerLink]="['admin']">Admin</a>
+    <a *ngIf="person" [routerLink]="['/user/dashboard']">Dashboard</a>
+    <a *ngIf="person" [routerLink]="['/user/my-results']">Moje výsledky</a>
+    <a *ngIf="person" [routerLink]="['/user/my-stats']">Moje statistiky</a>
   </nav>
-  <div *ngIf="account" class="profile" [routerLink]="['/account/profile']">{{showUserName()}}</div>
-  <div *ngIf="account" class="logout" (click)="logout()">odhlásit</div>
-  <div *ngIf="!account" class="logout" (click)="login()">přihlásit</div>
+  <div class="profile-container">
+    <div matBadge="22" matBadgePosition="above after">
+      <i class="fa fa-bell"></i>
+    </div>
+    <div *ngIf="account" class="profile" [routerLink]="['/account/profile']">{{showUserName()}}</div>
+    <div *ngIf="account" class="logout" (click)="logout()">odhlásit</div>
+    <div *ngIf="!account" class="logout" (click)="login()">přihlásit</div>
+  </div>
 </div>

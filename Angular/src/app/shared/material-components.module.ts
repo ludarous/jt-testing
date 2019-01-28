@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
+  MatBadge, MatBadgeModule,
   MatButtonModule, MatCardModule, MatCheckboxModule, MatDatepickerModule, MatDialogModule, MatExpansionModule, MatIconModule,
   MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressSpinnerModule,
   MatRadioModule,
@@ -36,6 +37,7 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatStepperModule,
     MatSidenavModule,
     MatExpansionModule,
+    MatBadgeModule,
   ],
   providers: [
   ],
@@ -64,6 +66,7 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatStepperModule,
     MatSidenavModule,
     MatExpansionModule,
+    MatBadgeModule,
   ],
 })
 export class MaterialComponentsModule { }
