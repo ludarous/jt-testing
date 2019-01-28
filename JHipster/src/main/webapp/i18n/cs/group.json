@@ -1,0 +1,23 @@
+
+{
+    "jtTestingApp": {
+        "group" : {
+            "home": {
+                "title": "Groups",
+                "createLabel": "Vytvořit Group",
+                "createOrEditLabel": "Vytvořit nebo upravit Group",
+                "search": "Vyhledat Group"
+            },
+            "created": "Byl vytvořen potomek entity Group s identifikátorem {{ param }}",
+            "updated": "Potomek entity Group s identifikátorem {{ param }} byl upravený.",
+            "deleted": "Potomek entity Group s identifikátorem {{ param }} bol smazaný.",
+            "delete": {
+                "question": "Jste si jisti, že chcete smazat Group {{ id }}?"
+            },
+            "detail": {
+                "title": "Group"
+            },
+            "name": "Name"
+        }
+    }
+}

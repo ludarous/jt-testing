@@ -19,6 +19,7 @@
                 "personalData": "Personal Data",
                 "address": "Address",
                 "sport": "Sport",
+                "group": "Group",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
