@@ -1,0 +1,9 @@
+{
+    "jtTestingApp": {
+        "GroupAuthority" : {
+            "null": "",
+            "ADMIN": "ADMIN",
+            "MEMBER": "MEMBER"
+        }
+    }
+}

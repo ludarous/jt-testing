@@ -1,0 +1,25 @@
+
+{
+    "jtTestingApp": {
+        "personGroup" : {
+            "home": {
+                "title": "Person Groups",
+                "createLabel": "Create a new Person Group",
+                "createOrEditLabel": "Create or edit a Person Group",
+                "search": "Search for Person Group"
+            },
+            "created": "A new Person Group is created with identifier {{ param }}",
+            "updated": "A Person Group is updated with identifier {{ param }}",
+            "deleted": "A Person Group is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Person Group {{ id }}?"
+            },
+            "detail": {
+                "title": "Person Group"
+            },
+            "groupRole": "Group Role",
+            "person": "Person",
+            "group": "Group"
+        }
+    }
+}

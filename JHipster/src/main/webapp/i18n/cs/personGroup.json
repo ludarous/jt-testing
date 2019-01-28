@@ -1,0 +1,25 @@
+
+{
+    "jtTestingApp": {
+        "personGroup" : {
+            "home": {
+                "title": "Person Groups",
+                "createLabel": "Vytvořit Person Group",
+                "createOrEditLabel": "Vytvořit nebo upravit Person Group",
+                "search": "Vyhledat Person Group"
+            },
+            "created": "Byl vytvořen potomek entity Person Group s identifikátorem {{ param }}",
+            "updated": "Potomek entity Person Group s identifikátorem {{ param }} byl upravený.",
+            "deleted": "Potomek entity Person Group s identifikátorem {{ param }} bol smazaný.",
+            "delete": {
+                "question": "Jste si jisti, že chcete smazat Person Group {{ id }}?"
+            },
+            "detail": {
+                "title": "Person Group"
+            },
+            "groupRole": "Group Role",
+            "person": "Person",
+            "group": "Group"
+        }
+    }
+}

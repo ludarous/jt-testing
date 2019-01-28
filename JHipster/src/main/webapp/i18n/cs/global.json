@@ -20,6 +20,7 @@
                 "address": "Address",
                 "sport": "Sport",
                 "group": "Group",
+                "personGroup": "Person Group",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

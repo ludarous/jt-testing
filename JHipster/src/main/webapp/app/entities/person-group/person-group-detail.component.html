@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="personGroup">
+            <h2><span jhiTranslate="jtTestingApp.personGroup.detail.title">Person Group</span> {{personGroup.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jtTestingApp.personGroup.groupRole">Group Role</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jtTestingApp.GroupAuthority.' + personGroup.groupRole}}">{{personGroup.groupRole}}</span>
+                </dd>
+                <dt><span jhiTranslate="jtTestingApp.personGroup.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="personGroup.personId">
+                        <a [routerLink]="['/person', personGroup.personId, 'view']">{{personGroup.personEmail}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jtTestingApp.personGroup.group">Group</span></dt>
+                <dd>
+                    <div *ngIf="personGroup.groupId">
+                        <a [routerLink]="['/group', personGroup.groupId, 'view']">{{personGroup.groupName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/person-group', personGroup.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

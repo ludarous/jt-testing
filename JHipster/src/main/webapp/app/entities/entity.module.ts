@@ -13,6 +13,7 @@ import { JtTestingPersonalDataModule } from './personal-data/personal-data.modul
 import { JtTestingAddressModule } from './address/address.module';
 import { JtTestingSportModule } from './sport/sport.module';
 import { JtTestingGroupModule } from './group/group.module';
+import { JtTestingPersonGroupModule } from './person-group/person-group.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -31,6 +32,7 @@ import { JtTestingGroupModule } from './group/group.module';
         JtTestingAddressModule,
         JtTestingSportModule,
         JtTestingGroupModule,
+        JtTestingPersonGroupModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],
