@@ -47,6 +47,9 @@ export class EventEditComponent implements OnInit {
 
   set eventDateClassic(value: Date) {
     this._eventDateClassic = value;
+    if (this.eventForm) {
+      this.eventForm.controls['date'].setValue(value.toISOString());
+    }
   }
 
   private _eventDate: Moment;
@@ -99,8 +102,7 @@ export class EventEditComponent implements OnInit {
         this.event = event;
         this.tests = tests.body;
         this.persons = persons.body;
-        this.eventDate = moment(this.event.date);
-        
+
         this.setEventForm(this.event, this.tests, this.persons);
       });
 
@@ -113,28 +115,42 @@ export class EventEditComponent implements OnInit {
     this.eventForm = new FormGroup({
       id: new FormControl(event.id),
       name: new FormControl(event.name),
-      date: new FormControl(event.date),
+      date: new FormControl(event.date ? new Date(event.date) : null),
       minAge: new FormControl(event.minAge),
       maxAge: new FormControl(event.maxAge)
     });
 
-    if (event.tests) {
+    if (tests && event.tests) {
       this.selectedTests = tests.filter((t) => event.tests.some((st) => st.id === t.id));
       this.suggestedTests = tests.filter((t) => !this.selectedTests.some((st) => st.id === t.id));
+    } else {
+      this.suggestedTests = tests;
     }
 
-    if (event.tests) {
+    if (persons && event.attachedPersons) {
       this.selectedPersons = persons.filter((p) => event.attachedPersons.some((sp) => sp.id === p.id));
       this.suggestedPerson = persons.filter((p) => !this.selectedPersons.some((sp) => sp.id === p.id));
+    } else {
+      this.suggestedPerson = persons;
     }
+
+    this.eventDateClassic = event.date ? new Date(event.date) : null;
     
   }
 
-  saveTest() {
+  duplicateEvent() {
+    this.eventForm.controls['id'].setValue(null);
+    const eventName = this.eventForm.controls['name'].value;
+    this.eventForm.controls['name'].setValue(eventName + ' kopie');
+
+    this.saveEvent();
+  }
+
+  saveEvent() {
     if (this.eventForm.valid) {
 
       const eventToSave = <IEvent>this.eventForm.value;
-      eventToSave.date = this.eventDate.toISOString();
+
       let saveEvent$;
       if (eventToSave.id) {
         saveEvent$ = this.eventService.update(eventToSave);
@@ -142,7 +158,10 @@ export class EventEditComponent implements OnInit {
         saveEvent$ = this.eventService.create(eventToSave);
       }
 
-      eventToSave.tests = this.selectedTests;
+      if (this.selectedTests) {
+        eventToSave.tests = this.selectedTests;
+      }
+
       if (this.selectedPersons) {
         eventToSave.attachedPersons = this.selectedPersons.map(pf => Person.createPerson(pf));
       }

@@ -20,7 +20,8 @@
                                   [rangeFillOpacity]="rangeFillOpacity"
                                   [showSeriesOnHover]="true"
                                   [yAxisMinScale]="100"
-                                  (select)="select($event)">
+                                  [labelTrim]="false"
+                                  (select)="selectCategory($event)">
           </ngx-charts-polar-chart>
         </div>
         <div *ngIf="secondaryChartData" class="secondary-polar-chart-container">
@@ -38,7 +39,8 @@
                                   [rangeFillOpacity]="rangeFillOpacity"
                                   [showSeriesOnHover]="true"
                                   [yAxisMinScale]="100"
-                                  (select)="select($event)">
+                                  [labelTrim]="false"
+                                  (select)="selectCategory($event)">
           </ngx-charts-polar-chart>
         </div>
       </div>
@@ -71,8 +73,8 @@
       </div>
     </div>
   </div>
-  <ng-container *ngIf="testStats">
-    <div *ngFor="let activityStats of testStats.personalActivitiesStats">
+  <ng-container *ngIf="stats">
+    <div *ngFor="let activityStats of filteredActivitiesStats">
       <app-user-activity-result [activityStats]="activityStats"
                                 [test]="test"
                                 [event]="event">

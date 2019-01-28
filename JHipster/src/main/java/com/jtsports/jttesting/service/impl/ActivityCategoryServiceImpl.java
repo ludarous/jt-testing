@@ -8,11 +8,8 @@ import com.jtsports.jttesting.domain.ActivityCategory;
 import com.jtsports.jttesting.repository.ActivityCategoryRepository;
 import com.jtsports.jttesting.repository.search.ActivityCategorySearchRepository;
 import com.jtsports.jttesting.service.ActivityService;
-import com.jtsports.jttesting.service.dto.Activity.PersonalActivityStatsDTO;
-import com.jtsports.jttesting.service.dto.StatsRequestDTO;
+import com.jtsports.jttesting.service.dto.Stats.Activity.PersonalActivityStatsDTO;
 import com.jtsports.jttesting.service.dto.ActivityCategoryDTO;
-import com.jtsports.jttesting.service.dto.Category.PersonalCategoryResultsStatsDTO;
-import com.jtsports.jttesting.service.dto.Category.PersonalCategoryStatsDTO;
 import com.jtsports.jttesting.service.mapper.ActivityCategoryMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -185,6 +182,25 @@ public class ActivityCategoryServiceImpl implements ActivityCategoryService {
             .stream()
             .map(activityCategoryMapper::toDto)
             .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ActivityCategory> getAllRootCategories(List<ActivityCategory> categories) {
+        List<ActivityCategory> allRootCategories = new ArrayList<>();
+
+        for(ActivityCategory category: categories) {
+            allRootCategories.add(this.getRootCategory(category));
+        }
+        return allRootCategories.stream().distinct().collect(Collectors.toList());
+    }
+
+    @Override
+    public ActivityCategory getRootCategory(ActivityCategory activityCategory) {
+        if (activityCategory.getParent() == null) {
+            return activityCategory;
+        } else {
+            return getRootCategory(activityCategory.getParent());
+        }
     }
 
 }

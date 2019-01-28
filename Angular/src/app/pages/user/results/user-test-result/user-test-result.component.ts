@@ -1,18 +1,19 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ITest, PersonalTestStats} from '../../../../entities/test';
+import {ITest} from '../../../../entities/test';
 import {ITestResult} from '../../../../entities/test-result';
 import {IActivityResult} from '../../../../entities/activity-result';
 import {IActivity} from '../../../../entities/activity';
 import {IEvent} from '../../../../entities/event';
 import {ActivityCategoryService} from '../../../../services/activity-category.service';
-import {ActivityCategoriesComponent} from '../../../admin/activity-categories/activity-categories.component';
-import {PersonalCategoryStats} from '../../../../entities/activity-category';
-import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {HttpResponse} from '@angular/common/http';
 import {colorSets} from '@swimlane/ngx-charts/release/utils';
 import {StatsRequest} from '../../../../entities/stats-request';
 import {TestService} from '../../../../services/test.service';
 import {EventManager} from '../../../../services/event.manager';
 import {StatsUtils} from '../../../../utils/stats-utils';
+import {StatsService} from '../../../../services/stats.service';
+import {PersonalActivityStats, PersonalCategoryStats, PersonalStats, Stats} from '../../../../entities/stats';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-user-test-result',
@@ -23,6 +24,7 @@ export class UserTestResultComponent implements OnInit {
 
   constructor(private categoryService: ActivityCategoryService,
               private testService: TestService,
+              private statsService: StatsService,
               private eventManager: EventManager) { }
 
   @Input()
@@ -34,9 +36,8 @@ export class UserTestResultComponent implements OnInit {
   @Input()
   event: IEvent;
 
-  categoryStats: PersonalCategoryStats;
-  testStats: PersonalTestStats;
-
+  stats: PersonalStats;
+  filteredActivitiesStats: Array<PersonalActivityStats>;
   primaryChartData: object[];
   secondaryChartData: object[];
   activitiesChartData: object[];
@@ -46,17 +47,15 @@ export class UserTestResultComponent implements OnInit {
     const request = new StatsRequest();
     request.testId = this.test ? this.test.id : null;
     request.eventId = this.event ? this.event.id : null;
-    // this.categoryService.findMyStats(null, request).subscribe((categoryStatsResponse: HttpResponse<PersonalCategoryStats>) => {
-    //   this.categoryStats = categoryStatsResponse.body;
-    //   this.createChartData();
-    // });
 
-    this.testService.findMyStats(request).subscribe((testStatsResponse: HttpResponse<PersonalTestStats>) => {
+    this.statsService.findMyStats(request).subscribe((testStatsResponse: HttpResponse<PersonalStats>) => {
       console.log(testStatsResponse.body);
-      this.testStats = PersonalTestStats.resolveResponse(testStatsResponse);
-      this.categoryStats = this.testStats.personalCategoryStats;
+      this.stats = Stats.resolveResponse(testStatsResponse);
       this.createChartData();
+      this.filteredActivitiesStats = this.stats.activitiesStats
+        .filter(as => as.primaryPersonalActivityStats || as.secondaryPersonalActivityStats);
     });
+
   }
 
   getActivityForActivityResult(activityResult: IActivityResult): IActivity {
@@ -65,56 +64,74 @@ export class UserTestResultComponent implements OnInit {
 
   createChartData() {
 
-    const primarySeries = [];
-    const secondarySeries = [];
-
-    for (const categoryResultStats of this.categoryStats.personalCategoriesResultsStats) {
-      primarySeries.push({
-        name: categoryResultStats.category.name,
-        value: categoryResultStats.primaryPlacement * 100
-      });
-
-      secondarySeries.push({
-        name: categoryResultStats.category.name,
-        value: categoryResultStats.secondaryPlacement * 100
-      });
-    }
-
-    this.primaryChartData = [
-      {
-        name: 'Hlavní výsledek',
-        series: primarySeries
-      }
-    ];
-
-    this.secondaryChartData = [
-      {
-        name: 'Vedlejší výsledek',
-        series: secondarySeries
-      }
-    ];
+    this.setCategoriesStats(this.stats.categoriesStats);
 
     this.activitiesChartData = [];
 
-    for (const activityStats of this.testStats.personalActivitiesStats) {
+    for (const activityStats of this.stats.activitiesStats) {
 
-      const totalPrimaryCounts = activityStats.personalActivityResultsStats.map(par => par.totalPrimaryResults);
-      const totalPrimaryCountsAverage = StatsUtils.average(totalPrimaryCounts);
+      if (activityStats.primaryResultsStats) {
 
-      const primaryPlacements = activityStats.personalActivityResultsStats.map(par => totalPrimaryCountsAverage - par.primaryPlacement);
-      const primaryPlacementsAverage = StatsUtils.average(primaryPlacements);
-
-      this.activitiesChartData.push(
-        {
-          name: activityStats.activity.name,
-          value: primaryPlacementsAverage * 100 / totalPrimaryCountsAverage,
-          extra: {
-            activity: activityStats.activity
-          }
-        });
+        this.activitiesChartData.push(
+          {
+            name: activityStats.activity.name,
+            value: activityStats.primaryPersonalActivityStats.bestPlacementInPercents,
+            extra: {
+              activity: activityStats.activity
+            }
+          });
+      }
     }
 
 
+  }
+
+  setCategoriesStats(categoriesStats: Array<PersonalCategoryStats>) {
+    const primarySeries = [];
+    const secondarySeries = [];
+
+    for (const personalCategoryStats of categoriesStats) {
+
+      if (personalCategoryStats.primaryCategoryResultsStats) {
+        primarySeries.push({
+          name: personalCategoryStats.category.name,
+          value: personalCategoryStats.primaryCategoryResultsStats.averagePlacementInPercents,
+          extra: {
+            activity: personalCategoryStats.category
+          }
+        });
+      }
+
+      if (personalCategoryStats.secondaryCategoryResultsStats) {
+        secondarySeries.push({
+          name: personalCategoryStats.category.name,
+          value: personalCategoryStats.secondaryCategoryResultsStats.averagePlacementInPercents,
+          extra: {
+            activity: personalCategoryStats.category
+          }
+        });
+      }
+    }
+
+    if (primarySeries.length > 0) {
+      this.primaryChartData = [
+        {
+          name: 'Hlavní výsledek',
+          series: primarySeries
+        }
+      ];
+    }
+
+    if (secondarySeries.length > 0) {
+      this.secondaryChartData = [
+        {
+          name: 'Vedlejší výsledek',
+          series: secondarySeries
+        }
+      ];
+    }
+
+    this.registerPolarChartClickable();
   }
 
   selectActivity(event: any) {
@@ -124,7 +141,28 @@ export class UserTestResultComponent implements OnInit {
     });
   }
 
+  selectCategory(event: any) {
+    console.log(event.extra.category.name);
+  }
+
   getColorScheme(name): any {
     return colorSets.find(s => s.name === name);
+  }
+
+  private registerPolarChartClickable() {
+    setTimeout(() => {
+      $('.pie-label').css('cursor', 'pointer');
+      $('.pie-label').on('click', (event) => {
+        const categoryName = $(event.target).text().trim();
+        const categoryStats = this.stats.categoriesStats.find((c) => c.category.name === categoryName);
+        this.setCategoriesStats(categoryStats.childCategoryPersonalStats);
+      });
+
+      $('.polar-chart-background').css('cursor', 'pointer');
+      $('.polar-chart-background').on('click', (event) => {
+        this.setCategoriesStats(this.stats.categoriesStats);
+      });
+    }, 1000);
+
   }
 }

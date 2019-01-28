@@ -7,7 +7,7 @@ import com.jtsports.jttesting.service.ActivityCategoryService;
 import com.jtsports.jttesting.service.PersonService;
 import com.jtsports.jttesting.service.StatsService;
 import com.jtsports.jttesting.service.UserService;
-import com.jtsports.jttesting.service.dto.Category.PersonalCategoryStatsDTO;
+import com.jtsports.jttesting.service.dto.Stats.Category.PersonalCategoryStatsDTO;
 import com.jtsports.jttesting.service.dto.PersonFullDTO;
 import com.jtsports.jttesting.service.dto.StatsRequestDTO;
 import com.jtsports.jttesting.web.rest.errors.BadRequestAlertException;
@@ -172,27 +172,5 @@ public class ActivityCategoryResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-    /**
-     * POST  /activity-categories/my-stats : get the "id" activity.
-     *
-     * @return the ResponseEntity with status 200 (OK) and with body the activityDTO, or with status 404 (Not Found)
-     */
-    @PostMapping("/activity-categories/my-stats")
-    @Timed
-    public ResponseEntity<PersonalCategoryStatsDTO> getPersonalCategoryStats(@RequestParam(required = false) Long parentCategoryId, @RequestBody StatsRequestDTO statsRequestDTO) {
-        log.debug("REST request to get Category stats : {}", parentCategoryId);
-        Optional<User> user = userService.getUserWithAuthorities();
-        if(user.isPresent()) {
-            Optional<PersonFullDTO> personFullDTO = this.personService.findOneByUserId(user.get().getId());
-            if (personFullDTO.isPresent()) {
-
-                List<ActivityResult> filteredActivityResult = statsService.getFilterActivitiesResults(statsRequestDTO);
-                PersonalCategoryStatsDTO categoryStatsDTO = statsService.getPersonalCategoryStats(personFullDTO.get().getId(), parentCategoryId, filteredActivityResult);
-                return ResponseEntity.ok(categoryStatsDTO);
-            }
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.notFound().build();
-    }
 
 }

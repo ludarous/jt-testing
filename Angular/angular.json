@@ -33,6 +33,7 @@
               "node_modules/font-awesome/css/font-awesome.min.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/nova-dark/theme.css",
+              "node_modules/fullcalendar/dist/fullcalendar.min.css",
               "node_modules/primeng/resources/primeng.min.css",
               "src/assets/styles/jt-theme.scss"
             ],

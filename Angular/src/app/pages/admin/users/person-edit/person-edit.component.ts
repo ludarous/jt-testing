@@ -73,6 +73,8 @@ export class PersonEditComponent implements OnInit {
 
     if (!person.personalData) person.personalData = new PersonalData();
     this.personForm.addControl('personalData', this.setPersonalDataForm(person.personalData));
+
+    this.personBirthDate = person.personalData.birthDate ? new Date(person.personalData.birthDate) : null;
   }
 
   setAddressForm(address: IAddress) {

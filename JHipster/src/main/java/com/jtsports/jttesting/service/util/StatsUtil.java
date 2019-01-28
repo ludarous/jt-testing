@@ -8,39 +8,62 @@ import java.util.stream.Collectors;
 
 public class StatsUtil {
     public static Float median(List<Float> values) {
-        Collections.sort(values);
-        int length = values.size();
-
-
-        Float median;
-        if (values.size() % 2 == 0)
-            median = (values.get(length/2) + values.get(length/2 - 1))/2;
-        else
-            median = values.get(length/2);
-        return  median;
+        if(values != null && values.size() > 0) {
+            Collections.sort(values);
+            int length = values.size();
+            Float median;
+            if (values.size() % 2 == 0)
+                median = (values.get(length / 2) + values.get(length / 2 - 1)) / 2;
+            else
+                median = values.get(length / 2);
+            return median;
+        }
+        return null;
     }
 
     public static Float average (List<Float> values) {
-        Float sum = 0F; //average will have decimal point
+        if(values != null && values.size() > 0) {
+            Float sum = 0F; //average will have decimal point
 
-        for(int i=0; i < values.size(); i++){
-            sum += values.get(i);
+
+            for (int i = 0; i < values.size(); i++) {
+                sum += values.get(i);
+            }
+
+            Float average = sum / values.size();
+            return average;
         }
-
-        Float average = sum/values.size();
-        return average;
+        return null;
     }
     
     public static Float min(List<Float> values) {
-        return Collections.min(values);
+        if(values != null && values.size() > 0) {
+            return Collections.min(values);
+        }
+        return null;
     }
 
     public static Float max(List<Float> values) {
-        return Collections.max(values);
+        if(values != null && values.size() > 0) {
+            return Collections.max(values);
+        }
+        return null;
+    }
+
+    public static Float sum(List<Float> values)
+    {
+        if(values != null && values.size() > 0) {
+            Float sum = 0F;
+            for (Float num : values) {
+                sum += num;
+            }
+            return sum;
+        }
+        return 0F;
     }
 
     public static Integer medianInt(List<Integer> values) {
-        if(values != null) {
+        if(values != null && values.size() > 0) {
 
             List<Integer> notNullValues = values.stream().filter(v -> v != null).collect(Collectors.toList());
 
@@ -59,25 +82,28 @@ public class StatsUtil {
     }
 
     public static Float averageInt (List<Integer> values) {
-        Float sum = 0F; //average will have decimal point
-        Float average = null;
 
-        List<Integer> notNullValues = values.stream().filter(v -> v != null).collect(Collectors.toList());
+        if(values != null && values.size() > 0) {
+            Float sum = 0F; //average will have decimal point
+            Float average = null;
 
-        if(notNullValues != null) {
-            for (int i = 0; i < notNullValues.size(); i++) {
-                if (notNullValues.get(i) != null) {
-                    sum += notNullValues.get(i);
+            List<Integer> notNullValues = values.stream().filter(v -> v != null).collect(Collectors.toList());
+
+            if (notNullValues != null) {
+                for (int i = 0; i < notNullValues.size(); i++) {
+                    if (notNullValues.get(i) != null) {
+                        sum += notNullValues.get(i);
+                    }
                 }
+                average = sum / notNullValues.size();
             }
-            average = sum/notNullValues.size();
+            return average;
         }
-
-        return average;
+        return null;
     }
 
     public static Integer minInt(List<Integer> values) {
-        if(values != null) {
+        if(values != null && values.size() > 0) {
 
             return Collections.min(values.stream().filter(v -> v != null).collect(Collectors.toList()));
         }
@@ -85,7 +111,7 @@ public class StatsUtil {
     }
 
     public static Integer maxInt(List<Integer> values) {
-        if(values != null) {
+        if(values != null && values.size() > 0) {
             return Collections.max(values.stream().filter(v -> v != null).collect(Collectors.toList()));
         }
         return null;

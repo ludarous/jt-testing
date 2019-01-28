@@ -1,14 +1,14 @@
 <mat-expansion-panel #expansionPanel class="activity-result-panel" (afterExpand)="afterExpand($event)">
   <mat-expansion-panel-header [collapsedHeight]="'100px'" [expandedHeight]="'100px'">
     <mat-panel-title>
-      <div>{{activityResult.activityName}}</div>
+      <div>{{activity.name}}</div>
     </mat-panel-title>
     <mat-panel-description>
-      <div class="header-cards-container">
-        {{activityResult.primaryResultValue + ' ' + (activity.primaryResultValueUnit | enumTranslator: 'plural')}}
+      <div *ngIf="activityStats.primaryPersonalActivityStats" class="header-cards-container">
+        {{activityStats.primaryPersonalActivityStats.bestValue + ' ' + (activity.primaryResultValueUnit | enumTranslator: 'plural')}}
       </div>
-      <div class="header-cards-container" *ngIf="activityResult.secondaryResultValue">
-        {{activityResult.secondaryResultValue + ' ' + (activity.secondaryResultValueUnit | enumTranslator: 'plural')}}
+      <div *ngIf="activityStats.secondaryPersonalActivityStats" class="header-cards-container" >
+        {{activityStats.secondaryPersonalActivityStats.bestValue + ' ' + (activity.secondaryResultValueUnit | enumTranslator: 'plural')}}
       </div>
     </mat-panel-description>
   </mat-expansion-panel-header>
@@ -16,8 +16,8 @@
   <ng-template matExpansionPanelContent>
     <div class="user-activity-result-container">
       <div class="user-activity-result-info">
-        <div class="user-activity-name">{{activityResult.activityName}}</div>
-        <div><span class="info-label" translate>Poznámka: </span>{{activityResult.note}}</div>
+        <div class="user-activity-name">{{activity.name}}</div>
+        <div><span class="info-label" translate>Poznámka: </span>{{activityStats.personalActivityResults[0].note}}</div>
         <div>
           <span class="info-label" translate>Kategorie: </span>
           <span *ngFor="let category of activity.categories">{{category.name}}, {{(category.parent ? category.parent.name : '')}}</span>
@@ -27,7 +27,7 @@
         <div *ngIf="activityStats">
           <div class="result-charts dark">
             <div class="row">
-              <div [ngClass]="{'col-7': activityResult.secondaryResultValue, 'col-12': !activityResult.secondaryResultValue}">
+              <div [ngClass]="{'col-7': activityStats.secondaryPersonalActivityStats, 'col-12': !activityStats.secondaryPersonalActivityStats}">
                 <div class="chart-container" *ngIf="myPrimaryResultCardData">
                   <ngx-charts-number-card class="chart-container"
                                           [scheme]="getColorScheme('cool')"
@@ -55,7 +55,7 @@
                   </ngx-charts-number-card>
                 </div>
               </div>
-              <div *ngIf="activityResult.secondaryResultValue" class="col-5">
+              <div *ngIf="activityStats.secondaryPersonalActivityStats" class="col-5">
                 <div class="chart-container" *ngIf="mySecondaryResultCardData">
                   <ngx-charts-number-card class="chart-container"
                                           [scheme]="getColorScheme('cool')"

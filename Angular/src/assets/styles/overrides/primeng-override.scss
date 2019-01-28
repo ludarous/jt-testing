@@ -35,6 +35,8 @@
 .ui-picklist .ui-picklist-list {
   width: auto;
   border: 1px solid #333333 !important;
+  height: 100%;
+  max-height: 400px;
 }
 
 .edit-picklist {
@@ -620,4 +622,11 @@ p-table.table-without-row-lines {
   & .ui-overlaypanel-content {
     padding: 0px;
   }
+}
+
+/* Fullcalendar */
+
+body .fc .fc-event {
+  background-color: $chart-color;
+  border: none;
 }

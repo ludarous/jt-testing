@@ -80,7 +80,7 @@ export class MenuComponent implements OnInit {
           this.showAdminMenuItem = value;
           if (this.router.url.includes('/account/login')) this.router.navigate(['/admin']);
         } else {
-          if (this.router.url.includes('/account/login')) this.router.navigate(['/my-results']);
+          if (this.router.url.includes('/account/login')) this.router.navigate(['/user/dashboard']);
         }
       });
 

@@ -167,7 +167,7 @@ public class EventResultServiceImpl implements EventResultService {
         List<Person> persons = this.personRepository.findAllByVirtual(false);
 
         for(Event event : events) {
-            for(Person person : persons) {
+            for(Person person : event.getAttachedPersons()) {
                 EventResult eventResult = EventResult.createEventResult(event, person);
                 this.eventResultRepository.save(eventResult);
             }

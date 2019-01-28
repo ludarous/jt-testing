@@ -1,16 +1,12 @@
 package com.jtsports.jttesting.service.impl;
 
-import com.jtsports.jttesting.domain.Activity;
 import com.jtsports.jttesting.service.ActivityCategoryService;
 import com.jtsports.jttesting.service.ActivityService;
 import com.jtsports.jttesting.service.JTTestService;
 import com.jtsports.jttesting.domain.JTTest;
 import com.jtsports.jttesting.repository.JTTestRepository;
 import com.jtsports.jttesting.repository.search.JTTestSearchRepository;
-import com.jtsports.jttesting.service.dto.Activity.PersonalActivityStatsDTO;
-import com.jtsports.jttesting.service.dto.StatsRequestDTO;
 import com.jtsports.jttesting.service.dto.JTTestDTO;
-import com.jtsports.jttesting.service.dto.Test.PersonalTestsStatsDTO;
 import com.jtsports.jttesting.service.mapper.JTTestMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,10 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 

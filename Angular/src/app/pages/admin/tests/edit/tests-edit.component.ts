@@ -95,16 +95,18 @@ export class TestsEditComponent implements OnInit {
       maxAge: new FormControl(test.maxAge)
     });
 
-    if (test.activities) {
+    if (activities && test.activities) {
       this.selectedActivities = activities.filter((a) => test.activities.some((sa) => sa.id === a.id));
       this.suggestedActivities = activities.filter((a) => !this.selectedActivities.some((sa) => sa.id === a.id));
+    } else {
+      this.suggestedActivities = activities;
     }
 
-    if (test.sports) {
+    if (sports && test.sports) {
       this.selectedSports = sports.filter((s) => test.sports.some((ss) => ss.id === s.id));
     }
 
-    if (test.categories) {
+    if (categories && test.categories) {
       this.selectedCategories = categories.filter((c) => test.categories.some((sc) => sc.id === c.id));
     }
 

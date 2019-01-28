@@ -1,5 +1,5 @@
 <div class="component-container-center">
-  <form class="form" *ngIf="eventForm" [formGroup]="eventForm" (submit)="saveTest()">
+  <form class="form" *ngIf="eventForm" [formGroup]="eventForm" (submit)="saveEvent()">
     <div class="ui-inputgroup">
       <input type="text" pInputText placeholder="Název" formControlName="name" required>
       <p-message severity="error" text="Název kategorie je povinný"
@@ -49,5 +49,7 @@
       </p-pickList>
     </div>
     <button mat-raised-button>{{'Uložit' | translate}}</button>
+    <br>
+    <button type="button" mat-raised-button (click)="duplicateEvent()">{{'Vytvořit kopii' | translate}}</button>
   </form>
 </div>

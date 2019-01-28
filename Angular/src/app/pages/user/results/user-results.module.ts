@@ -21,6 +21,7 @@ import {
 } from '@swimlane/ngx-charts';
 import {ActivityCategoryService} from '../../../services/activity-category.service';
 import {TestService} from '../../../services/test.service';
+import {StatsService} from '../../../services/stats.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {TestService} from '../../../services/test.service';
     EventService,
     ActivityService,
     ActivityCategoryService,
-    TestService
+    TestService,
+    StatsService,
   ],
   exports: [
     UserResultsComponent,

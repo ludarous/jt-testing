@@ -1,19 +1,17 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {ActivityStats, IActivity, PersonalActivityStats} from '../../../../entities/activity';
+import {IActivity} from '../../../../entities/activity';
 import {IActivityResult} from '../../../../entities/activity-result';
 import {ActivityService} from '../../../../services/activity.service';
-import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {colorSets} from '@swimlane/ngx-charts/release/utils';
 import {EnumTranslatorService} from '../../../../shared/pipes/enum-translator/enum-translator';
 import {ITest} from '../../../../entities/test';
 import {IEvent} from '../../../../entities/event';
-import {ActivityResultUnits} from '../../../../entities/enums/activity-result-units';
 import {StatsRequest} from '../../../../entities/stats-request';
 import {EventManager} from '../../../../services/event.manager';
-import {MatExpansionModule, MatExpansionPanel} from '@angular/material';
+import {MatExpansionPanel} from '@angular/material';
 import {StatsUtils} from '../../../../utils/stats-utils';
 import {ChartUtils} from '../../../../utils/chart-utils';
 import {ResultType} from '../../../../entities/enums/result-type';
+import {PersonalActivityStats} from '../../../../entities/stats';
 
 @Component({
   selector: 'app-user-activity-result',
@@ -40,7 +38,6 @@ export class UserActivityResultComponent implements OnInit {
   expansionPanel: MatExpansionPanel;
 
   activity: IActivity;
-  activityResult: IActivityResult;
 
   headerResultCardData: object[];
 
@@ -57,208 +54,195 @@ export class UserActivityResultComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this.activityStats.personalActivityResults && this.activityStats.personalActivityResults.length > 0) {
-      this.activityResult = this.activityStats.personalActivityResults[0];
-      this.activity = this.activityStats.activity;
-      this.createChartData(this.activityStats, this.activityResult);
-    }
+    this.activity = this.activityStats.activity;
+    this.createChartData(this.activityStats);
 
-    this.headerResultCardData = [
-      {
+    this.headerResultCardData = [];
+
+    if (this.activityStats.primaryPersonalActivityStats) {
+      this.headerResultCardData.push({
         name: 'Výsledek',
-        value: this.activityResult.primaryResultValue,
+        value: this.activityStats.primaryPersonalActivityStats.bestValue,
         extra: {
           unit: this.enumTranslatorService.translate(this.activity.primaryResultValueUnit, 'plural'),
         }
-      },
-      {
-        name: 'Vedlejší výsledek',
-        value: this.activityResult.secondaryResultValue,
-        extra: {
-          unit: this.enumTranslatorService.translate(this.activity.secondaryResultValueUnit, 'plural'),
-        }
-      }
+      });
+    }
 
-    ];
+    if (this.activityStats.secondaryPersonalActivityStats) {
+      this.headerResultCardData.push(
+        {
+          name: 'Vedlejší výsledek',
+          value: this.activityStats.secondaryPersonalActivityStats.bestValue,
+          extra: {
+            unit: this.enumTranslatorService.translate(this.activity.secondaryResultValueUnit, 'plural'),
+          }
+        });
+    }
 
     this.eventManager.subscribe('activityStatsSelected', message => {
       const activity = <IActivity>message.content;
       if (activity.id === this.activity.id) {
         this.expansionPanel.expanded = true;
-        this.expansionPanel._body.nativeElement.scrollIntoView({ block: 'start',  behavior: 'smooth' });
+        this.expansionPanel._body.nativeElement.scrollIntoView({block: 'start', behavior: 'smooth'});
       }
     });
   }
 
-  createChartData(activityStats: PersonalActivityStats, activityResult: IActivityResult) {
+  createChartData(activityStats: PersonalActivityStats) {
 
-    const primaryCount = activityStats.activityResultsStats.primaryResultsCount;
-    const primaryPlacements = activityStats.personalActivityResultsStats.map(par => primaryCount - par.primaryPlacement);
-    const primaryPlacementAverage = StatsUtils.average(primaryPlacements);
 
-    this.myPrimaryResultCardData = [
-      {
-        name: 'Můj výsledek',
-        value: activityResult.primaryResultValue,
-        extra: {
-          unit: this.enumTranslatorService.translate(this.activity.primaryResultValueUnit, 'plural'),
-        }
-      },
-      {
-        name: 'Pořadí v testu',
-        value: Math.floor(primaryPlacementAverage * 100 / primaryCount),
-        extra: {
-          unit: '%',
-          subtitle: primaryPlacementAverage + ' z ' + primaryCount
-        }
-      }
-    ];
+    if (activityStats.primaryPersonalActivityStats) {
 
-    if (this.activityResult.secondaryResultValue) {
+      const personalResultsStats = this.activityStats.primaryPersonalActivityStats;
+      const primaryCount = activityStats.primaryResultsStats.resultsCount;
 
-      const secondaryCount = activityStats.activityResultsStats.secondaryResultsCount;
-      const secondaryPlacements = activityStats.personalActivityResultsStats.map(par => secondaryCount - par.secondaryPlacement);
-      const secondaryPlacementAverage = StatsUtils.average(secondaryPlacements);
-
-        this.mySecondaryResultCardData = [
+      this.myPrimaryResultCardData = [
         {
-          name: 'Můj vedlejší výsledek',
-          value: activityResult.secondaryResultValue,
+          name: 'Můj výsledek',
+          value: personalResultsStats.bestValue,
           extra: {
-            unit: this.enumTranslatorService.translate(this.activity.secondaryResultValueUnit, 'plural')
+            unit: this.enumTranslatorService.translate(this.activity.primaryResultValueUnit, 'plural'),
           }
         },
         {
           name: 'Pořadí v testu',
-          value: Math.floor(secondaryPlacementAverage * 100 / secondaryCount),
+          value: personalResultsStats.bestPlacementInPercents,
           extra: {
             unit: '%',
-            subtitle: secondaryPlacementAverage + ' z ' + secondaryCount
-          }
-        }
-        ];
-    }
-
-    this.primaryCardsData = [
-      {
-        name: 'Průměr v testu',
-        value: activityStats.activityResultsStats.primaryAverage,
-        extra: {
-          unit: this.enumTranslatorService.translate(this.activity.primaryResultValueUnit, 'plural')
-        }
-      },
-      {
-        name: 'Nejlepší výsledek v testu',
-        value: ResultType.MORE_IS_BETTER.equals(this.activity.primaryResultType) ?
-          activityStats.activityResultsStats.primaryMax :
-          activityStats.activityResultsStats.primaryMin,
-        extra: {
-          unit: this.enumTranslatorService.translate(this.activity.primaryResultValueUnit, 'plural')
-        }
-      },
-      {
-        name: 'Nejhorší výsledek v testu',
-        value: ResultType.MORE_IS_BETTER.equals(this.activity.primaryResultType) ?
-          activityStats.activityResultsStats.primaryMin :
-          activityStats.activityResultsStats.primaryMax,
-        extra: {
-          unit: this.enumTranslatorService.translate(this.activity.primaryResultValueUnit, 'plural')
-        }
-      }
-    ];
-
-    if (activityStats.activityResultsStats.secondaryMin && activityStats.activityResultsStats.secondaryMax) {
-      this.secondaryCardsData = [
-        {
-          name: 'Průměr v testu',
-          value: activityStats.activityResultsStats.secondaryAverage,
-          extra: {
-            unit: this.enumTranslatorService.translate(this.activity.secondaryResultValueUnit, 'plural')
-          }
-        },
-        {
-          name: 'Nejlepší výsledek v testu',
-          value: ResultType.MORE_IS_BETTER.equals(this.activity.secondaryResultType) ?
-            activityStats.activityResultsStats.secondaryMax :
-            activityStats.activityResultsStats.secondaryMin,
-          extra: {
-            unit: this.enumTranslatorService.translate(this.activity.secondaryResultValueUnit, 'plural')
-          }
-        },
-        {
-          name: 'Nejhorší výsledek v testu',
-          value: ResultType.MORE_IS_BETTER.equals(this.activity.secondaryResultType) ?
-            activityStats.activityResultsStats.secondaryMin :
-            activityStats.activityResultsStats.secondaryMax,
-          extra: {
-            unit: this.enumTranslatorService.translate(this.activity.secondaryResultValueUnit, 'plural')
+            subtitle: personalResultsStats.bestPlacement + ' z ' + primaryCount
           }
         }
       ];
-    }
 
-    this.primaryChartData = [
-      {
-        name: activityResult.activityName + ' - Hlavní výsledek',
-        value: 0,
-        series: [
-          {
-            name: 'Můj výsledek',
-            value: activityResult.primaryResultValue
-          },
-          {
-            name: 'Průměr v testu',
-            value: activityStats.activityResultsStats.primaryAverage
-          },
-          {
-            name: 'Nejlepší výsledek v testu',
-            value: ResultType.MORE_IS_BETTER.equals(this.activity.primaryResultType) ?
-              activityStats.activityResultsStats.primaryMax :
-              activityStats.activityResultsStats.primaryMin
-          },
-          {
-            name: 'Nejhorší výsledek v testu',
-            value: ResultType.MORE_IS_BETTER.equals(this.activity.secondaryResultType) ?
-              activityStats.activityResultsStats.primaryMin :
-              activityStats.activityResultsStats.primaryMax
-          }
-        ]
-      }
-    ];
-
-    if (this.activity.secondaryResultValueUnit && this.activityResult.secondaryResultValue) {
-      this.secondaryChartData = [
+      this.primaryChartData = [
         {
-          name: activityResult.activityName + ' - Vedlejší výsledek',
+          name: activityStats.activity.name + ' - Hlavní výsledek',
           value: 0,
           series: [
             {
               name: 'Můj výsledek',
-              value: activityResult.secondaryResultValue
+              value: personalResultsStats.bestValue
             },
             {
               name: 'Průměr v testu',
-              value: activityStats.activityResultsStats.secondaryAverage
+              value: activityStats.primaryResultsStats.resultsAverageValue
             },
             {
               name: 'Nejlepší výsledek v testu',
-              value: ResultType.MORE_IS_BETTER.equals(this.activity.secondaryResultType) ?
-                activityStats.activityResultsStats.secondaryMax :
-                activityStats.activityResultsStats.secondaryMin
+              value: activityStats.primaryResultsStats.resultsMinValue
             },
             {
               name: 'Nejhorší výsledek v testu',
-              value: ResultType.MORE_IS_BETTER.equals(this.activity.secondaryResultType) ?
-                activityStats.activityResultsStats.secondaryMin :
-                activityStats.activityResultsStats.secondaryMax
+              value: activityStats.primaryResultsStats.resultsMaxValue
             }
           ]
         }
       ];
     }
 
-    this.refLines = [{value: 60, name: 'Maximum'}, {value: 50, name: 'Average'}, {value: 20, name: 'Minimum'}];
+    if (activityStats.secondaryPersonalActivityStats) {
 
+      const personalResultsStats = this.activityStats.secondaryPersonalActivityStats;
+      const secondaryCount = activityStats.secondaryResultsStats.resultsCount;
+
+      this.mySecondaryResultCardData = [
+        {
+          name: 'Můj vedlejší výsledek',
+          value: personalResultsStats.bestValue,
+          extra: {
+            unit: this.enumTranslatorService.translate(this.activity.secondaryResultValueUnit, 'plural')
+          }
+        },
+        {
+          name: 'Pořadí v testu',
+          value: personalResultsStats.bestPlacementInPercents,
+          extra: {
+            unit: '%',
+            subtitle: personalResultsStats.bestPlacement + ' z ' + secondaryCount
+          }
+        }
+      ];
+
+      this.secondaryChartData = [
+        {
+          name: activityStats.activity.name + ' - Vedlejší výsledek',
+          value: 0,
+          series: [
+            {
+              name: 'Můj výsledek',
+              value: personalResultsStats.bestValue
+            },
+            {
+              name: 'Průměr v testu',
+              value: activityStats.secondaryResultsStats.resultsAverageValue
+            },
+            {
+              name: 'Nejlepší výsledek v testu',
+              value: activityStats.secondaryResultsStats.resultsMinValue
+            },
+            {
+              name: 'Nejhorší výsledek v testu',
+              value: activityStats.secondaryResultsStats.resultsMaxValue
+            }
+          ]
+        }
+      ];
+    }
+
+    if (activityStats.primaryResultsStats) {
+      this.primaryCardsData = [
+        {
+          name: 'Průměr v testu',
+          value: activityStats.primaryResultsStats.resultsAverageValue,
+          extra: {
+            unit: this.enumTranslatorService.translate(this.activity.primaryResultValueUnit, 'plural')
+          }
+        },
+        {
+          name: 'Nejlepší výsledek v testu',
+          value: activityStats.primaryResultsStats.resultsMinValue,
+          extra: {
+            unit: this.enumTranslatorService.translate(this.activity.primaryResultValueUnit, 'plural')
+          }
+        },
+        {
+          name: 'Nejhorší výsledek v testu',
+          value: activityStats.primaryResultsStats.resultsMaxValue,
+          extra: {
+            unit: this.enumTranslatorService.translate(this.activity.primaryResultValueUnit, 'plural')
+          }
+        }
+      ];
+    }
+
+    if (activityStats.secondaryResultsStats) {
+      this.secondaryCardsData = [
+        {
+          name: 'Průměr v testu',
+          value: activityStats.secondaryResultsStats.resultsAverageValue,
+          extra: {
+            unit: this.enumTranslatorService.translate(this.activity.secondaryResultValueUnit, 'plural')
+          }
+        },
+        {
+          name: 'Nejlepší výsledek v testu',
+          value: activityStats.secondaryResultsStats.resultsMinValue,
+          extra: {
+            unit: this.enumTranslatorService.translate(this.activity.secondaryResultValueUnit, 'plural')
+          }
+        },
+        {
+          name: 'Nejhorší výsledek v testu',
+          value: activityStats.secondaryResultsStats.resultsMaxValue,
+          extra: {
+            unit: this.enumTranslatorService.translate(this.activity.secondaryResultValueUnit, 'plural')
+          }
+        }
+      ];
+    }
+
+    this.refLines = [{value: 60, name: 'Maximum'}, {value: 50, name: 'Average'}, {value: 20, name: 'Minimum'}];
     this.xLabel = this.enumTranslatorService.translate(this.activity.primaryResultValueUnit, 'plural');
   }
 

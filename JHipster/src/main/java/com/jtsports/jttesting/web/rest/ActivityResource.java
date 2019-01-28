@@ -9,8 +9,8 @@ import com.jtsports.jttesting.service.ActivityService;
 import com.jtsports.jttesting.service.PersonService;
 import com.jtsports.jttesting.service.StatsService;
 import com.jtsports.jttesting.service.UserService;
-import com.jtsports.jttesting.service.dto.Activity.ActivityStatsDTO;
-import com.jtsports.jttesting.service.dto.Activity.PersonalActivityStatsDTO;
+import com.jtsports.jttesting.service.dto.Stats.Activity.ActivityStatsDTO;
+import com.jtsports.jttesting.service.dto.Stats.Activity.PersonalActivityStatsDTO;
 import com.jtsports.jttesting.service.dto.StatsRequestDTO;
 import com.jtsports.jttesting.service.dto.PersonFullDTO;
 import com.jtsports.jttesting.web.rest.errors.BadRequestAlertException;
@@ -169,68 +169,6 @@ public class ActivityResource {
         Page<ActivityDTO> page = activityService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/activities");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-    }
-
-    /**
-     * POST  /activities/:id/stats : get the "id" activity.
-     *
-     * @return the ResponseEntity with status 200 (OK) and with body the activityDTO, or with status 404 (Not Found)
-     */
-    @PostMapping("/activities/{activityId}/stats")
-    @Timed
-    public ResponseEntity<ActivityStatsDTO> getActivityStats(@PathVariable Long activityId, @RequestBody StatsRequestDTO statsRequestDTO) {
-        log.debug("REST request to get Activity stats : {}", activityId);
-        ActivityStatsDTO activityStatsDTO = statsService.findStats(activityId, statsRequestDTO);
-        return ResponseEntity.ok(activityStatsDTO);
-    }
-
-
-    /**
-     * POST  /activities/:activityId/my-stats : get the "id" activity stats.
-     *
-     * @return the ResponseEntity with status 200 (OK) and with body the activityDTO, or with status 404 (Not Found)
-     */
-    @PostMapping("/activities/{activityId}/my-stats")
-    @Timed
-    public ResponseEntity<PersonalActivityStatsDTO> getPersonalActivityStats(@PathVariable Long activityId, @RequestBody StatsRequestDTO statsRequestDTO) {
-        log.debug("REST request to get Activity stats : {}", activityId);
-        Optional<User> user = userService.getUserWithAuthorities();
-        if(user.isPresent()) {
-            Optional<PersonFullDTO> personFullDTO = this.personService.findOneByUserId(user.get().getId());
-            if (personFullDTO.isPresent()) {
-
-                List<ActivityResult> filteredActivityResult = statsService.getFilterActivitiesResults(statsRequestDTO);
-                Activity activity = activityRepository.getOne(activityId);
-
-                PersonalActivityStatsDTO activityStatsDTO = statsService.getPersonalActivityStats(personFullDTO.get().getId(), activity, filteredActivityResult);
-                return ResponseEntity.ok(activityStatsDTO);
-            }
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.notFound().build();
-    }
-
-    /**
-     * POST  /activities/my-stats : get the "id" activity.
-     *
-     * @return the ResponseEntity with status 200 (OK) and with body the activityDTO, or with status 404 (Not Found)
-     */
-    @PostMapping("/activities/my-stats")
-    @Timed
-    public ResponseEntity<List<PersonalActivityStatsDTO>> getPersonalActivitiesStats(@RequestBody StatsRequestDTO statsRequestDTO) {
-        log.debug("REST request to get Personal Activities stats");
-        Optional<User> user = userService.getUserWithAuthorities();
-        if(user.isPresent()) {
-            Optional<PersonFullDTO> personFullDTO = this.personService.findOneByUserId(user.get().getId());
-            if (personFullDTO.isPresent()) {
-
-                List<ActivityResult> filteredActivityResult = statsService.getFilterActivitiesResults(statsRequestDTO);
-                List<PersonalActivityStatsDTO> personalActivitiesStats = statsService.getPersonalActivitiesStats(personFullDTO.get().getId(), filteredActivityResult);
-                return ResponseEntity.ok(personalActivitiesStats);
-            }
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.notFound().build();
     }
 
 }

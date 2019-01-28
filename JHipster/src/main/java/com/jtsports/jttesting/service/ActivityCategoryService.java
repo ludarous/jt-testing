@@ -4,8 +4,7 @@ import com.jtsports.jttesting.domain.Activity;
 import com.jtsports.jttesting.domain.ActivityCategory;
 import com.jtsports.jttesting.service.dto.ActivityCategoryDTO;
 
-import com.jtsports.jttesting.service.dto.Category.PersonalCategoryStatsDTO;
-import com.jtsports.jttesting.service.dto.StatsRequestDTO;
+import com.jtsports.jttesting.service.dto.Stats.Category.PersonalCategoryStatsDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -67,4 +66,8 @@ public interface ActivityCategoryService {
     List<ActivityCategory> getAllSubcategories(ActivityCategory activityCategory);
 
     List<ActivityCategoryDTO> getAllMainCategories();
+
+    List<ActivityCategory> getAllRootCategories(List<ActivityCategory> categories);
+
+    ActivityCategory getRootCategory(ActivityCategory activityCategory);
 }

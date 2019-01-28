@@ -55,7 +55,7 @@ spring:
     data:
         elasticsearch:
             # note: run by "docker-compose -f src/main/docker/elasticsearch.yml up -d"
-            cluster-name:
+            cluster-name: elasticsearch
             cluster-nodes: localhost:9300
             properties:
                 path:

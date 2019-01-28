@@ -24,7 +24,7 @@
     </div>
     <div *ngIf="testActivities" class="ui-inputgroup">
       <p-pickList styleClass="edit-picklist"
-                  [source]="testActivities"
+                  [source]="suggestedActivities"
                   [target]="selectedActivities"
                   sourceHeader="Aktivity"
                   targetHeader="Vybrané aktivity"
@@ -33,6 +33,12 @@
         <ng-template let-activity pTemplate="item">
           <div class="ui-helper-clearfix">
             {{activity.name}}
+          </div>
+          <div class="activity-picklist-categories">
+            Kategorie:
+            <ng-container *ngFor="let category of activity.categories">
+              <span>{{category.name}}</span>
+            </ng-container>
           </div>
         </ng-template>
       </p-pickList>

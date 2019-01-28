@@ -2,8 +2,6 @@ package com.jtsports.jttesting.service;
 
 import com.jtsports.jttesting.service.dto.JTTestDTO;
 
-import com.jtsports.jttesting.service.dto.StatsRequestDTO;
-import com.jtsports.jttesting.service.dto.Test.PersonalTestsStatsDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

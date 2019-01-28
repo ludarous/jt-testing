@@ -1,5 +1,5 @@
-<div *ngIf="activitiesStats" class="activities-stats-container">
-  <div *ngFor="let activityStats of activitiesStats" class="activity-line-chart-container">
+<div *ngIf="filteredPersonalActivitiesStats" class="activities-stats-container">
+  <div *ngFor="let activityStats of filteredPersonalActivitiesStats" class="activity-line-chart-container">
     <app-user-activity-stats [activityStats]="activityStats"></app-user-activity-stats>
   </div>
 </div>

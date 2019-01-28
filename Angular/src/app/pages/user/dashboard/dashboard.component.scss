@@ -1,0 +1,13 @@
+.dashboard-container {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar-container {
+  flex: 1;
+}
+
+.chart-container {
+  flex: 1;
+}

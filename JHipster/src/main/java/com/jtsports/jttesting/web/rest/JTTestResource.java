@@ -8,8 +8,8 @@ import com.jtsports.jttesting.service.PersonService;
 import com.jtsports.jttesting.service.StatsService;
 import com.jtsports.jttesting.service.UserService;
 import com.jtsports.jttesting.service.dto.PersonFullDTO;
+import com.jtsports.jttesting.service.dto.Stats.PersonalStatsDTO;
 import com.jtsports.jttesting.service.dto.StatsRequestDTO;
-import com.jtsports.jttesting.service.dto.Test.PersonalTestsStatsDTO;
 import com.jtsports.jttesting.web.rest.errors.BadRequestAlertException;
 import com.jtsports.jttesting.web.rest.util.HeaderUtil;
 import com.jtsports.jttesting.web.rest.util.PaginationUtil;
@@ -172,14 +172,13 @@ public class JTTestResource {
      */
     @PostMapping("/jt-tests/my-stats")
     @Timed
-    public ResponseEntity<PersonalTestsStatsDTO> getPersonalTestStats(@RequestBody StatsRequestDTO statsRequestDTO) {
+    public ResponseEntity<PersonalStatsDTO> getPersonalTestStats(@RequestBody StatsRequestDTO statsRequestDTO) {
         log.debug("REST request to get Personal Activities stats");
         Optional<User> user = userService.getUserWithAuthorities();
         if(user.isPresent()) {
             Optional<PersonFullDTO> personFullDTO = this.personService.findOneByUserId(user.get().getId());
             if (personFullDTO.isPresent()) {
-                List<ActivityResult> filteredActivityResult = statsService.getFilterActivitiesResults(statsRequestDTO);
-                PersonalTestsStatsDTO personalTestsStatsDTO = statsService.getPersonalTestStats(personFullDTO.get().getId(), null, filteredActivityResult);
+                PersonalStatsDTO personalTestsStatsDTO = statsService.getPersonalStats(personFullDTO.get().getId(), statsRequestDTO);
                 return ResponseEntity.ok(personalTestsStatsDTO);
             }
             return ResponseEntity.notFound().build();
