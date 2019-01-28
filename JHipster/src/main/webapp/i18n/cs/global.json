@@ -22,6 +22,7 @@
                 "group": "Group",
                 "personGroup": "Person Group",
                 "activityGroupCategory": "Activity Group Category",
+                "activityGroup": "Activity Group",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

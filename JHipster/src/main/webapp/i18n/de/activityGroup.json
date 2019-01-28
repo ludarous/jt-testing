@@ -1,0 +1,28 @@
+
+{
+    "jtTestingApp": {
+        "activityGroup" : {
+            "home": {
+                "title": "Activity Groups",
+                "createLabel": "Activity Group erstellen",
+                "createOrEditLabel": "Activity Group erstellen oder bearbeiten",
+                "search": "Suche nach Activity Group"
+            },
+            "created": "Activity Group erstellt mit ID {{ param }}",
+            "updated": "Activity Group aktualisiert mit ID {{ param }}",
+            "deleted": "Activity Group gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Activity Group {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Activity Group"
+            },
+            "name": "Name",
+            "description": "Description",
+            "minAge": "Min Age",
+            "maxAge": "Max Age",
+            "activities": "Activities",
+            "activityGroupCategories": "Activity Group Categories"
+        }
+    }
+}
