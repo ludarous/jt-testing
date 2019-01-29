@@ -33,6 +33,7 @@
     <include file="config/liquibase/changelog/20190128082118_updated_entity_activity.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081352_added_entity_ActivityGroupCategory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081350_added_entity_ActivityGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180919081355_added_entity_ActivityGroupResult.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180919081349_added_entity_constraints_Event.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081350_added_entity_constraints_JTTest.xml" relativeToChangelogFile="false"/>
@@ -44,5 +45,6 @@
     <include file="config/liquibase/changelog/20190128064851_added_entity_constraints_Group.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190128080336_added_entity_constraints_PersonGroup.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081350_added_entity_constraints_ActivityGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180919081355_added_entity_constraints_ActivityGroupResult.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

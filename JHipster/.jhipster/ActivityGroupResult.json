@@ -1,0 +1,40 @@
+{
+    "name": "ActivityGroupResult",
+    "fields": [
+        {
+            "fieldName": "note",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "eventResult",
+            "otherEntityName": "eventResult",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "activitiesResults",
+            "otherEntityName": "activityResult",
+            "otherEntityRelationshipName": "activityGroupResult"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "activityGroup",
+            "otherEntityName": "activityGroup",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20180919081355",
+    "entityTableName": "activity_group_result",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "searchEngine": "elasticsearch"
+}

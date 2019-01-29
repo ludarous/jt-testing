@@ -1,0 +1,26 @@
+
+{
+    "jtTestingApp": {
+        "activityGroupResult" : {
+            "home": {
+                "title": "Activity Group Results",
+                "createLabel": "Activity Group Result erstellen",
+                "createOrEditLabel": "Activity Group Result erstellen oder bearbeiten",
+                "search": "Suche nach Activity Group Result"
+            },
+            "created": "Activity Group Result erstellt mit ID {{ param }}",
+            "updated": "Activity Group Result aktualisiert mit ID {{ param }}",
+            "deleted": "Activity Group Result gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Activity Group Result {{ id }} wirklich dauerhaft gelöscht werden?"
+            },
+            "detail": {
+                "title": "Activity Group Result"
+            },
+            "note": "Note",
+            "eventResult": "Event Result",
+            "activitiesResults": "Activities Results",
+            "activityGroup": "Activity Group"
+        }
+    }
+}
