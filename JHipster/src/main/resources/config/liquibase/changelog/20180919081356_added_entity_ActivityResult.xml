@@ -33,7 +33,15 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="test_result_id" type="bigint">
+            <column name="jhi_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="official" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="activity_group_result_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
@@ -41,8 +49,21 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="activity_group_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="event_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="person_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+        <dropDefaultValue tableName="activity_result" columnName="jhi_date" columnDataType="datetime"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

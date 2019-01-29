@@ -33,11 +33,11 @@
             <th jhiSortBy="primaryResultValue"><span jhiTranslate="jtTestingApp.activityResult.primaryResultValue">Primary Result Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="secondaryResultValue"><span jhiTranslate="jtTestingApp.activityResult.secondaryResultValue">Secondary Result Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="note"><span jhiTranslate="jtTestingApp.activityResult.note">Note</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="eventDate"><span jhiTranslate="jtTestingApp.activityResult.eventDate">Event Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="personBirthDate"><span jhiTranslate="jtTestingApp.activityResult.personBirthDate">Person Birth Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="testResultId"><span jhiTranslate="jtTestingApp.activityResult.testResult">Test Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="date"><span jhiTranslate="jtTestingApp.activityResult.date">Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="official"><span jhiTranslate="jtTestingApp.activityResult.official">Official</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="activityGroupResultId"><span jhiTranslate="jtTestingApp.activityResult.activityGroupResult">Activity Group Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="activityName"><span jhiTranslate="jtTestingApp.activityResult.activity">Activity</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="testName"><span jhiTranslate="jtTestingApp.activityResult.test">Test</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="activityGroupName"><span jhiTranslate="jtTestingApp.activityResult.activityGroup">Activity Group</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="eventName"><span jhiTranslate="jtTestingApp.activityResult.event">Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="personEmail"><span jhiTranslate="jtTestingApp.activityResult.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
@@ -49,11 +49,11 @@
                 <td>{{activityResult.primaryResultValue}}</td>
                 <td>{{activityResult.secondaryResultValue}}</td>
                 <td>{{activityResult.note}}</td>
-                <td>{{activityResult.eventDate | date:'medium'}}</td>
-                <td>{{activityResult.personBirthDate | date:'medium'}}</td>
+                <td>{{activityResult.date | date:'medium'}}</td>
+                <td>{{activityResult.official}}</td>
                 <td>
-                    <div *ngIf="activityResult.testResultId">
-                        <a [routerLink]="['../test-result', activityResult.testResultId , 'view' ]" >{{activityResult.testResultId}}</a>
+                    <div *ngIf="activityResult.activityGroupResultId">
+                        <a [routerLink]="['../activity-group-result', activityResult.activityGroupResultId , 'view' ]" >{{activityResult.activityGroupResultId}}</a>
                     </div>
                 </td>
                 <td>
@@ -62,8 +62,8 @@
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="activityResult.testId">
-                        <a [routerLink]="['../jt-test', activityResult.testId , 'view' ]" >{{activityResult.testName}}</a>
+                    <div *ngIf="activityResult.activityGroupId">
+                        <a [routerLink]="['../activity-group', activityResult.activityGroupId , 'view' ]" >{{activityResult.activityGroupName}}</a>
                     </div>
                 </td>
                 <td>

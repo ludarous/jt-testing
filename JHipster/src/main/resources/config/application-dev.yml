@@ -40,7 +40,7 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:postgresql://localhost:5432/jt_testing
+        url: jdbc:postgresql://localhost:5432/sportstalent
         username: jt-testing
         password: jt-testing
     jpa:

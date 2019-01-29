@@ -8,12 +8,12 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { IActivityResult } from 'app/shared/model/activity-result.model';
 import { ActivityResultService } from './activity-result.service';
-import { ITestResult } from 'app/shared/model/test-result.model';
-import { TestResultService } from 'app/entities/test-result';
+import { IActivityGroupResult } from 'app/shared/model/activity-group-result.model';
+import { ActivityGroupResultService } from 'app/entities/activity-group-result';
 import { IActivity } from 'app/shared/model/activity.model';
 import { ActivityService } from 'app/entities/activity';
-import { IJTTest } from 'app/shared/model/jt-test.model';
-import { JTTestService } from 'app/entities/jt-test';
+import { IActivityGroup } from 'app/shared/model/activity-group.model';
+import { ActivityGroupService } from 'app/entities/activity-group';
 import { IEvent } from 'app/shared/model/event.model';
 import { EventService } from 'app/entities/event';
 import { IPerson } from 'app/shared/model/person.model';
@@ -27,24 +27,23 @@ export class ActivityResultUpdateComponent implements OnInit {
     private _activityResult: IActivityResult;
     isSaving: boolean;
 
-    testresults: ITestResult[];
+    activitygroupresults: IActivityGroupResult[];
 
     activities: IActivity[];
 
-    jttests: IJTTest[];
+    activitygroups: IActivityGroup[];
 
     events: IEvent[];
 
     people: IPerson[];
-    eventDate: string;
-    personBirthDate: string;
+    date: string;
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private activityResultService: ActivityResultService,
-        private testResultService: TestResultService,
+        private activityGroupResultService: ActivityGroupResultService,
         private activityService: ActivityService,
-        private jtTestService: JTTestService,
+        private activityGroupService: ActivityGroupService,
         private eventService: EventService,
         private personService: PersonService,
         private activatedRoute: ActivatedRoute
@@ -55,9 +54,9 @@ export class ActivityResultUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ activityResult }) => {
             this.activityResult = activityResult;
         });
-        this.testResultService.query().subscribe(
-            (res: HttpResponse<ITestResult[]>) => {
-                this.testresults = res.body;
+        this.activityGroupResultService.query().subscribe(
+            (res: HttpResponse<IActivityGroupResult[]>) => {
+                this.activitygroupresults = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -67,9 +66,9 @@ export class ActivityResultUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        this.jtTestService.query().subscribe(
-            (res: HttpResponse<IJTTest[]>) => {
-                this.jttests = res.body;
+        this.activityGroupService.query().subscribe(
+            (res: HttpResponse<IActivityGroup[]>) => {
+                this.activitygroups = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -93,8 +92,7 @@ export class ActivityResultUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.activityResult.eventDate = moment(this.eventDate, DATE_TIME_FORMAT);
-        this.activityResult.personBirthDate = moment(this.personBirthDate, DATE_TIME_FORMAT);
+        this.activityResult.date = moment(this.date, DATE_TIME_FORMAT);
         if (this.activityResult.id !== undefined) {
             this.subscribeToSaveResponse(this.activityResultService.update(this.activityResult));
         } else {
@@ -119,7 +117,7 @@ export class ActivityResultUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackTestResultById(index: number, item: ITestResult) {
+    trackActivityGroupResultById(index: number, item: IActivityGroupResult) {
         return item.id;
     }
 
@@ -127,7 +125,7 @@ export class ActivityResultUpdateComponent implements OnInit {
         return item.id;
     }
 
-    trackJtTestById(index: number, item: IJTTest) {
+    trackActivityGroupById(index: number, item: IActivityGroup) {
         return item.id;
     }
 
@@ -144,7 +142,6 @@ export class ActivityResultUpdateComponent implements OnInit {
 
     set activityResult(activityResult: IActivityResult) {
         this._activityResult = activityResult;
-        this.eventDate = moment(activityResult.eventDate).format(DATE_TIME_FORMAT);
-        this.personBirthDate = moment(activityResult.personBirthDate).format(DATE_TIME_FORMAT);
+        this.date = moment(activityResult.date).format(DATE_TIME_FORMAT);
     }
 }

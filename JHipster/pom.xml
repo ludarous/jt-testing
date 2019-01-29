@@ -502,7 +502,7 @@
                     <changeLogFile>src/main/resources/config/liquibase/master.xml</changeLogFile>
                     <diffChangeLogFile>src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                     <driver>org.postgresql.Driver</driver>
-                    <url>jdbc:postgresql://localhost:5432/jt_testing</url>
+                    <url>jdbc:postgresql://localhost:5432/sportstalent</url>
                     <defaultSchemaName></defaultSchemaName>
                     <username>jt-testing</username>
                     <password>jt-testing</password>

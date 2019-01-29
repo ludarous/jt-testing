@@ -5,13 +5,13 @@ export interface IActivityResult {
     primaryResultValue?: number;
     secondaryResultValue?: number;
     note?: string;
-    eventDate?: Moment;
-    personBirthDate?: Moment;
-    testResultId?: number;
+    date?: Moment;
+    official?: boolean;
+    activityGroupResultId?: number;
     activityName?: string;
     activityId?: number;
-    testName?: string;
-    testId?: number;
+    activityGroupName?: string;
+    activityGroupId?: number;
     eventName?: string;
     eventId?: number;
     personEmail?: string;
@@ -24,16 +24,18 @@ export class ActivityResult implements IActivityResult {
         public primaryResultValue?: number,
         public secondaryResultValue?: number,
         public note?: string,
-        public eventDate?: Moment,
-        public personBirthDate?: Moment,
-        public testResultId?: number,
+        public date?: Moment,
+        public official?: boolean,
+        public activityGroupResultId?: number,
         public activityName?: string,
         public activityId?: number,
-        public testName?: string,
-        public testId?: number,
+        public activityGroupName?: string,
+        public activityGroupId?: number,
         public eventName?: string,
         public eventId?: number,
         public personEmail?: string,
         public personId?: number
-    ) {}
+    ) {
+        this.official = false;
+    }
 }

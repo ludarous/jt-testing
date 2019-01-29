@@ -1,10 +1,6 @@
 package com.jtsports.jttesting.service.dto;
 
 import java.time.ZonedDateTime;
-import javax.persistence.ColumnResult;
-import javax.persistence.ConstructorResult;
-import javax.persistence.NamedNativeQuery;
-import javax.persistence.SqlResultSetMapping;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -12,17 +8,7 @@ import java.util.Objects;
 /**
  * A DTO for the ActivityResult entity.
  */
-
 public class ActivityResultDTO implements Serializable {
-
-    public ActivityResultDTO() {
-
-    }
-
-    public ActivityResultDTO(Long id, Float primaryResultValue) {
-        this.id = id;
-        this.primaryResultValue = primaryResultValue;
-    }
 
     private Long id;
 
@@ -32,20 +18,19 @@ public class ActivityResultDTO implements Serializable {
 
     private String note;
 
-    @NotNull
-    private ZonedDateTime eventDate;
+    private ZonedDateTime date;
 
-    private ZonedDateTime personBirthDate;
+    private Boolean official;
 
-    private Long testResultId;
+    private Long activityGroupResultId;
 
     private Long activityId;
 
     private String activityName;
 
-    private Long testId;
+    private Long activityGroupId;
 
-    private String testName;
+    private String activityGroupName;
 
     private Long eventId;
 
@@ -87,28 +72,28 @@ public class ActivityResultDTO implements Serializable {
         this.note = note;
     }
 
-    public ZonedDateTime getEventDate() {
-        return eventDate;
+    public ZonedDateTime getDate() {
+        return date;
     }
 
-    public void setEventDate(ZonedDateTime eventDate) {
-        this.eventDate = eventDate;
+    public void setDate(ZonedDateTime date) {
+        this.date = date;
     }
 
-    public ZonedDateTime getPersonBirthDate() {
-        return personBirthDate;
+    public Boolean isOfficial() {
+        return official;
     }
 
-    public void setPersonBirthDate(ZonedDateTime personBirthDate) {
-        this.personBirthDate = personBirthDate;
+    public void setOfficial(Boolean official) {
+        this.official = official;
     }
 
-    public Long getTestResultId() {
-        return testResultId;
+    public Long getActivityGroupResultId() {
+        return activityGroupResultId;
     }
 
-    public void setTestResultId(Long testResultId) {
-        this.testResultId = testResultId;
+    public void setActivityGroupResultId(Long activityGroupResultId) {
+        this.activityGroupResultId = activityGroupResultId;
     }
 
     public Long getActivityId() {
@@ -127,20 +112,20 @@ public class ActivityResultDTO implements Serializable {
         this.activityName = activityName;
     }
 
-    public Long getTestId() {
-        return testId;
+    public Long getActivityGroupId() {
+        return activityGroupId;
     }
 
-    public void setTestId(Long jtTestId) {
-        this.testId = jtTestId;
+    public void setActivityGroupId(Long activityGroupId) {
+        this.activityGroupId = activityGroupId;
     }
 
-    public String getTestName() {
-        return testName;
+    public String getActivityGroupName() {
+        return activityGroupName;
     }
 
-    public void setTestName(String jtTestName) {
-        this.testName = jtTestName;
+    public void setActivityGroupName(String activityGroupName) {
+        this.activityGroupName = activityGroupName;
     }
 
     public Long getEventId() {
@@ -203,13 +188,13 @@ public class ActivityResultDTO implements Serializable {
             ", primaryResultValue=" + getPrimaryResultValue() +
             ", secondaryResultValue=" + getSecondaryResultValue() +
             ", note='" + getNote() + "'" +
-            ", eventDate='" + getEventDate() + "'" +
-            ", personBirthDate='" + getPersonBirthDate() + "'" +
-            ", testResult=" + getTestResultId() +
+            ", date='" + getDate() + "'" +
+            ", official='" + isOfficial() + "'" +
+            ", activityGroupResult=" + getActivityGroupResultId() +
             ", activity=" + getActivityId() +
             ", activity='" + getActivityName() + "'" +
-            ", test=" + getTestId() +
-            ", test='" + getTestName() + "'" +
+            ", activityGroup=" + getActivityGroupId() +
+            ", activityGroup='" + getActivityGroupName() + "'" +
             ", event=" + getEventId() +
             ", event='" + getEventName() + "'" +
             ", person=" + getPersonId() +

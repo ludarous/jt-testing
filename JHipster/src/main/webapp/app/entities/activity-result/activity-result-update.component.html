@@ -25,35 +25,23 @@
                         [(ngModel)]="activityResult.note" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jtTestingApp.activityResult.eventDate" for="field_eventDate">Event Date</label>
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activityResult.date" for="field_date">Date</label>
                     <div class="d-flex">
-                        <input id="field_eventDate" type="datetime-local" class="form-control" name="eventDate" [(ngModel)]="eventDate"
-                        required/>
-                    </div>
-                    <div [hidden]="!(editForm.controls.eventDate?.dirty && editForm.controls.eventDate?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.eventDate?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.controls.eventDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                            This field should be a date and time.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jtTestingApp.activityResult.personBirthDate" for="field_personBirthDate">Person Birth Date</label>
-                    <div class="d-flex">
-                        <input id="field_personBirthDate" type="datetime-local" class="form-control" name="personBirthDate" [(ngModel)]="personBirthDate"
+                        <input id="field_date" type="datetime-local" class="form-control" name="date" [(ngModel)]="date"
                         />
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activityResult.official" for="field_official">Official</label>
+                    <input type="checkbox" class="form-control" name="official" id="field_official"
+                        [(ngModel)]="activityResult.official" />
+                </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jtTestingApp.activityResult.testResult" for="field_testResult">Test Result</label>
-                    <select class="form-control" id="field_testResult" name="testResult" [(ngModel)]="activityResult.testResultId" >
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activityResult.activityGroupResult" for="field_activityGroupResult">Activity Group Result</label>
+                    <select class="form-control" id="field_activityGroupResult" name="activityGroupResult" [(ngModel)]="activityResult.activityGroupResultId" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="testResultOption.id" *ngFor="let testResultOption of testresults; trackBy: trackTestResultById">{{testResultOption.id}}</option>
+                        <option [ngValue]="activityGroupResultOption.id" *ngFor="let activityGroupResultOption of activitygroupresults; trackBy: trackActivityGroupResultById">{{activityGroupResultOption.id}}</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -70,10 +58,10 @@
                     </small>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jtTestingApp.activityResult.test" for="field_test">Test</label>
-                    <select class="form-control" id="field_test" name="test" [(ngModel)]="activityResult.testId" >
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activityResult.activityGroup" for="field_activityGroup">Activity Group</label>
+                    <select class="form-control" id="field_activityGroup" name="activityGroup" [(ngModel)]="activityResult.activityGroupId" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="jtTestOption.id" *ngFor="let jtTestOption of jttests; trackBy: trackJtTestById">{{jtTestOption.name}}</option>
+                        <option [ngValue]="activityGroupOption.id" *ngFor="let activityGroupOption of activitygroups; trackBy: trackActivityGroupById">{{activityGroupOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">

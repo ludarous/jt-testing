@@ -17,18 +17,18 @@
                 <dd>
                     <span>{{activityResult.note}}</span>
                 </dd>
-                <dt><span jhiTranslate="jtTestingApp.activityResult.eventDate">Event Date</span></dt>
+                <dt><span jhiTranslate="jtTestingApp.activityResult.date">Date</span></dt>
                 <dd>
-                    <span>{{activityResult.eventDate}}</span>
+                    <span>{{activityResult.date}}</span>
                 </dd>
-                <dt><span jhiTranslate="jtTestingApp.activityResult.personBirthDate">Person Birth Date</span></dt>
+                <dt><span jhiTranslate="jtTestingApp.activityResult.official">Official</span></dt>
                 <dd>
-                    <span>{{activityResult.personBirthDate}}</span>
+                    <span>{{activityResult.official}}</span>
                 </dd>
-                <dt><span jhiTranslate="jtTestingApp.activityResult.testResult">Test Result</span></dt>
+                <dt><span jhiTranslate="jtTestingApp.activityResult.activityGroupResult">Activity Group Result</span></dt>
                 <dd>
-                    <div *ngIf="activityResult.testResultId">
-                        <a [routerLink]="['/test-result', activityResult.testResultId, 'view']">{{activityResult.testResultId}}</a>
+                    <div *ngIf="activityResult.activityGroupResultId">
+                        <a [routerLink]="['/activity-group-result', activityResult.activityGroupResultId, 'view']">{{activityResult.activityGroupResultId}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="jtTestingApp.activityResult.activity">Activity</span></dt>
@@ -37,10 +37,10 @@
                         <a [routerLink]="['/activity', activityResult.activityId, 'view']">{{activityResult.activityName}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="jtTestingApp.activityResult.test">Test</span></dt>
+                <dt><span jhiTranslate="jtTestingApp.activityResult.activityGroup">Activity Group</span></dt>
                 <dd>
-                    <div *ngIf="activityResult.testId">
-                        <a [routerLink]="['/jt-test', activityResult.testId, 'view']">{{activityResult.testName}}</a>
+                    <div *ngIf="activityResult.activityGroupId">
+                        <a [routerLink]="['/activity-group', activityResult.activityGroupId, 'view']">{{activityResult.activityGroupName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="jtTestingApp.activityResult.event">Event</span></dt>

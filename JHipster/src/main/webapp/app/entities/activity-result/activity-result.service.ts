@@ -59,25 +59,19 @@ export class ActivityResultService {
 
     private convertDateFromClient(activityResult: IActivityResult): IActivityResult {
         const copy: IActivityResult = Object.assign({}, activityResult, {
-            eventDate: activityResult.eventDate != null && activityResult.eventDate.isValid() ? activityResult.eventDate.toJSON() : null,
-            personBirthDate:
-                activityResult.personBirthDate != null && activityResult.personBirthDate.isValid()
-                    ? activityResult.personBirthDate.toJSON()
-                    : null
+            date: activityResult.date != null && activityResult.date.isValid() ? activityResult.date.toJSON() : null
         });
         return copy;
     }
 
     private convertDateFromServer(res: EntityResponseType): EntityResponseType {
-        res.body.eventDate = res.body.eventDate != null ? moment(res.body.eventDate) : null;
-        res.body.personBirthDate = res.body.personBirthDate != null ? moment(res.body.personBirthDate) : null;
+        res.body.date = res.body.date != null ? moment(res.body.date) : null;
         return res;
     }
 
     private convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
         res.body.forEach((activityResult: IActivityResult) => {
-            activityResult.eventDate = activityResult.eventDate != null ? moment(activityResult.eventDate) : null;
-            activityResult.personBirthDate = activityResult.personBirthDate != null ? moment(activityResult.personBirthDate) : null;
+            activityResult.date = activityResult.date != null ? moment(activityResult.date) : null;
         });
         return res;
     }

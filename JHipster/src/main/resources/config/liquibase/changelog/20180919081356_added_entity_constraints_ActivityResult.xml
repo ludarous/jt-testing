@@ -8,17 +8,35 @@
     -->
     <changeSet id="20180919081356-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="test_result_id"
+        <addForeignKeyConstraint baseColumnNames="activity_group_result_id"
                                  baseTableName="activity_result"
-                                 constraintName="fk_activity_result_test_result_id"
+                                 constraintName="fk_activity_result_activity_group_result_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="test_result"/>
+                                 referencedTableName="activity_group_result"/>
 
         <addForeignKeyConstraint baseColumnNames="activity_id"
                                  baseTableName="activity_result"
                                  constraintName="fk_activity_result_activity_id"
                                  referencedColumnNames="id"
                                  referencedTableName="activity"/>
+
+        <addForeignKeyConstraint baseColumnNames="activity_group_id"
+                                 baseTableName="activity_result"
+                                 constraintName="fk_activity_result_activity_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="activity_group"/>
+
+        <addForeignKeyConstraint baseColumnNames="event_id"
+                                 baseTableName="activity_result"
+                                 constraintName="fk_activity_result_event_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="event"/>
+
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="activity_result"
+                                 constraintName="fk_activity_result_person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
 
     </changeSet>
 </databaseChangeLog>

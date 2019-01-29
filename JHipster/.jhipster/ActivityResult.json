@@ -3,8 +3,8 @@
     "clientRootFolder": "",
     "relationships": [
         {
-            "relationshipName": "testResult",
-            "otherEntityName": "testResult",
+            "relationshipName": "activityGroupResult",
+            "otherEntityName": "activityGroupResult",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
@@ -16,8 +16,8 @@
             "otherEntityField": "name"
         },
         {
-            "relationshipName": "test",
-            "otherEntityName": "jtTest",
+            "relationshipName": "activityGroup",
+            "otherEntityName": "activityGroup",
             "relationshipType": "many-to-one",
             "otherEntityField": "name"
         },
@@ -48,15 +48,12 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "eventDate",
-            "fieldType": "ZonedDateTime",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldName": "date",
+            "fieldType": "ZonedDateTime"
         },
         {
-            "fieldName": "personBirthDate",
-            "fieldType": "ZonedDateTime"
+            "fieldName": "official",
+            "fieldType": "Boolean"
         }
     ],
     "changelogDate": "20180919081356",

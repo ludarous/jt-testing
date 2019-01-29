@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import com.jtsports.jttesting.domain.util.RandomNumbers;
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -15,7 +14,7 @@ import java.util.Objects;
  * A ActivityResult.
  */
 @Entity
-@Table(name = "activity_result", indexes = {@Index(name = "filter_index", columnList = "event_date,person_birth_date,activity_id,test_id,event_id,person_id")})
+@Table(name = "activity_result", indexes = {@Index(name = "filter_index", columnList = "date, activity_id, activity_group_id, event_id, person_id")})
 @Document(indexName = "activityresult")
 public class ActivityResult implements Serializable {
 
@@ -35,15 +34,15 @@ public class ActivityResult implements Serializable {
     @Column(name = "note")
     private String note;
 
-    @Column(name = "event_date")
-    private ZonedDateTime eventDate;
+    @Column(name = "jhi_date")
+    private ZonedDateTime date;
 
-    @Column(name = "person_birth_date")
-    private ZonedDateTime personBirthDate;
+    @Column(name = "official")
+    private Boolean official;
 
     @ManyToOne
     @JsonIgnoreProperties("activitiesResults")
-    private TestResult testResult;
+    private ActivityGroupResult activityGroupResult;
 
     @ManyToOne(optional = false)
     @NotNull
@@ -52,7 +51,7 @@ public class ActivityResult implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("")
-    private JTTest test;
+    private ActivityGroup activityGroup;
 
     @ManyToOne
     @JsonIgnoreProperties("")
@@ -110,43 +109,43 @@ public class ActivityResult implements Serializable {
         this.note = note;
     }
 
-    public ZonedDateTime getEventDate() {
-        return eventDate;
+    public ZonedDateTime getDate() {
+        return date;
     }
 
-    public ActivityResult eventDate(ZonedDateTime eventDate) {
-        this.eventDate = eventDate;
+    public ActivityResult date(ZonedDateTime date) {
+        this.date = date;
         return this;
     }
 
-    public void setEventDate(ZonedDateTime eventDate) {
-        this.eventDate = eventDate;
+    public void setDate(ZonedDateTime date) {
+        this.date = date;
     }
 
-    public ZonedDateTime getPersonBirthDate() {
-        return personBirthDate;
+    public Boolean isOfficial() {
+        return official;
     }
 
-    public ActivityResult personBirthDate(ZonedDateTime personBirthDate) {
-        this.personBirthDate = personBirthDate;
+    public ActivityResult official(Boolean official) {
+        this.official = official;
         return this;
     }
 
-    public void setPersonBirthDate(ZonedDateTime personBirthDate) {
-        this.personBirthDate = personBirthDate;
+    public void setOfficial(Boolean official) {
+        this.official = official;
     }
 
-    public TestResult getTestResult() {
-        return testResult;
+    public ActivityGroupResult getActivityGroupResult() {
+        return activityGroupResult;
     }
 
-    public ActivityResult testResult(TestResult testResult) {
-        this.testResult = testResult;
+    public ActivityResult activityGroupResult(ActivityGroupResult activityGroupResult) {
+        this.activityGroupResult = activityGroupResult;
         return this;
     }
 
-    public void setTestResult(TestResult testResult) {
-        this.testResult = testResult;
+    public void setActivityGroupResult(ActivityGroupResult activityGroupResult) {
+        this.activityGroupResult = activityGroupResult;
     }
 
     public Activity getActivity() {
@@ -162,17 +161,17 @@ public class ActivityResult implements Serializable {
         this.activity = activity;
     }
 
-    public JTTest getTest() {
-        return test;
+    public ActivityGroup getActivityGroup() {
+        return activityGroup;
     }
 
-    public ActivityResult test(JTTest jtTest) {
-        this.test = jtTest;
+    public ActivityResult activityGroup(ActivityGroup activityGroup) {
+        this.activityGroup = activityGroup;
         return this;
     }
 
-    public void setTest(JTTest jtTest) {
-        this.test = jtTest;
+    public void setActivityGroup(ActivityGroup activityGroup) {
+        this.activityGroup = activityGroup;
     }
 
     public Event getEvent() {
@@ -229,35 +228,8 @@ public class ActivityResult implements Serializable {
             ", primaryResultValue=" + getPrimaryResultValue() +
             ", secondaryResultValue=" + getSecondaryResultValue() +
             ", note='" + getNote() + "'" +
-            ", eventDate='" + getEventDate() + "'" +
-            ", personBirthDate='" + getPersonBirthDate() + "'" +
+            ", date='" + getDate() + "'" +
+            ", official='" + isOfficial() + "'" +
             "}";
     }
-
-    public static ActivityResult craeteActivityResult(Activity activity, TestResult testResult, JTTest test, Event event, Person person) {
-        String personName =  testResult.getEventResult().getPerson().getPersonalData().getFirstName() + " " + testResult.getEventResult().getPerson().getPersonalData().getLastName();
-        ActivityResult activityResult = new ActivityResult();
-        activityResult.setTestResult(testResult);
-        activityResult.setActivity(activity);
-        activityResult.setNote("Poznámka k aktivitě " + activity.getName() + ". Osooba: " + personName);
-        activityResult.setEventDate(event.getDate());
-        activityResult.setEvent(event);
-        activityResult.setTest(test);
-        activityResult.setPerson(person);
-        activityResult.setPersonBirthDate(person.getPersonalData().getBirthDate());
-
-
-        activityResult.setPrimaryResultValue(new Float(RandomNumbers.getRandomNumberInRange(20,100)));
-
-        if(activity.getSecondaryResultValueUnit() != null) {
-            activityResult.setSecondaryResultValue(new Float(RandomNumbers.getRandomNumberInRange(30,50)));
-        }
-        return activityResult;
-    }
-
-    public static ActivityResult activityResultWithDate(ActivityResult activityResult, ZonedDateTime resultDate) {
-        activityResult.setEventDate(resultDate);
-        return activityResult;
-    }
-
 }
