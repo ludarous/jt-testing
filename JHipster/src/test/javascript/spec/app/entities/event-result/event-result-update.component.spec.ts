@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import { HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
-import { ActivityGroupingTestModule } from '../../../test.module';
+import { JtTestingTestModule } from '../../../test.module';
 import { EventResultUpdateComponent } from 'app/entities/event-result/event-result-update.component';
 import { EventResultService } from 'app/entities/event-result/event-result.service';
 import { EventResult } from 'app/shared/model/event-result.model';
@@ -16,7 +16,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [ActivityGroupingTestModule],
+                imports: [JtTestingTestModule],
                 declarations: [EventResultUpdateComponent]
             })
                 .overrideTemplate(EventResultUpdateComponent, '')

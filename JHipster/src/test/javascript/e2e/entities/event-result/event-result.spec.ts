@@ -18,13 +18,13 @@ describe('EventResult e2e test', () => {
     it('should load EventResults', () => {
         navBarPage.goToEntity('event-result');
         eventResultComponentsPage = new EventResultComponentsPage();
-        expect(eventResultComponentsPage.getTitle()).toMatch(/activityGroupingApp.eventResult.home.title/);
+        expect(eventResultComponentsPage.getTitle()).toMatch(/jtTestingApp.eventResult.home.title/);
     });
 
     it('should load create EventResult page', () => {
         eventResultComponentsPage.clickOnCreateButton();
         eventResultUpdatePage = new EventResultUpdatePage();
-        expect(eventResultUpdatePage.getPageTitle()).toMatch(/activityGroupingApp.eventResult.home.createOrEditLabel/);
+        expect(eventResultUpdatePage.getPageTitle()).toMatch(/jtTestingApp.eventResult.home.createOrEditLabel/);
         eventResultUpdatePage.cancel();
     });
 

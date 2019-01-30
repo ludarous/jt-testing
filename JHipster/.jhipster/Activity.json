@@ -72,7 +72,7 @@
         {
             "fieldName": "secondaryResultType",
             "fieldType": "ResultType",
-            "fieldValues": ""
+            "fieldValues": "LESS_IS_BETTER,MORE_IS_BETTER"
         },
         {
             "fieldName": "creationTime",

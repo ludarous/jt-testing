@@ -11,9 +11,9 @@ import { EventService } from './event.service';
 import { IAddress } from 'app/shared/model/address.model';
 import { AddressService } from 'app/entities/address';
 import { IActivityGroup } from 'app/shared/model/jt-test.model';
-import { ActivityGroupService } from 'app/entities/jt-test';
 import { IPerson } from 'app/shared/model/person.model';
 import { PersonService } from 'app/entities/person';
+import {ActivityGroupService} from 'app/entities/activity-group';
 
 @Component({
     selector: 'jhi-event-update',

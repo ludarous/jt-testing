@@ -19,5 +19,17 @@
                                  referencedColumnNames="id"
                                  referencedTableName="activity_category"/>
         
+        <addForeignKeyConstraint baseColumnNames="author_id"
+                                 baseTableName="activity"
+                                 constraintName="fk_activity_author_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
+
+        <addForeignKeyConstraint baseColumnNames="group_id"
+                                 baseTableName="activity"
+                                 constraintName="fk_activity_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_group"/>
+
     </changeSet>
 </databaseChangeLog>

@@ -87,7 +87,8 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jtTestingApp.activity.secondaryResultType" for="field_secondaryResultType">Secondary Result Type</label>
                     <select class="form-control" name="secondaryResultType" [(ngModel)]="activity.secondaryResultType" id="field_secondaryResultType" >
-                        <option value="">{{'jtTestingApp.ResultType.' | translate}}</option>
+                        <option value="LESS_IS_BETTER">{{'jtTestingApp.ResultType.LESS_IS_BETTER' | translate}}</option>
+                        <option value="MORE_IS_BETTER">{{'jtTestingApp.ResultType.MORE_IS_BETTER' | translate}}</option>
                     </select>
                 </div>
                 <div class="form-group">

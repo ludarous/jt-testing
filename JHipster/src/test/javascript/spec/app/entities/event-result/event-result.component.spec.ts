@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Data } from '@angular/router';
 
-import { ActivityGroupingTestModule } from '../../../test.module';
+import { JtTestingTestModule } from '../../../test.module';
 import { EventResultComponent } from 'app/entities/event-result/event-result.component';
 import { EventResultService } from 'app/entities/event-result/event-result.service';
 import { EventResult } from 'app/shared/model/event-result.model';
@@ -17,7 +17,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [ActivityGroupingTestModule],
+                imports: [JtTestingTestModule],
                 declarations: [EventResultComponent],
                 providers: [
                     {

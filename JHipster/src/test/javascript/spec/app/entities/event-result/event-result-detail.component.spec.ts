@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
-import { ActivityGroupingTestModule } from '../../../test.module';
+import { JtTestingTestModule } from '../../../test.module';
 import { EventResultDetailComponent } from 'app/entities/event-result/event-result-detail.component';
 import { EventResult } from 'app/shared/model/event-result.model';
 
@@ -15,7 +15,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [ActivityGroupingTestModule],
+                imports: [JtTestingTestModule],
                 declarations: [EventResultDetailComponent],
                 providers: [{ provide: ActivatedRoute, useValue: route }]
             })

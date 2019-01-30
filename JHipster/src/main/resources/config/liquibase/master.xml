@@ -8,7 +8,6 @@
     <include file="config/liquibase/changelog/20180919081349_added_entity_Event.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081350_added_entity_ActivityGroup.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081351_added_entity_Activity.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180919081352_added_entity_TestCategory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081353_added_entity_ActivityCategory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081354_added_entity_EventResult.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081355_added_entity_ActivityGroupResult.xml" relativeToChangelogFile="false"/>

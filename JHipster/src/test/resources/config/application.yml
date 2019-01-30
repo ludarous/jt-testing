@@ -17,15 +17,15 @@ eureka:
     client:
         enabled: false
     instance:
-        appname: ActivityGrouping
-        instanceId: ActivityGrouping:${spring.application.instance-id:${random.value}}
+        appname: JtTesting
+        instanceId: JtTesting:${spring.application.instance-id:${random.value}}
 
 spring:
     application:
-        name: ActivityGrouping
+        name: JtTesting
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:mem:ActivityGrouping;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+        url: jdbc:h2:mem:JtTesting;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
         name:
         username:
         password:
