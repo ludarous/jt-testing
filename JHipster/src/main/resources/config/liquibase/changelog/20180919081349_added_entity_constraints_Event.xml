@@ -15,15 +15,26 @@
                                  referencedTableName="address"/>
 
         <addForeignKeyConstraint baseColumnNames="events_id"
-                                 baseTableName="event_tests"
-                                 constraintName="fk_event_tests_events_id"
+                                 baseTableName="event_activity_groups"
+                                 constraintName="fk_event_activity_groups_events_id"
                                  referencedColumnNames="id"
                                  referencedTableName="event"/>
-        <addForeignKeyConstraint baseColumnNames="tests_id"
-                                 baseTableName="event_tests"
-                                 constraintName="fk_event_tests_tests_id"
+        <addForeignKeyConstraint baseColumnNames="activity_groups_id"
+                                 baseTableName="event_activity_groups"
+                                 constraintName="fk_event_activity_groups_activity_groups_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="jt_test"/>
+                                 referencedTableName="activity_group"/>
+        
+        <addForeignKeyConstraint baseColumnNames="events_id"
+                                 baseTableName="event_attached_persons"
+                                 constraintName="fk_event_attached_persons_events_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="event"/>
+        <addForeignKeyConstraint baseColumnNames="attached_persons_id"
+                                 baseTableName="event_attached_persons"
+                                 constraintName="fk_event_attached_persons_attached_persons_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="person"/>
         
     </changeSet>
 </databaseChangeLog>

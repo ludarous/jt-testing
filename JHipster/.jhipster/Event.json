@@ -17,8 +17,8 @@
         {
             "relationshipType": "many-to-many",
             "otherEntityRelationshipName": "",
-            "relationshipName": "tests",
-            "otherEntityName": "jTTest",
+            "relationshipName": "activityGroups",
+            "otherEntityName": "activityGroup",
             "otherEntityField": "name",
             "ownerSide": true
         },

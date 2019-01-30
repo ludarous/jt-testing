@@ -10,10 +10,10 @@ import { IEvent } from 'app/shared/model/event.model';
 import { EventService } from './event.service';
 import { IAddress } from 'app/shared/model/address.model';
 import { AddressService } from 'app/entities/address';
-import { IActivityGroup } from 'app/shared/model/jt-test.model';
+import { IActivityGroup } from 'app/shared/model/activity-group.model';
+import { ActivityGroupService } from 'app/entities/activity-group';
 import { IPerson } from 'app/shared/model/person.model';
 import { PersonService } from 'app/entities/person';
-import {ActivityGroupService} from 'app/entities/activity-group';
 
 @Component({
     selector: 'jhi-event-update',
@@ -25,7 +25,7 @@ export class EventUpdateComponent implements OnInit {
 
     addresses: IAddress[];
 
-    jttests: IActivityGroup[];
+    activitygroups: IActivityGroup[];
 
     people: IPerson[];
     date: string;
@@ -34,7 +34,7 @@ export class EventUpdateComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private eventService: EventService,
         private addressService: AddressService,
-        private jTTestService: ActivityGroupService,
+        private activityGroupService: ActivityGroupService,
         private personService: PersonService,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -50,9 +50,9 @@ export class EventUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        this.jTTestService.query().subscribe(
+        this.activityGroupService.query().subscribe(
             (res: HttpResponse<IActivityGroup[]>) => {
-                this.jttests = res.body;
+                this.activitygroups = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

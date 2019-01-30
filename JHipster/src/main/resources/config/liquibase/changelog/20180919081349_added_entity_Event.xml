@@ -29,6 +29,14 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="min_age" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="max_age" type="integer">
+                <constraints nullable="true" />
+            </column>
+
             <column name="address_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -37,8 +45,8 @@
         </createTable>
         <dropDefaultValue tableName="event" columnName="jhi_date" columnDataType="datetime"/>
         
-        <createTable tableName="event_tests">
-            <column name="tests_id" type="bigint">
+        <createTable tableName="event_activity_groups">
+            <column name="activity_groups_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="events_id" type="bigint">
@@ -46,7 +54,18 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="events_id, tests_id" tableName="event_tests"/>
+        <addPrimaryKey columnNames="events_id, activity_groups_id" tableName="event_activity_groups"/>
+        
+        <createTable tableName="event_attached_persons">
+            <column name="attached_persons_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="events_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="events_id, attached_persons_id" tableName="event_attached_persons"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

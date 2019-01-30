@@ -39,7 +39,7 @@ describe('Event e2e test', () => {
         eventUpdatePage.setMaxAgeInput('5');
         expect(eventUpdatePage.getMaxAgeInput()).toMatch('5');
         eventUpdatePage.addressSelectLastOption();
-        // eventUpdatePage.testsSelectLastOption();
+        // eventUpdatePage.activityGroupsSelectLastOption();
         // eventUpdatePage.attachedPersonsSelectLastOption();
         eventUpdatePage.save();
         expect(eventUpdatePage.getSaveButton().isPresent()).toBeFalsy();
