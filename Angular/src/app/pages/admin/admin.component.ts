@@ -49,35 +49,35 @@ export class AdminComponent implements OnInit {
         ]
       },
       {
-        label: 'Testy',
-        routerLink: ['/admin/tests'],
+        label: 'Skupiny aktivit',
+        routerLink: ['/admin/activity-groups'],
         routerLinkActiveOptions: {exact: true},
         items: [
           {
-            label: 'Kategorie testů',
-            routerLink: ['/admin/test-categories'],
+            label: 'Kategorie skupin aktivit',
+            routerLink: ['/admin/activity-group-categories'],
             routerLinkActiveOptions: {exact: true},
             items: [
               {
-                label: 'Seznam kategorie testů',
-                routerLink: ['/admin/test-categories/list'],
+                label: 'Seznam kategorií skupin aktivit',
+                routerLink: ['/admin/activity-group-categories/list'],
                 routerLinkActiveOptions: {exact: true},
               },
               {
-                label: 'Vytvoř kategorii testu',
-                routerLink: ['/admin/test-categories/create'],
+                label: 'Vytvoř kategorii skupin aktivit',
+                routerLink: ['/admin/activity-group-categories/create'],
                 routerLinkActiveOptions: {exact: true},
               }
             ]
           },
           {
-            label: 'Seznam testů',
-            routerLink: ['/admin/tests/list'],
+            label: 'Seznam skupin aktivit',
+            routerLink: ['/admin/activity-groups/list'],
             routerLinkActiveOptions: {exact: true},
           },
           {
-            label: 'Vytvoř test',
-            routerLink: ['/admin/tests/create'],
+            label: 'Vytvoř skupinu aktivit',
+            routerLink: ['/admin/activity-groups/create'],
             routerLinkActiveOptions: {exact: true},
           }
         ]

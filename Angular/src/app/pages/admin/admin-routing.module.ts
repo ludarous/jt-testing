@@ -20,12 +20,12 @@ const routes: Routes = [
         loadChildren: 'app/pages/admin/activities/activities.module#ActivitiesModule',
       },
       {
-        path: 'test-categories',
-        loadChildren: 'app/pages/admin/test-categories/test-categories.module#TestCategoriesModule',
+        path: 'activity-group-categories',
+        loadChildren: 'app/pages/admin/activity-group-categories/activity-group-categories.module#ActivityGroupCategoriesModule',
       },
       {
-        path: 'tests',
-        loadChildren: 'app/pages/admin/tests/tests.module#TestsModule',
+        path: 'activity-groups',
+        loadChildren: 'app/pages/admin/activity-groups/activity-groups.module#ActivityGroupsModule',
       },
       {
         path: 'events',

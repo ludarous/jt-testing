@@ -16,19 +16,8 @@
     <include file="config/liquibase/changelog/20180919081358_added_entity_PersonalData.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081359_added_entity_Address.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081400_added_entity_Sport.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20181113073023_added_person_user_relation.xml" relativeToChangelogFile="false" />
-    <include file="config/liquibase/changelog/20181114135212_added_email_to_Person.xml" relativeToChangelogFile="false" />
-    <include file="config/liquibase/changelog/20181115145404_added_event_person_relation.xml" relativeToChangelogFile="false" />
-    <include file="config/liquibase/changelog/20181126123222_added_minAge_maxAge_to_event.xml" relativeToChangelogFile="false" />
-    <include file="config/liquibase/changelog/20181129121600_added_virtual_to_person.xml" relativeToChangelogFile="false" />
-    <include file="config/liquibase/changelog/20181129204712_activityCategory_tree_structure.xml" relativeToChangelogFile="false" />
-    <include file="config/liquibase/changelog/20181212081532_added_eventDate_to_activityResult.xml" relativeToChangelogFile="false" />
-    <include file="config/liquibase/changelog/20181217212040_added_activityResults_stats_fields.xml" relativeToChangelogFile="false" />
-    <include file="config/liquibase/changelog/20181219110232_added_activityResult_indexes.xml" relativeToChangelogFile="false" />
-    <include file="config/liquibase/changelog/20190109090943_added_result_types_to_Activity.xml" relativeToChangelogFile="false" />
     <include file="config/liquibase/changelog/20190128064851_added_entity_Group.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190128080336_added_entity_PersonGroup.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190128082118_updated_entity_activity.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081352_added_entity_ActivityGroupCategory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081350_added_entity_ActivityGroup.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081355_added_entity_ActivityGroupResult.xml" relativeToChangelogFile="false"/>

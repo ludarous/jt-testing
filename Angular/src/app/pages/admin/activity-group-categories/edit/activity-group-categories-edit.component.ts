@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {IActivityGroupCategory, ActivityGroupCategory} from '../../../../entities/activity-group-category';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {TestCategoryService} from '../../../../services/test-category.service';
+import {ActivityGroupCategoryService} from '../../../../services/activity-group-category.service';
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {RxjsUtils} from '../../../../utils/rxjs.utils';
@@ -11,16 +11,16 @@ import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-test-categories-edit',
-  templateUrl: './test-categories-edit.component.html',
-  styleUrls: ['./test-categories-edit.component.scss']
+  templateUrl: './activity-group-categories-edit.component.html',
+  styleUrls: ['./activity-group-categories-edit.component.scss']
 })
-export class TestCategoriesEditComponent implements OnInit {
+export class ActivityGroupCategoriesEditComponent implements OnInit {
 
   testCategoryId: number;
   testCategory: IActivityGroupCategory;
   testCategoryForm: FormGroup;
 
-  constructor(private testCategoryService: TestCategoryService,
+  constructor(private activityGroupCategoryService: ActivityGroupCategoryService,
               private activatedRoute: ActivatedRoute,
               private messageService: MessageService,
               private router: Router) {
@@ -56,9 +56,9 @@ export class TestCategoriesEditComponent implements OnInit {
       const categoryToSave = <IActivityGroupCategory>this.testCategoryForm.value;
       let saveCategory$;
       if (categoryToSave.id) {
-        saveCategory$ = this.testCategoryService.update(categoryToSave);
+        saveCategory$ = this.activityGroupCategoryService.update(categoryToSave);
       } else {
-        saveCategory$ = this.testCategoryService.create(categoryToSave);
+        saveCategory$ = this.activityGroupCategoryService.create(categoryToSave);
       }
 
 
@@ -76,7 +76,7 @@ export class TestCategoriesEditComponent implements OnInit {
 
   getTestCategory(testCategoryId: number): Observable<IActivityGroupCategory> {
     if (testCategoryId) {
-      return this.testCategoryService.find(testCategoryId).pipe(map((testCategoryResponse: HttpResponse<IActivityGroupCategory>) => {
+      return this.activityGroupCategoryService.find(testCategoryId).pipe(map((testCategoryResponse: HttpResponse<IActivityGroupCategory>) => {
         return testCategoryResponse.body;
       }));
 

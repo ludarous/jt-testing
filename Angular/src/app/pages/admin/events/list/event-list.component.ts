@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {IActivity} from '../../../../entities/activity';
 import {Router} from '@angular/router';
-import {TestService} from '../../../../services/test.service';
+import {ActivityGroupService} from '../../../../services/activity-group.service';
 import {IActivityGroup} from '../../../../entities/activity-group';
 import {IEvent} from '../../../../entities/event';
 import {EventService} from '../../../../services/event.service';

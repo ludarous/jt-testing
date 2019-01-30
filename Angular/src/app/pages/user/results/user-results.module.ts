@@ -20,7 +20,7 @@ import {
   NumberCardModule, PolarChartModule
 } from '@swimlane/ngx-charts';
 import {ActivityCategoryService} from '../../../services/activity-category.service';
-import {TestService} from '../../../services/test.service';
+import {ActivityGroupService} from '../../../services/activity-group.service';
 import {StatsService} from '../../../services/stats.service';
 
 @NgModule({
@@ -47,7 +47,7 @@ import {StatsService} from '../../../services/stats.service';
     EventService,
     ActivityService,
     ActivityCategoryService,
-    TestService,
+    ActivityGroupService,
     StatsService,
   ],
   exports: [

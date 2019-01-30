@@ -5,24 +5,24 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {SharedModule} from '../../../shared/shared.module';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
-import {TestsComponent} from './tests.component';
-import {TestsListComponent} from './list/tests-list.component';
-import {TestsEditComponent} from './edit/tests-edit.component';
-import {TestsRoutingModule} from './tests-routing.module';
+import {ActivityGroupsComponent} from './activity-groups.component';
+import {ActivityGroupsListComponent} from './list/activity-groups-list.component';
+import {ActivityGroupsEditComponent} from './edit/activity-groups-edit.component';
+import {ActivityGroupsRoutingModule} from './activity-groups-routing.module';
 import {MaterialComponentsModule} from '../../../shared/material-components.module';
 import {PrimeNgComponentsModule} from '../../../shared/primeng-components.module';
 
 @NgModule({
   declarations: [
-    TestsComponent,
-    TestsListComponent,
-    TestsEditComponent,
+    ActivityGroupsComponent,
+    ActivityGroupsListComponent,
+    ActivityGroupsEditComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    TestsRoutingModule,
+    ActivityGroupsRoutingModule,
     MaterialComponentsModule,
     PrimeNgComponentsModule,
     TranslateModule,
@@ -30,9 +30,9 @@ import {PrimeNgComponentsModule} from '../../../shared/primeng-components.module
     NgMultiSelectDropDownModule
   ],
   exports: [
-    TestsComponent,
-    TestsListComponent,
-    TestsEditComponent,
+    ActivityGroupsComponent,
+    ActivityGroupsListComponent,
+    ActivityGroupsEditComponent,
   ]
 })
-export class TestsModule { }
+export class ActivityGroupsModule { }

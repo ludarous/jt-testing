@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import {IActivityGroupCategory} from '../../../../entities/activity-group-category';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {TestCategoryService} from '../../../../services/test-category.service';
+import {ActivityGroupCategoryService} from '../../../../services/activity-group-category.service';
 import {Router} from '@angular/router';
 import {IEvent} from '../../../../entities/event';
 import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-test-categories-list',
-  templateUrl: './test-categories-list.component.html',
-  styleUrls: ['./test-categories-list.component.scss']
+  templateUrl: './activity-group-categories-list.component.html',
+  styleUrls: ['./activity-group-categories-list.component.scss']
 })
-export class TestCategoriesListComponent implements OnInit {
+export class ActivityGroupCategoriesListComponent implements OnInit {
 
   tableCols: Array<any>;
   testCategories: Array<IActivityGroupCategory>;
 
-  constructor(private testCategoryService: TestCategoryService,
+  constructor(private ActivityGroupCategoryService: ActivityGroupCategoryService,
               private router: Router,
               private messageService: MessageService) { }
 
@@ -30,7 +30,7 @@ export class TestCategoriesListComponent implements OnInit {
   }
 
   load() {
-    const getCategories$ = this.testCategoryService.query();
+    const getCategories$ = this.ActivityGroupCategoryService.query();
     getCategories$.subscribe((categories: HttpResponse<Array<IActivityGroupCategory>>) => {
       this.testCategories = categories.body;
     });
@@ -44,7 +44,7 @@ export class TestCategoriesListComponent implements OnInit {
     event.stopPropagation();
 
     if (confirm('Opravdu chceš smazat kategorii ' + testCategory.name)) {
-      this.testCategoryService.delete(testCategory.id).subscribe(() => {
+      this.ActivityGroupCategoryService.delete(testCategory.id).subscribe(() => {
         this.load();
       }, (errorResponse: HttpErrorResponse) => {
         this.messageService.add({severity: 'error', summary: 'Kategorii se nepodařilo smazat', detail: errorResponse.error.detail});

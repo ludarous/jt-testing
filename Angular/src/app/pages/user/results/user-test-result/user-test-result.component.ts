@@ -8,7 +8,7 @@ import {ActivityCategoryService} from '../../../../services/activity-category.se
 import {HttpResponse} from '@angular/common/http';
 import {colorSets} from '@swimlane/ngx-charts/release/utils';
 import {StatsRequest} from '../../../../entities/stats-request';
-import {TestService} from '../../../../services/test.service';
+import {ActivityGroupService} from '../../../../services/activity-group.service';
 import {EventManager} from '../../../../services/event.manager';
 import {StatsUtils} from '../../../../utils/stats-utils';
 import {StatsService} from '../../../../services/stats.service';
@@ -23,7 +23,7 @@ import * as $ from 'jquery';
 export class UserTestResultComponent implements OnInit {
 
   constructor(private categoryService: ActivityCategoryService,
-              private testService: TestService,
+              private ActivityGroupService: ActivityGroupService,
               private statsService: StatsService,
               private eventManager: EventManager) { }
 

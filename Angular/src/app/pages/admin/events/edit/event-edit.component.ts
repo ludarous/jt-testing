@@ -6,7 +6,6 @@ import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {RxjsUtils} from '../../../../utils/rxjs.utils';
 import {IActivityGroup} from '../../../../entities/activity-group';
-import {TestService} from '../../../../services/test.service';
 import {EventService} from '../../../../services/event.service';
 import {IEvent, Event} from '../../../../entities/event';
 import {IPersonFull} from '../../../../entities/person-full';
@@ -15,6 +14,7 @@ import {Person} from '../../../../entities/person';
 import {Moment} from 'moment';
 import * as moment from 'moment';
 import {MessageService} from 'primeng/api';
+import {ActivityGroupService} from '../../../../services/activity-group.service';
 
 @Component({
   selector: 'app-events-edit',
@@ -75,7 +75,7 @@ export class EventEditComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private eventService: EventService,
               private personService: PersonService,
-              private testService: TestService,
+              private activityGroupService: ActivityGroupService,
               private messageService: MessageService,
               private router: Router) { }
 
@@ -85,7 +85,7 @@ export class EventEditComponent implements OnInit {
     params$.subscribe((params) => {
       this.eventId = +params['id'];
 
-      const getTests$ = this.testService.query({
+      const getTests$ = this.activityGroupService.query({
         page: 0,
         size: 1000,
       });

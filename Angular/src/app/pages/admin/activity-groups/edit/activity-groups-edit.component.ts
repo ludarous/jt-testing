@@ -10,19 +10,19 @@ import {map} from 'rxjs/operators';
 import {RxjsUtils} from '../../../../utils/rxjs.utils';
 import {ActivityGroup, IActivityGroup} from '../../../../entities/activity-group';
 import {ISport} from '../../../../entities/sport';
-import {TestService} from '../../../../services/test.service';
-import {TestCategoryService} from '../../../../services/test-category.service';
+import {ActivityGroupService} from '../../../../services/activity-group.service';
+import {ActivityGroupCategoryService} from '../../../../services/activity-group-category.service';
 import {SportService} from '../../../../services/sport.service';
 import {IActivityGroupCategory} from '../../../../entities/activity-group-category';
 import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-tests-edit',
-  templateUrl: './tests-edit.component.html',
-  styleUrls: ['./tests-edit.component.scss'],
+  templateUrl: './activity-groups-edit.component.html',
+  styleUrls: ['./activity-groups-edit.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class TestsEditComponent implements OnInit {
+export class ActivityGroupsEditComponent implements OnInit {
 
   testForm: FormGroup;
   test: IActivityGroup;
@@ -41,8 +41,8 @@ export class TestsEditComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private activityService: ActivityService,
-              private testService: TestService,
-              private testCategoryService: TestCategoryService,
+              private ActivityGroupService: ActivityGroupService,
+              private ActivityGroupCategoryService: ActivityGroupCategoryService,
               private sportService: SportService,
               private messageService: MessageService,
               private router: Router) { }
@@ -57,7 +57,7 @@ export class TestsEditComponent implements OnInit {
         page: 0,
         size: 1000,
       });
-      const getCategories$ = this.testCategoryService.query({
+      const getCategories$ = this.ActivityGroupCategoryService.query({
         page: 0,
         size: 1000,
       });
@@ -118,9 +118,9 @@ export class TestsEditComponent implements OnInit {
       const testToSave = <IActivityGroup>this.testForm.value;
       let saveTest$;
       if (testToSave.id) {
-        saveTest$ = this.testService.update(testToSave);
+        saveTest$ = this.ActivityGroupService.update(testToSave);
       } else {
-        saveTest$ = this.testService.create(testToSave);
+        saveTest$ = this.ActivityGroupService.create(testToSave);
       }
 
       testToSave.categories = this.selectedCategories;
@@ -142,7 +142,7 @@ export class TestsEditComponent implements OnInit {
 
   getTest(testId: number): Observable<IActivityGroup> {
     if (testId) {
-      return this.testService.find(testId).pipe(map((activityResponse: HttpResponse<IActivityGroup>) => {
+      return this.ActivityGroupService.find(testId).pipe(map((activityResponse: HttpResponse<IActivityGroup>) => {
         return activityResponse.body;
       }));
 

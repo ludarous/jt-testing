@@ -32,7 +32,7 @@ public class Group implements Serializable {
     private String name;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("children")
     private Group parent;
 
     @OneToMany(mappedBy = "parent")
