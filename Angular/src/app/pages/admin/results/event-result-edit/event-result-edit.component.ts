@@ -7,8 +7,8 @@ import {IPerson} from '../../../../entities/person';
 import {IPersonFull} from '../../../../entities/person-full';
 import {EventResult, IEventResult} from '../../../../entities/event-result';
 import {EventResultService} from '../../../../services/event-result.service';
-import {ITestResult} from '../../../../entities/test-result';
-import {ITest} from '../../../../entities/test';
+import {IActivityGroupResult} from '../../../../entities/activity-group-result';
+import {IActivityGroup} from '../../../../entities/activity-group';
 import {EventManager} from '../../../../services/event.manager';
 import {MessageService} from 'primeng/api';
 
@@ -66,7 +66,7 @@ export class EventResultEditComponent implements OnInit {
     console.log(this._person);
   }
 
-  getTestForTestResult(testResult: ITestResult): ITest {
+  getTestForTestResult(testResult: IActivityGroupResult): IActivityGroup {
     if (this.testEvent.tests) {
       return this.testEvent.tests.find((t) => t.id === testResult.testId);
     }

@@ -1,7 +1,7 @@
 import {ActivityResultUnits} from './enums/activity-result-units';
 import {IActivityCategory} from './activity-category';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {ITest} from './test';
+import {IActivityGroup} from './activity-group';
 import {IActivityResult} from './activity-result';
 import {ResultType} from './enums/result-type';
 

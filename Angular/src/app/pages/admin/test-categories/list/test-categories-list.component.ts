@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ITestCategory} from '../../../../entities/test-category';
+import {IActivityGroupCategory} from '../../../../entities/activity-group-category';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {TestCategoryService} from '../../../../services/test-category.service';
 import {Router} from '@angular/router';
@@ -14,7 +14,7 @@ import {MessageService} from 'primeng/api';
 export class TestCategoriesListComponent implements OnInit {
 
   tableCols: Array<any>;
-  testCategories: Array<ITestCategory>;
+  testCategories: Array<IActivityGroupCategory>;
 
   constructor(private testCategoryService: TestCategoryService,
               private router: Router,
@@ -31,16 +31,16 @@ export class TestCategoriesListComponent implements OnInit {
 
   load() {
     const getCategories$ = this.testCategoryService.query();
-    getCategories$.subscribe((categories: HttpResponse<Array<ITestCategory>>) => {
+    getCategories$.subscribe((categories: HttpResponse<Array<IActivityGroupCategory>>) => {
       this.testCategories = categories.body;
     });
   }
 
-  rowSelect(category: ITestCategory) {
+  rowSelect(category: IActivityGroupCategory) {
     this.router.navigate(['/admin/test-categories/edit', category.id]);
   }
 
-  delete(event, testCategory: ITestCategory) {
+  delete(event, testCategory: IActivityGroupCategory) {
     event.stopPropagation();
 
     if (confirm('Opravdu chceš smazat kategorii ' + testCategory.name)) {

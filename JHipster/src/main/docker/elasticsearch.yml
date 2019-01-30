@@ -3,7 +3,7 @@ services:
     jttesting-elasticsearch:
         image: elasticsearch:5.6.5
         # volumes:
-        #     - ~/volumes/jhipster/JTTesting/elasticsearch/:/usr/share/elasticsearch/data/
+        #     - ~/volumes/jhipster/ActivityGrouping/elasticsearch/:/usr/share/elasticsearch/data/
         ports:
             - 9200:9200
             - 9300:9300

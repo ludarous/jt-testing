@@ -1,8 +1,8 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {ITest} from '../../../../entities/test';
+import {IActivityGroup} from '../../../../entities/activity-group';
 import {IEvent} from '../../../../entities/event';
 import {IPersonFull} from '../../../../entities/person-full';
-import {ITestResult} from '../../../../entities/test-result';
+import {IActivityGroupResult} from '../../../../entities/activity-group-result';
 import {IEventResult} from '../../../../entities/event-result';
 import {IActivityResult} from '../../../../entities/activity-result';
 import {IActivity} from '../../../../entities/activity';
@@ -17,23 +17,23 @@ export class TestResultEditComponent implements OnInit {
 
   constructor() { }
 
-  private _test: ITest;
+  private _test: IActivityGroup;
   @Input()
-  get test(): ITest {
+  get test(): IActivityGroup {
     return this._test;
   }
 
-  set test(value: ITest) {
+  set test(value: IActivityGroup) {
     this._test = value;
   }
 
-  private _testsResult: ITestResult;
+  private _testsResult: IActivityGroupResult;
   @Input()
-  get testsResult(): ITestResult {
+  get testsResult(): IActivityGroupResult {
     return this._testsResult;
   }
 
-  set testsResult(value: ITestResult) {
+  set testsResult(value: IActivityGroupResult) {
     this._testsResult = value;
   }
 

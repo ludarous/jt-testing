@@ -143,4 +143,20 @@ public class ActivityGroupResult implements Serializable {
             ", note='" + getNote() + "'" +
             "}";
     }
+
+    public static ActivityGroupResult createActivityGroupResult(ActivityGroup activityGroup, EventResult eventResult, Event event, Person person) {
+        String personName =  eventResult.getPerson().getPersonalData().getFirstName() + " " + eventResult.getPerson().getPersonalData().getLastName();
+        ActivityGroupResult activityGroupResult = new ActivityGroupResult();
+        activityGroupResult.setActivityGroup(activityGroup);
+        activityGroupResult.setEventResult(eventResult);
+        activityGroupResult.setNote("Poznámka k testu " + activityGroup.getName() + ". Osooba: " + personName);
+
+        HashSet<ActivityResult> activitiesResults = new HashSet<>();
+        for(Activity activity : activityGroup.getActivities()) {
+            activitiesResults.add(ActivityResult.craeteActivityResult(activity, activityGroupResult, activityGroup, event, person));
+        }
+        activityGroupResult.setActivitiesResults(activitiesResults);
+
+        return activityGroupResult;
+    }
 }

@@ -51,10 +51,10 @@ public class Event implements Serializable {
     private Address address;
 
     @ManyToMany
-    @JoinTable(name = "event_tests",
+    @JoinTable(name = "event_activity_groups",
                joinColumns = @JoinColumn(name = "events_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "tests_id", referencedColumnName = "id"))
-    private Set<JTTest> tests = new HashSet<>();
+               inverseJoinColumns = @JoinColumn(name = "activity_groups_id", referencedColumnName = "id"))
+    private Set<ActivityGroup> activityGroups = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "event_attached_persons",
@@ -161,27 +161,27 @@ public class Event implements Serializable {
         this.address = address;
     }
 
-    public Set<JTTest> getTests() {
-        return tests;
+    public Set<ActivityGroup> getActivityGroups() {
+        return activityGroups;
     }
 
-    public Event tests(Set<JTTest> jTTests) {
-        this.tests = jTTests;
+    public Event activityGroups(Set<ActivityGroup> activityGroups) {
+        this.activityGroups = activityGroups;
         return this;
     }
 
-    public Event addTests(JTTest jTTest) {
-        this.tests.add(jTTest);
+    public Event addActivityGroups(ActivityGroup activityGroup) {
+        this.activityGroups.add(activityGroup);
         return this;
     }
 
-    public Event removeTests(JTTest jTTest) {
-        this.tests.remove(jTTest);
+    public Event removeActivityGroups(ActivityGroup activityGroup) {
+        this.activityGroups.remove(activityGroup);
         return this;
     }
 
-    public void setTests(Set<JTTest> jTTests) {
-        this.tests = jTTests;
+    public void setActivityGroups(Set<ActivityGroup> activityGroups) {
+        this.activityGroups = activityGroups;
     }
 
     public Set<Person> getAttachedPersons() {

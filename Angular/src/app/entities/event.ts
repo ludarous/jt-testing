@@ -1,10 +1,7 @@
-import {ITest, Test} from './test';
-import {IPerson} from './person';
+import {ActivityGroup, IActivityGroup} from './activity-group';
 import {IPersonFull} from './person-full';
-import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {Activity} from './activity';
+import {HttpResponse} from '@angular/common/http';
 import {IEventResult} from './event-result';
-import {forEach} from '@angular/router/src/utils/collection';
 
 export interface IEvent {
   id?: number;
@@ -16,7 +13,7 @@ export interface IEvent {
   addressId?: number;
   addressStreet?: string;
   
-  tests?: Array<ITest>;
+  tests?: Array<IActivityGroup>;
   attachedPersons?: Array<IPersonFull>;
   eventResults?: Array<IEventResult>;
   
@@ -32,7 +29,7 @@ export class Event implements IEvent {
   addressId: number;
   addressStreet: string;
 
-  tests: Array<ITest>;
+  tests: Array<IActivityGroup>;
   attachedPersons: Array<IPersonFull>;
   eventResults: Array<IEventResult>;
 
@@ -52,7 +49,7 @@ export class Event implements IEvent {
   static parseItemEnums(event: any): IEvent {
     if (event) {
       if (event.tests) {
-        Test.parseItemsEnums(event.tests);
+        ActivityGroup.parseItemsEnums(event.tests);
       }
     }
     return event;
@@ -61,7 +58,7 @@ export class Event implements IEvent {
   static parseItemsEnums(events: Array<any>): Array<IEvent> {
     if (events) {
       for (const event of events) {
-        Test.parseItemEnums(event);
+        ActivityGroup.parseItemEnums(event);
       }
     }
     return events;

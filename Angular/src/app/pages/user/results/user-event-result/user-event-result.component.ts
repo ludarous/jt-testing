@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EventResult, IEventResult} from '../../../../entities/event-result';
 import {IEvent} from '../../../../entities/event';
-import {ITestResult} from '../../../../entities/test-result';
-import {ITest} from '../../../../entities/test';
+import {IActivityGroupResult} from '../../../../entities/activity-group-result';
+import {IActivityGroup} from '../../../../entities/activity-group';
 import {EventResultService} from '../../../../services/event-result.service';
 import {EventService} from '../../../../services/event.service';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
@@ -28,7 +28,7 @@ export class UserEventResultComponent implements OnInit {
     });
   }
 
-  getTestForTestResult(testResult: ITestResult): ITest {
+  getTestForTestResult(testResult: IActivityGroupResult): IActivityGroup {
     return this.event.tests.find((t) => t.id === testResult.testId);
   }
 

@@ -1,4 +1,4 @@
-import { ITestResult } from 'app/shared/model//test-result.model';
+import { IActivityGroupResult } from 'app/shared/model//activity-group-result.model';
 
 export interface IEventResult {
     id?: number;
@@ -6,7 +6,7 @@ export interface IEventResult {
     actualHeightInCm?: number;
     actualWeightInKg?: number;
     eventId?: number;
-    testResults?: ITestResult[];
+    activityGroupResults?: IActivityGroupResult[];
     personId?: number;
 }
 
@@ -17,7 +17,7 @@ export class EventResult implements IEventResult {
         public actualHeightInCm?: number,
         public actualWeightInKg?: number,
         public eventId?: number,
-        public testResults?: ITestResult[],
+        public activityGroupResults?: IActivityGroupResult[],
         public personId?: number
     ) {}
 }

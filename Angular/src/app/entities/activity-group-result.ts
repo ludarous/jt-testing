@@ -1,7 +1,7 @@
 import {ActivityResult, IActivityResult} from './activity-result';
-import {ITest} from './test';
+import {IActivityGroup} from './activity-group';
 
-export interface ITestResult {
+export interface IActivityGroupResult {
   id?: number;
   note?: string;
 
@@ -13,7 +13,7 @@ export interface ITestResult {
   activitiesResults?: Array<IActivityResult>;
 }
 
-export class TestResult implements ITestResult {
+export class ActivityGroupResult implements IActivityGroupResult {
   id: number;
   note: string;
 
@@ -24,7 +24,7 @@ export class TestResult implements ITestResult {
 
   activitiesResults: Array<IActivityResult> = new Array<IActivityResult>();
 
-  constructor(test: ITest) {
+  constructor(test: IActivityGroup) {
     this.testId = test.id;
     for (const activity of test.activities) {
       this.activitiesResults.push(new ActivityResult(activity));

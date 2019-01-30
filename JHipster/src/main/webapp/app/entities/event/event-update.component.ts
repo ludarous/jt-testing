@@ -10,8 +10,8 @@ import { IEvent } from 'app/shared/model/event.model';
 import { EventService } from './event.service';
 import { IAddress } from 'app/shared/model/address.model';
 import { AddressService } from 'app/entities/address';
-import { IJTTest } from 'app/shared/model/jt-test.model';
-import { JTTestService } from 'app/entities/jt-test';
+import { IActivityGroup } from 'app/shared/model/jt-test.model';
+import { ActivityGroupService } from 'app/entities/jt-test';
 import { IPerson } from 'app/shared/model/person.model';
 import { PersonService } from 'app/entities/person';
 
@@ -25,7 +25,7 @@ export class EventUpdateComponent implements OnInit {
 
     addresses: IAddress[];
 
-    jttests: IJTTest[];
+    jttests: IActivityGroup[];
 
     people: IPerson[];
     date: string;
@@ -34,7 +34,7 @@ export class EventUpdateComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private eventService: EventService,
         private addressService: AddressService,
-        private jTTestService: JTTestService,
+        private jTTestService: ActivityGroupService,
         private personService: PersonService,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -51,7 +51,7 @@ export class EventUpdateComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
         this.jTTestService.query().subscribe(
-            (res: HttpResponse<IJTTest[]>) => {
+            (res: HttpResponse<IActivityGroup[]>) => {
                 this.jttests = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
@@ -99,7 +99,7 @@ export class EventUpdateComponent implements OnInit {
         return item.id;
     }
 
-    trackJTTestById(index: number, item: IJTTest) {
+    trackActivityGroupById(index: number, item: IActivityGroup) {
         return item.id;
     }
 

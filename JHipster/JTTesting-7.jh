@@ -4,7 +4,7 @@ entity Event {
 }
 
 
-entity JTTest {
+entity ActivityGroup {
 	name String required,
     description String
 }
@@ -38,7 +38,7 @@ entity EventResult {
     actualWeightInKg Float
 }
 
-entity TestResult {
+entity ActivityGroupResult {
     note String
 }
 
@@ -80,23 +80,23 @@ relationship OneToOne {
 }
 
 relationship ManyToMany {
-	JTTest{activities(name)} to Activity
+	ActivityGroup{activities(name)} to Activity
     Activity{categories(name)} to ActivityCategory
-    JTTest{categories(name)} to TestCategory
-    JTTest{sports(name)} to Sport
-    Event{tests(name)} to JTTest
+    ActivityGroup{categories(name)} to TestCategory
+    ActivityGroup{sports(name)} to Sport
+    Event{tests(name)} to ActivityGroup
 }
 
 // defining multiple OneToMany relationships with comments
 relationship OneToMany {
-	TestResult{activitiesResults} to ActivityResult
+	ActivityGroupResult{activitiesResults} to ActivityResult
     Event{eventResults} to EventResult
-    EventResult{testResults} to TestResult
+    EventResult{activityGroupResults} to ActivityGroupResult
 }
 
 relationship ManyToOne {
 	EventResult{person required} to Person
-    TestResult{test(name) required} to JTTest
+    ActivityGroupResult{test(name) required} to ActivityGroup
     ActivityResult{activity(name) required} to Activity
     Event{address(street)} to Address
 }

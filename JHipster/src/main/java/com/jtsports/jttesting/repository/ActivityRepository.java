@@ -39,8 +39,8 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
 
     @Query("select activityResult from ActivityResult activityResult " +
         "join activityResult.activity activity " +
-        "join activityResult.testResult testResult " +
-        "join testResult.eventResult eventResult " +
+        "join activityResult.activityGroupResult activityGroupResult " +
+        "join activityGroupResult.eventResult eventResult " +
         "join eventResult.event event " +
         "join eventResult.person person " +
         "where activityResult.activity.id = :id")
@@ -49,23 +49,23 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
     //@Query(name = "activityResults", nativeQuery = true)
     @Query("select activityResult from ActivityResult activityResult " +
         "join fetch activityResult.activity activity " +
-        "join fetch activityResult.testResult testResult " +
-        "join fetch testResult.test test " +
-        "join fetch testResult.eventResult eventResult " +
+        "join fetch activityResult.activityGroupResult activityGroupResult " +
+        "join fetch activityGroupResult.activityGroup activityGroup " +
+        "join fetch activityGroupResult.eventResult eventResult " +
         "join fetch eventResult.person person " +
         "join fetch activity.categories categories " +
         "where ((:personId is null) or (:personId = person.id)) " +
         "and ((:activityId is null) or (:activityId = activity.id)) " +
-        "and ((:testId is null) or (:testId = test.id)) " +
+        "and ((:activityGroupId is null) or (:activityGroupId = activityGroup.id)) " +
         "and ((:eventId is null) or (:eventId = eventResult.event.id)) " +
-        "and ((cast(:dateFrom as timestamp) is null) or (:dateFrom <= activityResult.eventDate)) " +
-        "and ((cast(:dateTo as timestamp) is null) or (:dateTo >= activityResult.eventDate)) " +
+        "and ((cast(:dateFrom as timestamp) is null) or (:dateFrom <= activityResult.date)) " +
+        "and ((cast(:dateTo as timestamp) is null) or (:dateTo >= activityResult.date)) " +
         "and ((cast(:usersBirthdayFrom as timestamp) is null) or (:usersBirthdayFrom <= person.personalData.birthDate)) " +
         "and ((cast(:usersBirthdayTo as timestamp) is null) or (:usersBirthdayTo >= person.personalData.birthDate))")
     List<ActivityResult> findAllActivitiesResultsWithRequest(
         @Param("personId") Long personId,
         @Param("activityId") Long activityId,
-        @Param("testId") Long testId,
+        @Param("activityGroupId") Long activityGroupId,
         @Param("eventId") Long eventId,
         @Param("dateFrom") ZonedDateTime dateFrom,
         @Param("dateTo") ZonedDateTime dateTo,
@@ -79,17 +79,17 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
     List<Activity> findActivityByCategories(@Param("ids") List<Long> ids);
 
     @Query("select activity from Event event " +
-        "inner join event.tests test " +
-        "inner join test.activities activity " +
+        "inner join event.activityGroups activityGroup " +
+        "inner join activityGroup.activities activity " +
         "inner join activity.categories category " +
         "where category.id in :ids and event.id = :eventId")
     List<Activity> findActivityByCategoriesAndEventId(@Param("ids") List<Long> ids, @Param("eventId") Long eventId);
 
     @Query("select activity from Event event " +
-        "inner join event.tests test " +
-        "inner join test.activities activity " +
+        "inner join event.activityGroups activityGroup " +
+        "inner join activityGroup.activities activity " +
         "inner join activity.categories category " +
-        "where category.id in :ids and event.id = :eventId and test.id = :testId")
-    List<Activity> findActivityByCategoriesAndEventIdAndTestId(@Param("ids") List<Long> ids, @Param("eventId") Long eventId, @Param("testId") Long testId);
+        "where category.id in :ids and event.id = :eventId and activityGroup.id = :activityGroupId")
+    List<Activity> findActivityByCategoriesAndEventIdAndTestId(@Param("ids") List<Long> ids, @Param("eventId") Long eventId, @Param("activityGroupId") Long activityGroupId);
 
 }

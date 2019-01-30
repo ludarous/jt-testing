@@ -4,24 +4,24 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { JtTestingTestModule } from '../../../test.module';
-import { JTTestDetailComponent } from 'app/entities/jt-test/jt-test-detail.component';
-import { JTTest } from 'app/shared/model/jt-test.model';
+import { ActivityGroupDetailComponent } from 'app/entities/jt-test/jt-test-detail.component';
+import { ActivityGroup } from 'app/shared/model/jt-test.model';
 
 describe('Component Tests', () => {
-    describe('JTTest Management Detail Component', () => {
-        let comp: JTTestDetailComponent;
-        let fixture: ComponentFixture<JTTestDetailComponent>;
-        const route = ({ data: of({ jTTest: new JTTest(123) }) } as any) as ActivatedRoute;
+    describe('ActivityGroup Management Detail Component', () => {
+        let comp: ActivityGroupDetailComponent;
+        let fixture: ComponentFixture<ActivityGroupDetailComponent>;
+        const route = ({ data: of({ jTTest: new ActivityGroup(123) }) } as any) as ActivatedRoute;
 
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [JtTestingTestModule],
-                declarations: [JTTestDetailComponent],
+                declarations: [ActivityGroupDetailComponent],
                 providers: [{ provide: ActivatedRoute, useValue: route }]
             })
-                .overrideTemplate(JTTestDetailComponent, '')
+                .overrideTemplate(ActivityGroupDetailComponent, '')
                 .compileComponents();
-            fixture = TestBed.createComponent(JTTestDetailComponent);
+            fixture = TestBed.createComponent(ActivityGroupDetailComponent);
             comp = fixture.componentInstance;
         });
 

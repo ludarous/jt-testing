@@ -1,11 +1,11 @@
 import { browser } from 'protractor';
 import { NavBarPage } from './../../page-objects/jhi-page-objects';
-import { JTTestComponentsPage, JTTestUpdatePage } from './jt-test.page-object';
+import { ActivityGroupComponentsPage, ActivityGroupUpdatePage } from './jt-test.page-object';
 
-describe('JTTest e2e test', () => {
+describe('ActivityGroup e2e test', () => {
     let navBarPage: NavBarPage;
-    let jTTestUpdatePage: JTTestUpdatePage;
-    let jTTestComponentsPage: JTTestComponentsPage;
+    let jTTestUpdatePage: ActivityGroupUpdatePage;
+    let jTTestComponentsPage: ActivityGroupComponentsPage;
 
     beforeAll(() => {
         browser.get('/');
@@ -15,20 +15,20 @@ describe('JTTest e2e test', () => {
         browser.waitForAngular();
     });
 
-    it('should load JTTests', () => {
+    it('should load ActivityGroups', () => {
         navBarPage.goToEntity('jt-test');
-        jTTestComponentsPage = new JTTestComponentsPage();
+        jTTestComponentsPage = new ActivityGroupComponentsPage();
         expect(jTTestComponentsPage.getTitle()).toMatch(/jtTestingApp.jTTest.home.title/);
     });
 
-    it('should load create JTTest page', () => {
+    it('should load create ActivityGroup page', () => {
         jTTestComponentsPage.clickOnCreateButton();
-        jTTestUpdatePage = new JTTestUpdatePage();
+        jTTestUpdatePage = new ActivityGroupUpdatePage();
         expect(jTTestUpdatePage.getPageTitle()).toMatch(/jtTestingApp.jTTest.home.createOrEditLabel/);
         jTTestUpdatePage.cancel();
     });
 
-    it('should create and save JTTests', () => {
+    it('should create and save ActivityGroups', () => {
         jTTestComponentsPage.clickOnCreateButton();
         jTTestUpdatePage.setNameInput('name');
         expect(jTTestUpdatePage.getNameInput()).toMatch('name');

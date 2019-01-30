@@ -2,7 +2,7 @@ import { IActivity } from 'app/shared/model//activity.model';
 import { ITestCategory } from 'app/shared/model//test-category.model';
 import { ISport } from 'app/shared/model//sport.model';
 
-export interface IJTTest {
+export interface IActivityGroup {
     id?: number;
     name?: string;
     description?: string;
@@ -13,7 +13,7 @@ export interface IJTTest {
     sports?: ISport[];
 }
 
-export class JTTest implements IJTTest {
+export class ActivityGroup implements IActivityGroup {
     constructor(
         public id?: number,
         public name?: string,

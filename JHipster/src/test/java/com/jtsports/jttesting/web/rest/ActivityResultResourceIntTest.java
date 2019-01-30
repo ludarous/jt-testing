@@ -126,8 +126,7 @@ public class ActivityResultResourceIntTest {
             .primaryResultValue(DEFAULT_PRIMARY_RESULT_VALUE)
             .secondaryResultValue(DEFAULT_SECONDARY_RESULT_VALUE)
             .note(DEFAULT_NOTE)
-            .eventDate(DEFAULT_EVENT_DATE)
-            .personBirthDate(DEFAULT_PERSON_BIRTH_DATE);
+            .date(DEFAULT_EVENT_DATE);
         // Add required entity
         Activity activity = ActivityResourceIntTest.createEntity(em);
         em.persist(activity);
@@ -160,8 +159,7 @@ public class ActivityResultResourceIntTest {
         assertThat(testActivityResult.getPrimaryResultValue()).isEqualTo(DEFAULT_PRIMARY_RESULT_VALUE);
         assertThat(testActivityResult.getSecondaryResultValue()).isEqualTo(DEFAULT_SECONDARY_RESULT_VALUE);
         assertThat(testActivityResult.getNote()).isEqualTo(DEFAULT_NOTE);
-        assertThat(testActivityResult.getEventDate()).isEqualTo(DEFAULT_EVENT_DATE);
-        assertThat(testActivityResult.getPersonBirthDate()).isEqualTo(DEFAULT_PERSON_BIRTH_DATE);
+        assertThat(testActivityResult.getDate()).isEqualTo(DEFAULT_EVENT_DATE);
 
         // Validate the ActivityResult in Elasticsearch
         verify(mockActivityResultSearchRepository, times(1)).save(testActivityResult);
@@ -195,7 +193,7 @@ public class ActivityResultResourceIntTest {
     public void checkEventDateIsRequired() throws Exception {
         int databaseSizeBeforeTest = activityResultRepository.findAll().size();
         // set the field null
-        activityResult.setEventDate(null);
+        activityResult.setDate(null);
 
         // Create the ActivityResult, which fails.
         ActivityResultDTO activityResultDTO = activityResultMapper.toDto(activityResult);
@@ -269,8 +267,7 @@ public class ActivityResultResourceIntTest {
             .primaryResultValue(UPDATED_PRIMARY_RESULT_VALUE)
             .secondaryResultValue(UPDATED_SECONDARY_RESULT_VALUE)
             .note(UPDATED_NOTE)
-            .eventDate(UPDATED_EVENT_DATE)
-            .personBirthDate(UPDATED_PERSON_BIRTH_DATE);
+            .date(UPDATED_EVENT_DATE);
         ActivityResultDTO activityResultDTO = activityResultMapper.toDto(updatedActivityResult);
 
         restActivityResultMockMvc.perform(put("/api/activity-results")
@@ -285,8 +282,7 @@ public class ActivityResultResourceIntTest {
         assertThat(testActivityResult.getPrimaryResultValue()).isEqualTo(UPDATED_PRIMARY_RESULT_VALUE);
         assertThat(testActivityResult.getSecondaryResultValue()).isEqualTo(UPDATED_SECONDARY_RESULT_VALUE);
         assertThat(testActivityResult.getNote()).isEqualTo(UPDATED_NOTE);
-        assertThat(testActivityResult.getEventDate()).isEqualTo(UPDATED_EVENT_DATE);
-        assertThat(testActivityResult.getPersonBirthDate()).isEqualTo(UPDATED_PERSON_BIRTH_DATE);
+        assertThat(testActivityResult.getDate()).isEqualTo(UPDATED_EVENT_DATE);
 
         // Validate the ActivityResult in Elasticsearch
         verify(mockActivityResultSearchRepository, times(1)).save(testActivityResult);

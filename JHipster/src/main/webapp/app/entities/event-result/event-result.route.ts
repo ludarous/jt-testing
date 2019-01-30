@@ -36,7 +36,7 @@ export const eventResultRoute: Routes = [
         data: {
             authorities: ['ROLE_USER'],
             defaultSort: 'id,asc',
-            pageTitle: 'jtTestingApp.eventResult.home.title'
+            pageTitle: 'activityGroupingApp.eventResult.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -48,7 +48,7 @@ export const eventResultRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'jtTestingApp.eventResult.home.title'
+            pageTitle: 'activityGroupingApp.eventResult.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -60,7 +60,7 @@ export const eventResultRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'jtTestingApp.eventResult.home.title'
+            pageTitle: 'activityGroupingApp.eventResult.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -72,7 +72,7 @@ export const eventResultRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'jtTestingApp.eventResult.home.title'
+            pageTitle: 'activityGroupingApp.eventResult.home.title'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -87,7 +87,7 @@ export const eventResultPopupRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'jtTestingApp.eventResult.home.title'
+            pageTitle: 'activityGroupingApp.eventResult.home.title'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

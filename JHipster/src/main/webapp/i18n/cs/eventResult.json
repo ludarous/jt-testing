@@ -1,6 +1,6 @@
 
 {
-    "jtTestingApp": {
+    "activityGroupingApp": {
         "eventResult" : {
             "home": {
                 "title": "Event Results",
@@ -21,7 +21,7 @@
             "actualHeightInCm": "Actual Height In Cm",
             "actualWeightInKg": "Actual Weight In Kg",
             "event": "Event",
-            "testResults": "Test Results",
+            "activityGroupResults": "Activity Group Results",
             "person": "Person"
         }
     }

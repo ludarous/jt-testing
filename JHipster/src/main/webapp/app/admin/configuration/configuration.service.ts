@@ -40,7 +40,7 @@ export class JhiConfigurationService {
             }
         }
         // by default, use the default ApplicationContext Id
-        return res['contexts']['JTTesting']['beans'];
+        return res['contexts']['ActivityGrouping']['beans'];
     }
 
     getEnv(): Observable<any> {

@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { JtTestingSharedModule } from 'app/shared';
+import { ActivityGroupingSharedModule } from 'app/shared';
 import {
     EventResultComponent,
     EventResultDetailComponent,
@@ -15,7 +15,7 @@ import {
 const ENTITY_STATES = [...eventResultRoute, ...eventResultPopupRoute];
 
 @NgModule({
-    imports: [JtTestingSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [ActivityGroupingSharedModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         EventResultComponent,
         EventResultDetailComponent,
@@ -26,4 +26,4 @@ const ENTITY_STATES = [...eventResultRoute, ...eventResultPopupRoute];
     entryComponents: [EventResultComponent, EventResultUpdateComponent, EventResultDeleteDialogComponent, EventResultDeletePopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class JtTestingEventResultModule {}
+export class ActivityGroupingEventResultModule {}

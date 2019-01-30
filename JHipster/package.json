@@ -1,7 +1,7 @@
 {
   "name": "jt-testing",
   "version": "0.0.0",
-  "description": "Description for JTTesting",
+  "description": "Description for ActivityGrouping",
   "private": true,
   "license": "UNLICENSED",
   "cacheDirectories": [

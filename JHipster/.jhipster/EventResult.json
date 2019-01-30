@@ -23,8 +23,8 @@
         },
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "testResults",
-            "otherEntityName": "testResult",
+            "relationshipName": "activityGroupResults",
+            "otherEntityName": "activityGroupResult",
             "otherEntityRelationshipName": "eventResult"
         },
         {

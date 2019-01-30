@@ -1,9 +1,9 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="jtTestingApp.eventResult.home.title">Event Results</span>
+        <span jhiTranslate="activityGroupingApp.eventResult.home.title">Event Results</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-event-result" [routerLink]="['/event-result/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span class="hidden-sm-down"  jhiTranslate="jtTestingApp.eventResult.home.createLabel">
+            <span class="hidden-sm-down"  jhiTranslate="activityGroupingApp.eventResult.home.createLabel">
             Create new Event Result
             </span>
         </button>
@@ -13,7 +13,7 @@
         <div class="col-sm-12">
             <form name="searchForm" class="form-inline">
                 <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'jtTestingApp.eventResult.home.search' | translate }}">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'activityGroupingApp.eventResult.home.search' | translate }}">
                     <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
                         <fa-icon [icon]="'search'"></fa-icon>
                     </button>
@@ -30,11 +30,11 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="note"><span jhiTranslate="jtTestingApp.eventResult.note">Note</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="actualHeightInCm"><span jhiTranslate="jtTestingApp.eventResult.actualHeightInCm">Actual Height In Cm</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="actualWeightInKg"><span jhiTranslate="jtTestingApp.eventResult.actualWeightInKg">Actual Weight In Kg</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="eventId"><span jhiTranslate="jtTestingApp.eventResult.event">Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="personId"><span jhiTranslate="jtTestingApp.eventResult.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="note"><span jhiTranslate="activityGroupingApp.eventResult.note">Note</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="actualHeightInCm"><span jhiTranslate="activityGroupingApp.eventResult.actualHeightInCm">Actual Height In Cm</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="actualWeightInKg"><span jhiTranslate="activityGroupingApp.eventResult.actualWeightInKg">Actual Weight In Kg</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="eventId"><span jhiTranslate="activityGroupingApp.eventResult.event">Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="personId"><span jhiTranslate="activityGroupingApp.eventResult.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>

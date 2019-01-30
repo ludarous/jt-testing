@@ -6,12 +6,12 @@
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081349_added_entity_Event.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180919081350_added_entity_JTTest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180919081350_added_entity_ActivityGroup.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081351_added_entity_Activity.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081352_added_entity_TestCategory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081353_added_entity_ActivityCategory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081354_added_entity_EventResult.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180919081355_added_entity_TestResult.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180919081355_added_entity_ActivityGroupResult.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081356_added_entity_ActivityResult.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081357_added_entity_Person.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081358_added_entity_PersonalData.xml" relativeToChangelogFile="false"/>
@@ -20,7 +20,6 @@
     <include file="config/liquibase/changelog/20181113073023_added_person_user_relation.xml" relativeToChangelogFile="false" />
     <include file="config/liquibase/changelog/20181114135212_added_email_to_Person.xml" relativeToChangelogFile="false" />
     <include file="config/liquibase/changelog/20181115145404_added_event_person_relation.xml" relativeToChangelogFile="false" />
-    <include file="config/liquibase/changelog/20181126122145_added_minAge_maxAge_to_JTTest.xml" relativeToChangelogFile="false" />
     <include file="config/liquibase/changelog/20181126123222_added_minAge_maxAge_to_event.xml" relativeToChangelogFile="false" />
     <include file="config/liquibase/changelog/20181129121600_added_virtual_to_person.xml" relativeToChangelogFile="false" />
     <include file="config/liquibase/changelog/20181129204712_activityCategory_tree_structure.xml" relativeToChangelogFile="false" />
@@ -36,10 +35,10 @@
     <include file="config/liquibase/changelog/20180919081355_added_entity_ActivityGroupResult.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180919081349_added_entity_constraints_Event.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180919081350_added_entity_constraints_JTTest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180919081350_added_entity_constraints_ActivityGroup.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081351_added_entity_constraints_Activity.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081354_added_entity_constraints_EventResult.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180919081355_added_entity_constraints_TestResult.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180919081355_added_entity_constraints_ActivityGroupResult.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081356_added_entity_constraints_ActivityResult.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081357_added_entity_constraints_Person.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190128064851_added_entity_constraints_Group.xml" relativeToChangelogFile="false"/>

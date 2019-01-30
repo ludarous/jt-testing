@@ -8,12 +8,12 @@ import {ActivityService} from '../../../../services/activity.service';
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {RxjsUtils} from '../../../../utils/rxjs.utils';
-import {ITest, Test} from '../../../../entities/test';
+import {ActivityGroup, IActivityGroup} from '../../../../entities/activity-group';
 import {ISport} from '../../../../entities/sport';
 import {TestService} from '../../../../services/test.service';
 import {TestCategoryService} from '../../../../services/test-category.service';
 import {SportService} from '../../../../services/sport.service';
-import {ITestCategory} from '../../../../entities/test-category';
+import {IActivityGroupCategory} from '../../../../entities/activity-group-category';
 import {MessageService} from 'primeng/api';
 
 @Component({
@@ -25,16 +25,16 @@ import {MessageService} from 'primeng/api';
 export class TestsEditComponent implements OnInit {
 
   testForm: FormGroup;
-  test: ITest;
+  test: IActivityGroup;
   testId: number;
 
   testActivities: Array<IActivity>;
   suggestedActivities: Array<IActivity> = new Array<IActivity>();
   selectedActivities: Array<IActivity> = new Array<IActivity>();
 
-  testCategories: Array<ITestCategory>;
-  suggestedCategories: Array<ITestCategory>;
-  selectedCategories: Array<ITestCategory>;
+  testCategories: Array<IActivityGroupCategory>;
+  suggestedCategories: Array<IActivityGroupCategory>;
+  selectedCategories: Array<IActivityGroupCategory>;
 
   sports: Array<ISport>;
   selectedSports: Array<ISport>;
@@ -86,7 +86,7 @@ export class TestsEditComponent implements OnInit {
     console.log(items);
   }
 
-  setTestForm(test: ITest, activities: Array<IActivity>, categories: Array<IActivityCategory>, sports: Array<ISport>) {
+  setTestForm(test: IActivityGroup, activities: Array<IActivity>, categories: Array<IActivityCategory>, sports: Array<ISport>) {
 
     this.testForm = new FormGroup({
       id: new FormControl(test.id),
@@ -115,7 +115,7 @@ export class TestsEditComponent implements OnInit {
   saveTest() {
     if (this.testForm.valid) {
 
-      const testToSave = <ITest>this.testForm.value;
+      const testToSave = <IActivityGroup>this.testForm.value;
       let saveTest$;
       if (testToSave.id) {
         saveTest$ = this.testService.update(testToSave);
@@ -128,7 +128,7 @@ export class TestsEditComponent implements OnInit {
       testToSave.sports = this.selectedSports;
 
       saveTest$.subscribe(
-        (testResponse: HttpResponse<ITest>) => {
+        (testResponse: HttpResponse<IActivityGroup>) => {
         this.test = testResponse.body;
         this.setTestForm(this.test, this.testActivities, this.testCategories, this.sports);
           this.messageService.add({severity: 'success', summary: 'Test uložen'});
@@ -140,14 +140,14 @@ export class TestsEditComponent implements OnInit {
     }
   }
 
-  getTest(testId: number): Observable<ITest> {
+  getTest(testId: number): Observable<IActivityGroup> {
     if (testId) {
-      return this.testService.find(testId).pipe(map((activityResponse: HttpResponse<ITest>) => {
+      return this.testService.find(testId).pipe(map((activityResponse: HttpResponse<IActivityGroup>) => {
         return activityResponse.body;
       }));
 
     } else {
-      return RxjsUtils.create(new Test());
+      return RxjsUtils.create(new ActivityGroup());
     }
   }
 

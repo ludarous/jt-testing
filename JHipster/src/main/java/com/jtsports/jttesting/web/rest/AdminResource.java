@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.ZonedDateTime;
 
 /**
- * REST controller for managing TestResult.
+ * REST controller for managing ActivityGroupResult.
  */
 @RestController
 @RequestMapping("/api")
@@ -37,12 +37,12 @@ public class AdminResource {
     /**
      * GET  /generate-virtual-users : generates virtual users
      *
-     * @return the ResponseEntity with status 200 (OK) and the list of testResults in body
+     * @return the ResponseEntity with status 200 (OK) and the list of activityGroupResults in body
      */
     @GetMapping("/generate-virtual-users")
     @Timed
     public ResponseEntity generateVirtualUsers() {
-        log.debug("REST request to get a page of TestResults");
+        log.debug("REST request to get a page of ActivityGroupResults");
 
         int levels = 2;
         for(int i = 6; i < 50; i++) {
@@ -70,12 +70,12 @@ public class AdminResource {
     /**
      * GET  /generate-fake-event-results : generates virtual users
      *
-     * @return the ResponseEntity with status 200 (OK) and the list of testResults in body
+     * @return the ResponseEntity with status 200 (OK) and the list of activityGroupResults in body
      */
     @GetMapping("/generate-fake-event-results")
     @Timed
     public ResponseEntity generateFakeEventResults() {
-        log.debug("REST request to get a page of TestResults");
+        log.debug("REST request to get a page of ActivityGroupResults");
 
         this.eventResultService.generateFakeEventsResults();
 

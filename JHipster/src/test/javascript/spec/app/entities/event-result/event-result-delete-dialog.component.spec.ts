@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { JtTestingTestModule } from '../../../test.module';
+import { ActivityGroupingTestModule } from '../../../test.module';
 import { EventResultDeleteDialogComponent } from 'app/entities/event-result/event-result-delete-dialog.component';
 import { EventResultService } from 'app/entities/event-result/event-result.service';
 
@@ -18,7 +18,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             TestBed.configureTestingModule({
-                imports: [JtTestingTestModule],
+                imports: [ActivityGroupingTestModule],
                 declarations: [EventResultDeleteDialogComponent]
             })
                 .overrideTemplate(EventResultDeleteDialogComponent, '')

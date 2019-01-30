@@ -5,27 +5,27 @@ import { Observable, of } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { JtTestingTestModule } from '../../../test.module';
-import { JTTestDeleteDialogComponent } from 'app/entities/jt-test/jt-test-delete-dialog.component';
-import { JTTestService } from 'app/entities/jt-test/jt-test.service';
+import { ActivityGroupDeleteDialogComponent } from 'app/entities/jt-test/jt-test-delete-dialog.component';
+import { ActivityGroupService } from 'app/entities/jt-test/jt-test.service';
 
 describe('Component Tests', () => {
-    describe('JTTest Management Delete Component', () => {
-        let comp: JTTestDeleteDialogComponent;
-        let fixture: ComponentFixture<JTTestDeleteDialogComponent>;
-        let service: JTTestService;
+    describe('ActivityGroup Management Delete Component', () => {
+        let comp: ActivityGroupDeleteDialogComponent;
+        let fixture: ComponentFixture<ActivityGroupDeleteDialogComponent>;
+        let service: ActivityGroupService;
         let mockEventManager: any;
         let mockActiveModal: any;
 
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [JtTestingTestModule],
-                declarations: [JTTestDeleteDialogComponent]
+                declarations: [ActivityGroupDeleteDialogComponent]
             })
-                .overrideTemplate(JTTestDeleteDialogComponent, '')
+                .overrideTemplate(ActivityGroupDeleteDialogComponent, '')
                 .compileComponents();
-            fixture = TestBed.createComponent(JTTestDeleteDialogComponent);
+            fixture = TestBed.createComponent(ActivityGroupDeleteDialogComponent);
             comp = fixture.componentInstance;
-            service = fixture.debugElement.injector.get(JTTestService);
+            service = fixture.debugElement.injector.get(ActivityGroupService);
             mockEventManager = fixture.debugElement.injector.get(JhiEventManager);
             mockActiveModal = fixture.debugElement.injector.get(NgbActiveModal);
         });

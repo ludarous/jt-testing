@@ -1,11 +1,11 @@
 import { browser } from 'protractor';
 import { NavBarPage } from './../../page-objects/jhi-page-objects';
-import { TestResultComponentsPage, TestResultUpdatePage } from './test-result.page-object';
+import { ActivityGroupResultComponentsPage, ActivityGroupResultUpdatePage } from './test-result.page-object';
 
-describe('TestResult e2e test', () => {
+describe('ActivityGroupResult e2e test', () => {
     let navBarPage: NavBarPage;
-    let testResultUpdatePage: TestResultUpdatePage;
-    let testResultComponentsPage: TestResultComponentsPage;
+    let activityGroupResultUpdatePage: ActivityGroupResultUpdatePage;
+    let activityGroupResultComponentsPage: ActivityGroupResultComponentsPage;
 
     beforeAll(() => {
         browser.get('/');
@@ -15,27 +15,27 @@ describe('TestResult e2e test', () => {
         browser.waitForAngular();
     });
 
-    it('should load TestResults', () => {
+    it('should load ActivityGroupResults', () => {
         navBarPage.goToEntity('test-result');
-        testResultComponentsPage = new TestResultComponentsPage();
-        expect(testResultComponentsPage.getTitle()).toMatch(/jtTestingApp.testResult.home.title/);
+        activityGroupResultComponentsPage = new ActivityGroupResultComponentsPage();
+        expect(activityGroupResultComponentsPage.getTitle()).toMatch(/jtTestingApp.activityGroupResult.home.title/);
     });
 
-    it('should load create TestResult page', () => {
-        testResultComponentsPage.clickOnCreateButton();
-        testResultUpdatePage = new TestResultUpdatePage();
-        expect(testResultUpdatePage.getPageTitle()).toMatch(/jtTestingApp.testResult.home.createOrEditLabel/);
-        testResultUpdatePage.cancel();
+    it('should load create ActivityGroupResult page', () => {
+        activityGroupResultComponentsPage.clickOnCreateButton();
+        activityGroupResultUpdatePage = new ActivityGroupResultUpdatePage();
+        expect(activityGroupResultUpdatePage.getPageTitle()).toMatch(/jtTestingApp.activityGroupResult.home.createOrEditLabel/);
+        activityGroupResultUpdatePage.cancel();
     });
 
-    /* it('should create and save TestResults', () => {
-        testResultComponentsPage.clickOnCreateButton();
-        testResultUpdatePage.setNoteInput('note');
-        expect(testResultUpdatePage.getNoteInput()).toMatch('note');
-        testResultUpdatePage.eventResultSelectLastOption();
-        testResultUpdatePage.testSelectLastOption();
-        testResultUpdatePage.save();
-        expect(testResultUpdatePage.getSaveButton().isPresent()).toBeFalsy();
+    /* it('should create and save ActivityGroupResults', () => {
+        activityGroupResultComponentsPage.clickOnCreateButton();
+        activityGroupResultUpdatePage.setNoteInput('note');
+        expect(activityGroupResultUpdatePage.getNoteInput()).toMatch('note');
+        activityGroupResultUpdatePage.eventResultSelectLastOption();
+        activityGroupResultUpdatePage.testSelectLastOption();
+        activityGroupResultUpdatePage.save();
+        expect(activityGroupResultUpdatePage.getSaveButton().isPresent()).toBeFalsy();
     });*/
 
     afterAll(() => {

@@ -9,7 +9,7 @@ public class StatsRequestDTO {
 
     private Long activityId;
 
-    private Long testId;
+    private Long activityGroupId;
 
     private Long eventId;
 
@@ -57,12 +57,12 @@ public class StatsRequestDTO {
         this.usersBirthDayTo = usersBirthDayTo;
     }
 
-    public Long getTestId() {
-        return testId;
+    public Long getActivityGroupId() {
+        return activityGroupId;
     }
 
-    public void setTestId(Long testId) {
-        this.testId = testId;
+    public void setActivityGroupId(Long activityGroupId) {
+        this.activityGroupId = activityGroupId;
     }
 
     public Long getEventId() {

@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-event-result-heading" jhiTranslate="jtTestingApp.eventResult.home.createOrEditLabel">Create or edit a Event Result</h2>
+            <h2 id="jhi-event-result-heading" jhiTranslate="activityGroupingApp.eventResult.home.createOrEditLabel">Create or edit a Event Result</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!eventResult.id">
@@ -10,30 +10,30 @@
                         [(ngModel)]="eventResult.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jtTestingApp.eventResult.note" for="field_note">Note</label>
+                    <label class="form-control-label" jhiTranslate="activityGroupingApp.eventResult.note" for="field_note">Note</label>
                     <input type="text" class="form-control" name="note" id="field_note"
                         [(ngModel)]="eventResult.note" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jtTestingApp.eventResult.actualHeightInCm" for="field_actualHeightInCm">Actual Height In Cm</label>
+                    <label class="form-control-label" jhiTranslate="activityGroupingApp.eventResult.actualHeightInCm" for="field_actualHeightInCm">Actual Height In Cm</label>
                     <input type="number" class="form-control" name="actualHeightInCm" id="field_actualHeightInCm"
                         [(ngModel)]="eventResult.actualHeightInCm" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jtTestingApp.eventResult.actualWeightInKg" for="field_actualWeightInKg">Actual Weight In Kg</label>
+                    <label class="form-control-label" jhiTranslate="activityGroupingApp.eventResult.actualWeightInKg" for="field_actualWeightInKg">Actual Weight In Kg</label>
                     <input type="number" class="form-control" name="actualWeightInKg" id="field_actualWeightInKg"
                         [(ngModel)]="eventResult.actualWeightInKg" />
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jtTestingApp.eventResult.event" for="field_event">Event</label>
+                    <label class="form-control-label" jhiTranslate="activityGroupingApp.eventResult.event" for="field_event">Event</label>
                     <select class="form-control" id="field_event" name="event" [(ngModel)]="eventResult.eventId" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="eventOption.id" *ngFor="let eventOption of events; trackBy: trackEventById">{{eventOption.id}}</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jtTestingApp.eventResult.person" for="field_person">Person</label>
+                    <label class="form-control-label" jhiTranslate="activityGroupingApp.eventResult.person" for="field_person">Person</label>
                     <select class="form-control" id="field_person" name="person" [(ngModel)]="eventResult.personId"  required>
                         <option *ngIf="!editForm.value.person" [ngValue]="null" selected></option>
                         <option [ngValue]="personOption.id" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.id}}</option>

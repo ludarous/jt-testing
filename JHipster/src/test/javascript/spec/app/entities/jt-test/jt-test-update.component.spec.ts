@@ -4,27 +4,27 @@ import { HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { JtTestingTestModule } from '../../../test.module';
-import { JTTestUpdateComponent } from 'app/entities/jt-test/jt-test-update.component';
-import { JTTestService } from 'app/entities/jt-test/jt-test.service';
-import { JTTest } from 'app/shared/model/jt-test.model';
+import { ActivityGroupUpdateComponent } from 'app/entities/jt-test/jt-test-update.component';
+import { ActivityGroupService } from 'app/entities/jt-test/jt-test.service';
+import { ActivityGroup } from 'app/shared/model/jt-test.model';
 
 describe('Component Tests', () => {
-    describe('JTTest Management Update Component', () => {
-        let comp: JTTestUpdateComponent;
-        let fixture: ComponentFixture<JTTestUpdateComponent>;
-        let service: JTTestService;
+    describe('ActivityGroup Management Update Component', () => {
+        let comp: ActivityGroupUpdateComponent;
+        let fixture: ComponentFixture<ActivityGroupUpdateComponent>;
+        let service: ActivityGroupService;
 
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [JtTestingTestModule],
-                declarations: [JTTestUpdateComponent]
+                declarations: [ActivityGroupUpdateComponent]
             })
-                .overrideTemplate(JTTestUpdateComponent, '')
+                .overrideTemplate(ActivityGroupUpdateComponent, '')
                 .compileComponents();
 
-            fixture = TestBed.createComponent(JTTestUpdateComponent);
+            fixture = TestBed.createComponent(ActivityGroupUpdateComponent);
             comp = fixture.componentInstance;
-            service = fixture.debugElement.injector.get(JTTestService);
+            service = fixture.debugElement.injector.get(ActivityGroupService);
         });
 
         describe('save', () => {
@@ -32,7 +32,7 @@ describe('Component Tests', () => {
                 'Should call update service on save for existing entity',
                 fakeAsync(() => {
                     // GIVEN
-                    const entity = new JTTest(123);
+                    const entity = new ActivityGroup(123);
                     spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
                     comp.jTTest = entity;
                     // WHEN
@@ -49,7 +49,7 @@ describe('Component Tests', () => {
                 'Should call create service on save for new entity',
                 fakeAsync(() => {
                     // GIVEN
-                    const entity = new JTTest();
+                    const entity = new ActivityGroup();
                     spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
                     comp.jTTest = entity;
                     // WHEN

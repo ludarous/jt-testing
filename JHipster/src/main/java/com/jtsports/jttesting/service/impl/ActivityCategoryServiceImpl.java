@@ -2,7 +2,7 @@ package com.jtsports.jttesting.service.impl;
 
 import com.jtsports.jttesting.domain.Activity;
 import com.jtsports.jttesting.repository.ActivityRepository;
-import com.jtsports.jttesting.repository.JTTestRepository;
+import com.jtsports.jttesting.repository.ActivityGroupRepository;
 import com.jtsports.jttesting.service.ActivityCategoryService;
 import com.jtsports.jttesting.domain.ActivityCategory;
 import com.jtsports.jttesting.repository.ActivityCategoryRepository;
@@ -46,9 +46,9 @@ public class ActivityCategoryServiceImpl implements ActivityCategoryService {
 
     private final ActivityRepository activityRepository;
 
-    private final JTTestRepository testRepository;
+    private final ActivityGroupRepository testRepository;
 
-    public ActivityCategoryServiceImpl(ActivityCategoryRepository activityCategoryRepository, ActivityCategoryMapper activityCategoryMapper, ActivityCategorySearchRepository activityCategorySearchRepository, ActivityService activityService, ActivityRepository activityRepository, JTTestRepository testRepository) {
+    public ActivityCategoryServiceImpl(ActivityCategoryRepository activityCategoryRepository, ActivityCategoryMapper activityCategoryMapper, ActivityCategorySearchRepository activityCategorySearchRepository, ActivityService activityService, ActivityRepository activityRepository, ActivityGroupRepository testRepository) {
         this.activityCategoryRepository = activityCategoryRepository;
         this.activityCategoryMapper = activityCategoryMapper;
         this.activityCategorySearchRepository = activityCategorySearchRepository;

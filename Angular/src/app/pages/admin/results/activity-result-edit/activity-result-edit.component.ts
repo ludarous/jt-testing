@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IActivity} from '../../../../entities/activity';
 import {ActivityResult, IActivityResult} from '../../../../entities/activity-result';
-import {ITestResult} from '../../../../entities/test-result';
+import {IActivityGroupResult} from '../../../../entities/activity-group-result';
 import {FormControl, FormGroup} from '@angular/forms';
 import {IEvent} from '../../../../entities/event';
 
@@ -37,13 +37,13 @@ export class ActivityResultEditComponent implements OnInit {
     }
   }
 
-  private _testResult: ITestResult;
+  private _testResult: IActivityGroupResult;
   @Input()
-  get testResult(): ITestResult {
+  get testResult(): IActivityGroupResult {
     return this._testResult;
   }
 
-  set testResult(value: ITestResult) {
+  set testResult(value: IActivityGroupResult) {
     this._testResult = value;
   }
 

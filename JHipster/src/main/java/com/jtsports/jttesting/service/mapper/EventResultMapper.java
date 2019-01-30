@@ -8,17 +8,17 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity EventResult and its DTO EventResultDTO.
  */
-@Mapper(componentModel = "spring", uses = {EventMapper.class, PersonFullMapper.class, TestResultMapper.class})
+@Mapper(componentModel = "spring", uses = {EventMapper.class, PersonFullMapper.class, ActivityGroupResultMapper.class})
 public interface EventResultMapper extends EntityMapper<EventResultDTO, EventResult> {
 
     @Mapping(source = "event.id", target = "eventId")
     @Mapping(source = "person.id", target = "personId")
-    @Mapping(source = "testResults", target = "testResults")
+    @Mapping(source = "activityGroupResults", target = "activityGroupResults")
     EventResultDTO toDto(EventResult eventResult);
 
     @Mapping(source = "eventId", target = "event")
     @Mapping(source = "personId", target = "person")
-    @Mapping(source = "testResults", target = "testResults")
+    @Mapping(source = "activityGroupResults", target = "activityGroupResults")
     EventResult toEntity(EventResultDTO eventResultDTO);
 
     default EventResult fromId(Long id) {

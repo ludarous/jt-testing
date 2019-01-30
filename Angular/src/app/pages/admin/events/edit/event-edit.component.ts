@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import { IActivity} from '../../../../entities/activity';
-import {IActivityCategory} from '../../../../entities/activity-category';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {RxjsUtils} from '../../../../utils/rxjs.utils';
-import {ITest, Test} from '../../../../entities/test';
-import {ISport} from '../../../../entities/sport';
+import {IActivityGroup} from '../../../../entities/activity-group';
 import {TestService} from '../../../../services/test.service';
 import {EventService} from '../../../../services/event.service';
 import {IEvent, Event} from '../../../../entities/event';
@@ -30,13 +27,13 @@ export class EventEditComponent implements OnInit {
   event: IEvent;
   eventId: number;
 
-  tests: Array<ITest>;
+  tests: Array<IActivityGroup>;
   persons: Array<IPersonFull>;
 
-  suggestedTests: Array<ITest> = new Array<ITest>();
+  suggestedTests: Array<IActivityGroup> = new Array<IActivityGroup>();
   suggestedPerson: Array<IPersonFull> = new Array<IPersonFull>();
 
-  selectedTests: Array<ITest> = new Array<ITest>();
+  selectedTests: Array<IActivityGroup> = new Array<IActivityGroup>();
   selectedPersons: Array<IPersonFull> = new Array<IPersonFull>();
 
 
@@ -110,7 +107,7 @@ export class EventEditComponent implements OnInit {
   }
   
 
-  setEventForm(event: IEvent, tests: Array<ITest>, persons: Array<IPersonFull>) {
+  setEventForm(event: IEvent, tests: Array<IActivityGroup>, persons: Array<IPersonFull>) {
 
     this.eventForm = new FormGroup({
       id: new FormControl(event.id),

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {ITestCategory, TestCategory} from '../../../../entities/test-category';
+import {IActivityGroupCategory, ActivityGroupCategory} from '../../../../entities/activity-group-category';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {TestCategoryService} from '../../../../services/test-category.service';
 import {Observable, zip} from 'rxjs';
@@ -17,7 +17,7 @@ import {MessageService} from 'primeng/api';
 export class TestCategoriesEditComponent implements OnInit {
 
   testCategoryId: number;
-  testCategory: ITestCategory;
+  testCategory: IActivityGroupCategory;
   testCategoryForm: FormGroup;
 
   constructor(private testCategoryService: TestCategoryService,
@@ -32,7 +32,7 @@ export class TestCategoriesEditComponent implements OnInit {
       this.testCategoryId = +params['id'];
       const getTestCategory$ = this.getTestCategory(this.testCategoryId);
 
-      getTestCategory$.subscribe((testCategory: ITestCategory) => {
+      getTestCategory$.subscribe((testCategory: IActivityGroupCategory) => {
         this.testCategory = testCategory;
         this.setCategoryForm(this.testCategory);
       });
@@ -40,7 +40,7 @@ export class TestCategoriesEditComponent implements OnInit {
     });
   }
 
-  setCategoryForm(category: ITestCategory) {
+  setCategoryForm(category: IActivityGroupCategory) {
 
     this.testCategoryForm = new FormGroup({
       id: new FormControl(category.id),
@@ -53,7 +53,7 @@ export class TestCategoriesEditComponent implements OnInit {
   saveCategory() {
     if (this.testCategoryForm.valid) {
 
-      const categoryToSave = <ITestCategory>this.testCategoryForm.value;
+      const categoryToSave = <IActivityGroupCategory>this.testCategoryForm.value;
       let saveCategory$;
       if (categoryToSave.id) {
         saveCategory$ = this.testCategoryService.update(categoryToSave);
@@ -63,7 +63,7 @@ export class TestCategoriesEditComponent implements OnInit {
 
 
       saveCategory$.subscribe(
-        (categoryResponse: HttpResponse<ITestCategory>) => {
+        (categoryResponse: HttpResponse<IActivityGroupCategory>) => {
           this.testCategory = categoryResponse.body;
           this.messageService.add({severity: 'success', summary: 'Kategorie uložena'});
           this.router.navigate(['/admin/test-categories/list']);
@@ -74,14 +74,14 @@ export class TestCategoriesEditComponent implements OnInit {
     }
   }
 
-  getTestCategory(testCategoryId: number): Observable<ITestCategory> {
+  getTestCategory(testCategoryId: number): Observable<IActivityGroupCategory> {
     if (testCategoryId) {
-      return this.testCategoryService.find(testCategoryId).pipe(map((testCategoryResponse: HttpResponse<ITestCategory>) => {
+      return this.testCategoryService.find(testCategoryId).pipe(map((testCategoryResponse: HttpResponse<IActivityGroupCategory>) => {
         return testCategoryResponse.body;
       }));
 
     } else {
-      return RxjsUtils.create(new TestCategory());
+      return RxjsUtils.create(new ActivityGroupCategory());
     }
   }
 }

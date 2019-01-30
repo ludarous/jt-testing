@@ -1,8 +1,8 @@
 import {IActivity} from './activity';
-import {ITestResult} from './test-result';
+import {IActivityGroupResult} from './activity-group-result';
 import {IPersonFull} from './person-full';
 import {IEvent} from './event';
-import {ITest} from './test';
+import {IActivityGroup} from './activity-group';
 
 export interface IActivityResult {
   id?: number;

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import com.jtsports.jttesting.domain.util.RandomNumbers;
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -14,7 +15,7 @@ import java.util.Objects;
  * A ActivityResult.
  */
 @Entity
-@Table(name = "activity_result", indexes = {@Index(name = "filter_index", columnList = "date, activity_id, activity_group_id, event_id, person_id")})
+@Table(name = "activity_result", indexes = {@Index(name = "filter_index", columnList = "jhi_date, activity_id, activity_group_id, event_id, person_id")})
 @Document(indexName = "activityresult")
 public class ActivityResult implements Serializable {
 
@@ -232,4 +233,29 @@ public class ActivityResult implements Serializable {
             ", official='" + isOfficial() + "'" +
             "}";
     }
+
+    public static ActivityResult craeteActivityResult(Activity activity, ActivityGroupResult activityGroupResult, ActivityGroup activityGroup, Event event, Person person) {
+        String personName =  activityGroupResult.getEventResult().getPerson().getPersonalData().getFirstName() + " " + activityGroupResult.getEventResult().getPerson().getPersonalData().getLastName();
+        ActivityResult activityResult = new ActivityResult();
+        activityResult.setActivityGroupResult(activityGroupResult);
+        activityResult.setActivity(activity);
+        activityResult.setNote("Poznámka k aktivitě " + activity.getName() + ". Osooba: " + personName);
+        activityResult.setDate(event.getDate());
+        activityResult.setEvent(event);
+        activityResult.setActivityGroup(activityGroup);
+        activityResult.setPerson(person);
+
+        activityResult.setPrimaryResultValue(new Float(RandomNumbers.getRandomNumberInRange(20,100)));
+
+        if(activity.getSecondaryResultValueUnit() != null) {
+            activityResult.setSecondaryResultValue(new Float(RandomNumbers.getRandomNumberInRange(30,50)));
+        }
+        return activityResult;
+    }
+
+    public static ActivityResult activityResultWithDate(ActivityResult activityResult, ZonedDateTime resultDate) {
+        activityResult.setDate(resultDate);
+        return activityResult;
+    }
+
 }

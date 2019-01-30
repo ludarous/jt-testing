@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ITest} from '../../../../entities/test';
-import {ITestResult} from '../../../../entities/test-result';
+import {IActivityGroup} from '../../../../entities/activity-group';
+import {IActivityGroupResult} from '../../../../entities/activity-group-result';
 import {IActivityResult} from '../../../../entities/activity-result';
 import {IActivity} from '../../../../entities/activity';
 import {IEvent} from '../../../../entities/event';
@@ -28,10 +28,10 @@ export class UserTestResultComponent implements OnInit {
               private eventManager: EventManager) { }
 
   @Input()
-  test: ITest;
+  test: IActivityGroup;
 
   @Input()
-  testResult: ITestResult;
+  testResult: IActivityGroupResult;
 
   @Input()
   event: IEvent;

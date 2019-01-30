@@ -2,11 +2,11 @@ package com.jtsports.jttesting.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.jtsports.jttesting.domain.User;
-import com.jtsports.jttesting.service.JTTestService;
+import com.jtsports.jttesting.service.ActivityGroupService;
 import com.jtsports.jttesting.service.PersonService;
 import com.jtsports.jttesting.service.StatsService;
 import com.jtsports.jttesting.service.UserService;
-import com.jtsports.jttesting.service.dto.JTTestDTO;
+import com.jtsports.jttesting.service.dto.ActivityGroupDTO;
 import com.jtsports.jttesting.service.dto.PersonFullDTO;
 import com.jtsports.jttesting.service.dto.Stats.PersonalStatsDTO;
 import com.jtsports.jttesting.service.dto.StatsRequestDTO;
@@ -40,7 +40,7 @@ public class StatsResource {
 
     private static final String ENTITY_NAME = "Stats";
 
-    private final JTTestService jTTestService;
+    private final ActivityGroupService jTTestService;
 
     private final UserService userService;
 
@@ -48,7 +48,7 @@ public class StatsResource {
 
     private final StatsService statsService;
 
-    public StatsResource(JTTestService jTTestService, UserService userService, PersonService personService, StatsService statsService) {
+    public StatsResource(ActivityGroupService jTTestService, UserService userService, PersonService personService, StatsService statsService) {
         this.jTTestService = jTTestService;
         this.userService = userService;
         this.personService = personService;

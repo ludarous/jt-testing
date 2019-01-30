@@ -3,7 +3,7 @@ import {CrudBaseService} from './crud-base.service';
 import {IUser} from '../entities/user';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {IActivity} from '../entities/activity';
-import {ITest} from '../entities/test';
+import {IActivityGroup} from '../entities/activity-group';
 import {IEventResult} from '../entities/event-result';
 import {Observable} from 'rxjs';
 

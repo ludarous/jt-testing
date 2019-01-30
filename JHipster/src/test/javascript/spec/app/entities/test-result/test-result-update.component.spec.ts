@@ -4,27 +4,27 @@ import { HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { JtTestingTestModule } from '../../../test.module';
-import { TestResultUpdateComponent } from 'app/entities/test-result/test-result-update.component';
-import { TestResultService } from 'app/entities/test-result/test-result.service';
-import { TestResult } from 'app/shared/model/test-result.model';
+import { ActivityGroupResultUpdateComponent } from 'app/entities/test-result/test-result-update.component';
+import { ActivityGroupResultService } from 'app/entities/test-result/test-result.service';
+import { ActivityGroupResult } from 'app/shared/model/test-result.model';
 
 describe('Component Tests', () => {
-    describe('TestResult Management Update Component', () => {
-        let comp: TestResultUpdateComponent;
-        let fixture: ComponentFixture<TestResultUpdateComponent>;
-        let service: TestResultService;
+    describe('ActivityGroupResult Management Update Component', () => {
+        let comp: ActivityGroupResultUpdateComponent;
+        let fixture: ComponentFixture<ActivityGroupResultUpdateComponent>;
+        let service: ActivityGroupResultService;
 
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [JtTestingTestModule],
-                declarations: [TestResultUpdateComponent]
+                declarations: [ActivityGroupResultUpdateComponent]
             })
-                .overrideTemplate(TestResultUpdateComponent, '')
+                .overrideTemplate(ActivityGroupResultUpdateComponent, '')
                 .compileComponents();
 
-            fixture = TestBed.createComponent(TestResultUpdateComponent);
+            fixture = TestBed.createComponent(ActivityGroupResultUpdateComponent);
             comp = fixture.componentInstance;
-            service = fixture.debugElement.injector.get(TestResultService);
+            service = fixture.debugElement.injector.get(ActivityGroupResultService);
         });
 
         describe('save', () => {
@@ -32,9 +32,9 @@ describe('Component Tests', () => {
                 'Should call update service on save for existing entity',
                 fakeAsync(() => {
                     // GIVEN
-                    const entity = new TestResult(123);
+                    const entity = new ActivityGroupResult(123);
                     spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
-                    comp.testResult = entity;
+                    comp.activityGroupResult = entity;
                     // WHEN
                     comp.save();
                     tick(); // simulate async
@@ -49,9 +49,9 @@ describe('Component Tests', () => {
                 'Should call create service on save for new entity',
                 fakeAsync(() => {
                     // GIVEN
-                    const entity = new TestResult();
+                    const entity = new ActivityGroupResult();
                     spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
-                    comp.testResult = entity;
+                    comp.activityGroupResult = entity;
                     // WHEN
                     comp.save();
                     tick(); // simulate async

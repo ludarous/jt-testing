@@ -4,24 +4,24 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { JtTestingTestModule } from '../../../test.module';
-import { TestResultDetailComponent } from 'app/entities/test-result/test-result-detail.component';
-import { TestResult } from 'app/shared/model/test-result.model';
+import { ActivityGroupResultDetailComponent } from 'app/entities/test-result/test-result-detail.component';
+import { ActivityGroupResult } from 'app/shared/model/test-result.model';
 
 describe('Component Tests', () => {
-    describe('TestResult Management Detail Component', () => {
-        let comp: TestResultDetailComponent;
-        let fixture: ComponentFixture<TestResultDetailComponent>;
-        const route = ({ data: of({ testResult: new TestResult(123) }) } as any) as ActivatedRoute;
+    describe('ActivityGroupResult Management Detail Component', () => {
+        let comp: ActivityGroupResultDetailComponent;
+        let fixture: ComponentFixture<ActivityGroupResultDetailComponent>;
+        const route = ({ data: of({ activityGroupResult: new ActivityGroupResult(123) }) } as any) as ActivatedRoute;
 
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [JtTestingTestModule],
-                declarations: [TestResultDetailComponent],
+                declarations: [ActivityGroupResultDetailComponent],
                 providers: [{ provide: ActivatedRoute, useValue: route }]
             })
-                .overrideTemplate(TestResultDetailComponent, '')
+                .overrideTemplate(ActivityGroupResultDetailComponent, '')
                 .compileComponents();
-            fixture = TestBed.createComponent(TestResultDetailComponent);
+            fixture = TestBed.createComponent(ActivityGroupResultDetailComponent);
             comp = fixture.componentInstance;
         });
 
@@ -33,7 +33,7 @@ describe('Component Tests', () => {
                 comp.ngOnInit();
 
                 // THEN
-                expect(comp.testResult).toEqual(jasmine.objectContaining({ id: 123 }));
+                expect(comp.activityGroupResult).toEqual(jasmine.objectContaining({ id: 123 }));
             });
         });
     });

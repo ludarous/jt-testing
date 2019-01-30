@@ -1,14 +1,14 @@
 /* tslint:disable max-line-length */
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TestResultService } from 'app/entities/test-result/test-result.service';
-import { TestResult } from 'app/shared/model/test-result.model';
+import { ActivityGroupResultService } from 'app/entities/test-result/test-result.service';
+import { ActivityGroupResult } from 'app/shared/model/test-result.model';
 import { SERVER_API_URL } from 'app/app.constants';
 
 describe('Service Tests', () => {
-    describe('TestResult Service', () => {
+    describe('ActivityGroupResult Service', () => {
         let injector: TestBed;
-        let service: TestResultService;
+        let service: ActivityGroupResultService;
         let httpMock: HttpTestingController;
 
         beforeEach(() => {
@@ -16,7 +16,7 @@ describe('Service Tests', () => {
                 imports: [HttpClientTestingModule]
             });
             injector = getTestBed();
-            service = injector.get(TestResultService);
+            service = injector.get(ActivityGroupResultService);
             httpMock = injector.get(HttpTestingController);
         });
 
@@ -30,8 +30,8 @@ describe('Service Tests', () => {
                 expect(req.request.url).toEqual(resourceUrl + '/' + 123);
             });
 
-            it('should create a TestResult', () => {
-                service.create(new TestResult(null)).subscribe(received => {
+            it('should create a ActivityGroupResult', () => {
+                service.create(new ActivityGroupResult(null)).subscribe(received => {
                     expect(received.body.id).toEqual(null);
                 });
 
@@ -39,8 +39,8 @@ describe('Service Tests', () => {
                 req.flush({ id: null });
             });
 
-            it('should update a TestResult', () => {
-                service.update(new TestResult(123)).subscribe(received => {
+            it('should update a ActivityGroupResult', () => {
+                service.update(new ActivityGroupResult(123)).subscribe(received => {
                     expect(received.body.id).toEqual(123);
                 });
 
@@ -48,7 +48,7 @@ describe('Service Tests', () => {
                 req.flush({ id: 123 });
             });
 
-            it('should return a TestResult', () => {
+            it('should return a ActivityGroupResult', () => {
                 service.find(123).subscribe(received => {
                     expect(received.body.id).toEqual(123);
                 });
@@ -57,16 +57,16 @@ describe('Service Tests', () => {
                 req.flush({ id: 123 });
             });
 
-            it('should return a list of TestResult', () => {
+            it('should return a list of ActivityGroupResult', () => {
                 service.query(null).subscribe(received => {
                     expect(received.body[0].id).toEqual(123);
                 });
 
                 const req = httpMock.expectOne({ method: 'GET' });
-                req.flush([new TestResult(123)]);
+                req.flush([new ActivityGroupResult(123)]);
             });
 
-            it('should delete a TestResult', () => {
+            it('should delete a ActivityGroupResult', () => {
                 service.delete(123).subscribe(received => {
                     expect(received.url).toContain('/' + 123);
                 });

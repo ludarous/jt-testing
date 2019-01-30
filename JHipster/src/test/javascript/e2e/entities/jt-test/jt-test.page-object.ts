@@ -1,6 +1,6 @@
 import { element, by, promise, ElementFinder } from 'protractor';
 
-export class JTTestComponentsPage {
+export class ActivityGroupComponentsPage {
     createButton = element(by.id('jh-create-entity'));
     title = element.all(by.css('jhi-jt-test div h2#page-heading span')).first();
 
@@ -13,7 +13,7 @@ export class JTTestComponentsPage {
     }
 }
 
-export class JTTestUpdatePage {
+export class ActivityGroupUpdatePage {
     pageTitle = element(by.id('jhi-jt-test-heading'));
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));

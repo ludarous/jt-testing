@@ -1,6 +1,6 @@
 {
     "global": {
-        "title": "JTTesting",
+        "title": "ActivityGrouping",
         "browsehappy": "Sie benutzen einen <strong>veralteten</strong> Browser. Bitte <a href=\"http://browsehappy.com/?locale=de/\">aktualisieren Sie Ihren Browser</a>, um die Benutzerfreundlichkeit zu erhöhen.",
         "menu": {
             "home": "Startseite",
@@ -13,7 +13,7 @@
                 "testCategory": "Test Category",
                 "activityCategory": "Activity Category",
                 "eventResult": "Event Result",
-                "testResult": "Test Result",
+                "activityGroupResult": "Test Result",
                 "activityResult": "Activity Result",
                 "person": "Person",
                 "personalData": "Personal Data",

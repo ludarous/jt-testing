@@ -1,14 +1,11 @@
 package com.jtsports.jttesting.web.rest;
 
 import com.jtsports.jttesting.JtTestingApp;
-
 import com.jtsports.jttesting.domain.EventResult;
 import com.jtsports.jttesting.domain.Person;
 import com.jtsports.jttesting.repository.EventResultRepository;
 import com.jtsports.jttesting.repository.search.EventResultSearchRepository;
 import com.jtsports.jttesting.service.EventResultService;
-import com.jtsports.jttesting.service.PersonService;
-import com.jtsports.jttesting.service.UserService;
 import com.jtsports.jttesting.service.dto.EventResultDTO;
 import com.jtsports.jttesting.service.mapper.EventResultMapper;
 import com.jtsports.jttesting.web.rest.errors.ExceptionTranslator;
@@ -89,12 +86,6 @@ public class EventResultResourceIntTest {
     private ExceptionTranslator exceptionTranslator;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
-    private PersonService personService;
-
-    @Autowired
     private EntityManager em;
 
     private MockMvc restEventResultMockMvc;
@@ -104,7 +95,7 @@ public class EventResultResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final EventResultResource eventResultResource = new EventResultResource(eventResultService, userService, personService);
+        final EventResultResource eventResultResource = new EventResultResource(eventResultService);
         this.restEventResultMockMvc = MockMvcBuilders.standaloneSetup(eventResultResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

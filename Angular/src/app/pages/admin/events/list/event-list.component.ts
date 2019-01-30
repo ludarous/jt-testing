@@ -3,7 +3,7 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {IActivity} from '../../../../entities/activity';
 import {Router} from '@angular/router';
 import {TestService} from '../../../../services/test.service';
-import {ITest} from '../../../../entities/test';
+import {IActivityGroup} from '../../../../entities/activity-group';
 import {IEvent} from '../../../../entities/event';
 import {EventService} from '../../../../services/event.service';
 import {IActivityCategory} from '../../../../entities/activity-category';
@@ -33,7 +33,7 @@ export class EventListComponent implements OnInit {
   }
 
   load() {
-    this.eventService.query().subscribe((eventsResponse: HttpResponse<Array<ITest>>) => {
+    this.eventService.query().subscribe((eventsResponse: HttpResponse<Array<IActivityGroup>>) => {
       this.events = eventsResponse.body;
     });
   }

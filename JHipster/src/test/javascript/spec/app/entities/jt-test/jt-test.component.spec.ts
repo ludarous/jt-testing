@@ -5,20 +5,20 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Data } from '@angular/router';
 
 import { JtTestingTestModule } from '../../../test.module';
-import { JTTestComponent } from 'app/entities/jt-test/jt-test.component';
-import { JTTestService } from 'app/entities/jt-test/jt-test.service';
-import { JTTest } from 'app/shared/model/jt-test.model';
+import { ActivityGroupComponent } from 'app/entities/jt-test/jt-test.component';
+import { ActivityGroupService } from 'app/entities/jt-test/jt-test.service';
+import { ActivityGroup } from 'app/shared/model/jt-test.model';
 
 describe('Component Tests', () => {
-    describe('JTTest Management Component', () => {
-        let comp: JTTestComponent;
-        let fixture: ComponentFixture<JTTestComponent>;
-        let service: JTTestService;
+    describe('ActivityGroup Management Component', () => {
+        let comp: ActivityGroupComponent;
+        let fixture: ComponentFixture<ActivityGroupComponent>;
+        let service: ActivityGroupService;
 
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [JtTestingTestModule],
-                declarations: [JTTestComponent],
+                declarations: [ActivityGroupComponent],
                 providers: [
                     {
                         provide: ActivatedRoute,
@@ -37,12 +37,12 @@ describe('Component Tests', () => {
                     }
                 ]
             })
-                .overrideTemplate(JTTestComponent, '')
+                .overrideTemplate(ActivityGroupComponent, '')
                 .compileComponents();
 
-            fixture = TestBed.createComponent(JTTestComponent);
+            fixture = TestBed.createComponent(ActivityGroupComponent);
             comp = fixture.componentInstance;
-            service = fixture.debugElement.injector.get(JTTestService);
+            service = fixture.debugElement.injector.get(ActivityGroupService);
         });
 
         it('Should call load all on init', () => {
@@ -51,7 +51,7 @@ describe('Component Tests', () => {
             spyOn(service, 'query').and.returnValue(
                 of(
                     new HttpResponse({
-                        body: [new JTTest(123)],
+                        body: [new ActivityGroup(123)],
                         headers
                     })
                 )
@@ -71,7 +71,7 @@ describe('Component Tests', () => {
             spyOn(service, 'query').and.returnValue(
                 of(
                     new HttpResponse({
-                        body: [new JTTest(123)],
+                        body: [new ActivityGroup(123)],
                         headers
                     })
                 )
@@ -101,7 +101,7 @@ describe('Component Tests', () => {
             spyOn(service, 'query').and.returnValue(
                 of(
                     new HttpResponse({
-                        body: [new JTTest(123)],
+                        body: [new ActivityGroup(123)],
                         headers
                     })
                 )

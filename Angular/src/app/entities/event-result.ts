@@ -1,4 +1,4 @@
-import {ITestResult, TestResult} from './test-result';
+import {IActivityGroupResult, ActivityGroupResult} from './activity-group-result';
 import {IEvent} from './event';
 import {IPersonFull} from './person-full';
 
@@ -12,7 +12,7 @@ export interface IEventResult {
   eventId?: number;
   personId?: number;
 
-  testResults?: Array<ITestResult>;
+  testResults?: Array<IActivityGroupResult>;
 }
 
 export class EventResult implements IEventResult {
@@ -25,14 +25,14 @@ export class EventResult implements IEventResult {
   eventId: number;
   personId: number;
 
-  testResults: Array<ITestResult> = new Array<ITestResult>();
+  testResults: Array<IActivityGroupResult> = new Array<IActivityGroupResult>();
 
   constructor(event: IEvent, person: IPersonFull) {
     this.eventId = event.id;
     this.personId = person.id;
 
     for (const test of event.tests) {
-      this.testResults.push(new TestResult(test));
+      this.testResults.push(new ActivityGroupResult(test));
     }
   }
 }

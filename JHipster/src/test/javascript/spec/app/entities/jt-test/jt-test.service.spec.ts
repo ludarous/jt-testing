@@ -1,14 +1,14 @@
 /* tslint:disable max-line-length */
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { JTTestService } from 'app/entities/jt-test/jt-test.service';
-import { JTTest } from 'app/shared/model/jt-test.model';
+import { ActivityGroupService } from 'app/entities/jt-test/jt-test.service';
+import { ActivityGroup } from 'app/shared/model/jt-test.model';
 import { SERVER_API_URL } from 'app/app.constants';
 
 describe('Service Tests', () => {
-    describe('JTTest Service', () => {
+    describe('ActivityGroup Service', () => {
         let injector: TestBed;
-        let service: JTTestService;
+        let service: ActivityGroupService;
         let httpMock: HttpTestingController;
 
         beforeEach(() => {
@@ -16,7 +16,7 @@ describe('Service Tests', () => {
                 imports: [HttpClientTestingModule]
             });
             injector = getTestBed();
-            service = injector.get(JTTestService);
+            service = injector.get(ActivityGroupService);
             httpMock = injector.get(HttpTestingController);
         });
 
@@ -30,8 +30,8 @@ describe('Service Tests', () => {
                 expect(req.request.url).toEqual(resourceUrl + '/' + 123);
             });
 
-            it('should create a JTTest', () => {
-                service.create(new JTTest(null)).subscribe(received => {
+            it('should create a ActivityGroup', () => {
+                service.create(new ActivityGroup(null)).subscribe(received => {
                     expect(received.body.id).toEqual(null);
                 });
 
@@ -39,8 +39,8 @@ describe('Service Tests', () => {
                 req.flush({ id: null });
             });
 
-            it('should update a JTTest', () => {
-                service.update(new JTTest(123)).subscribe(received => {
+            it('should update a ActivityGroup', () => {
+                service.update(new ActivityGroup(123)).subscribe(received => {
                     expect(received.body.id).toEqual(123);
                 });
 
@@ -48,7 +48,7 @@ describe('Service Tests', () => {
                 req.flush({ id: 123 });
             });
 
-            it('should return a JTTest', () => {
+            it('should return a ActivityGroup', () => {
                 service.find(123).subscribe(received => {
                     expect(received.body.id).toEqual(123);
                 });
@@ -57,16 +57,16 @@ describe('Service Tests', () => {
                 req.flush({ id: 123 });
             });
 
-            it('should return a list of JTTest', () => {
+            it('should return a list of ActivityGroup', () => {
                 service.query(null).subscribe(received => {
                     expect(received.body[0].id).toEqual(123);
                 });
 
                 const req = httpMock.expectOne({ method: 'GET' });
-                req.flush([new JTTest(123)]);
+                req.flush([new ActivityGroup(123)]);
             });
 
-            it('should delete a JTTest', () => {
+            it('should delete a ActivityGroup', () => {
                 service.delete(123).subscribe(received => {
                     expect(received.url).toContain('/' + 123);
                 });

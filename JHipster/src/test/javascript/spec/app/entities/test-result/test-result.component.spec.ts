@@ -5,20 +5,20 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Data } from '@angular/router';
 
 import { JtTestingTestModule } from '../../../test.module';
-import { TestResultComponent } from 'app/entities/test-result/test-result.component';
-import { TestResultService } from 'app/entities/test-result/test-result.service';
-import { TestResult } from 'app/shared/model/test-result.model';
+import { ActivityGroupResultComponent } from 'app/entities/test-result/test-result.component';
+import { ActivityGroupResultService } from 'app/entities/test-result/test-result.service';
+import { ActivityGroupResult } from 'app/shared/model/test-result.model';
 
 describe('Component Tests', () => {
-    describe('TestResult Management Component', () => {
-        let comp: TestResultComponent;
-        let fixture: ComponentFixture<TestResultComponent>;
-        let service: TestResultService;
+    describe('ActivityGroupResult Management Component', () => {
+        let comp: ActivityGroupResultComponent;
+        let fixture: ComponentFixture<ActivityGroupResultComponent>;
+        let service: ActivityGroupResultService;
 
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [JtTestingTestModule],
-                declarations: [TestResultComponent],
+                declarations: [ActivityGroupResultComponent],
                 providers: [
                     {
                         provide: ActivatedRoute,
@@ -37,12 +37,12 @@ describe('Component Tests', () => {
                     }
                 ]
             })
-                .overrideTemplate(TestResultComponent, '')
+                .overrideTemplate(ActivityGroupResultComponent, '')
                 .compileComponents();
 
-            fixture = TestBed.createComponent(TestResultComponent);
+            fixture = TestBed.createComponent(ActivityGroupResultComponent);
             comp = fixture.componentInstance;
-            service = fixture.debugElement.injector.get(TestResultService);
+            service = fixture.debugElement.injector.get(ActivityGroupResultService);
         });
 
         it('Should call load all on init', () => {
@@ -51,7 +51,7 @@ describe('Component Tests', () => {
             spyOn(service, 'query').and.returnValue(
                 of(
                     new HttpResponse({
-                        body: [new TestResult(123)],
+                        body: [new ActivityGroupResult(123)],
                         headers
                     })
                 )
@@ -62,7 +62,7 @@ describe('Component Tests', () => {
 
             // THEN
             expect(service.query).toHaveBeenCalled();
-            expect(comp.testResults[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+            expect(comp.activityGroupResults[0]).toEqual(jasmine.objectContaining({ id: 123 }));
         });
 
         it('should load a page', () => {
@@ -71,7 +71,7 @@ describe('Component Tests', () => {
             spyOn(service, 'query').and.returnValue(
                 of(
                     new HttpResponse({
-                        body: [new TestResult(123)],
+                        body: [new ActivityGroupResult(123)],
                         headers
                     })
                 )
@@ -82,7 +82,7 @@ describe('Component Tests', () => {
 
             // THEN
             expect(service.query).toHaveBeenCalled();
-            expect(comp.testResults[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+            expect(comp.activityGroupResults[0]).toEqual(jasmine.objectContaining({ id: 123 }));
         });
 
         it('should not load a page is the page is the same as the previous page', () => {
@@ -101,7 +101,7 @@ describe('Component Tests', () => {
             spyOn(service, 'query').and.returnValue(
                 of(
                     new HttpResponse({
-                        body: [new TestResult(123)],
+                        body: [new ActivityGroupResult(123)],
                         headers
                     })
                 )
@@ -114,7 +114,7 @@ describe('Component Tests', () => {
             // THEN
             expect(comp.page).toEqual(0);
             expect(service.query).toHaveBeenCalledTimes(2);
-            expect(comp.testResults[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+            expect(comp.activityGroupResults[0]).toEqual(jasmine.objectContaining({ id: 123 }));
         });
         it('should calculate the sort attribute for an id', () => {
             // WHEN

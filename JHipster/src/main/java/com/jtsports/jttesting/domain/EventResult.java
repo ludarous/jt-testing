@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import com.jtsports.jttesting.domain.util.RandomNumbers;
+import org.bouncycastle.util.test.TestResult;
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -41,8 +42,8 @@ public class EventResult implements Serializable {
     @JsonIgnoreProperties("eventResults")
     private Event event;
 
-    @OneToMany(mappedBy = "eventResult", cascade = CascadeType.ALL)
-    private Set<TestResult> testResults = new HashSet<>();
+    @OneToMany(mappedBy = "eventResult")
+    private Set<ActivityGroupResult> activityGroupResults = new HashSet<>();
 
     @ManyToOne(optional = false)
     @NotNull
@@ -110,29 +111,29 @@ public class EventResult implements Serializable {
         this.event = event;
     }
 
-    public Set<TestResult> getTestResults() {
-        return testResults;
+    public Set<ActivityGroupResult> getActivityGroupResults() {
+        return activityGroupResults;
     }
 
-    public EventResult testResults(Set<TestResult> testResults) {
-        this.testResults = testResults;
+    public EventResult activityGroupResults(Set<ActivityGroupResult> activityGroupResults) {
+        this.activityGroupResults = activityGroupResults;
         return this;
     }
 
-    public EventResult addTestResults(TestResult testResult) {
-        this.testResults.add(testResult);
-        testResult.setEventResult(this);
+    public EventResult addActivityGroupResults(ActivityGroupResult activityGroupResult) {
+        this.activityGroupResults.add(activityGroupResult);
+        activityGroupResult.setEventResult(this);
         return this;
     }
 
-    public EventResult removeTestResults(TestResult testResult) {
-        this.testResults.remove(testResult);
-        testResult.setEventResult(null);
+    public EventResult removeActivityGroupResults(ActivityGroupResult activityGroupResult) {
+        this.activityGroupResults.remove(activityGroupResult);
+        activityGroupResult.setEventResult(null);
         return this;
     }
 
-    public void setTestResults(Set<TestResult> testResults) {
-        this.testResults = testResults;
+    public void setActivityGroupResults(Set<ActivityGroupResult> activityGroupResults) {
+        this.activityGroupResults = activityGroupResults;
     }
 
     public Person getPerson() {
@@ -186,11 +187,11 @@ public class EventResult implements Serializable {
         eventResult.setActualHeightInCm(RandomNumbers.getHeight());
         eventResult.setActualWeightInKg(RandomNumbers.getWeight());
 
-        HashSet<TestResult> testResults = new HashSet<>();
-        for(JTTest test : event.getTests()) {
-            testResults.add(TestResult.createTestResult(test, eventResult, event, person));
+        HashSet<ActivityGroupResult> activityGroupResults = new HashSet<>();
+        for(ActivityGroup activityGroup : event.getActivityGroups()) {
+            activityGroupResults.add(ActivityGroupResult.createActivityGroupResult(activityGroup, eventResult, event, person));
         }
-        eventResult.setTestResults(testResults);
+        eventResult.setActivityGroupResults(activityGroupResults);
         return  eventResult;
     }
 }

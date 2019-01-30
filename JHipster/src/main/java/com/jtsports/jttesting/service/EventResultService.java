@@ -1,12 +1,7 @@
 package com.jtsports.jttesting.service;
 
-import com.jtsports.jttesting.domain.Event;
-import com.jtsports.jttesting.domain.EventResult;
-import com.jtsports.jttesting.domain.JTTest;
-import com.jtsports.jttesting.domain.TestResult;
-import com.jtsports.jttesting.service.dto.EventResultDTO;
 
-import com.jtsports.jttesting.service.dto.TestResultDTO;
+import com.jtsports.jttesting.service.dto.EventResultDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

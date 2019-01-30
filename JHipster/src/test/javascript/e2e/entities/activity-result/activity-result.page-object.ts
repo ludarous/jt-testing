@@ -22,7 +22,7 @@ export class ActivityResultUpdatePage {
     noteInput = element(by.id('field_note'));
     eventDateInput = element(by.id('field_eventDate'));
     personBirthDateInput = element(by.id('field_personBirthDate'));
-    testResultSelect = element(by.id('field_testResult'));
+    activityGroupResultSelect = element(by.id('field_activityGroupResult'));
     activitySelect = element(by.id('field_activity'));
     testSelect = element(by.id('field_test'));
     eventSelect = element(by.id('field_event'));
@@ -72,23 +72,23 @@ export class ActivityResultUpdatePage {
         return this.personBirthDateInput.getAttribute('value');
     }
 
-    testResultSelectLastOption(): promise.Promise<void> {
-        return this.testResultSelect
+    activityGroupResultSelectLastOption(): promise.Promise<void> {
+        return this.activityGroupResultSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    testResultSelectOption(option): promise.Promise<void> {
-        return this.testResultSelect.sendKeys(option);
+    activityGroupResultSelectOption(option): promise.Promise<void> {
+        return this.activityGroupResultSelect.sendKeys(option);
     }
 
-    getTestResultSelect(): ElementFinder {
-        return this.testResultSelect;
+    getActivityGroupResultSelect(): ElementFinder {
+        return this.activityGroupResultSelect;
     }
 
-    getTestResultSelectedOption() {
-        return this.testResultSelect.element(by.css('option:checked')).getText();
+    getActivityGroupResultSelectedOption() {
+        return this.activityGroupResultSelect.element(by.css('option:checked')).getText();
     }
 
     activitySelectLastOption(): promise.Promise<void> {

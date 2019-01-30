@@ -36,7 +36,7 @@ public class EventResultServiceImpl implements EventResultService {
 
     private final PersonRepository personRepository;
 
-    private final TestResultRepository testResultRepository;
+    private final ActivityGroupResultRepository activityGroupResultRepository;
 
     private final ActivityResultRepository activityResultRepository;
 
@@ -44,11 +44,11 @@ public class EventResultServiceImpl implements EventResultService {
 
     private final EventResultSearchRepository eventResultSearchRepository;
 
-    public EventResultServiceImpl(EventResultRepository eventResultRepository, EventRepository eventRepository, PersonRepository personRepository, TestResultRepository testResultRepository, ActivityResultRepository activityResultRepository, EventResultMapper eventResultMapper, EventResultSearchRepository eventResultSearchRepository) {
+    public EventResultServiceImpl(EventResultRepository eventResultRepository, EventRepository eventRepository, PersonRepository personRepository, ActivityGroupResultRepository activityGroupResultRepository, ActivityResultRepository activityResultRepository, EventResultMapper eventResultMapper, EventResultSearchRepository eventResultSearchRepository) {
         this.eventResultRepository = eventResultRepository;
         this.eventRepository = eventRepository;
         this.personRepository = personRepository;
-        this.testResultRepository = testResultRepository;
+        this.activityGroupResultRepository = activityGroupResultRepository;
         this.activityResultRepository = activityResultRepository;
         this.eventResultMapper = eventResultMapper;
         this.eventResultSearchRepository = eventResultSearchRepository;
@@ -66,18 +66,18 @@ public class EventResultServiceImpl implements EventResultService {
         EventResult eventResult = eventResultMapper.toEntity(eventResultDTO);
         eventResult = eventResultRepository.save(eventResult);
 
-        for(TestResult testResult : eventResult.getTestResults()) {
-            testResult.setEventResult(eventResult);
+        for(ActivityGroupResult activityGroupResult : eventResult.getActivityGroupResults()) {
+            activityGroupResult.setEventResult(eventResult);
 
-            for(ActivityResult activityResult : testResult.getActivitiesResults()) {
-                activityResult.setTestResult(testResult);
+            for(ActivityResult activityResult : activityGroupResult.getActivitiesResults()) {
+                activityResult.setActivityGroupResult(activityGroupResult);
                 activityResult.setPerson(eventResult.getPerson());
                 activityResult.setEvent(eventResult.getEvent());
-                activityResult.setTest(testResult.getTest());
+                activityResult.setActivityGroup(activityGroupResult.getActivityGroup());
                 activityResultRepository.save(activityResult);
             }
 
-            testResultRepository.save(testResult);
+            activityGroupResultRepository.save(activityGroupResult);
         }
 
         EventResultDTO result = eventResultMapper.toDto(eventResult);
