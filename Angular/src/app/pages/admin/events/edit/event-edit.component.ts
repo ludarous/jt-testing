@@ -44,7 +44,7 @@ export class EventEditComponent implements OnInit {
 
   set eventDateClassic(value: Date) {
     this._eventDateClassic = value;
-    if (this.eventForm) {
+    if (this.eventForm && value) {
       this.eventForm.controls['date'].setValue(value.toISOString());
     }
   }
@@ -117,8 +117,8 @@ export class EventEditComponent implements OnInit {
       maxAge: new FormControl(event.maxAge)
     });
 
-    if (tests && event.tests) {
-      this.selectedTests = tests.filter((t) => event.tests.some((st) => st.id === t.id));
+    if (tests && event.activityGroups) {
+      this.selectedTests = tests.filter((t) => event.activityGroups.some((st) => st.id === t.id));
       this.suggestedTests = tests.filter((t) => !this.selectedTests.some((st) => st.id === t.id));
     } else {
       this.suggestedTests = tests;
@@ -156,7 +156,7 @@ export class EventEditComponent implements OnInit {
       }
 
       if (this.selectedTests) {
-        eventToSave.tests = this.selectedTests;
+        eventToSave.activityGroups = this.selectedTests;
       }
 
       if (this.selectedPersons) {

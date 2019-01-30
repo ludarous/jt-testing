@@ -28,8 +28,8 @@ export class UserEventResultComponent implements OnInit {
     });
   }
 
-  getTestForTestResult(testResult: IActivityGroupResult): IActivityGroup {
-    return this.event.tests.find((t) => t.id === testResult.testId);
+  getActivityGroupForActivityGroupResult(activityGroupResult: IActivityGroupResult): IActivityGroup {
+    return this.event.activityGroups.find((t) => t.id === activityGroupResult.id);
   }
 
 }

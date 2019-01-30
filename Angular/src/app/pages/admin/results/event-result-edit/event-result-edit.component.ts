@@ -66,9 +66,9 @@ export class EventResultEditComponent implements OnInit {
     console.log(this._person);
   }
 
-  getTestForTestResult(testResult: IActivityGroupResult): IActivityGroup {
-    if (this.testEvent.tests) {
-      return this.testEvent.tests.find((t) => t.id === testResult.testId);
+  getActivityGroupForActivityGroupResult(activityGroupResult: IActivityGroupResult): IActivityGroup {
+    if (this.testEvent.activityGroups) {
+      return this.testEvent.activityGroups.find((t) => t.id === activityGroupResult.activityGroupId);
     }
   }
 

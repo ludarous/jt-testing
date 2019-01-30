@@ -45,6 +45,8 @@ public class Person implements Serializable {
     @OneToOne
     @JoinColumn(unique = true)
     private User user;
+
+
     @ManyToMany(mappedBy = "attachedPersons")
     @JsonIgnore
     private Set<Event> events = new HashSet<>();

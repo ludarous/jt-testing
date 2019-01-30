@@ -12,8 +12,8 @@ export interface IEvent {
 
   addressId?: number;
   addressStreet?: string;
-  
-  tests?: Array<IActivityGroup>;
+
+  activityGroups?: Array<IActivityGroup>;
   attachedPersons?: Array<IPersonFull>;
   eventResults?: Array<IEventResult>;
   
@@ -29,7 +29,7 @@ export class Event implements IEvent {
   addressId: number;
   addressStreet: string;
 
-  tests: Array<IActivityGroup>;
+  activityGroups: Array<IActivityGroup>;
   attachedPersons: Array<IPersonFull>;
   eventResults: Array<IEventResult>;
 

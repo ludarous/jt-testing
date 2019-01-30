@@ -41,8 +41,8 @@ export class ActivityGroupsEditComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private activityService: ActivityService,
-              private ActivityGroupService: ActivityGroupService,
-              private ActivityGroupCategoryService: ActivityGroupCategoryService,
+              private activityGroupService: ActivityGroupService,
+              private activityGroupCategoryService: ActivityGroupCategoryService,
               private sportService: SportService,
               private messageService: MessageService,
               private router: Router) { }
@@ -57,7 +57,7 @@ export class ActivityGroupsEditComponent implements OnInit {
         page: 0,
         size: 1000,
       });
-      const getCategories$ = this.ActivityGroupCategoryService.query({
+      const getCategories$ = this.activityGroupCategoryService.query({
         page: 0,
         size: 1000,
       });
@@ -112,15 +112,15 @@ export class ActivityGroupsEditComponent implements OnInit {
 
   }
 
-  saveTest() {
+  saveActivityGroup() {
     if (this.testForm.valid) {
 
       const testToSave = <IActivityGroup>this.testForm.value;
       let saveTest$;
       if (testToSave.id) {
-        saveTest$ = this.ActivityGroupService.update(testToSave);
+        saveTest$ = this.activityGroupService.update(testToSave);
       } else {
-        saveTest$ = this.ActivityGroupService.create(testToSave);
+        saveTest$ = this.activityGroupService.create(testToSave);
       }
 
       testToSave.categories = this.selectedCategories;
@@ -132,7 +132,7 @@ export class ActivityGroupsEditComponent implements OnInit {
         this.test = testResponse.body;
         this.setTestForm(this.test, this.testActivities, this.testCategories, this.sports);
           this.messageService.add({severity: 'success', summary: 'Test uložen'});
-          this.router.navigate(['/admin/tests/list']);
+          this.router.navigate(['/admin/activity-groups/list']);
       },
         (errorResponse: HttpErrorResponse) => {
           this.messageService.add({severity: 'error', summary: 'Test nebyl uložen', detail: errorResponse.error.detail});
@@ -142,7 +142,7 @@ export class ActivityGroupsEditComponent implements OnInit {
 
   getTest(testId: number): Observable<IActivityGroup> {
     if (testId) {
-      return this.ActivityGroupService.find(testId).pipe(map((activityResponse: HttpResponse<IActivityGroup>) => {
+      return this.activityGroupService.find(testId).pipe(map((activityResponse: HttpResponse<IActivityGroup>) => {
         return activityResponse.body;
       }));
 
@@ -156,7 +156,7 @@ export class ActivityGroupsEditComponent implements OnInit {
     const testName = this.testForm.controls['name'].value;
     this.testForm.controls['name'].setValue(testName + ' kopie');
 
-    this.saveTest();
+    this.saveActivityGroup();
   }
 
   search(event) {

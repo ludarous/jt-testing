@@ -8,33 +8,33 @@ import {IActivityResult} from '../../../../entities/activity-result';
 import {IActivity} from '../../../../entities/activity';
 
 @Component({
-  selector: 'app-test-result-edit',
-  templateUrl: './test-result-edit.component.html',
-  styleUrls: ['./test-result-edit.component.scss'],
+  selector: 'app-activity-group-result-edit',
+  templateUrl: './activity-group-result-edit.component.html',
+  styleUrls: ['./activity-group-result-edit.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class TestResultEditComponent implements OnInit {
+export class ActivityGroupResultEditComponent implements OnInit {
 
   constructor() { }
 
-  private _test: IActivityGroup;
+  private _activityGroup: IActivityGroup;
   @Input()
-  get test(): IActivityGroup {
-    return this._test;
+  get activityGroup(): IActivityGroup {
+    return this._activityGroup;
   }
 
-  set test(value: IActivityGroup) {
-    this._test = value;
+  set activityGroup(value: IActivityGroup) {
+    this._activityGroup = value;
   }
 
-  private _testsResult: IActivityGroupResult;
+  private _activityGroupResult: IActivityGroupResult;
   @Input()
-  get testsResult(): IActivityGroupResult {
-    return this._testsResult;
+  get activityGroupResult(): IActivityGroupResult {
+    return this._activityGroupResult;
   }
 
-  set testsResult(value: IActivityGroupResult) {
-    this._testsResult = value;
+  set activityGroupResult(value: IActivityGroupResult) {
+    this._activityGroupResult = value;
   }
 
   private _testEvent: IEvent;
@@ -74,7 +74,7 @@ export class TestResultEditComponent implements OnInit {
   }
 
   getActivityForActivityResult(activityResult: IActivityResult): IActivity {
-    return this.test.activities.find(a => a.id === activityResult.activityId);
+    return this.activityGroup.activities.find(a => a.id === activityResult.activityId);
   }
 
 }

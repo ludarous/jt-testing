@@ -1,15 +1,15 @@
 <div class="component-container-center">
-  <form class="form" *ngIf="testForm" [formGroup]="testForm" (submit)="saveTest()">
+  <form class="form" *ngIf="testForm" [formGroup]="testForm" (submit)="saveActivityGroup()">
     <div class="ui-inputgroup">
       <input type="text" pInputText placeholder="Název" formControlName="name" required>
       <p-message severity="error" text="Název testu je povinný"
                  *ngIf="!testForm.controls['name'].valid && testForm.controls['name'].touched"></p-message>
     </div>
     <div class="ui-inputgroup">
-      <input type="text" pInputText placeholder="Minimální věk" formControlName="minAge" required>
+      <input type="text" pInputText placeholder="Minimální věk" formControlName="minAge">
     </div>
     <div class="ui-inputgroup">
-      <input type="text" pInputText placeholder="Maximální věk" formControlName="maxAge" required>
+      <input type="text" pInputText placeholder="Maximální věk" formControlName="maxAge">
     </div>
     <div class="ui-inputgroup">
       <p-autoComplete
@@ -43,19 +43,10 @@
         </ng-template>
       </p-pickList>
     </div>
-    <!--<mat-form-field>-->
-      <!--<mat-select placeholder="Kategorie" [(ngModel)]="selectedCategories" [ngModelOptions]="{standalone: true}"-->
-                  <!--multiple>-->
-        <!--<mat-option *ngFor="let category of testCategories" [value]="category">{{category.name}}</mat-option>-->
-      <!--</mat-select>-->
-    <!--</mat-form-field>-->
-    <!--<mat-form-field>-->
-      <!--<mat-select placeholder="Sporty" [(ngModel)]="selectedSports" [ngModelOptions]="{standalone: true}" multiple>-->
-        <!--<mat-option *ngFor="let sport of sports" [value]="sport">{{sport.name}}</mat-option>-->
-      <!--</mat-select>-->
-    <!--</mat-form-field>-->
-    <button mat-raised-button>{{'Uložit' | translate}}</button>
-    <br>
-    <button type="button" mat-raised-button (click)="duplicateTest()">{{'Vytvořit kopii' | translate}}</button>
+    <div class="form-button-container">
+      <button mat-raised-button>{{'Uložit' | translate}}</button>
+      <br>
+      <button type="button" mat-raised-button (click)="duplicateTest()">{{'Vytvořit kopii' | translate}}</button>
+    </div>
   </form>
 </div>

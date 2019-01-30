@@ -17,10 +17,10 @@ import * as $ from 'jquery';
 
 @Component({
   selector: 'app-user-test-result',
-  templateUrl: './user-test-result.component.html',
-  styleUrls: ['./user-test-result.component.scss']
+  templateUrl: './user-activity-group-result.component.html',
+  styleUrls: ['./user-activity-group-result.component.scss']
 })
-export class UserTestResultComponent implements OnInit {
+export class UserActivityGroupResultComponent implements OnInit {
 
   constructor(private categoryService: ActivityCategoryService,
               private ActivityGroupService: ActivityGroupService,
@@ -31,7 +31,7 @@ export class UserTestResultComponent implements OnInit {
   test: IActivityGroup;
 
   @Input()
-  testResult: IActivityGroupResult;
+  activityGroupResult: IActivityGroupResult;
 
   @Input()
   event: IEvent;

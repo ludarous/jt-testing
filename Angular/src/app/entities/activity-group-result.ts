@@ -7,8 +7,8 @@ export interface IActivityGroupResult {
 
   eventResultId?: number;
   
-  testId?: number;
-  testName?: string;
+  activityGroupId?: number;
+  activityGroupName?: string;
 
   activitiesResults?: Array<IActivityResult>;
 }
@@ -19,14 +19,14 @@ export class ActivityGroupResult implements IActivityGroupResult {
 
   eventResultId: number;
 
-  testId: number;
-  testName: string;
+  activityGroupId: number;
+  activityGroupName: string;
 
   activitiesResults: Array<IActivityResult> = new Array<IActivityResult>();
 
-  constructor(test: IActivityGroup) {
-    this.testId = test.id;
-    for (const activity of test.activities) {
+  constructor(activityGroup: IActivityGroup) {
+    this.activityGroupId = activityGroup.id;
+    for (const activity of activityGroup.activities) {
       this.activitiesResults.push(new ActivityResult(activity));
     }
   }

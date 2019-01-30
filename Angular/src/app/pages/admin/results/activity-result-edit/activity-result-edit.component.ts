@@ -37,14 +37,14 @@ export class ActivityResultEditComponent implements OnInit {
     }
   }
 
-  private _testResult: IActivityGroupResult;
+  private _activityGroupResult: IActivityGroupResult;
   @Input()
-  get testResult(): IActivityGroupResult {
-    return this._testResult;
+  get activityGroupResult(): IActivityGroupResult {
+    return this._activityGroupResult;
   }
 
-  set testResult(value: IActivityGroupResult) {
-    this._testResult = value;
+  set activityGroupResult(value: IActivityGroupResult) {
+    this._activityGroupResult = value;
   }
 
   private _testEvent: IEvent;
@@ -72,7 +72,7 @@ export class ActivityResultEditComponent implements OnInit {
       note: new FormControl(activityResult.note),
       primaryResultValue: new FormControl(activityResult.primaryResultValue),
       secondaryResultValue: new FormControl(activityResult.secondaryResultValue),
-      testResultId: new FormControl(activityResult.testResultId),
+      activityGroupResultId: new FormControl(activityResult.activityGroupResultId),
       activityId: new FormControl(activityResult.activityId),
       eventDate: new FormControl(this.testEvent.date)
     });

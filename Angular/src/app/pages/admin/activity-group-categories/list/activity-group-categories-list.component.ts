@@ -37,7 +37,7 @@ export class ActivityGroupCategoriesListComponent implements OnInit {
   }
 
   rowSelect(category: IActivityGroupCategory) {
-    this.router.navigate(['/admin/test-categories/edit', category.id]);
+    this.router.navigate(['/admin/activity-group-categories/edit', category.id]);
   }
 
   delete(event, testCategory: IActivityGroupCategory) {

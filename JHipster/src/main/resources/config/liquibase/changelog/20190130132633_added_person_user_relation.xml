@@ -1,0 +1,37 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="RLU (generated)" id="1548854801419-1">
+        <addColumn tableName="person">
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1548854801419-2">
+        <addColumn tableName="person">
+            <column name="user_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1548854801419-3">
+        <addColumn tableName="person">
+            <column name="virtual" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1548854801419-4">
+        <addUniqueConstraint columnNames="user_id" constraintName="UC_PERSONUSER_ID_COL" tableName="person"/>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1548854801419-5">
+        <createIndex indexName="filter_index" tableName="activity_result">
+            <column name="jhi_date"/>
+            <column name="activity_id"/>
+            <column name="activity_group_id"/>
+            <column name="event_id"/>
+            <column name="person_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1548854801419-6">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="person" constraintName="FKe9y2rjb98wsg2nnk3eyrvc2ss" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user"/>
+    </changeSet>
+</databaseChangeLog>

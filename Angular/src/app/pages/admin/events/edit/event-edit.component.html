@@ -6,10 +6,10 @@
                  *ngIf="!eventForm.controls['name'].valid && eventForm.controls['name'].touched"></p-message>
     </div>
     <div class="ui-inputgroup">
-      <input type="text" pInputText placeholder="Minimální věk" formControlName="minAge" required>
+      <input type="text" pInputText placeholder="Minimální věk" formControlName="minAge">
     </div>
     <div class="ui-inputgroup">
-      <input type="text" pInputText placeholder="Maximální věk" formControlName="maxAge" required>
+      <input type="text" pInputText placeholder="Maximální věk" formControlName="maxAge">
     </div>
     <p-calendar [(ngModel)]="eventDateClassic"
                 [ngModelOptions]="{standalone: true}"

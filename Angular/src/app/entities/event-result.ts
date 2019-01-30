@@ -12,7 +12,7 @@ export interface IEventResult {
   eventId?: number;
   personId?: number;
 
-  testResults?: Array<IActivityGroupResult>;
+  activityGroupResults?: Array<IActivityGroupResult>;
 }
 
 export class EventResult implements IEventResult {
@@ -25,14 +25,14 @@ export class EventResult implements IEventResult {
   eventId: number;
   personId: number;
 
-  testResults: Array<IActivityGroupResult> = new Array<IActivityGroupResult>();
+  activityGroupResults: Array<IActivityGroupResult> = new Array<IActivityGroupResult>();
 
   constructor(event: IEvent, person: IPersonFull) {
     this.eventId = event.id;
     this.personId = person.id;
 
-    for (const test of event.tests) {
-      this.testResults.push(new ActivityGroupResult(test));
+    for (const test of event.activityGroups) {
+      this.activityGroupResults.push(new ActivityGroupResult(test));
     }
   }
 }

@@ -35,7 +35,7 @@ export class ActivityGroupsListComponent implements OnInit {
   }
 
   rowSelect(test: IActivityGroup) {
-    this.router.navigate(['/admin/tests/edit', test.id]);
+    this.router.navigate(['/admin/activity-groups/edit', test.id]);
   }
 
   delete(event, test: IActivityGroup) {

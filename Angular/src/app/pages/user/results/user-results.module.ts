@@ -7,7 +7,7 @@ import {MaterialComponentsModule} from '../../../shared/material-components.modu
 import {EventResultService} from '../../../services/event-result.service';
 import {EventService} from '../../../services/event.service';
 import { UserEventResultComponent } from './user-event-result/user-event-result.component';
-import { UserTestResultComponent } from './user-test-result/user-test-result.component';
+import { UserActivityGroupResultComponent } from './user-activity-group-result/user-activity-group-result.component';
 import { UserActivityResultComponent } from './user-activity-result/user-activity-result.component';
 import {ActivityService} from '../../../services/activity.service';
 import {EnumTranslationsModule} from '../../../shared/pipes/enum-translator/enum-translations.module';
@@ -27,7 +27,7 @@ import {StatsService} from '../../../services/stats.service';
   declarations: [
     UserResultsComponent,
     UserEventResultComponent,
-    UserTestResultComponent,
+    UserActivityGroupResultComponent,
     UserActivityResultComponent,
   ],
   imports: [
@@ -53,7 +53,7 @@ import {StatsService} from '../../../services/stats.service';
   exports: [
     UserResultsComponent,
     UserEventResultComponent,
-    UserTestResultComponent,
+    UserActivityGroupResultComponent,
     UserActivityResultComponent
   ]
 })

@@ -10,7 +10,7 @@ export interface IActivityResult {
   secondaryResultValue?: number;
   note?: string;
   
-  testResultId?: number;
+  activityGroupResultId?: number;
   activityId?: number;
   activityName?: number;
 
@@ -24,7 +24,7 @@ export class ActivityResult implements IActivityResult {
   secondaryResultValue: number;
   note: string;
 
-  testResultId: number;
+  activityGroupResultId: number;
   activityId: number;
   activityName: number;
 

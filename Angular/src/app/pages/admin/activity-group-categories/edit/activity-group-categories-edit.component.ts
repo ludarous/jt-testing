@@ -66,7 +66,7 @@ export class ActivityGroupCategoriesEditComponent implements OnInit {
         (categoryResponse: HttpResponse<IActivityGroupCategory>) => {
           this.testCategory = categoryResponse.body;
           this.messageService.add({severity: 'success', summary: 'Kategorie uložena'});
-          this.router.navigate(['/admin/test-categories/list']);
+          this.router.navigate(['/admin/activity-group-categories/list']);
         },
         (errorResponse: HttpErrorResponse) => {
           this.messageService.add({severity: 'error', summary: 'Kategorie nebyla uložena', detail: errorResponse.error.detail});
