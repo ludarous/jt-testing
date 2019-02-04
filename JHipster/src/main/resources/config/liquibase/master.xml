@@ -6,11 +6,11 @@
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081349_added_entity_Event.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180919081350_added_entity_ActivityGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180919081350_added_entity_Workout.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081351_added_entity_Activity.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081353_added_entity_ActivityCategory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081354_added_entity_EventResult.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180919081355_added_entity_ActivityGroupResult.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180919081355_added_entity_WorkoutResult.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081356_added_entity_ActivityResult.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081357_added_entity_Person.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081358_added_entity_PersonalData.xml" relativeToChangelogFile="false"/>
@@ -18,22 +18,22 @@
     <include file="config/liquibase/changelog/20180919081400_added_entity_Sport.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190128064851_added_entity_Group.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190128080336_added_entity_PersonGroup.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180919081352_added_entity_ActivityGroupCategory.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180919081350_added_entity_ActivityGroup.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180919081355_added_entity_ActivityGroupResult.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180919081352_added_entity_WorkoutCategory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180919081350_added_entity_Workout.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180919081355_added_entity_WorkoutResult.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190130132633_added_person_user_relation.xml" relativeToChangelogFile="false" />
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180919081349_added_entity_constraints_Event.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180919081350_added_entity_constraints_ActivityGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180919081350_added_entity_constraints_Workout.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081351_added_entity_constraints_Activity.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081354_added_entity_constraints_EventResult.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180919081355_added_entity_constraints_ActivityGroupResult.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180919081355_added_entity_constraints_WorkoutResult.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081356_added_entity_constraints_ActivityResult.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081357_added_entity_constraints_Person.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190128064851_added_entity_constraints_Group.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190128080336_added_entity_constraints_PersonGroup.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180919081350_added_entity_constraints_ActivityGroup.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20180919081355_added_entity_constraints_ActivityGroupResult.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180919081350_added_entity_constraints_Workout.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180919081355_added_entity_constraints_WorkoutResult.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180919081353_added_entity_constraints_ActivityCategory.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

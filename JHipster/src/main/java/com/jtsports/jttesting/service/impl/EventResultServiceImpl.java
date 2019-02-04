@@ -36,7 +36,7 @@ public class EventResultServiceImpl implements EventResultService {
 
     private final PersonRepository personRepository;
 
-    private final ActivityGroupResultRepository activityGroupResultRepository;
+    private final WorkoutResultRepository workoutResultRepository;
 
     private final ActivityResultRepository activityResultRepository;
 
@@ -44,11 +44,11 @@ public class EventResultServiceImpl implements EventResultService {
 
     private final EventResultSearchRepository eventResultSearchRepository;
 
-    public EventResultServiceImpl(EventResultRepository eventResultRepository, EventRepository eventRepository, PersonRepository personRepository, ActivityGroupResultRepository activityGroupResultRepository, ActivityResultRepository activityResultRepository, EventResultMapper eventResultMapper, EventResultSearchRepository eventResultSearchRepository) {
+    public EventResultServiceImpl(EventResultRepository eventResultRepository, EventRepository eventRepository, PersonRepository personRepository, WorkoutResultRepository workoutResultRepository, ActivityResultRepository activityResultRepository, EventResultMapper eventResultMapper, EventResultSearchRepository eventResultSearchRepository) {
         this.eventResultRepository = eventResultRepository;
         this.eventRepository = eventRepository;
         this.personRepository = personRepository;
-        this.activityGroupResultRepository = activityGroupResultRepository;
+        this.workoutResultRepository = workoutResultRepository;
         this.activityResultRepository = activityResultRepository;
         this.eventResultMapper = eventResultMapper;
         this.eventResultSearchRepository = eventResultSearchRepository;
@@ -66,18 +66,18 @@ public class EventResultServiceImpl implements EventResultService {
         EventResult eventResult = eventResultMapper.toEntity(eventResultDTO);
         eventResult = eventResultRepository.save(eventResult);
 
-        for(ActivityGroupResult activityGroupResult : eventResult.getActivityGroupResults()) {
-            activityGroupResult.setEventResult(eventResult);
+        for(WorkoutResult workoutResult : eventResult.getWorkoutResults()) {
+            workoutResult.setEventResult(eventResult);
 
-            for(ActivityResult activityResult : activityGroupResult.getActivitiesResults()) {
-                activityResult.setActivityGroupResult(activityGroupResult);
+            for(ActivityResult activityResult : workoutResult.getActivitiesResults()) {
+                activityResult.setWorkoutResult(workoutResult);
                 activityResult.setPerson(eventResult.getPerson());
                 activityResult.setEvent(eventResult.getEvent());
-                activityResult.setActivityGroup(activityGroupResult.getActivityGroup());
+                activityResult.setWorkout(workoutResult.getWorkout());
                 activityResultRepository.save(activityResult);
             }
 
-            activityGroupResultRepository.save(activityGroupResult);
+            workoutResultRepository.save(workoutResult);
         }
 
         EventResultDTO result = eventResultMapper.toDto(eventResult);

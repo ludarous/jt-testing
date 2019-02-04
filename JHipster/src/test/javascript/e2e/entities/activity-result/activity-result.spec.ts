@@ -40,7 +40,7 @@ describe('ActivityResult e2e test', () => {
         expect(activityResultUpdatePage.getEventDateInput()).toContain('2001-01-01T02:30');
         activityResultUpdatePage.setPersonBirthDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM');
         expect(activityResultUpdatePage.getPersonBirthDateInput()).toContain('2001-01-01T02:30');
-        activityResultUpdatePage.activityGroupResultSelectLastOption();
+        activityResultUpdatePage.workoutResultSelectLastOption();
         activityResultUpdatePage.activitySelectLastOption();
         activityResultUpdatePage.testSelectLastOption();
         activityResultUpdatePage.eventSelectLastOption();

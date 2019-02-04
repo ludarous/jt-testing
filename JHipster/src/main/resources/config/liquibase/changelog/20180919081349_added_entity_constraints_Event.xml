@@ -15,15 +15,15 @@
                                  referencedTableName="address"/>
 
         <addForeignKeyConstraint baseColumnNames="events_id"
-                                 baseTableName="event_activity_groups"
-                                 constraintName="fk_event_activity_groups_events_id"
+                                 baseTableName="event_workouts"
+                                 constraintName="fk_event_workouts_events_id"
                                  referencedColumnNames="id"
                                  referencedTableName="event"/>
-        <addForeignKeyConstraint baseColumnNames="activity_groups_id"
-                                 baseTableName="event_activity_groups"
-                                 constraintName="fk_event_activity_groups_activity_groups_id"
+        <addForeignKeyConstraint baseColumnNames="workouts_id"
+                                 baseTableName="event_workouts"
+                                 constraintName="fk_event_workouts_workouts_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="activity_group"/>
+                                 referencedTableName="workout"/>
         
         <addForeignKeyConstraint baseColumnNames="events_id"
                                  baseTableName="event_attached_persons"

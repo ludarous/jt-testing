@@ -1,28 +1,28 @@
 
 {
     "jtTestingApp": {
-        "activityGroup" : {
+        "workout" : {
             "home": {
-                "title": "Activity Groups",
-                "createLabel": "Activity Group erstellen",
-                "createOrEditLabel": "Activity Group erstellen oder bearbeiten",
-                "search": "Suche nach Activity Group"
+                "title": "Workouts",
+                "createLabel": "Workout erstellen",
+                "createOrEditLabel": "Workout erstellen oder bearbeiten",
+                "search": "Suche nach Workout"
             },
-            "created": "Activity Group erstellt mit ID {{ param }}",
-            "updated": "Activity Group aktualisiert mit ID {{ param }}",
-            "deleted": "Activity Group gelöscht mit ID {{ param }}",
+            "created": "Workout erstellt mit ID {{ param }}",
+            "updated": "Workout aktualisiert mit ID {{ param }}",
+            "deleted": "Workout gelöscht mit ID {{ param }}",
             "delete": {
-                "question": "Soll Activity Group {{ id }} wirklich dauerhaft gelöscht werden?"
+                "question": "Soll Workout {{ id }} wirklich dauerhaft gelöscht werden?"
             },
             "detail": {
-                "title": "Activity Group"
+                "title": "Workout"
             },
             "name": "Name",
             "description": "Description",
             "minAge": "Min Age",
             "maxAge": "Max Age",
             "activities": "Activities",
-            "activityGroupCategories": "Activity Group Categories"
+            "workoutCategories": "Workout Categories"
         }
     }
 }

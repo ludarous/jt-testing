@@ -4,7 +4,7 @@ entity Event {
 }
 
 
-entity ActivityGroup {
+entity Workout {
 	name String required,
     description String
 }
@@ -38,7 +38,7 @@ entity EventResult {
     actualWeightInKg Float
 }
 
-entity ActivityGroupResult {
+entity WorkoutResult {
     note String
 }
 
@@ -80,23 +80,23 @@ relationship OneToOne {
 }
 
 relationship ManyToMany {
-	ActivityGroup{activities(name)} to Activity
+	Workout{activities(name)} to Activity
     Activity{categories(name)} to ActivityCategory
-    ActivityGroup{categories(name)} to TestCategory
-    ActivityGroup{sports(name)} to Sport
-    Event{tests(name)} to ActivityGroup
+    Workout{categories(name)} to TestCategory
+    Workout{sports(name)} to Sport
+    Event{tests(name)} to Workout
 }
 
 // defining multiple OneToMany relationships with comments
 relationship OneToMany {
-	ActivityGroupResult{activitiesResults} to ActivityResult
+	WorkoutResult{activitiesResults} to ActivityResult
     Event{eventResults} to EventResult
-    EventResult{activityGroupResults} to ActivityGroupResult
+    EventResult{workoutResults} to WorkoutResult
 }
 
 relationship ManyToOne {
 	EventResult{person required} to Person
-    ActivityGroupResult{test(name) required} to ActivityGroup
+    WorkoutResult{test(name) required} to Workout
     ActivityResult{activity(name) required} to Activity
     Event{address(street)} to Address
 }

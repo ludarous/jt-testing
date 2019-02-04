@@ -1,6 +1,6 @@
 import { element, by, promise, ElementFinder } from 'protractor';
 
-export class ActivityGroupResultComponentsPage {
+export class WorkoutResultComponentsPage {
     createButton = element(by.id('jh-create-entity'));
     title = element.all(by.css('jhi-activity-group-result div h2#page-heading span')).first();
 
@@ -13,13 +13,13 @@ export class ActivityGroupResultComponentsPage {
     }
 }
 
-export class ActivityGroupResultUpdatePage {
+export class WorkoutResultUpdatePage {
     pageTitle = element(by.id('jhi-activity-group-result-heading'));
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     noteInput = element(by.id('field_note'));
     eventResultSelect = element(by.id('field_eventResult'));
-    activityGroupSelect = element(by.id('field_activityGroup'));
+    workoutSelect = element(by.id('field_workout'));
 
     getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -52,23 +52,23 @@ export class ActivityGroupResultUpdatePage {
         return this.eventResultSelect.element(by.css('option:checked')).getText();
     }
 
-    activityGroupSelectLastOption(): promise.Promise<void> {
-        return this.activityGroupSelect
+    workoutSelectLastOption(): promise.Promise<void> {
+        return this.workoutSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    activityGroupSelectOption(option): promise.Promise<void> {
-        return this.activityGroupSelect.sendKeys(option);
+    workoutSelectOption(option): promise.Promise<void> {
+        return this.workoutSelect.sendKeys(option);
     }
 
-    getActivityGroupSelect(): ElementFinder {
-        return this.activityGroupSelect;
+    getWorkoutSelect(): ElementFinder {
+        return this.workoutSelect;
     }
 
-    getActivityGroupSelectedOption() {
-        return this.activityGroupSelect.element(by.css('option:checked')).getText();
+    getWorkoutSelectedOption() {
+        return this.workoutSelect.element(by.css('option:checked')).getText();
     }
 
     save(): promise.Promise<void> {

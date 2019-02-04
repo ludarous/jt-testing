@@ -35,9 +35,9 @@
             <th jhiSortBy="note"><span jhiTranslate="jtTestingApp.activityResult.note">Note</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="date"><span jhiTranslate="jtTestingApp.activityResult.date">Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="official"><span jhiTranslate="jtTestingApp.activityResult.official">Official</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="activityGroupResultId"><span jhiTranslate="jtTestingApp.activityResult.activityGroupResult">Activity Group Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="workoutResultId"><span jhiTranslate="jtTestingApp.activityResult.workoutResult">Workout Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="activityName"><span jhiTranslate="jtTestingApp.activityResult.activity">Activity</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="activityGroupName"><span jhiTranslate="jtTestingApp.activityResult.activityGroup">Activity Group</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="workoutName"><span jhiTranslate="jtTestingApp.activityResult.workout">Workout</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="eventName"><span jhiTranslate="jtTestingApp.activityResult.event">Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="personEmail"><span jhiTranslate="jtTestingApp.activityResult.person">Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
@@ -52,8 +52,8 @@
                 <td>{{activityResult.date | date:'medium'}}</td>
                 <td>{{activityResult.official}}</td>
                 <td>
-                    <div *ngIf="activityResult.activityGroupResultId">
-                        <a [routerLink]="['../activity-group-result', activityResult.activityGroupResultId , 'view' ]" >{{activityResult.activityGroupResultId}}</a>
+                    <div *ngIf="activityResult.workoutResultId">
+                        <a [routerLink]="['../activity-group-result', activityResult.workoutResultId , 'view' ]" >{{activityResult.workoutResultId}}</a>
                     </div>
                 </td>
                 <td>
@@ -62,8 +62,8 @@
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="activityResult.activityGroupId">
-                        <a [routerLink]="['../activity-group', activityResult.activityGroupId , 'view' ]" >{{activityResult.activityGroupName}}</a>
+                    <div *ngIf="activityResult.workoutId">
+                        <a [routerLink]="['../activity-group', activityResult.workoutId , 'view' ]" >{{activityResult.workoutName}}</a>
                     </div>
                 </td>
                 <td>

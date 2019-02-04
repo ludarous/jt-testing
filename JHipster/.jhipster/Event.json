@@ -17,8 +17,8 @@
         {
             "relationshipType": "many-to-many",
             "otherEntityRelationshipName": "",
-            "relationshipName": "activityGroups",
-            "otherEntityName": "activityGroup",
+            "relationshipName": "workouts",
+            "otherEntityName": "workout",
             "otherEntityField": "name",
             "ownerSide": true
         },

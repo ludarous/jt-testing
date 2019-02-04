@@ -27,7 +27,7 @@
 
         <addForeignKeyConstraint baseColumnNames="group_id"
                                  baseTableName="activity"
-                                 constraintName="fk_activity_group_id"
+                                 constraintName="fk_workout_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_group"/>
 

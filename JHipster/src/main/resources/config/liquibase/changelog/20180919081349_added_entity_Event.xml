@@ -45,8 +45,8 @@
         </createTable>
         <dropDefaultValue tableName="event" columnName="jhi_date" columnDataType="datetime"/>
         
-        <createTable tableName="event_activity_groups">
-            <column name="activity_groups_id" type="bigint">
+        <createTable tableName="event_workouts">
+            <column name="workouts_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="events_id" type="bigint">
@@ -54,7 +54,7 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="events_id, activity_groups_id" tableName="event_activity_groups"/>
+        <addPrimaryKey columnNames="events_id, workouts_id" tableName="event_workouts"/>
         
         <createTable tableName="event_attached_persons">
             <column name="attached_persons_id" type="bigint">

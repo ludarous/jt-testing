@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Event and its DTO EventDTO.
  */
-@Mapper(componentModel = "spring", uses = {AddressMapper.class, ActivityGroupMapper.class, PersonFullMapper.class, EventResultMapper.class})
+@Mapper(componentModel = "spring", uses = {AddressMapper.class, WorkoutMapper.class, PersonFullMapper.class, EventResultMapper.class})
 public interface EventMapper extends EntityMapper<EventDTO, Event> {
 
     @Mapping(source = "address.id", target = "addressId")

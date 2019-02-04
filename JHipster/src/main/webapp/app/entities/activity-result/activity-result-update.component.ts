@@ -8,12 +8,12 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { IActivityResult } from 'app/shared/model/activity-result.model';
 import { ActivityResultService } from './activity-result.service';
-import { IActivityGroupResult } from 'app/shared/model/activity-group-result.model';
-import { ActivityGroupResultService } from 'app/entities/activity-group-result';
+import { IWorkoutResult } from 'app/shared/model/activity-group-result.model';
+import { WorkoutResultService } from 'app/entities/workout-result';
 import { IActivity } from 'app/shared/model/activity.model';
 import { ActivityService } from 'app/entities/activity';
-import { IActivityGroup } from 'app/shared/model/activity-group.model';
-import { ActivityGroupService } from 'app/entities/activity-group';
+import { IWorkout } from 'app/shared/model/activity-group.model';
+import { WorkoutService } from 'app/entities/workout';
 import { IEvent } from 'app/shared/model/event.model';
 import { EventService } from 'app/entities/event';
 import { IPerson } from 'app/shared/model/person.model';
@@ -27,11 +27,11 @@ export class ActivityResultUpdateComponent implements OnInit {
     private _activityResult: IActivityResult;
     isSaving: boolean;
 
-    activitygroupresults: IActivityGroupResult[];
+    workoutresults: IWorkoutResult[];
 
     activities: IActivity[];
 
-    activitygroups: IActivityGroup[];
+    workouts: IWorkout[];
 
     events: IEvent[];
 
@@ -41,9 +41,9 @@ export class ActivityResultUpdateComponent implements OnInit {
     constructor(
         private jhiAlertService: JhiAlertService,
         private activityResultService: ActivityResultService,
-        private activityGroupResultService: ActivityGroupResultService,
+        private workoutResultService: WorkoutResultService,
         private activityService: ActivityService,
-        private activityGroupService: ActivityGroupService,
+        private workoutService: WorkoutService,
         private eventService: EventService,
         private personService: PersonService,
         private activatedRoute: ActivatedRoute
@@ -54,9 +54,9 @@ export class ActivityResultUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ activityResult }) => {
             this.activityResult = activityResult;
         });
-        this.activityGroupResultService.query().subscribe(
-            (res: HttpResponse<IActivityGroupResult[]>) => {
-                this.activitygroupresults = res.body;
+        this.workoutResultService.query().subscribe(
+            (res: HttpResponse<IWorkoutResult[]>) => {
+                this.workoutresults = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -66,9 +66,9 @@ export class ActivityResultUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        this.activityGroupService.query().subscribe(
-            (res: HttpResponse<IActivityGroup[]>) => {
-                this.activitygroups = res.body;
+        this.workoutService.query().subscribe(
+            (res: HttpResponse<IWorkout[]>) => {
+                this.workouts = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -117,7 +117,7 @@ export class ActivityResultUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackActivityGroupResultById(index: number, item: IActivityGroupResult) {
+    trackWorkoutResultById(index: number, item: IWorkoutResult) {
         return item.id;
     }
 
@@ -125,7 +125,7 @@ export class ActivityResultUpdateComponent implements OnInit {
         return item.id;
     }
 
-    trackActivityGroupById(index: number, item: IActivityGroup) {
+    trackWorkoutById(index: number, item: IWorkout) {
         return item.id;
     }
 

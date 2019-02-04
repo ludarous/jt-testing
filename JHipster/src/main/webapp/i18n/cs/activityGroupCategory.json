@@ -1,21 +1,21 @@
 
 {
     "jtTestingApp": {
-        "activityGroupCategory" : {
+        "workoutCategory" : {
             "home": {
-                "title": "Activity Group Categories",
-                "createLabel": "Vytvořit Activity Group Category",
-                "createOrEditLabel": "Vytvořit nebo upravit Activity Group Category",
-                "search": "Vyhledat Activity Group Category"
+                "title": "Workout Categories",
+                "createLabel": "Vytvořit Workout Category",
+                "createOrEditLabel": "Vytvořit nebo upravit Workout Category",
+                "search": "Vyhledat Workout Category"
             },
-            "created": "Byl vytvořen potomek entity Activity Group Category s identifikátorem {{ param }}",
-            "updated": "Potomek entity Activity Group Category s identifikátorem {{ param }} byl upravený.",
-            "deleted": "Potomek entity Activity Group Category s identifikátorem {{ param }} bol smazaný.",
+            "created": "Byl vytvořen potomek entity Workout Category s identifikátorem {{ param }}",
+            "updated": "Potomek entity Workout Category s identifikátorem {{ param }} byl upravený.",
+            "deleted": "Potomek entity Workout Category s identifikátorem {{ param }} bol smazaný.",
             "delete": {
-                "question": "Jste si jisti, že chcete smazat Activity Group Category {{ id }}?"
+                "question": "Jste si jisti, že chcete smazat Workout Category {{ id }}?"
             },
             "detail": {
-                "title": "Activity Group Category"
+                "title": "Workout Category"
             },
             "name": "Name",
             "key": "Key",

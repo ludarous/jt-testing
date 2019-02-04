@@ -46,9 +46,9 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label jhiTranslate="jtTestingApp.event.activityGroups" for="field_activityGroups">Activity Groups</label>
-                    <select class="form-control" id="field_activityGroups" multiple name="activityGroups" [(ngModel)]="event.activityGroups">
-                        <option [ngValue]="getSelected(event.activityGroups, activityGroupOption)" *ngFor="let activityGroupOption of activitygroups; trackBy: trackActivityGroupById">{{activityGroupOption.name}}</option>
+                    <label jhiTranslate="jtTestingApp.event.workouts" for="field_workouts">Workouts</label>
+                    <select class="form-control" id="field_workouts" multiple name="workouts" [(ngModel)]="event.workouts">
+                        <option [ngValue]="getSelected(event.workouts, workoutOption)" *ngFor="let workoutOption of workouts; trackBy: trackWorkoutById">{{workoutOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">

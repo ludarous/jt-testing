@@ -1,28 +1,28 @@
 
 {
     "jtTestingApp": {
-        "activityGroup" : {
+        "workout" : {
             "home": {
-                "title": "Activity Groups",
-                "createLabel": "Vytvořit Activity Group",
-                "createOrEditLabel": "Vytvořit nebo upravit Activity Group",
-                "search": "Vyhledat Activity Group"
+                "title": "Workouts",
+                "createLabel": "Vytvořit Workout",
+                "createOrEditLabel": "Vytvořit nebo upravit Workout",
+                "search": "Vyhledat Workout"
             },
-            "created": "Byl vytvořen potomek entity Activity Group s identifikátorem {{ param }}",
-            "updated": "Potomek entity Activity Group s identifikátorem {{ param }} byl upravený.",
-            "deleted": "Potomek entity Activity Group s identifikátorem {{ param }} bol smazaný.",
+            "created": "Byl vytvořen potomek entity Workout s identifikátorem {{ param }}",
+            "updated": "Potomek entity Workout s identifikátorem {{ param }} byl upravený.",
+            "deleted": "Potomek entity Workout s identifikátorem {{ param }} bol smazaný.",
             "delete": {
-                "question": "Jste si jisti, že chcete smazat Activity Group {{ id }}?"
+                "question": "Jste si jisti, že chcete smazat Workout {{ id }}?"
             },
             "detail": {
-                "title": "Activity Group"
+                "title": "Workout"
             },
             "name": "Name",
             "description": "Description",
             "minAge": "Min Age",
             "maxAge": "Max Age",
             "activities": "Activities",
-            "activityGroupCategories": "Activity Group Categories"
+            "workoutCategories": "Workout Categories"
         }
     }
 }

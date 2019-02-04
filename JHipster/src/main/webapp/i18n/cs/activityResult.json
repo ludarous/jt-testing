@@ -22,9 +22,9 @@
             "note": "Note",
             "date": "Date",
             "official": "Official",
-            "activityGroupResult": "Activity Group Result",
+            "workoutResult": "Workout Result",
             "activity": "Activity",
-            "activityGroup": "Activity Group",
+            "workout": "Workout",
             "event": "Event",
             "person": "Person"
         }

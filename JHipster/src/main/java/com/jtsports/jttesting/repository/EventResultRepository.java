@@ -19,23 +19,23 @@ import java.util.List;
 public interface EventResultRepository extends JpaRepository<EventResult, Long> {
 
     @Query(value = "select distinct eventResult from EventResult eventResult " +
-        "left join fetch eventResult.activityGroupResults where eventResult.event.id = :eventId",
+        "left join fetch eventResult.workoutResults where eventResult.event.id = :eventId",
         countQuery = "select count(distinct eventResult) from EventResult eventResult where eventResult.event.id = :eventId")
     Page<EventResult> findAllByEventIdWithEagerRelationships(Pageable pageable, @Param("eventId") Long eventId);
 
 
     @Query(value = "select distinct eventResult from EventResult eventResult " +
-        "left join fetch eventResult.activityGroupResults where eventResult.person.id = :personId",
+        "left join fetch eventResult.workoutResults where eventResult.person.id = :personId",
         countQuery = "select count(distinct eventResult) from EventResult eventResult where eventResult.event.id = :personId")
     Page<EventResult> findAllByPersonIdWithEagerRelationships(Pageable pageable, @Param("personId") Long personId);
 
 
     @Query(value = "select distinct eventResult from EventResult eventResult " +
-        "left join fetch eventResult.activityGroupResults where eventResult.person.id = :personId and eventResult.event.id = :eventId")
+        "left join fetch eventResult.workoutResults where eventResult.person.id = :personId and eventResult.event.id = :eventId")
     List<EventResult> findAllByPersonAndEventIdWithEagerRelationships(@Param("personId") Long personId, @Param("eventId") Long eventId);
 
     @Query(value = "select distinct eventResult from EventResult eventResult " +
-        "left join fetch eventResult.activityGroupResults " +
+        "left join fetch eventResult.workoutResults " +
         "where eventResult.event.id = :eventId and eventResult.person.id = :personId")
     List<EventResult> findAllByEventIdAndPersonIdWithEagerRelationships(@Param("personId") Long personId, @Param("eventId") Long eventId);
 }

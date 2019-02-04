@@ -1,6 +1,6 @@
 import { element, by, promise, ElementFinder } from 'protractor';
 
-export class ActivityGroupCategoryComponentsPage {
+export class WorkoutCategoryComponentsPage {
     createButton = element(by.id('jh-create-entity'));
     title = element.all(by.css('jhi-activity-group-category div h2#page-heading span')).first();
 
@@ -13,7 +13,7 @@ export class ActivityGroupCategoryComponentsPage {
     }
 }
 
-export class ActivityGroupCategoryUpdatePage {
+export class WorkoutCategoryUpdatePage {
     pageTitle = element(by.id('jhi-activity-group-category-heading'));
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));

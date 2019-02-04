@@ -21,7 +21,7 @@
             "actualHeightInCm": "Actual Height In Cm",
             "actualWeightInKg": "Actual Weight In Kg",
             "event": "Event",
-            "activityGroupResults": "Activity Group Results",
+            "workoutResults": "Workout Results",
             "person": "Person"
         }
     }

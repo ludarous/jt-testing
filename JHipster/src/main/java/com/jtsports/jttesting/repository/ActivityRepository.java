@@ -42,8 +42,8 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
 
     @Query("select activityResult from ActivityResult activityResult " +
         "join activityResult.activity activity " +
-        "join activityResult.activityGroupResult activityGroupResult " +
-        "join activityGroupResult.eventResult eventResult " +
+        "join activityResult.workoutResult workoutResult " +
+        "join workoutResult.eventResult eventResult " +
         "join eventResult.event event " +
         "join eventResult.person person " +
         "where activityResult.activity.id = :id")
@@ -52,14 +52,14 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
     //@Query(name = "activityResults", nativeQuery = true)
     @Query("select activityResult from ActivityResult activityResult " +
         "join fetch activityResult.activity activity " +
-        "join fetch activityResult.activityGroupResult activityGroupResult " +
-        "join fetch activityGroupResult.activityGroup activityGroup " +
-        "join fetch activityGroupResult.eventResult eventResult " +
+        "join fetch activityResult.workoutResult workoutResult " +
+        "join fetch workoutResult.workout workout " +
+        "join fetch workoutResult.eventResult eventResult " +
         "join fetch eventResult.person person " +
         "join fetch activity.categories categories " +
         "where ((:personId is null) or (:personId = person.id)) " +
         "and ((:activityId is null) or (:activityId = activity.id)) " +
-        "and ((:activityGroupId is null) or (:activityGroupId = activityGroup.id)) " +
+        "and ((:workoutId is null) or (:workoutId = workout.id)) " +
         "and ((:eventId is null) or (:eventId = eventResult.event.id)) " +
         "and ((cast(:dateFrom as timestamp) is null) or (:dateFrom <= activityResult.date)) " +
         "and ((cast(:dateTo as timestamp) is null) or (:dateTo >= activityResult.date)) " +
@@ -68,7 +68,7 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
     List<ActivityResult> findAllActivitiesResultsWithRequest(
         @Param("personId") Long personId,
         @Param("activityId") Long activityId,
-        @Param("activityGroupId") Long activityGroupId,
+        @Param("workoutId") Long workoutId,
         @Param("eventId") Long eventId,
         @Param("dateFrom") ZonedDateTime dateFrom,
         @Param("dateTo") ZonedDateTime dateTo,
@@ -82,17 +82,17 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
     List<Activity> findActivityByCategories(@Param("ids") List<Long> ids);
 
     @Query("select activity from Event event " +
-        "inner join event.activityGroups activityGroup " +
-        "inner join activityGroup.activities activity " +
+        "inner join event.workouts workout " +
+        "inner join workout.activities activity " +
         "inner join activity.categories category " +
         "where category.id in :ids and event.id = :eventId")
     List<Activity> findActivityByCategoriesAndEventId(@Param("ids") List<Long> ids, @Param("eventId") Long eventId);
 
     @Query("select activity from Event event " +
-        "inner join event.activityGroups activityGroup " +
-        "inner join activityGroup.activities activity " +
+        "inner join event.workouts workout " +
+        "inner join workout.activities activity " +
         "inner join activity.categories category " +
-        "where category.id in :ids and event.id = :eventId and activityGroup.id = :activityGroupId")
-    List<Activity> findActivityByCategoriesAndEventIdAndTestId(@Param("ids") List<Long> ids, @Param("eventId") Long eventId, @Param("activityGroupId") Long activityGroupId);
+        "where category.id in :ids and event.id = :eventId and workout.id = :workoutId")
+    List<Activity> findActivityByCategoriesAndEventIdAndTestId(@Param("ids") List<Long> ids, @Param("eventId") Long eventId, @Param("workoutId") Long workoutId);
 
 }

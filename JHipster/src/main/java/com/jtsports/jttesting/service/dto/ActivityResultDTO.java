@@ -22,15 +22,15 @@ public class ActivityResultDTO implements Serializable {
 
     private Boolean official;
 
-    private Long activityGroupResultId;
+    private Long workoutResultId;
 
     private Long activityId;
 
     private String activityName;
 
-    private Long activityGroupId;
+    private Long workoutId;
 
-    private String activityGroupName;
+    private String workoutName;
 
     private Long eventId;
 
@@ -88,12 +88,12 @@ public class ActivityResultDTO implements Serializable {
         this.official = official;
     }
 
-    public Long getActivityGroupResultId() {
-        return activityGroupResultId;
+    public Long getWorkoutResultId() {
+        return workoutResultId;
     }
 
-    public void setActivityGroupResultId(Long activityGroupResultId) {
-        this.activityGroupResultId = activityGroupResultId;
+    public void setWorkoutResultId(Long workoutResultId) {
+        this.workoutResultId = workoutResultId;
     }
 
     public Long getActivityId() {
@@ -112,20 +112,20 @@ public class ActivityResultDTO implements Serializable {
         this.activityName = activityName;
     }
 
-    public Long getActivityGroupId() {
-        return activityGroupId;
+    public Long getWorkoutId() {
+        return workoutId;
     }
 
-    public void setActivityGroupId(Long activityGroupId) {
-        this.activityGroupId = activityGroupId;
+    public void setWorkoutId(Long workoutId) {
+        this.workoutId = workoutId;
     }
 
-    public String getActivityGroupName() {
-        return activityGroupName;
+    public String getWorkoutName() {
+        return workoutName;
     }
 
-    public void setActivityGroupName(String activityGroupName) {
-        this.activityGroupName = activityGroupName;
+    public void setWorkoutName(String workoutName) {
+        this.workoutName = workoutName;
     }
 
     public Long getEventId() {
@@ -190,11 +190,11 @@ public class ActivityResultDTO implements Serializable {
             ", note='" + getNote() + "'" +
             ", date='" + getDate() + "'" +
             ", official='" + isOfficial() + "'" +
-            ", activityGroupResult=" + getActivityGroupResultId() +
+            ", workoutResult=" + getWorkoutResultId() +
             ", activity=" + getActivityId() +
             ", activity='" + getActivityName() + "'" +
-            ", activityGroup=" + getActivityGroupId() +
-            ", activityGroup='" + getActivityGroupName() + "'" +
+            ", workout=" + getWorkoutId() +
+            ", workout='" + getWorkoutName() + "'" +
             ", event=" + getEventId() +
             ", event='" + getEventName() + "'" +
             ", person=" + getPersonId() +

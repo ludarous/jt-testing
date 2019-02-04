@@ -1,26 +1,26 @@
 
 {
     "jtTestingApp": {
-        "activityGroupResult" : {
+        "workoutResult" : {
             "home": {
-                "title": "Activity Group Results",
-                "createLabel": "Vytvořit Activity Group Result",
-                "createOrEditLabel": "Vytvořit nebo upravit Activity Group Result",
-                "search": "Vyhledat Activity Group Result"
+                "title": "Workout Results",
+                "createLabel": "Vytvořit Workout Result",
+                "createOrEditLabel": "Vytvořit nebo upravit Workout Result",
+                "search": "Vyhledat Workout Result"
             },
-            "created": "Byl vytvořen potomek entity Activity Group Result s identifikátorem {{ param }}",
-            "updated": "Potomek entity Activity Group Result s identifikátorem {{ param }} byl upravený.",
-            "deleted": "Potomek entity Activity Group Result s identifikátorem {{ param }} bol smazaný.",
+            "created": "Byl vytvořen potomek entity Workout Result s identifikátorem {{ param }}",
+            "updated": "Potomek entity Workout Result s identifikátorem {{ param }} byl upravený.",
+            "deleted": "Potomek entity Workout Result s identifikátorem {{ param }} bol smazaný.",
             "delete": {
-                "question": "Jste si jisti, že chcete smazat Activity Group Result {{ id }}?"
+                "question": "Jste si jisti, že chcete smazat Workout Result {{ id }}?"
             },
             "detail": {
-                "title": "Activity Group Result"
+                "title": "Workout Result"
             },
             "note": "Note",
             "eventResult": "Event Result",
             "activitiesResults": "Activities Results",
-            "activityGroup": "Activity Group"
+            "workout": "Workout"
         }
     }
 }

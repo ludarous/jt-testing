@@ -22,7 +22,7 @@ export class EventUpdatePage {
     minAgeInput = element(by.id('field_minAge'));
     maxAgeInput = element(by.id('field_maxAge'));
     addressSelect = element(by.id('field_address'));
-    activityGroupsSelect = element(by.id('field_activityGroups'));
+    workoutsSelect = element(by.id('field_workouts'));
     attachedPersonsSelect = element(by.id('field_attachedPersons'));
 
     getPageTitle() {
@@ -80,23 +80,23 @@ export class EventUpdatePage {
         return this.addressSelect.element(by.css('option:checked')).getText();
     }
 
-    activityGroupsSelectLastOption(): promise.Promise<void> {
-        return this.activityGroupsSelect
+    workoutsSelectLastOption(): promise.Promise<void> {
+        return this.workoutsSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    activityGroupsSelectOption(option): promise.Promise<void> {
-        return this.activityGroupsSelect.sendKeys(option);
+    workoutsSelectOption(option): promise.Promise<void> {
+        return this.workoutsSelect.sendKeys(option);
     }
 
-    getActivityGroupsSelect(): ElementFinder {
-        return this.activityGroupsSelect;
+    getWorkoutsSelect(): ElementFinder {
+        return this.workoutsSelect;
     }
 
-    getActivityGroupsSelectedOption() {
-        return this.activityGroupsSelect.element(by.css('option:checked')).getText();
+    getWorkoutsSelectedOption() {
+        return this.workoutsSelect.element(by.css('option:checked')).getText();
     }
 
     attachedPersonsSelectLastOption(): promise.Promise<void> {

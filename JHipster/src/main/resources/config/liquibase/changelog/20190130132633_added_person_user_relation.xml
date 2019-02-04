@@ -26,7 +26,7 @@
         <createIndex indexName="filter_index" tableName="activity_result">
             <column name="jhi_date"/>
             <column name="activity_id"/>
-            <column name="activity_group_id"/>
+            <column name="workout_id"/>
             <column name="event_id"/>
             <column name="person_id"/>
         </createIndex>

@@ -41,7 +41,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="activity_group_result_id" type="bigint">
+            <column name="workout_result_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
@@ -49,7 +49,7 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="activity_group_id" type="bigint">
+            <column name="workout_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

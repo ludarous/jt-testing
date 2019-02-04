@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
 import { IEventResult } from 'app/shared/model//event-result.model';
-import { IActivityGroup } from 'app/shared/model//activity-group.model';
+import { IWorkout } from 'app/shared/model//activity-group.model';
 import { IPerson } from 'app/shared/model//person.model';
 
 export interface IEvent {
@@ -12,7 +12,7 @@ export interface IEvent {
     eventResults?: IEventResult[];
     addressStreet?: string;
     addressId?: number;
-    activityGroups?: IActivityGroup[];
+    workouts?: IWorkout[];
     attachedPersons?: IPerson[];
 }
 
@@ -26,7 +26,7 @@ export class Event implements IEvent {
         public eventResults?: IEventResult[],
         public addressStreet?: string,
         public addressId?: number,
-        public activityGroups?: IActivityGroup[],
+        public workouts?: IWorkout[],
         public attachedPersons?: IPerson[]
     ) {}
 }

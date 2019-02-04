@@ -43,7 +43,7 @@ public class EventResult implements Serializable {
     private Event event;
 
     @OneToMany(mappedBy = "eventResult", cascade = CascadeType.ALL)
-    private Set<ActivityGroupResult> activityGroupResults = new HashSet<>();
+    private Set<WorkoutResult> workoutResults = new HashSet<>();
 
     @ManyToOne(optional = false)
     @NotNull
@@ -111,29 +111,29 @@ public class EventResult implements Serializable {
         this.event = event;
     }
 
-    public Set<ActivityGroupResult> getActivityGroupResults() {
-        return activityGroupResults;
+    public Set<WorkoutResult> getWorkoutResults() {
+        return workoutResults;
     }
 
-    public EventResult activityGroupResults(Set<ActivityGroupResult> activityGroupResults) {
-        this.activityGroupResults = activityGroupResults;
+    public EventResult workoutResults(Set<WorkoutResult> workoutResults) {
+        this.workoutResults = workoutResults;
         return this;
     }
 
-    public EventResult addActivityGroupResults(ActivityGroupResult activityGroupResult) {
-        this.activityGroupResults.add(activityGroupResult);
-        activityGroupResult.setEventResult(this);
+    public EventResult addWorkoutResults(WorkoutResult workoutResult) {
+        this.workoutResults.add(workoutResult);
+        workoutResult.setEventResult(this);
         return this;
     }
 
-    public EventResult removeActivityGroupResults(ActivityGroupResult activityGroupResult) {
-        this.activityGroupResults.remove(activityGroupResult);
-        activityGroupResult.setEventResult(null);
+    public EventResult removeWorkoutResults(WorkoutResult workoutResult) {
+        this.workoutResults.remove(workoutResult);
+        workoutResult.setEventResult(null);
         return this;
     }
 
-    public void setActivityGroupResults(Set<ActivityGroupResult> activityGroupResults) {
-        this.activityGroupResults = activityGroupResults;
+    public void setWorkoutResults(Set<WorkoutResult> workoutResults) {
+        this.workoutResults = workoutResults;
     }
 
     public Person getPerson() {
@@ -187,11 +187,11 @@ public class EventResult implements Serializable {
         eventResult.setActualHeightInCm(RandomNumbers.getHeight());
         eventResult.setActualWeightInKg(RandomNumbers.getWeight());
 
-        HashSet<ActivityGroupResult> activityGroupResults = new HashSet<>();
-        for(ActivityGroup activityGroup : event.getActivityGroups()) {
-            activityGroupResults.add(ActivityGroupResult.createActivityGroupResult(activityGroup, eventResult, event, person));
+        HashSet<WorkoutResult> workoutResults = new HashSet<>();
+        for(Workout workout : event.getWorkouts()) {
+            workoutResults.add(WorkoutResult.createWorkoutResult(workout, eventResult, event, person));
         }
-        eventResult.setActivityGroupResults(activityGroupResults);
+        eventResult.setWorkoutResults(workoutResults);
         return  eventResult;
     }
 }

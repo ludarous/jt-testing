@@ -6,7 +6,7 @@ import com.jtsports.jttesting.domain.Person;
 import com.jtsports.jttesting.domain.enumeration.ActivityResultUnits;
 import com.jtsports.jttesting.domain.enumeration.ResultType;
 import com.jtsports.jttesting.repository.ActivityCategoryRepository;
-import com.jtsports.jttesting.repository.ActivityGroupRepository;
+import com.jtsports.jttesting.repository.WorkoutRepository;
 import com.jtsports.jttesting.repository.ActivityRepository;
 import com.jtsports.jttesting.repository.search.ActivityCategorySearchRepository;
 import com.jtsports.jttesting.service.ActivityService;
@@ -40,7 +40,7 @@ public class AdminServiceImpl implements AdminService {
 
     private final ActivityRepository activityRepository;
 
-    private final ActivityGroupRepository activityGroupRepository;
+    private final WorkoutRepository workoutRepository;
 
     private final PersonService personService;
 
@@ -51,14 +51,14 @@ public class AdminServiceImpl implements AdminService {
                             ActivityCategorySearchRepository activityCategorySearchRepository,
                             ActivityService activityService,
                             ActivityRepository activityRepository,
-                            ActivityGroupRepository activityGroupRepository, PersonService personService)
+                            WorkoutRepository workoutRepository, PersonService personService)
     {
         this.activityCategoryRepository = activityCategoryRepository;
         this.activityCategoryMapper = activityCategoryMapper;
         this.activityCategorySearchRepository = activityCategorySearchRepository;
         this.activityService = activityService;
         this.activityRepository = activityRepository;
-        this.activityGroupRepository = activityGroupRepository;
+        this.workoutRepository = workoutRepository;
         this.personService = personService;
     }
 

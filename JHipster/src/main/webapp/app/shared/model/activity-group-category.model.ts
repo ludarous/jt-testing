@@ -1,10 +1,10 @@
-export interface IActivityGroupCategory {
+export interface IWorkoutCategory {
     id?: number;
     name?: string;
     key?: string;
     description?: string;
 }
 
-export class ActivityGroupCategory implements IActivityGroupCategory {
+export class WorkoutCategory implements IWorkoutCategory {
     constructor(public id?: number, public name?: string, public key?: string, public description?: string) {}
 }

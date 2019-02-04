@@ -1,6 +1,6 @@
 import { IActivityResult } from 'app/shared/model//activity-result.model';
 
-export interface IActivityGroupResult {
+export interface IWorkoutResult {
     id?: number;
     note?: string;
     eventResultId?: number;
@@ -9,7 +9,7 @@ export interface IActivityGroupResult {
     testId?: number;
 }
 
-export class ActivityGroupResult implements IActivityGroupResult {
+export class WorkoutResult implements IWorkoutResult {
     constructor(
         public id?: number,
         public note?: string,

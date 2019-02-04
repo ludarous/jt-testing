@@ -10,8 +10,8 @@ import { IEvent } from 'app/shared/model/event.model';
 import { EventService } from './event.service';
 import { IAddress } from 'app/shared/model/address.model';
 import { AddressService } from 'app/entities/address';
-import { IActivityGroup } from 'app/shared/model/activity-group.model';
-import { ActivityGroupService } from 'app/entities/activity-group';
+import { IWorkout } from 'app/shared/model/activity-group.model';
+import { WorkoutService } from 'app/entities/workout';
 import { IPerson } from 'app/shared/model/person.model';
 import { PersonService } from 'app/entities/person';
 
@@ -25,7 +25,7 @@ export class EventUpdateComponent implements OnInit {
 
     addresses: IAddress[];
 
-    activitygroups: IActivityGroup[];
+    workouts: IWorkout[];
 
     people: IPerson[];
     date: string;
@@ -34,7 +34,7 @@ export class EventUpdateComponent implements OnInit {
         private jhiAlertService: JhiAlertService,
         private eventService: EventService,
         private addressService: AddressService,
-        private activityGroupService: ActivityGroupService,
+        private workoutService: WorkoutService,
         private personService: PersonService,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -50,9 +50,9 @@ export class EventUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        this.activityGroupService.query().subscribe(
-            (res: HttpResponse<IActivityGroup[]>) => {
-                this.activitygroups = res.body;
+        this.workoutService.query().subscribe(
+            (res: HttpResponse<IWorkout[]>) => {
+                this.workouts = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -99,7 +99,7 @@ export class EventUpdateComponent implements OnInit {
         return item.id;
     }
 
-    trackActivityGroupById(index: number, item: IActivityGroup) {
+    trackWorkoutById(index: number, item: IWorkout) {
         return item.id;
     }
 

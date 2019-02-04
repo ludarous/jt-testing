@@ -1,5 +1,5 @@
 {
-    "name": "ActivityGroupCategory",
+    "name": "WorkoutCategory",
     "fields": [
         {
             "fieldName": "name",
@@ -19,7 +19,7 @@
     ],
     "relationships": [],
     "changelogDate": "20180919081352",
-    "entityTableName": "activity_group_category",
+    "entityTableName": "workout_category",
     "dto": "mapstruct",
     "pagination": "pagination",
     "service": "serviceImpl",

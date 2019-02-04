@@ -1,11 +1,11 @@
 import { browser } from 'protractor';
 import { NavBarPage } from './../../page-objects/jhi-page-objects';
-import { ActivityGroupResultComponentsPage, ActivityGroupResultUpdatePage } from './activity-group-result.page-object';
+import { WorkoutResultComponentsPage, WorkoutResultUpdatePage } from './activity-group-result.page-object';
 
-describe('ActivityGroupResult e2e test', () => {
+describe('WorkoutResult e2e test', () => {
     let navBarPage: NavBarPage;
-    let activityGroupResultUpdatePage: ActivityGroupResultUpdatePage;
-    let activityGroupResultComponentsPage: ActivityGroupResultComponentsPage;
+    let workoutResultUpdatePage: WorkoutResultUpdatePage;
+    let workoutResultComponentsPage: WorkoutResultComponentsPage;
 
     beforeAll(() => {
         browser.get('/');
@@ -15,27 +15,27 @@ describe('ActivityGroupResult e2e test', () => {
         browser.waitForAngular();
     });
 
-    it('should load ActivityGroupResults', () => {
+    it('should load WorkoutResults', () => {
         navBarPage.goToEntity('activity-group-result');
-        activityGroupResultComponentsPage = new ActivityGroupResultComponentsPage();
-        expect(activityGroupResultComponentsPage.getTitle()).toMatch(/jtTestingApp.activityGroupResult.home.title/);
+        workoutResultComponentsPage = new WorkoutResultComponentsPage();
+        expect(workoutResultComponentsPage.getTitle()).toMatch(/jtTestingApp.workoutResult.home.title/);
     });
 
-    it('should load create ActivityGroupResult page', () => {
-        activityGroupResultComponentsPage.clickOnCreateButton();
-        activityGroupResultUpdatePage = new ActivityGroupResultUpdatePage();
-        expect(activityGroupResultUpdatePage.getPageTitle()).toMatch(/jtTestingApp.activityGroupResult.home.createOrEditLabel/);
-        activityGroupResultUpdatePage.cancel();
+    it('should load create WorkoutResult page', () => {
+        workoutResultComponentsPage.clickOnCreateButton();
+        workoutResultUpdatePage = new WorkoutResultUpdatePage();
+        expect(workoutResultUpdatePage.getPageTitle()).toMatch(/jtTestingApp.workoutResult.home.createOrEditLabel/);
+        workoutResultUpdatePage.cancel();
     });
 
-    /* it('should create and save ActivityGroupResults', () => {
-        activityGroupResultComponentsPage.clickOnCreateButton();
-        activityGroupResultUpdatePage.setNoteInput('note');
-        expect(activityGroupResultUpdatePage.getNoteInput()).toMatch('note');
-        activityGroupResultUpdatePage.eventResultSelectLastOption();
-        activityGroupResultUpdatePage.activityGroupSelectLastOption();
-        activityGroupResultUpdatePage.save();
-        expect(activityGroupResultUpdatePage.getSaveButton().isPresent()).toBeFalsy();
+    /* it('should create and save WorkoutResults', () => {
+        workoutResultComponentsPage.clickOnCreateButton();
+        workoutResultUpdatePage.setNoteInput('note');
+        expect(workoutResultUpdatePage.getNoteInput()).toMatch('note');
+        workoutResultUpdatePage.eventResultSelectLastOption();
+        workoutResultUpdatePage.workoutSelectLastOption();
+        workoutResultUpdatePage.save();
+        expect(workoutResultUpdatePage.getSaveButton().isPresent()).toBeFalsy();
     });*/
 
     afterAll(() => {

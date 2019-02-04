@@ -27,7 +27,7 @@ public class EventDTO implements Serializable {
 
     private String addressStreet;
 
-    private Set<ActivityGroupDTO> activityGroups = new HashSet<>();
+    private Set<WorkoutDTO> workouts = new HashSet<>();
 
     private Set<PersonFullDTO> attachedPersons = new HashSet<>();
 
@@ -89,12 +89,12 @@ public class EventDTO implements Serializable {
         this.addressStreet = addressStreet;
     }
 
-    public Set<ActivityGroupDTO> getActivityGroups() {
-        return activityGroups;
+    public Set<WorkoutDTO> getWorkouts() {
+        return workouts;
     }
 
-    public void setActivityGroups(Set<ActivityGroupDTO> activityGroups) {
-        this.activityGroups = activityGroups;
+    public void setWorkouts(Set<WorkoutDTO> workouts) {
+        this.workouts = workouts;
     }
 
     public Set<PersonFullDTO> getAttachedPersons() {

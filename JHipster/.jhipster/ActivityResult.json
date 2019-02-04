@@ -3,8 +3,8 @@
     "clientRootFolder": "",
     "relationships": [
         {
-            "relationshipName": "activityGroupResult",
-            "otherEntityName": "activityGroupResult",
+            "relationshipName": "workoutResult",
+            "otherEntityName": "workoutResult",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         },
@@ -16,8 +16,8 @@
             "otherEntityField": "name"
         },
         {
-            "relationshipName": "activityGroup",
-            "otherEntityName": "activityGroup",
+            "relationshipName": "workout",
+            "otherEntityName": "workout",
             "relationshipType": "many-to-one",
             "otherEntityField": "name"
         },

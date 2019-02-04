@@ -1,21 +1,21 @@
 
 {
     "jtTestingApp": {
-        "activityGroupCategory" : {
+        "workoutCategory" : {
             "home": {
-                "title": "Activity Group Categories",
-                "createLabel": "Create a new Activity Group Category",
-                "createOrEditLabel": "Create or edit a Activity Group Category",
-                "search": "Search for Activity Group Category"
+                "title": "Workout Categories",
+                "createLabel": "Create a new Workout Category",
+                "createOrEditLabel": "Create or edit a Workout Category",
+                "search": "Search for Workout Category"
             },
-            "created": "A new Activity Group Category is created with identifier {{ param }}",
-            "updated": "A Activity Group Category is updated with identifier {{ param }}",
-            "deleted": "A Activity Group Category is deleted with identifier {{ param }}",
+            "created": "A new Workout Category is created with identifier {{ param }}",
+            "updated": "A Workout Category is updated with identifier {{ param }}",
+            "deleted": "A Workout Category is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Activity Group Category {{ id }}?"
+                "question": "Are you sure you want to delete Workout Category {{ id }}?"
             },
             "detail": {
-                "title": "Activity Group Category"
+                "title": "Workout Category"
             },
             "name": "Name",
             "key": "Key",

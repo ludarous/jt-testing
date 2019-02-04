@@ -27,10 +27,10 @@
                         <a [routerLink]="['/address', event.addressId, 'view']">{{event.addressStreet}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="jtTestingApp.event.activityGroups">Activity Groups</span></dt>
+                <dt><span jhiTranslate="jtTestingApp.event.workouts">Workouts</span></dt>
                 <dd>
-                    <span *ngFor="let activityGroups of event.activityGroups; let last = last">
-                        <a [routerLink]="['/activity-group', activityGroups?.id, 'view' ]">{{activityGroups.name}}</a>{{last ? '' : ', '}}
+                    <span *ngFor="let workouts of event.workouts; let last = last">
+                        <a [routerLink]="['/activity-group', workouts?.id, 'view' ]">{{workouts.name}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
                 <dt><span jhiTranslate="jtTestingApp.event.attachedPersons">Attached Persons</span></dt>

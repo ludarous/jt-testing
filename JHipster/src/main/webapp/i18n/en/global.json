@@ -13,7 +13,7 @@
                 "testCategory": "Test Category",
                 "activityCategory": "Activity Category",
                 "eventResult": "Event Result",
-                "activityGroupResult": "Test Result",
+                "workoutResult": "Test Result",
                 "activityResult": "Activity Result",
                 "person": "Person",
                 "personalData": "Personal Data",
@@ -21,9 +21,9 @@
                 "sport": "Sport",
                 "group": "Group",
                 "personGroup": "Person Group",
-                "activityGroupCategory": "Activity Group Category",
-                "activityGroup": "Activity Group",
-                "activityGroupResult": "Activity Group Result",
+                "workoutCategory": "Workout Category",
+                "workout": "Workout",
+                "workoutResult": "Workout Result",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

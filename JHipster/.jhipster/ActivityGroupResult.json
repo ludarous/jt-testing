@@ -1,5 +1,5 @@
 {
-    "name": "ActivityGroupResult",
+    "name": "WorkoutResult",
     "fields": [
         {
             "fieldName": "note",
@@ -17,18 +17,18 @@
             "relationshipType": "one-to-many",
             "relationshipName": "activitiesResults",
             "otherEntityName": "activityResult",
-            "otherEntityRelationshipName": "activityGroupResult"
+            "otherEntityRelationshipName": "workoutResult"
         },
         {
             "relationshipType": "many-to-one",
             "relationshipValidateRules": "required",
-            "relationshipName": "activityGroup",
-            "otherEntityName": "activityGroup",
+            "relationshipName": "workout",
+            "otherEntityName": "workout",
             "otherEntityField": "name"
         }
     ],
     "changelogDate": "20180919081355",
-    "entityTableName": "activity_group_result",
+    "entityTableName": "workout_result",
     "dto": "mapstruct",
     "pagination": "pagination",
     "service": "serviceImpl",

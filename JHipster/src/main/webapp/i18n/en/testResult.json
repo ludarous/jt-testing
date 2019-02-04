@@ -1,7 +1,7 @@
 
 {
     "jtTestingApp": {
-        "activityGroupResult" : {
+        "workoutResult" : {
             "home": {
                 "title": "Test Results",
                 "createLabel": "Create a new Test Result",

@@ -8,7 +8,7 @@ import com.jtsports.jttesting.domain.enumeration.ResultType;
 import com.jtsports.jttesting.repository.ActivityCategoryRepository;
 import com.jtsports.jttesting.repository.ActivityRepository;
 import com.jtsports.jttesting.repository.ActivityResultRepository;
-import com.jtsports.jttesting.repository.ActivityGroupRepository;
+import com.jtsports.jttesting.repository.WorkoutRepository;
 import com.jtsports.jttesting.service.*;
 import com.jtsports.jttesting.service.dto.Stats.Activity.ActivityResultsStatsDTO;
 import com.jtsports.jttesting.service.dto.Stats.Activity.ActivityStatsDTO;
@@ -21,7 +21,7 @@ import com.jtsports.jttesting.service.dto.StatsRequestDTO;
 import com.jtsports.jttesting.service.mapper.ActivityCategoryMapper;
 import com.jtsports.jttesting.service.mapper.ActivityMapper;
 import com.jtsports.jttesting.service.mapper.ActivityResultMapper;
-import com.jtsports.jttesting.service.mapper.ActivityGroupMapper;
+import com.jtsports.jttesting.service.mapper.WorkoutMapper;
 import com.jtsports.jttesting.service.util.StatsUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,11 +59,11 @@ public class StatsServiceImpl implements StatsService {
     private final ActivityResultMapper activityResultMapper;
 
 
-    private final ActivityGroupService testService;
+    private final WorkoutService testService;
 
-    private final ActivityGroupRepository testRepository;
+    private final WorkoutRepository testRepository;
 
-    private final ActivityGroupMapper testMapper;
+    private final WorkoutMapper testMapper;
 
     public StatsServiceImpl(
         ActivityService activityService,
@@ -74,7 +74,7 @@ public class StatsServiceImpl implements StatsService {
         ActivityMapper activityMapper,
         ActivityResultService activityResultService,
         ActivityResultRepository activityResultRepository,
-        ActivityResultMapper activityResultMapper, ActivityGroupService testService, ActivityGroupRepository testRepository, ActivityGroupMapper testMapper) {
+        ActivityResultMapper activityResultMapper, WorkoutService testService, WorkoutRepository testRepository, WorkoutMapper testMapper) {
         this.activityService = activityService;
         this.activityCategoryService = activityCategoryService;
         this.activityCategoryRepository = activityCategoryRepository;
@@ -331,7 +331,7 @@ public class StatsServiceImpl implements StatsService {
         List<ActivityResult> allActivityResults = activityRepository.findAllActivitiesResultsWithRequest(
             statsRequest.getPersonId(),
             statsRequest.getActivityId(),
-            statsRequest.getActivityGroupId(),
+            statsRequest.getWorkoutId(),
             statsRequest.getEventId(),
             statsRequest.getDateFrom(),
             statsRequest.getDateTo(),
@@ -347,7 +347,7 @@ public class StatsServiceImpl implements StatsService {
         List<ActivityResult> filteredPersonResults = results;
 
         if (personId != null) {
-            filteredPersonResults = filteredPersonResults.stream().filter(r -> r.getActivityGroupResult().getEventResult().getPerson().getId().longValue() == personId.longValue()).collect(Collectors.toList());
+            filteredPersonResults = filteredPersonResults.stream().filter(r -> r.getWorkoutResult().getEventResult().getPerson().getId().longValue() == personId.longValue()).collect(Collectors.toList());
         }
 
         return filteredPersonResults;

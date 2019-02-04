@@ -49,10 +49,10 @@ public class Event implements Serializable {
     private Address address;
 
     @ManyToMany
-    @JoinTable(name = "event_activity_groups",
+    @JoinTable(name = "event_workouts",
                joinColumns = @JoinColumn(name = "events_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "activity_groups_id", referencedColumnName = "id"))
-    private Set<ActivityGroup> activityGroups = new HashSet<>();
+               inverseJoinColumns = @JoinColumn(name = "workouts_id", referencedColumnName = "id"))
+    private Set<Workout> workouts = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "event_attached_persons",
@@ -159,27 +159,27 @@ public class Event implements Serializable {
         this.address = address;
     }
 
-    public Set<ActivityGroup> getActivityGroups() {
-        return activityGroups;
+    public Set<Workout> getWorkouts() {
+        return workouts;
     }
 
-    public Event activityGroups(Set<ActivityGroup> activityGroups) {
-        this.activityGroups = activityGroups;
+    public Event workouts(Set<Workout> workouts) {
+        this.workouts = workouts;
         return this;
     }
 
-    public Event addActivityGroups(ActivityGroup activityGroup) {
-        this.activityGroups.add(activityGroup);
+    public Event addWorkouts(Workout workout) {
+        this.workouts.add(workout);
         return this;
     }
 
-    public Event removeActivityGroups(ActivityGroup activityGroup) {
-        this.activityGroups.remove(activityGroup);
+    public Event removeWorkouts(Workout workout) {
+        this.workouts.remove(workout);
         return this;
     }
 
-    public void setActivityGroups(Set<ActivityGroup> activityGroups) {
-        this.activityGroups = activityGroups;
+    public void setWorkouts(Set<Workout> workouts) {
+        this.workouts = workouts;
     }
 
     public Set<Person> getAttachedPersons() {

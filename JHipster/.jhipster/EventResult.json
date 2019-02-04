@@ -23,8 +23,8 @@
         },
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "activityGroupResults",
-            "otherEntityName": "activityGroupResult",
+            "relationshipName": "workoutResults",
+            "otherEntityName": "workoutResult",
             "otherEntityRelationshipName": "eventResult"
         },
         {

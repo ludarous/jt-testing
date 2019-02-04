@@ -1,21 +1,21 @@
 import { IActivityResult } from 'app/shared/model//activity-result.model';
 
-export interface IActivityGroupResult {
+export interface IWorkoutResult {
     id?: number;
     note?: string;
     eventResultId?: number;
     activitiesResults?: IActivityResult[];
-    activityGroupName?: string;
-    activityGroupId?: number;
+    workoutName?: string;
+    workoutId?: number;
 }
 
-export class ActivityGroupResult implements IActivityGroupResult {
+export class WorkoutResult implements IWorkoutResult {
     constructor(
         public id?: number,
         public note?: string,
         public eventResultId?: number,
         public activitiesResults?: IActivityResult[],
-        public activityGroupName?: string,
-        public activityGroupId?: number
+        public workoutName?: string,
+        public workoutId?: number
     ) {}
 }

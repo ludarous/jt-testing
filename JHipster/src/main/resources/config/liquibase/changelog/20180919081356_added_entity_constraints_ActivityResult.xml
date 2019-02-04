@@ -8,11 +8,11 @@
     -->
     <changeSet id="20180919081356-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="activity_group_result_id"
+        <addForeignKeyConstraint baseColumnNames="workout_result_id"
                                  baseTableName="activity_result"
-                                 constraintName="fk_activity_result_activity_group_result_id"
+                                 constraintName="fk_activity_result_workout_result_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="activity_group_result"/>
+                                 referencedTableName="workout_result"/>
 
         <addForeignKeyConstraint baseColumnNames="activity_id"
                                  baseTableName="activity_result"
@@ -20,11 +20,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="activity"/>
 
-        <addForeignKeyConstraint baseColumnNames="activity_group_id"
+        <addForeignKeyConstraint baseColumnNames="workout_id"
                                  baseTableName="activity_result"
-                                 constraintName="fk_activity_result_activity_group_id"
+                                 constraintName="fk_activity_result_workout_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="activity_group"/>
+                                 referencedTableName="workout"/>
 
         <addForeignKeyConstraint baseColumnNames="event_id"
                                  baseTableName="activity_result"

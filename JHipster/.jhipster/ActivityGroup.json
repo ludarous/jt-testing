@@ -13,8 +13,8 @@
         {
             "relationshipType": "many-to-many",
             "otherEntityRelationshipName": "",
-            "relationshipName": "activityGroupCategories",
-            "otherEntityName": "activityGroupCategory",
+            "relationshipName": "workoutCategories",
+            "otherEntityName": "workoutCategory",
             "otherEntityField": "name",
             "ownerSide": true
         }
@@ -44,7 +44,7 @@
     "dto": "mapstruct",
     "searchEngine": "elasticsearch",
     "service": "serviceImpl",
-    "entityTableName": "activity_group",
+    "entityTableName": "workout",
     "jpaMetamodelFiltering": false,
     "pagination": "pagination"
 }

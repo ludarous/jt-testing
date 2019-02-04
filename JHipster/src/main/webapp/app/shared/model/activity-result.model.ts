@@ -7,11 +7,11 @@ export interface IActivityResult {
     note?: string;
     date?: Moment;
     official?: boolean;
-    activityGroupResultId?: number;
+    workoutResultId?: number;
     activityName?: string;
     activityId?: number;
-    activityGroupName?: string;
-    activityGroupId?: number;
+    workoutName?: string;
+    workoutId?: number;
     eventName?: string;
     eventId?: number;
     personEmail?: string;
@@ -26,11 +26,11 @@ export class ActivityResult implements IActivityResult {
         public note?: string,
         public date?: Moment,
         public official?: boolean,
-        public activityGroupResultId?: number,
+        public workoutResultId?: number,
         public activityName?: string,
         public activityId?: number,
-        public activityGroupName?: string,
-        public activityGroupId?: number,
+        public workoutName?: string,
+        public workoutId?: number,
         public eventName?: string,
         public eventId?: number,
         public personEmail?: string,

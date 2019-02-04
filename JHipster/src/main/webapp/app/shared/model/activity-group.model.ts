@@ -1,17 +1,17 @@
 import { IActivity } from 'app/shared/model//activity.model';
-import { IActivityGroupCategory } from 'app/shared/model//activity-group-category.model';
+import { IWorkoutCategory } from 'app/shared/model//activity-group-category.model';
 
-export interface IActivityGroup {
+export interface IWorkout {
     id?: number;
     name?: string;
     description?: string;
     minAge?: number;
     maxAge?: number;
     activities?: IActivity[];
-    activityGroupCategories?: IActivityGroupCategory[];
+    workoutCategories?: IWorkoutCategory[];
 }
 
-export class ActivityGroup implements IActivityGroup {
+export class Workout implements IWorkout {
     constructor(
         public id?: number,
         public name?: string,
@@ -19,6 +19,6 @@ export class ActivityGroup implements IActivityGroup {
         public minAge?: number,
         public maxAge?: number,
         public activities?: IActivity[],
-        public activityGroupCategories?: IActivityGroupCategory[]
+        public workoutCategories?: IWorkoutCategory[]
     ) {}
 }

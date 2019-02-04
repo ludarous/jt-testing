@@ -15,7 +15,7 @@ import java.util.Objects;
  * A ActivityResult.
  */
 @Entity
-@Table(name = "activity_result", indexes = {@Index(name = "filter_index", columnList = "jhi_date, activity_id, activity_group_id, event_id, person_id")})
+@Table(name = "activity_result", indexes = {@Index(name = "filter_index", columnList = "jhi_date, activity_id, workout_id, event_id, person_id")})
 @Document(indexName = "activityresult")
 public class ActivityResult implements Serializable {
 
@@ -43,7 +43,7 @@ public class ActivityResult implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("activitiesResults")
-    private ActivityGroupResult activityGroupResult;
+    private WorkoutResult workoutResult;
 
     @ManyToOne(optional = false)
     @NotNull
@@ -52,7 +52,7 @@ public class ActivityResult implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("")
-    private ActivityGroup activityGroup;
+    private Workout workout;
 
     @ManyToOne
     @JsonIgnoreProperties("")
@@ -136,17 +136,17 @@ public class ActivityResult implements Serializable {
         this.official = official;
     }
 
-    public ActivityGroupResult getActivityGroupResult() {
-        return activityGroupResult;
+    public WorkoutResult getWorkoutResult() {
+        return workoutResult;
     }
 
-    public ActivityResult activityGroupResult(ActivityGroupResult activityGroupResult) {
-        this.activityGroupResult = activityGroupResult;
+    public ActivityResult workoutResult(WorkoutResult workoutResult) {
+        this.workoutResult = workoutResult;
         return this;
     }
 
-    public void setActivityGroupResult(ActivityGroupResult activityGroupResult) {
-        this.activityGroupResult = activityGroupResult;
+    public void setWorkoutResult(WorkoutResult workoutResult) {
+        this.workoutResult = workoutResult;
     }
 
     public Activity getActivity() {
@@ -162,17 +162,17 @@ public class ActivityResult implements Serializable {
         this.activity = activity;
     }
 
-    public ActivityGroup getActivityGroup() {
-        return activityGroup;
+    public Workout getWorkout() {
+        return workout;
     }
 
-    public ActivityResult activityGroup(ActivityGroup activityGroup) {
-        this.activityGroup = activityGroup;
+    public ActivityResult workout(Workout workout) {
+        this.workout = workout;
         return this;
     }
 
-    public void setActivityGroup(ActivityGroup activityGroup) {
-        this.activityGroup = activityGroup;
+    public void setWorkout(Workout workout) {
+        this.workout = workout;
     }
 
     public Event getEvent() {
@@ -234,15 +234,15 @@ public class ActivityResult implements Serializable {
             "}";
     }
 
-    public static ActivityResult craeteActivityResult(Activity activity, ActivityGroupResult activityGroupResult, ActivityGroup activityGroup, Event event, Person person) {
-        String personName =  activityGroupResult.getEventResult().getPerson().getPersonalData().getFirstName() + " " + activityGroupResult.getEventResult().getPerson().getPersonalData().getLastName();
+    public static ActivityResult craeteActivityResult(Activity activity, WorkoutResult workoutResult, Workout workout, Event event, Person person) {
+        String personName =  workoutResult.getEventResult().getPerson().getPersonalData().getFirstName() + " " + workoutResult.getEventResult().getPerson().getPersonalData().getLastName();
         ActivityResult activityResult = new ActivityResult();
-        activityResult.setActivityGroupResult(activityGroupResult);
+        activityResult.setWorkoutResult(workoutResult);
         activityResult.setActivity(activity);
         activityResult.setNote("Poznámka k aktivitě " + activity.getName() + ". Osooba: " + personName);
         activityResult.setDate(event.getDate());
         activityResult.setEvent(event);
-        activityResult.setActivityGroup(activityGroup);
+        activityResult.setWorkout(workout);
         activityResult.setPerson(person);
 
         activityResult.setPrimaryResultValue(new Float(RandomNumbers.getRandomNumberInRange(20,100)));

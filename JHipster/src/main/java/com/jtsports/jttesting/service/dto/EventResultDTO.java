@@ -23,7 +23,7 @@ public class EventResultDTO implements Serializable {
 
     private Long personId;
 
-    private Set<ActivityGroupResultDTO> activityGroupResults = new HashSet<>();
+    private Set<WorkoutResultDTO> workoutResults = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -73,12 +73,12 @@ public class EventResultDTO implements Serializable {
         this.personId = personId;
     }
 
-    public Set<ActivityGroupResultDTO> getActivityGroupResults() {
-        return activityGroupResults;
+    public Set<WorkoutResultDTO> getWorkoutResults() {
+        return workoutResults;
     }
 
-    public void setActivityGroupResults(Set<ActivityGroupResultDTO> activityGroupResults) {
-        this.activityGroupResults = activityGroupResults;
+    public void setWorkoutResults(Set<WorkoutResultDTO> workoutResults) {
+        this.workoutResults = workoutResults;
     }
 
     @Override

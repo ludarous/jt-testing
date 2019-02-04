@@ -1,26 +1,26 @@
 
 {
     "jtTestingApp": {
-        "activityGroupResult" : {
+        "workoutResult" : {
             "home": {
-                "title": "Activity Group Results",
-                "createLabel": "Create a new Activity Group Result",
-                "createOrEditLabel": "Create or edit a Activity Group Result",
-                "search": "Search for Activity Group Result"
+                "title": "Workout Results",
+                "createLabel": "Create a new Workout Result",
+                "createOrEditLabel": "Create or edit a Workout Result",
+                "search": "Search for Workout Result"
             },
-            "created": "A new Activity Group Result is created with identifier {{ param }}",
-            "updated": "A Activity Group Result is updated with identifier {{ param }}",
-            "deleted": "A Activity Group Result is deleted with identifier {{ param }}",
+            "created": "A new Workout Result is created with identifier {{ param }}",
+            "updated": "A Workout Result is updated with identifier {{ param }}",
+            "deleted": "A Workout Result is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Activity Group Result {{ id }}?"
+                "question": "Are you sure you want to delete Workout Result {{ id }}?"
             },
             "detail": {
-                "title": "Activity Group Result"
+                "title": "Workout Result"
             },
             "note": "Note",
             "eventResult": "Event Result",
             "activitiesResults": "Activities Results",
-            "activityGroup": "Activity Group"
+            "workout": "Workout"
         }
     }
 }

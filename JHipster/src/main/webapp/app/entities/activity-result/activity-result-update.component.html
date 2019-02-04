@@ -38,10 +38,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jtTestingApp.activityResult.activityGroupResult" for="field_activityGroupResult">Activity Group Result</label>
-                    <select class="form-control" id="field_activityGroupResult" name="activityGroupResult" [(ngModel)]="activityResult.activityGroupResultId" >
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activityResult.workoutResult" for="field_workoutResult">Workout Result</label>
+                    <select class="form-control" id="field_workoutResult" name="workoutResult" [(ngModel)]="activityResult.workoutResultId" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="activityGroupResultOption.id" *ngFor="let activityGroupResultOption of activitygroupresults; trackBy: trackActivityGroupResultById">{{activityGroupResultOption.id}}</option>
+                        <option [ngValue]="workoutResultOption.id" *ngFor="let workoutResultOption of workoutresults; trackBy: trackWorkoutResultById">{{workoutResultOption.id}}</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -58,10 +58,10 @@
                     </small>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jtTestingApp.activityResult.activityGroup" for="field_activityGroup">Activity Group</label>
-                    <select class="form-control" id="field_activityGroup" name="activityGroup" [(ngModel)]="activityResult.activityGroupId" >
+                    <label class="form-control-label" jhiTranslate="jtTestingApp.activityResult.workout" for="field_workout">Workout</label>
+                    <select class="form-control" id="field_workout" name="workout" [(ngModel)]="activityResult.workoutId" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="activityGroupOption.id" *ngFor="let activityGroupOption of activitygroups; trackBy: trackActivityGroupById">{{activityGroupOption.name}}</option>
+                        <option [ngValue]="workoutOption.id" *ngFor="let workoutOption of workouts; trackBy: trackWorkoutById">{{workoutOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">

@@ -9,9 +9,9 @@ import { JtTestingAddressModule } from './address/address.module';
 import { JtTestingSportModule } from './sport/sport.module';
 import { JtTestingGroupModule } from './group/group.module';
 import { JtTestingPersonGroupModule } from './person-group/person-group.module';
-import { JtTestingActivityGroupCategoryModule } from './activity-group-category/activity-group-category.module';
-import { JtTestingActivityGroupModule } from './activity-group/activity-group.module';
-import { JtTestingActivityGroupResultModule } from './activity-group-result/activity-group-result.module';
+import { JtTestingWorkoutCategoryModule } from './activity-group-category/activity-group-category.module';
+import { JtTestingWorkoutModule } from './activity-group/activity-group.module';
+import { JtTestingWorkoutResultModule } from './activity-group-result/activity-group-result.module';
 import { JtTestingEventResultModule } from './event-result/event-result.module';
 import { JtTestingActivityModule } from './activity/activity.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
@@ -20,11 +20,11 @@ import { JtTestingActivityModule } from './activity/activity.module';
     // prettier-ignore
     imports: [
         JtTestingEventModule,
-        JtTestingActivityGroupModule,
+        JtTestingWorkoutModule,
         JtTestingActivityModule,
         JtTestingActivityCategoryModule,
         JtTestingEventResultModule,
-        JtTestingActivityGroupResultModule,
+        JtTestingWorkoutResultModule,
         JtTestingActivityResultModule,
         JtTestingPersonModule,
         JtTestingPersonalDataModule,
@@ -32,9 +32,9 @@ import { JtTestingActivityModule } from './activity/activity.module';
         JtTestingSportModule,
         JtTestingGroupModule,
         JtTestingPersonGroupModule,
-        JtTestingActivityGroupCategoryModule,
-        JtTestingActivityGroupModule,
-        JtTestingActivityGroupResultModule,
+        JtTestingWorkoutCategoryModule,
+        JtTestingWorkoutModule,
+        JtTestingWorkoutResultModule,
         JtTestingEventResultModule,
         JtTestingActivityModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
