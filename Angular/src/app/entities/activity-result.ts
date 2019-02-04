@@ -14,7 +14,7 @@ export interface IActivityResult {
   activityId?: number;
   activityName?: number;
 
-  eventDate?: string;
+  date?: string;
 
 }
 
@@ -28,7 +28,7 @@ export class ActivityResult implements IActivityResult {
   activityId: number;
   activityName: number;
 
-  eventDate: string;
+  date: string;
 
 
   constructor(activity: IActivity) {

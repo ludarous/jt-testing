@@ -9,6 +9,7 @@ import {StatsService} from '../../../services/stats.service';
 import * as $ from 'jquery';
 import {colorSets} from '@swimlane/ngx-charts/release/utils';
 import {zip} from 'rxjs';
+import {ArrayUtils} from '../../../utils/array.utils';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,6 +28,8 @@ export class DashboardComponent implements OnInit {
   stats: PersonalStats;
   chartData: Array<any>;
 
+  flattenedCategoriesStats: Array<PersonalCategoryStats>;
+
   ngOnInit() {
     this.load();
   }
@@ -39,6 +42,8 @@ export class DashboardComponent implements OnInit {
 
     zip(getStats$, getEvents$).subscribe(([statsResponse, eventsResponse]) => {
       this.stats = Stats.resolveResponse(statsResponse);
+
+      this.flattenedCategoriesStats = ArrayUtils.flatten(this.stats.categoriesStats, 'childCategoryPersonalStats');
       this.setCategoriesStats(this.stats.categoriesStats);
 
       this.events = eventsResponse.body;
@@ -141,7 +146,7 @@ export class DashboardComponent implements OnInit {
       $('.pie-label').css('cursor', 'pointer');
       $('.pie-label').on('click', (event) => {
         const categoryName = $(event.target).text().trim();
-        const categoryStats = this.stats.categoriesStats.find((c) => c.category.name === categoryName);
+        const categoryStats = this.flattenedCategoriesStats.find((c) => c.category.name === categoryName);
         this.setCategoriesStats(categoryStats.childCategoryPersonalStats);
       });
 

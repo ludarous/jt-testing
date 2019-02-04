@@ -34,7 +34,7 @@ public class ActivityGroupResult implements Serializable {
     @JsonIgnoreProperties("")
     private EventResult eventResult;
 
-    @OneToMany(mappedBy = "activityGroupResult")
+    @OneToMany(mappedBy = "activityGroupResult", cascade = CascadeType.ALL)
     private Set<ActivityResult> activitiesResults = new HashSet<>();
 
     @ManyToOne(optional = false)

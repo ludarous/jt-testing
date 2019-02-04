@@ -14,6 +14,7 @@ import {StatsUtils} from '../../../../utils/stats-utils';
 import {StatsService} from '../../../../services/stats.service';
 import {PersonalActivityStats, PersonalCategoryStats, PersonalStats, Stats} from '../../../../entities/stats';
 import * as $ from 'jquery';
+import {ArrayUtils} from '../../../../utils/array.utils';
 
 @Component({
   selector: 'app-user-test-result',
@@ -23,7 +24,7 @@ import * as $ from 'jquery';
 export class UserActivityGroupResultComponent implements OnInit {
 
   constructor(private categoryService: ActivityCategoryService,
-              private ActivityGroupService: ActivityGroupService,
+              private activityGroupService: ActivityGroupService,
               private statsService: StatsService,
               private eventManager: EventManager) { }
 
@@ -42,6 +43,7 @@ export class UserActivityGroupResultComponent implements OnInit {
   secondaryChartData: object[];
   activitiesChartData: object[];
 
+  flattenedCategoriesStats: Array<PersonalCategoryStats>;
 
   ngOnInit() {
     const request = new StatsRequest();
@@ -51,6 +53,8 @@ export class UserActivityGroupResultComponent implements OnInit {
     this.statsService.findMyStats(request).subscribe((testStatsResponse: HttpResponse<PersonalStats>) => {
       console.log(testStatsResponse.body);
       this.stats = Stats.resolveResponse(testStatsResponse);
+      this.flattenedCategoriesStats = ArrayUtils.flatten(this.stats.categoriesStats, 'childCategoryPersonalStats');
+
       this.createChartData();
       this.filteredActivitiesStats = this.stats.activitiesStats
         .filter(as => as.primaryPersonalActivityStats || as.secondaryPersonalActivityStats);
@@ -154,7 +158,7 @@ export class UserActivityGroupResultComponent implements OnInit {
       $('.pie-label').css('cursor', 'pointer');
       $('.pie-label').on('click', (event) => {
         const categoryName = $(event.target).text().trim();
-        const categoryStats = this.stats.categoriesStats.find((c) => c.category.name === categoryName);
+        const categoryStats = this.flattenedCategoriesStats.find((c) => c.category.name === categoryName);
         this.setCategoriesStats(categoryStats.childCategoryPersonalStats);
       });
 

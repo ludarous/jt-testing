@@ -2,6 +2,7 @@ package com.jtsports.jttesting.service.impl;
 
 import com.jtsports.jttesting.domain.User;
 import com.jtsports.jttesting.repository.AddressRepository;
+import com.jtsports.jttesting.repository.UserRepository;
 import com.jtsports.jttesting.security.SecurityUtils;
 import com.jtsports.jttesting.service.AddressService;
 import com.jtsports.jttesting.service.PersonService;
@@ -19,7 +20,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.rmi.runtime.Log;
 
 
 import java.util.Optional;
@@ -43,6 +43,8 @@ public class PersonServiceImpl implements PersonService {
 
     private final UserService userService;
 
+    private final UserRepository userRepository;
+
     private final UserMapper userMapper;
 
     private final PersonalDataService personalDataService;
@@ -55,11 +57,12 @@ public class PersonServiceImpl implements PersonService {
 
     private final PersonSearchRepository personSearchRepository;
 
-    public PersonServiceImpl(PersonRepository personRepository, AddressRepository addressRepository, AddressService addressService, AddressMapper addressMapper, UserService userService, UserMapper userMapper, PersonalDataService personalDataService, PersonalDataMapper personalDataMapper, PersonMapper personMapper, PersonFullMapper personFullMapper, PersonSearchRepository personSearchRepository) {
+    public PersonServiceImpl(PersonRepository personRepository, AddressRepository addressRepository, AddressService addressService, AddressMapper addressMapper, UserService userService, UserRepository userRepository, UserMapper userMapper, PersonalDataService personalDataService, PersonalDataMapper personalDataMapper, PersonMapper personMapper, PersonFullMapper personFullMapper, PersonSearchRepository personSearchRepository) {
         this.personRepository = personRepository;
         this.addressService = addressService;
         this.addressMapper = addressMapper;
         this.userService = userService;
+        this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.personalDataService = personalDataService;
         this.personalDataMapper = personalDataMapper;
@@ -212,7 +215,19 @@ public class PersonServiceImpl implements PersonService {
         }
 
         if(personFullDTO.getUser() != null) {
-            User user = this.userService.createUser(personFullDTO.getUser());
+            UserDTO userDTO = personFullDTO.getUser();
+            User user;
+            if(userDTO.getId() != null) {
+                Optional<User> userOptional = this.userRepository.findById(personFullDTO.getUser().getId());
+                if(userOptional.isPresent()) {
+                    user = userOptional.get();
+                } else {
+                    user = this.userService.createUser(personFullDTO.getUser());
+                }
+            } else {
+                user = this.userService.createUser(personFullDTO.getUser());
+            }
+
             person.setUser(user);
         }
 

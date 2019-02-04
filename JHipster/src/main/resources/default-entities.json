@@ -1,0 +1,558 @@
+{
+    "activityCategories": [
+        {
+            "name": "Koordinace",
+            "description": "Popis kategories síla",
+            "key": "coordination",
+            "children": [
+                {
+                    "name": "Koordinace - test prostorové orientace",
+                    "description": "",
+                    "key": "coordination-orientation-in-space"
+                },
+                {
+                    "name": "Koordinace - rovnováhová",
+                    "description": "",
+                    "key": "coordination-balance",
+                    "children": [
+                        {
+                            "name": "Koordinace - rovnováhová - statická",
+                            "description": "",
+                            "key": "coordination-balance-static"
+                        },
+                        {
+                            "name": "Koordinace - rovnováhová - dynamická",
+                            "description": "",
+                            "key": "coordination-balance-dynamic"
+                        }
+                    ]
+                },
+                {
+                    "name": "Koordinace - reakční",
+                    "description": "",
+                    "key": "coordination-reactionary"
+                },
+                {
+                    "name": "Koordinace - schopnost spojování pohybů",
+                    "description": "",
+                    "key": "coordination-merge-movements-ability"
+                },
+                {
+                    "name": "Koordinace - rozlišení polohy a pohybu jednotlivých částí těla",
+                    "description": "",
+                    "key": "coordination-position-and-movement-differentiation-of-individual-body-parts"
+                },
+                {
+                    "name": "Koordinace - schopnost přizpůsobování nebo běh pozadu - slalom",
+                    "description": "",
+                    "key": "coordination-ability-to-adapt"
+                },
+                {
+                    "name": "Koordinace - učenlivost",
+                    "description": "",
+                    "key": "coordination-learning"
+                },
+                {
+                    "name": "Koordinace - rytmická",
+                    "description": "",
+                    "key": "coordination-rytmic"
+                }
+            ]
+        },
+        {
+            "name": "Síla",
+            "description": "Popis kategories síla",
+            "key": "strength",
+            "children": [
+                {
+                    "name": "Síla - dynamická",
+                    "description": "Popis kategories síla - dynamická",
+                    "key": "strength-dynamic"
+                }
+            ]
+        },
+        {
+            "name": "Rychlost",
+            "description": "",
+            "key": "speed"
+        },
+        {
+            "name": "Vytrvalost",
+            "description": "",
+            "key": "endurance"
+        },
+        {
+            "name": "Pohyblivost",
+            "description": "",
+            "key": "mobility"
+        },
+        {
+            "name": "Dovednosti",
+            "description": "",
+            "key": "skills"
+        },
+        {
+            "name": "Core",
+            "description": "",
+            "key": "core"
+        },
+        {
+            "name": "Dovednosti s míčem",
+            "description": "",
+            "key": "ball-skills"
+        }
+    ],
+    "activities": [
+        {
+            "name": "Jít na povel a pak zpět poslepu",
+            "description": "",
+            "help": "",
+            "key": "go-on-command-and-then-back-blind",
+            "primaryResultValueUnit": "SECONDS",
+            "primaryResultType": "LESS_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "coordination-orientation-in-space"
+            ]
+        },
+        {
+            "name": "Zavázat si boty",
+            "description": "",
+            "help": "",
+            "key": "shoes-binding",
+            "primaryResultValueUnit": "SECONDS",
+            "primaryResultType": "LESS_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "coordination-balance-static"
+            ]
+        },
+        {
+            "name": "Stoj ja jedné noze",
+            "description": "",
+            "help": "",
+            "key": "stand-on-one-leg",
+            "primaryResultValueUnit": "SECONDS",
+            "primaryResultType": "MORE_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "coordination-balance-static"
+            ]
+        },
+        {
+            "name": "Skok na jednu nohu a vydržet",
+            "description": "",
+            "help": "",
+            "key": "jump-on-one-leg-and-endure",
+            "primaryResultValueUnit": "SECONDS",
+            "primaryResultType": "MORE_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "coordination-balance-dynamic"
+            ]
+        },
+        {
+            "name": "Běh 5m",
+            "description": "",
+            "help": "",
+            "key": "run-5m",
+            "primaryResultValueUnit": "SECONDS",
+            "primaryResultType": "LESS_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "coordination-reactionary"
+            ]
+        },
+        {
+            "name": "Letmý start",
+            "description": "",
+            "help": "",
+            "key": "flying-start",
+            "primaryResultValueUnit": "SECONDS",
+            "primaryResultType": "LESS_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "coordination-reactionary"
+            ]
+        },
+        {
+            "name": "Překážková dráha",
+            "description": "",
+            "help": "",
+            "key": "obstacle-course",
+            "primaryResultValueUnit": "SECONDS",
+            "primaryResultType": "LESS_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "coordination-merge-movements-ability"
+            ]
+        },
+        {
+            "name": "Házet tenisákem a kopat do míče",
+            "description": "",
+            "help": "",
+            "key": "throw-a-tennis-ball-and-kick-the-ball",
+            "primaryResultValueUnit": "POINTS",
+            "primaryResultType": "MORE_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "coordination-merge-movements-ability",
+                "coordination-position-and-movement-differentiation-of-individual-body-parts"
+            ]
+        },
+        {
+            "name": "Nožičky",
+            "description": "",
+            "help": "",
+            "key": "activity-default-1",
+            "primaryResultValueUnit": "COUNTS",
+            "primaryResultType": "MORE_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "coordination-position-and-movement-differentiation-of-individual-body-parts"
+            ]
+        },
+        {
+            "name": "Vybere a zakončí se třemi míči",
+            "description": "",
+            "help": "",
+            "key": "activity-default-2",
+            "primaryResultValueUnit": "POINTS",
+            "primaryResultType": "MORE_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "coordination-ability-to-adapt"
+            ]
+        },
+        {
+            "name": "Lowa brace test",
+            "description": "",
+            "help": "",
+            "key": "activity-default-3",
+            "primaryResultValueUnit": "SECONDS",
+            "primaryResultType": "MORE_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "coordination-learning"
+            ]
+        },
+        {
+            "name": "Žebřík",
+            "description": "",
+            "help": "",
+            "key": "activity-default-4",
+            "primaryResultValueUnit": "SECONDS",
+            "primaryResultType": "LESS_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "coordination-rytmic"
+            ]
+        },
+        {
+            "name": "Švihadlo",
+            "description": "",
+            "help": "",
+            "key": "activity-default-5",
+            "primaryResultValueUnit": "COUNTS",
+            "primaryResultType": "MORE_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "coordination-rytmic"
+            ]
+        },
+        {
+            "name": "Hod míčem 2kg",
+            "description": "",
+            "help": "",
+            "key": "activity-default-6",
+            "primaryResultValueUnit": "CENTIMETERS",
+            "primaryResultType": "MORE_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "strength"
+            ]
+        },
+        {
+            "name": "Skok daleký",
+            "description": "",
+            "help": "",
+            "key": "activity-default-7",
+            "primaryResultValueUnit": "CENTIMETERS",
+            "primaryResultType": "MORE_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "strength"
+            ]
+        },
+        {
+            "name": "Kliky",
+            "description": "",
+            "help": "",
+            "key": "activity-default-8",
+            "primaryResultValueUnit": "COUNTS",
+            "primaryResultType": "MORE_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "strength"
+            ]
+        },
+        {
+            "name": "Skok vysoký",
+            "description": "",
+            "help": "",
+            "key": "activity-default-9",
+            "primaryResultValueUnit": "CENTIMETERS",
+            "primaryResultType": "MORE_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "strength-dynamic"
+            ]
+        },
+        {
+            "name": "Běh 50m",
+            "description": "",
+            "help": "",
+            "key": "activity-default-10",
+            "primaryResultValueUnit": "SECONDS",
+            "primaryResultType": "LESS_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "speed"
+            ]
+        },
+        {
+            "name": "Slalom",
+            "description": "",
+            "help": "",
+            "key": "activity-default-11",
+            "primaryResultValueUnit": "SECONDS",
+            "primaryResultType": "LESS_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "speed"
+            ]
+        },
+        {
+            "name": "Člunkový běh",
+            "description": "",
+            "help": "",
+            "key": "activity-default-12",
+            "primaryResultValueUnit": "SECONDS",
+            "primaryResultType": "LESS_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "speed"
+            ]
+        },
+        {
+            "name": "Běh 1000m",
+            "description": "",
+            "help": "",
+            "key": "activity-default-13",
+            "primaryResultValueUnit": "SECONDS",
+            "primaryResultType": "LESS_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "endurance"
+            ]
+        },
+        {
+            "name": "Předklon",
+            "description": "",
+            "help": "",
+            "key": "activity-default-14",
+            "primaryResultValueUnit": "CENTIMETERS",
+            "primaryResultType": "MORE_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "mobility"
+            ]
+        },
+        {
+            "name": "Úklon",
+            "description": "",
+            "help": "",
+            "key": "activity-default-15",
+            "primaryResultValueUnit": "CENTIMETERS",
+            "primaryResultType": "MORE_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "mobility"
+            ]
+        },
+        {
+            "name": "Hod pytlíkem do díry - San Simeon",
+            "description": "",
+            "help": "",
+            "key": "activity-default-16",
+            "primaryResultValueUnit": "COUNTS",
+            "primaryResultType": "MORE_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "skills"
+            ]
+        },
+        {
+            "name": "Výdrž ve vzporu",
+            "description": "",
+            "help": "",
+            "key": "activity-default-17",
+            "primaryResultValueUnit": "SECONDS",
+            "primaryResultType": "MORE_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "core"
+            ]
+        },
+        {
+            "name": "Slalom s míčem",
+            "description": "",
+            "help": "",
+            "key": "activity-default-18",
+            "primaryResultValueUnit": "SECONDS",
+            "primaryResultType": "LESS_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "ball-skills"
+            ]
+        },
+        {
+            "name": "Běh 50m s míčem",
+            "description": "",
+            "help": "",
+            "key": "activity-default-19",
+            "primaryResultValueUnit": "SECONDS",
+            "primaryResultType": "LESS_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "ball-skills"
+            ]
+        },
+        {
+            "name": "Člunkový běh s míčem",
+            "description": "",
+            "help": "",
+            "key": "activity-default-20",
+            "primaryResultValueUnit": "SECONDS",
+            "primaryResultType": "LESS_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "ball-skills"
+            ]
+        },
+        {
+            "name": "Žebřík s míčem",
+            "description": "",
+            "help": "",
+            "key": "activity-default-21",
+            "primaryResultValueUnit": "SECONDS",
+            "primaryResultType": "LESS_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "ball-skills"
+            ]
+        },
+        {
+            "name": "Výskok s míčem",
+            "description": "",
+            "help": "",
+            "key": "activity-default-22",
+            "primaryResultValueUnit": "CENTIMETERS",
+            "primaryResultType": "MORE_IS_BETTER",
+            "secondaryResultValueUnit": "",
+            "secondaryResultType": "",
+            "minAge": 0,
+            "maxAge": 100,
+            "activityCategoriesKeys": [
+                "ball-skills"
+            ]
+        }
+    ]
+}

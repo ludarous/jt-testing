@@ -1,6 +1,7 @@
 package com.jtsports.jttesting.repository;
 
 import com.jtsports.jttesting.domain.Activity;
+import com.jtsports.jttesting.domain.ActivityCategory;
 import com.jtsports.jttesting.domain.ActivityResult;
 import com.jtsports.jttesting.domain.Event;
 
@@ -26,6 +27,8 @@ import java.util.Optional;
 @SuppressWarnings("unused")
 @Repository
 public interface ActivityRepository extends JpaRepository<Activity, Long> {
+
+    Optional<Activity> findOneByKey(String key);
 
     @Query(value = "select distinct activity from Activity activity left join fetch activity.categories",
         countQuery = "select count(distinct activity) from Activity activity")

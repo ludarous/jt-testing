@@ -11,6 +11,6 @@
     </div>
   </div>
   <div *ngFor="let activityGroupResult of eventResult.activityGroupResults">
-    <app-user-test-result [test]="getTestForActivityGroupResult(activityGroupResult)" [activityGroupResult]="activityGroupResult" [event]="event"></app-user-test-result>
+    <app-user-test-result [test]="getActivityGroupForActivityGroupResult(activityGroupResult)" [activityGroupResult]="activityGroupResult" [event]="event"></app-user-test-result>
   </div>
 </div>

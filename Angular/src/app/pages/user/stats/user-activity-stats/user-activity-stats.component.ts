@@ -49,7 +49,7 @@ export class UserActivityStatsComponent implements OnInit {
 
       const series = [];
       for (const activityResult of personalActivityStats.personalActivityResults) {
-        series.push({name: new Date(activityResult.eventDate), value: activityResult.primaryResultValue});
+        series.push({name: new Date(activityResult.date), value: activityResult.primaryResultValue});
       }
 
       activityStatsData.chartData = [
@@ -69,7 +69,7 @@ export class UserActivityStatsComponent implements OnInit {
       this.activityStatsChartData = activityStatsData;
     }
 
-    //this.setGradient();
+    this.setGradient();
   }
 
   getColorScheme(name): any {

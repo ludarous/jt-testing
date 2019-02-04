@@ -23,7 +23,7 @@ import {
   MessagesModule,
   MessageModule,
   KeyFilterModule,
-  SelectButtonModule, AutoCompleteModule, PickListModule, CalendarModule, DropdownModule, CheckboxModule, ButtonModule,
+  SelectButtonModule, AutoCompleteModule, PickListModule, CalendarModule, DropdownModule, CheckboxModule, ButtonModule, ScrollPanelModule,
 } from 'primeng/primeng';
 import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
@@ -72,6 +72,7 @@ import {FullCalendarModule} from 'primeng/fullcalendar';
     DropdownModule,
     CheckboxModule,
     ButtonModule,
+    ScrollPanelModule
   ],
 })
 export class PrimeNgComponentsModule { }

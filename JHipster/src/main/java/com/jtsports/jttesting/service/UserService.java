@@ -327,4 +327,16 @@ public class UserService {
     public List<String> getAuthorities() {
         return authorityRepository.findAll().stream().map(Authority::getName).collect(Collectors.toList());
     }
+
+    public User getCurrentUser() {
+        Optional<String> currentUserLoginOptional = SecurityUtils.getCurrentUserLogin();
+        if(currentUserLoginOptional.isPresent()) {
+            Optional<User> userOptional = this.userRepository.findOneByLogin(currentUserLoginOptional.get());
+            if(userOptional.isPresent()) {
+                return userOptional.get();
+            }
+        }
+
+        return null;
+    }
 }

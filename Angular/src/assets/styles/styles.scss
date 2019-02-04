@@ -61,7 +61,7 @@ app-root {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  justify-content: center;
+  overflow: hidden;
 }
 
 .pointer {
@@ -72,6 +72,7 @@ app-root {
   flex: 1;
   display: flex;
   align-items: stretch;
+  overflow-y: auto;
 
   & > *:not(router-outlet) {
     flex: 1;

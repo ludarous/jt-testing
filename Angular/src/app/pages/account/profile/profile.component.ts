@@ -15,7 +15,8 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {RxjsUtils} from '../../../utils/rxjs.utils';
 import {Principal} from '../../../core/auth/principal.service';
 import {IPerson} from '../../../entities/person';
-import {IUser} from '../../../entities/user';
+import {IUser, User} from '../../../entities/user';
+import {EventManager} from '../../../services/event.manager';
 
 @Component({
   selector: 'app-profile',
@@ -36,7 +37,7 @@ export class ProfileComponent implements OnInit {
 
   set personBirthDate(value: Date) {
     this._personBirthDate = value;
-    if (this.personForm) {
+    if (this.personForm && value) {
       (<FormGroup>this.personForm.controls['personalData']).controls['birthDate'].setValue(value.toISOString());
     }
   }
@@ -49,6 +50,7 @@ export class ProfileComponent implements OnInit {
               private personalDataService: PersonalDataService,
               private personService: PersonService,
               private messageService: MessageService,
+              private eventManager: EventManager,
               private router: Router) {
   }
 
@@ -125,6 +127,7 @@ export class ProfileComponent implements OnInit {
 
 
       const personToSave = this.personForm.value;
+      personToSave.user = this.account;
 
       let savePerson$;
       if (personToSave.id) {
@@ -137,6 +140,10 @@ export class ProfileComponent implements OnInit {
         (personResponse: HttpResponse<PersonFull>) => {
           this.person = personResponse.body;
           this.messageService.add({severity: 'success', summary: 'Profil uložen'});
+          this.eventManager.broadcast({
+            name: 'profileFilled',
+            content: 'Profile successfully filled'
+          });
         },
         (errorResponse: HttpErrorResponse) => {
           this.messageService.add({severity: 'error', summary: 'Profil nebyl uložen', detail: errorResponse.error.detail});

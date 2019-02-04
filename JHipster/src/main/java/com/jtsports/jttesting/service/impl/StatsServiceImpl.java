@@ -139,10 +139,10 @@ public class StatsServiceImpl implements StatsService {
             PersonalActivityResultsStatsDTO secondaryPersonalActivityResultsStatsDTOs = this.getPersonalActivityResultStats(activity, activityResults, personalResults, ResultCategory.SECONDARY);
             personalActivityStatsDTO.setSecondaryPersonalActivityStats(secondaryPersonalActivityResultsStatsDTOs);
 
-            ActivityResultsStatsDTO primaryResultsStatsDTO = this.getActivityResultStats(activityResults, ResultCategory.PRIMARY);
+            ActivityResultsStatsDTO primaryResultsStatsDTO = this.getActivityResultStats(activityResults, ResultCategory.PRIMARY, activity.getPrimaryResultType());
             personalActivityStatsDTO.setPrimaryResultsStats(primaryResultsStatsDTO);
 
-            ActivityResultsStatsDTO secondaryResultsStatsDTO = this.getActivityResultStats(activityResults, ResultCategory.SECONDARY);
+            ActivityResultsStatsDTO secondaryResultsStatsDTO = this.getActivityResultStats(activityResults, ResultCategory.SECONDARY, activity.getSecondaryResultType());
             personalActivityStatsDTO.setSecondaryResultsStats(secondaryResultsStatsDTO);
 
 
@@ -205,9 +205,9 @@ public class StatsServiceImpl implements StatsService {
         personalActivityResultsStatsDTO.setAveragePlacement(StatsUtil.averageInt(allPlacements));
         personalActivityResultsStatsDTO.setWorstPlacement(StatsUtil.maxInt(allPlacements));
 
-        personalActivityResultsStatsDTO.setBestPlacementInPercents(this.getPlacementInPercents(personalActivityResultsStatsDTO.getBestPlacement().floatValue(), activityResults.size()));
-        personalActivityResultsStatsDTO.setAveragePlacementInPercents(this.getPlacementInPercents(personalActivityResultsStatsDTO.getAveragePlacement(), activityResults.size()));
-        personalActivityResultsStatsDTO.setWorstPlacementInPercents(this.getPlacementInPercents(personalActivityResultsStatsDTO.getWorstPlacement().floatValue(), activityResults.size()));
+        personalActivityResultsStatsDTO.setBestPlacementInPercents(this.getPlacementInPercents(personalActivityResultsStatsDTO.getBestPlacement().floatValue(), new Float(activityResults.size())));
+        personalActivityResultsStatsDTO.setAveragePlacementInPercents(this.getPlacementInPercents(personalActivityResultsStatsDTO.getAveragePlacement(), new Float(activityResults.size())));
+        personalActivityResultsStatsDTO.setWorstPlacementInPercents(this.getPlacementInPercents(personalActivityResultsStatsDTO.getWorstPlacement().floatValue(), new Float(activityResults.size())));
 
         personalActivityResultsStatsDTO.setBestValue(StatsUtil.min(personalActivityResultsValues));
         personalActivityResultsStatsDTO.setAverageValue(StatsUtil.average(personalActivityResultsValues));
@@ -217,12 +217,12 @@ public class StatsServiceImpl implements StatsService {
 
     }
 
-    private ActivityResultsStatsDTO getActivityResultStats(List<ActivityResult> filteredResults, ResultCategory resultType) {
+    private ActivityResultsStatsDTO getActivityResultStats(List<ActivityResult> filteredResults, ResultCategory resultCategory, ResultType resultType) {
 
 
         List<Float> resultsValues;
 
-        if (ResultCategory.PRIMARY.equals(resultType)) {
+        if (ResultCategory.PRIMARY.equals(resultCategory)) {
             resultsValues = filteredResults.stream().filter(r -> r.getPrimaryResultValue() != null).map(r -> r.getPrimaryResultValue()).collect(Collectors.toList());
         } else {
             resultsValues = filteredResults.stream().filter(r -> r.getSecondaryResultValue() != null).map(r -> r.getSecondaryResultValue()).collect(Collectors.toList());
@@ -402,8 +402,10 @@ public class StatsServiceImpl implements StatsService {
         return false;
     }
 
-    private Float getPlacementInPercents(Float placement,  Integer size) {
-        return new Float((size - placement) * (100 / (size - 1)));
+    private Float getPlacementInPercents(Float placement,  Float size) {
+        if(size > 1) {
+            return new Float((size - placement) * (100F / (size - 1F)));
+        } else return 100F;
     }
 
 }

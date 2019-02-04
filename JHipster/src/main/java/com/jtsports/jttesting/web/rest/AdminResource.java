@@ -1,6 +1,7 @@
 package com.jtsports.jttesting.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.jtsports.jttesting.service.AdminService;
 import com.jtsports.jttesting.service.EventResultService;
 import com.jtsports.jttesting.service.PersonService;
 import com.jtsports.jttesting.service.dto.PersonFullDTO;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.time.ZonedDateTime;
 
 /**
@@ -27,10 +29,13 @@ public class AdminResource {
 
     private final EventResultService eventResultService;
 
-    public AdminResource(PersonService personService, EventResultService eventResultService) {
+    private final AdminService adminService;
+
+    public AdminResource(PersonService personService, EventResultService eventResultService, AdminService adminService) {
 
         this.personService = personService;
         this.eventResultService = eventResultService;
+        this.adminService = adminService;
     }
 
 
@@ -78,6 +83,21 @@ public class AdminResource {
         log.debug("REST request to get a page of ActivityGroupResults");
 
         this.eventResultService.generateFakeEventsResults();
+
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * GET  /generate-default-entities : generates default entities
+     *
+     * @return the ResponseEntity with status 200 (OK)
+     */
+    @GetMapping("/generate-default-entities")
+    @Timed
+    public ResponseEntity generateDefaultEntities() throws IOException {
+        log.debug("REST request to set default entities");
+
+        this.adminService.generateDefaultEntities();
 
         return ResponseEntity.ok().build();
     }

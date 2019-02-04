@@ -70,4 +70,5 @@ public interface ActivityCategoryService {
     List<ActivityCategory> getAllRootCategories(List<ActivityCategory> categories);
 
     ActivityCategory getRootCategory(ActivityCategory activityCategory);
+
 }

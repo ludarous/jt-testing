@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -19,4 +20,6 @@ public interface ActivityCategoryRepository extends JpaRepository<ActivityCatego
     @Query("select category from ActivityCategory category " +
         "where category.parent is null")
     List<ActivityCategory> findAllMainCategories();
+
+    Optional<ActivityCategory> findOneByKey(String key);
 }

@@ -33,6 +33,7 @@ export class MenuComponent implements OnInit {
 
     this.updateIdentity();
     this.registerAuthenticationSuccess();
+    this.registerProfileFillSuccess();
     this.principal.getAuthenticationState().subscribe((account) => {
       this.updateAccount(account);
     });
@@ -41,6 +42,12 @@ export class MenuComponent implements OnInit {
 
   registerAuthenticationSuccess() {
     this.eventManager.subscribe('authenticationSuccess', message => {
+      this.updateIdentity(true);
+    });
+  }
+
+  registerProfileFillSuccess() {
+    this.eventManager.subscribe('profileFilled', message => {
       this.updateIdentity(true);
     });
   }

@@ -6,7 +6,7 @@
     <a *ngIf="person" [routerLink]="['/user/my-stats']">Moje statistiky</a>
   </nav>
   <div class="profile-container">
-    <div matBadge="22" matBadgePosition="above after">
+    <div class="pointer" matBadge="2" matBadgePosition="above after">
       <i class="fa fa-bell"></i>
     </div>
     <div *ngIf="account" class="profile" [routerLink]="['/account/profile']">{{showUserName()}}</div>
