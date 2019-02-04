@@ -3,11 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { IWorkoutCategory } from 'app/shared/model/activity-group-category.model';
+import { IWorkoutCategory } from 'app/shared/model/workout-category.model';
 import { WorkoutCategoryService } from './workout-category.service';
 
 @Component({
-    selector: 'jhi-activity-group-category-update',
+    selector: 'jhi-workout-category-update',
     templateUrl: './workout-category-update.component.html'
 })
 export class WorkoutCategoryUpdateComponent implements OnInit {

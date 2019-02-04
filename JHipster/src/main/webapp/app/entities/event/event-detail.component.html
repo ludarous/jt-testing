@@ -30,7 +30,7 @@
                 <dt><span jhiTranslate="jtTestingApp.event.workouts">Workouts</span></dt>
                 <dd>
                     <span *ngFor="let workouts of event.workouts; let last = last">
-                        <a [routerLink]="['/activity-group', workouts?.id, 'view' ]">{{workouts.name}}</a>{{last ? '' : ', '}}
+                        <a [routerLink]="['/workout', workouts?.id, 'view' ]">{{workouts.name}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
                 <dt><span jhiTranslate="jtTestingApp.event.attachedPersons">Attached Persons</span></dt>

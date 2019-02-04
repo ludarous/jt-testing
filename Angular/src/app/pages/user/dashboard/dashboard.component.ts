@@ -1,6 +1,6 @@
 import {AfterContentInit, AfterViewInit, Component, OnInit} from '@angular/core';
 import {HttpResponse} from '@angular/common/http';
-import {IActivityGroup} from '../../../entities/activity-group';
+import {IWorkout} from '../../../entities/workout';
 import {EventService} from '../../../services/event.service';
 import {IEvent} from '../../../entities/event';
 import {StatsRequest} from '../../../entities/stats-request';

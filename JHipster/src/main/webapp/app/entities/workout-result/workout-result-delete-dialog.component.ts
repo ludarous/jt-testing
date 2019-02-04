@@ -4,11 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { IWorkoutResult } from 'app/shared/model/activity-group-result.model';
+import { IWorkoutResult } from 'app/shared/model/workout-result.model';
 import { WorkoutResultService } from './workout-result.service';
 
 @Component({
-    selector: 'jhi-activity-group-result-delete-dialog',
+    selector: 'jhi-workout-result-delete-dialog',
     templateUrl: './workout-result-delete-dialog.component.html'
 })
 export class WorkoutResultDeleteDialogComponent {
@@ -36,7 +36,7 @@ export class WorkoutResultDeleteDialogComponent {
 }
 
 @Component({
-    selector: 'jhi-activity-group-result-delete-popup',
+    selector: 'jhi-workout-result-delete-popup',
     template: ''
 })
 export class WorkoutResultDeletePopupComponent implements OnInit, OnDestroy {

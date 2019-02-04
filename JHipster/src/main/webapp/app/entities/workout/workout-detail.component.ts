@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { IWorkout } from 'app/shared/model/activity-group.model';
+import { IWorkout } from 'app/shared/model/workout.model';
 
 @Component({
-    selector: 'jhi-activity-group-detail',
+    selector: 'jhi-workout-detail',
     templateUrl: './workout-detail.component.html'
 })
 export class WorkoutDetailComponent implements OnInit {

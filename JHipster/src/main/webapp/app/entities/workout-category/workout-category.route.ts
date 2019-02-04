@@ -5,13 +5,13 @@ import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
 import { UserRouteAccessService } from 'app/core';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { WorkoutCategory } from 'app/shared/model/activity-group-category.model';
+import { WorkoutCategory } from 'app/shared/model/workout-category.model';
 import { WorkoutCategoryService } from './workout-category.service';
 import { WorkoutCategoryComponent } from './workout-category.component';
 import { WorkoutCategoryDetailComponent } from './workout-category-detail.component';
 import { WorkoutCategoryUpdateComponent } from './workout-category-update.component';
 import { WorkoutCategoryDeletePopupComponent } from './workout-category-delete-dialog.component';
-import { IWorkoutCategory } from 'app/shared/model/activity-group-category.model';
+import { IWorkoutCategory } from 'app/shared/model/workout-category.model';
 
 @Injectable({ providedIn: 'root' })
 export class WorkoutCategoryResolve implements Resolve<IWorkoutCategory> {
@@ -30,7 +30,7 @@ export class WorkoutCategoryResolve implements Resolve<IWorkoutCategory> {
 
 export const workoutCategoryRoute: Routes = [
     {
-        path: 'activity-group-category',
+        path: 'workout-category',
         component: WorkoutCategoryComponent,
         resolve: {
             pagingParams: JhiResolvePagingParams
@@ -43,7 +43,7 @@ export const workoutCategoryRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'activity-group-category/:id/view',
+        path: 'workout-category/:id/view',
         component: WorkoutCategoryDetailComponent,
         resolve: {
             workoutCategory: WorkoutCategoryResolve
@@ -55,7 +55,7 @@ export const workoutCategoryRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'activity-group-category/new',
+        path: 'workout-category/new',
         component: WorkoutCategoryUpdateComponent,
         resolve: {
             workoutCategory: WorkoutCategoryResolve
@@ -67,7 +67,7 @@ export const workoutCategoryRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'activity-group-category/:id/edit',
+        path: 'workout-category/:id/edit',
         component: WorkoutCategoryUpdateComponent,
         resolve: {
             workoutCategory: WorkoutCategoryResolve
@@ -82,7 +82,7 @@ export const workoutCategoryRoute: Routes = [
 
 export const workoutCategoryPopupRoute: Routes = [
     {
-        path: 'activity-group-category/:id/delete',
+        path: 'workout-category/:id/delete',
         component: WorkoutCategoryDeletePopupComponent,
         resolve: {
             workoutCategory: WorkoutCategoryResolve

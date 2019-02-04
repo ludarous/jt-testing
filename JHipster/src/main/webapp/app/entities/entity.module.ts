@@ -9,9 +9,9 @@ import { JtTestingAddressModule } from './address/address.module';
 import { JtTestingSportModule } from './sport/sport.module';
 import { JtTestingGroupModule } from './group/group.module';
 import { JtTestingPersonGroupModule } from './person-group/person-group.module';
-import { JtTestingWorkoutCategoryModule } from './activity-group-category/activity-group-category.module';
-import { JtTestingWorkoutModule } from './activity-group/activity-group.module';
-import { JtTestingWorkoutResultModule } from './activity-group-result/activity-group-result.module';
+import { JtTestingWorkoutCategoryModule } from './workout-category/workout-category.module';
+import { JtTestingWorkoutModule } from './workout/workout.module';
+import { JtTestingWorkoutResultModule } from './workout-result/workout-result.module';
 import { JtTestingEventResultModule } from './event-result/event-result.module';
 import { JtTestingActivityModule } from './activity/activity.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */

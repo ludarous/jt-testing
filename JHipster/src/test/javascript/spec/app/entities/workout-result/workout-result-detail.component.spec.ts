@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 
 import { JtTestingTestModule } from '../../../test.module';
 import { WorkoutResultDetailComponent } from 'app/entities/workout-result/workout-result-detail.component';
-import { WorkoutResult } from 'app/shared/model/activity-group-result.model';
+import { WorkoutResult } from 'app/shared/model/workout-result.model';
 
 describe('Component Tests', () => {
     describe('WorkoutResult Management Detail Component', () => {

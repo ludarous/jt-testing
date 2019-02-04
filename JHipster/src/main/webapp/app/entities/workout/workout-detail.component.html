@@ -30,7 +30,7 @@
                 <dt><span jhiTranslate="jtTestingApp.workout.workoutCategories">Workout Categories</span></dt>
                 <dd>
                     <span *ngFor="let workoutCategories of workout.workoutCategories; let last = last">
-                        <a [routerLink]="['/activity-group-category', workoutCategories?.id, 'view' ]">{{workoutCategories.name}}</a>{{last ? '' : ', '}}
+                        <a [routerLink]="['/workout-category', workoutCategories?.id, 'view' ]">{{workoutCategories.name}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
             </dl>
@@ -42,7 +42,7 @@
             </button>
 
             <button type="button"
-                    [routerLink]="['/activity-group', workout.id, 'edit']"
+                    [routerLink]="['/workout', workout.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>

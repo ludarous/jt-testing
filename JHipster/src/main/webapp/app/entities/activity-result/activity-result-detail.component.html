@@ -28,7 +28,7 @@
                 <dt><span jhiTranslate="jtTestingApp.activityResult.workoutResult">Workout Result</span></dt>
                 <dd>
                     <div *ngIf="activityResult.workoutResultId">
-                        <a [routerLink]="['/activity-group-result', activityResult.workoutResultId, 'view']">{{activityResult.workoutResultId}}</a>
+                        <a [routerLink]="['/workout-result', activityResult.workoutResultId, 'view']">{{activityResult.workoutResultId}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="jtTestingApp.activityResult.activity">Activity</span></dt>
@@ -40,7 +40,7 @@
                 <dt><span jhiTranslate="jtTestingApp.activityResult.workout">Workout</span></dt>
                 <dd>
                     <div *ngIf="activityResult.workoutId">
-                        <a [routerLink]="['/activity-group', activityResult.workoutId, 'view']">{{activityResult.workoutName}}</a>
+                        <a [routerLink]="['/workout', activityResult.workoutId, 'view']">{{activityResult.workoutName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="jtTestingApp.activityResult.event">Event</span></dt>

@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs';
 import { JtTestingTestModule } from '../../../test.module';
 import { WorkoutResultUpdateComponent } from 'app/entities/workout-result/workout-result-update.component';
 import { WorkoutResultService } from 'app/entities/workout-result/workout-result.service';
-import { WorkoutResult } from 'app/shared/model/activity-group-result.model';
+import { WorkoutResult } from 'app/shared/model/workout-result.model';
 
 describe('Component Tests', () => {
     describe('WorkoutResult Management Update Component', () => {

@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="jtTestingApp.workoutResult.home.title">Workout Results</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-activity-group-result" [routerLink]="['/activity-group-result/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-workout-result" [routerLink]="['/workout-result/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span class="hidden-sm-down"  jhiTranslate="jtTestingApp.workoutResult.home.createLabel">
             Create new Workout Result
@@ -38,7 +38,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let workoutResult of workoutResults ;trackBy: trackId">
-                <td><a [routerLink]="['/activity-group-result', workoutResult.id, 'view' ]">{{workoutResult.id}}</a></td>
+                <td><a [routerLink]="['/workout-result', workoutResult.id, 'view' ]">{{workoutResult.id}}</a></td>
                 <td>{{workoutResult.note}}</td>
                 <td>
                     <div *ngIf="workoutResult.eventResultId">
@@ -47,25 +47,25 @@
                 </td>
                 <td>
                     <div *ngIf="workoutResult.workoutId">
-                        <a [routerLink]="['../activity-group', workoutResult.workoutId , 'view' ]" >{{workoutResult.workoutName}}</a>
+                        <a [routerLink]="['../workout', workoutResult.workoutId , 'view' ]" >{{workoutResult.workoutName}}</a>
                     </div>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['/activity-group-result', workoutResult.id, 'view' ]"
+                                [routerLink]="['/workout-result', workoutResult.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/activity-group-result', workoutResult.id, 'edit']"
+                                [routerLink]="['/workout-result', workoutResult.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'activity-group-result/'+ workoutResult.id + '/delete'} }]"
+                                [routerLink]="['/', { outlets: { popup: 'workout-result/'+ workoutResult.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

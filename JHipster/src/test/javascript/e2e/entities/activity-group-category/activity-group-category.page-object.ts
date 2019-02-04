@@ -2,7 +2,7 @@ import { element, by, promise, ElementFinder } from 'protractor';
 
 export class WorkoutCategoryComponentsPage {
     createButton = element(by.id('jh-create-entity'));
-    title = element.all(by.css('jhi-activity-group-category div h2#page-heading span')).first();
+    title = element.all(by.css('jhi-workout-category div h2#page-heading span')).first();
 
     clickOnCreateButton(): promise.Promise<void> {
         return this.createButton.click();
@@ -14,7 +14,7 @@ export class WorkoutCategoryComponentsPage {
 }
 
 export class WorkoutCategoryUpdatePage {
-    pageTitle = element(by.id('jhi-activity-group-category-heading'));
+    pageTitle = element(by.id('jhi-workout-category-heading'));
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
     nameInput = element(by.id('field_name'));

@@ -5,13 +5,13 @@ import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
 import { UserRouteAccessService } from 'app/core';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Workout } from 'app/shared/model/activity-group.model';
+import { Workout } from 'app/shared/model/workout.model';
 import { WorkoutService } from './workout.service';
 import { WorkoutComponent } from './workout.component';
 import { WorkoutDetailComponent } from './workout-detail.component';
 import { WorkoutUpdateComponent } from './workout-update.component';
 import { WorkoutDeletePopupComponent } from './workout-delete-dialog.component';
-import { IWorkout } from 'app/shared/model/activity-group.model';
+import { IWorkout } from 'app/shared/model/workout.model';
 
 @Injectable({ providedIn: 'root' })
 export class WorkoutResolve implements Resolve<IWorkout> {
@@ -28,7 +28,7 @@ export class WorkoutResolve implements Resolve<IWorkout> {
 
 export const workoutRoute: Routes = [
     {
-        path: 'activity-group',
+        path: 'workout',
         component: WorkoutComponent,
         resolve: {
             pagingParams: JhiResolvePagingParams
@@ -41,7 +41,7 @@ export const workoutRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'activity-group/:id/view',
+        path: 'workout/:id/view',
         component: WorkoutDetailComponent,
         resolve: {
             workout: WorkoutResolve
@@ -53,7 +53,7 @@ export const workoutRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'activity-group/new',
+        path: 'workout/new',
         component: WorkoutUpdateComponent,
         resolve: {
             workout: WorkoutResolve
@@ -65,7 +65,7 @@ export const workoutRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'activity-group/:id/edit',
+        path: 'workout/:id/edit',
         component: WorkoutUpdateComponent,
         resolve: {
             workout: WorkoutResolve
@@ -80,7 +80,7 @@ export const workoutRoute: Routes = [
 
 export const workoutPopupRoute: Routes = [
     {
-        path: 'activity-group/:id/delete',
+        path: 'workout/:id/delete',
         component: WorkoutDeletePopupComponent,
         resolve: {
             workout: WorkoutResolve

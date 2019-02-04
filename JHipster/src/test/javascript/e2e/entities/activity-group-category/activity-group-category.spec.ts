@@ -1,6 +1,6 @@
 import { browser } from 'protractor';
 import { NavBarPage } from './../../page-objects/jhi-page-objects';
-import { WorkoutCategoryComponentsPage, WorkoutCategoryUpdatePage } from './activity-group-category.page-object';
+import { WorkoutCategoryComponentsPage, WorkoutCategoryUpdatePage } from './workout-category.page-object';
 
 describe('WorkoutCategory e2e test', () => {
     let navBarPage: NavBarPage;
@@ -16,7 +16,7 @@ describe('WorkoutCategory e2e test', () => {
     });
 
     it('should load WorkoutCategories', () => {
-        navBarPage.goToEntity('activity-group-category');
+        navBarPage.goToEntity('workout-category');
         workoutCategoryComponentsPage = new WorkoutCategoryComponentsPage();
         expect(workoutCategoryComponentsPage.getTitle()).toMatch(/jtTestingApp.workoutCategory.home.title/);
     });

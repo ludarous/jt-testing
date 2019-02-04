@@ -1,4 +1,4 @@
-import {ActivityGroup, IActivityGroup} from './activity-group';
+import {Workout, IWorkout} from './workout';
 import {IPersonFull} from './person-full';
 import {HttpResponse} from '@angular/common/http';
 import {IEventResult} from './event-result';
@@ -13,7 +13,7 @@ export interface IEvent {
   addressId?: number;
   addressStreet?: string;
 
-  activityGroups?: Array<IActivityGroup>;
+  workouts?: Array<IWorkout>;
   attachedPersons?: Array<IPersonFull>;
   eventResults?: Array<IEventResult>;
   
@@ -29,7 +29,7 @@ export class Event implements IEvent {
   addressId: number;
   addressStreet: string;
 
-  activityGroups: Array<IActivityGroup>;
+  workouts: Array<IWorkout>;
   attachedPersons: Array<IPersonFull>;
   eventResults: Array<IEventResult>;
 
@@ -49,7 +49,7 @@ export class Event implements IEvent {
   static parseItemEnums(event: any): IEvent {
     if (event) {
       if (event.tests) {
-        ActivityGroup.parseItemsEnums(event.tests);
+        Workout.parseItemsEnums(event.tests);
       }
     }
     return event;
@@ -58,7 +58,7 @@ export class Event implements IEvent {
   static parseItemsEnums(events: Array<any>): Array<IEvent> {
     if (events) {
       for (const event of events) {
-        ActivityGroup.parseItemEnums(event);
+        Workout.parseItemEnums(event);
       }
     }
     return events;

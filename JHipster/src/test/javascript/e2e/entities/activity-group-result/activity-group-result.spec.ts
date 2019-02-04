@@ -1,6 +1,6 @@
 import { browser } from 'protractor';
 import { NavBarPage } from './../../page-objects/jhi-page-objects';
-import { WorkoutResultComponentsPage, WorkoutResultUpdatePage } from './activity-group-result.page-object';
+import { WorkoutResultComponentsPage, WorkoutResultUpdatePage } from './workout-result.page-object';
 
 describe('WorkoutResult e2e test', () => {
     let navBarPage: NavBarPage;
@@ -16,7 +16,7 @@ describe('WorkoutResult e2e test', () => {
     });
 
     it('should load WorkoutResults', () => {
-        navBarPage.goToEntity('activity-group-result');
+        navBarPage.goToEntity('workout-result');
         workoutResultComponentsPage = new WorkoutResultComponentsPage();
         expect(workoutResultComponentsPage.getTitle()).toMatch(/jtTestingApp.workoutResult.home.title/);
     });

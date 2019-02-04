@@ -138,7 +138,7 @@ public class WorkoutResourceIntTest {
 
         // Create the Workout
         WorkoutDTO workoutDTO = workoutMapper.toDto(workout);
-        restWorkoutMockMvc.perform(post("/api/activity-groups")
+        restWorkoutMockMvc.perform(post("/api/workouts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(workoutDTO)))
             .andExpect(status().isCreated());
@@ -166,7 +166,7 @@ public class WorkoutResourceIntTest {
         WorkoutDTO workoutDTO = workoutMapper.toDto(workout);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restWorkoutMockMvc.perform(post("/api/activity-groups")
+        restWorkoutMockMvc.perform(post("/api/workouts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(workoutDTO)))
             .andExpect(status().isBadRequest());
@@ -189,7 +189,7 @@ public class WorkoutResourceIntTest {
         // Create the Workout, which fails.
         WorkoutDTO workoutDTO = workoutMapper.toDto(workout);
 
-        restWorkoutMockMvc.perform(post("/api/activity-groups")
+        restWorkoutMockMvc.perform(post("/api/workouts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(workoutDTO)))
             .andExpect(status().isBadRequest());
@@ -205,7 +205,7 @@ public class WorkoutResourceIntTest {
         workoutRepository.saveAndFlush(workout);
 
         // Get all the workoutList
-        restWorkoutMockMvc.perform(get("/api/activity-groups?sort=id,desc"))
+        restWorkoutMockMvc.perform(get("/api/workouts?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(workout.getId().intValue())))
@@ -225,7 +225,7 @@ public class WorkoutResourceIntTest {
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter).build();
 
-        restWorkoutMockMvc.perform(get("/api/activity-groups?eagerload=true"))
+        restWorkoutMockMvc.perform(get("/api/workouts?eagerload=true"))
         .andExpect(status().isOk());
 
         verify(workoutServiceMock, times(1)).findAllWithEagerRelationships(any());
@@ -240,7 +240,7 @@ public class WorkoutResourceIntTest {
             .setConversionService(createFormattingConversionService())
             .setMessageConverters(jacksonMessageConverter).build();
 
-        restWorkoutMockMvc.perform(get("/api/activity-groups?eagerload=true"))
+        restWorkoutMockMvc.perform(get("/api/workouts?eagerload=true"))
         .andExpect(status().isOk());
 
             verify(workoutServiceMock, times(1)).findAllWithEagerRelationships(any());
@@ -253,7 +253,7 @@ public class WorkoutResourceIntTest {
         workoutRepository.saveAndFlush(workout);
 
         // Get the workout
-        restWorkoutMockMvc.perform(get("/api/activity-groups/{id}", workout.getId()))
+        restWorkoutMockMvc.perform(get("/api/workouts/{id}", workout.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(workout.getId().intValue()))
@@ -266,7 +266,7 @@ public class WorkoutResourceIntTest {
     @Transactional
     public void getNonExistingWorkout() throws Exception {
         // Get the workout
-        restWorkoutMockMvc.perform(get("/api/activity-groups/{id}", Long.MAX_VALUE))
+        restWorkoutMockMvc.perform(get("/api/workouts/{id}", Long.MAX_VALUE))
             .andExpect(status().isNotFound());
     }
 
@@ -289,7 +289,7 @@ public class WorkoutResourceIntTest {
             .maxAge(UPDATED_MAX_AGE);
         WorkoutDTO workoutDTO = workoutMapper.toDto(updatedWorkout);
 
-        restWorkoutMockMvc.perform(put("/api/activity-groups")
+        restWorkoutMockMvc.perform(put("/api/workouts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(workoutDTO)))
             .andExpect(status().isOk());
@@ -316,7 +316,7 @@ public class WorkoutResourceIntTest {
         WorkoutDTO workoutDTO = workoutMapper.toDto(workout);
 
         // If the entity doesn't have an ID, it will be created instead of just being updated
-        restWorkoutMockMvc.perform(put("/api/activity-groups")
+        restWorkoutMockMvc.perform(put("/api/workouts")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(workoutDTO)))
             .andExpect(status().isBadRequest());
@@ -338,7 +338,7 @@ public class WorkoutResourceIntTest {
         int databaseSizeBeforeDelete = workoutRepository.findAll().size();
 
         // Get the workout
-        restWorkoutMockMvc.perform(delete("/api/activity-groups/{id}", workout.getId())
+        restWorkoutMockMvc.perform(delete("/api/workouts/{id}", workout.getId())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());
 
@@ -358,7 +358,7 @@ public class WorkoutResourceIntTest {
         when(mockWorkoutSearchRepository.search(queryStringQuery("id:" + workout.getId()), PageRequest.of(0, 20)))
             .thenReturn(new PageImpl<>(Collections.singletonList(workout), PageRequest.of(0, 1), 1));
         // Search the workout
-        restWorkoutMockMvc.perform(get("/api/_search/activity-groups?query=id:" + workout.getId()))
+        restWorkoutMockMvc.perform(get("/api/_search/workouts?query=id:" + workout.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(workout.getId().intValue())))

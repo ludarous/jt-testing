@@ -10,7 +10,7 @@
       <span class="info-label" translate>Poznámka: </span> {{eventResult.note}}
     </div>
   </div>
-  <div *ngFor="let activityGroupResult of eventResult.activityGroupResults">
-    <app-user-test-result [test]="getActivityGroupForActivityGroupResult(activityGroupResult)" [activityGroupResult]="activityGroupResult" [event]="event"></app-user-test-result>
+  <div *ngFor="let workoutResult of eventResult.workoutResults">
+    <app-user-test-result [test]="getWorkoutForWorkoutResult(workoutResult)" [workoutResult]="workoutResult" [event]="event"></app-user-test-result>
   </div>
 </div>

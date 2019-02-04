@@ -1,8 +1,4 @@
 import {IActivity} from './activity';
-import {IActivityGroupResult} from './activity-group-result';
-import {IPersonFull} from './person-full';
-import {IEvent} from './event';
-import {IActivityGroup} from './activity-group';
 
 export interface IActivityResult {
   id?: number;
@@ -10,7 +6,7 @@ export interface IActivityResult {
   secondaryResultValue?: number;
   note?: string;
   
-  activityGroupResultId?: number;
+  workoutResultId?: number;
   activityId?: number;
   activityName?: number;
 
@@ -24,7 +20,7 @@ export class ActivityResult implements IActivityResult {
   secondaryResultValue: number;
   note: string;
 
-  activityGroupResultId: number;
+  workoutResultId: number;
   activityId: number;
   activityName: number;
 

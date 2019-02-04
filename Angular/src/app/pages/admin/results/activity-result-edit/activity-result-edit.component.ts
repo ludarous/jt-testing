@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IActivity} from '../../../../entities/activity';
 import {ActivityResult, IActivityResult} from '../../../../entities/activity-result';
-import {IActivityGroupResult} from '../../../../entities/activity-group-result';
+import {IWorkoutResult} from '../../../../entities/workout-result';
 import {FormControl, FormGroup} from '@angular/forms';
 import {IEvent} from '../../../../entities/event';
 
@@ -37,14 +37,14 @@ export class ActivityResultEditComponent implements OnInit {
     }
   }
 
-  private _activityGroupResult: IActivityGroupResult;
+  private _workoutResult: IWorkoutResult;
   @Input()
-  get activityGroupResult(): IActivityGroupResult {
-    return this._activityGroupResult;
+  get workoutResult(): IWorkoutResult {
+    return this._workoutResult;
   }
 
-  set activityGroupResult(value: IActivityGroupResult) {
-    this._activityGroupResult = value;
+  set workoutResult(value: IWorkoutResult) {
+    this._workoutResult = value;
   }
 
   private _testEvent: IEvent;
@@ -72,7 +72,7 @@ export class ActivityResultEditComponent implements OnInit {
       note: new FormControl(activityResult.note),
       primaryResultValue: new FormControl(activityResult.primaryResultValue),
       secondaryResultValue: new FormControl(activityResult.secondaryResultValue),
-      activityGroupResultId: new FormControl(activityResult.activityGroupResultId),
+      workoutResultId: new FormControl(activityResult.workoutResultId),
       activityId: new FormControl(activityResult.activityId),
       eventDate: new FormControl(this.testEvent.date)
     });

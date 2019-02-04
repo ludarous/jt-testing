@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
 import { IEventResult } from 'app/shared/model//event-result.model';
-import { IWorkout } from 'app/shared/model//activity-group.model';
+import { IWorkout } from 'app/shared/model//workout.model';
 import { IPerson } from 'app/shared/model//person.model';
 
 export interface IEvent {

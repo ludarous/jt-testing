@@ -53,7 +53,7 @@
                 <td>{{activityResult.official}}</td>
                 <td>
                     <div *ngIf="activityResult.workoutResultId">
-                        <a [routerLink]="['../activity-group-result', activityResult.workoutResultId , 'view' ]" >{{activityResult.workoutResultId}}</a>
+                        <a [routerLink]="['../workout-result', activityResult.workoutResultId , 'view' ]" >{{activityResult.workoutResultId}}</a>
                     </div>
                 </td>
                 <td>
@@ -63,7 +63,7 @@
                 </td>
                 <td>
                     <div *ngIf="activityResult.workoutId">
-                        <a [routerLink]="['../activity-group', activityResult.workoutId , 'view' ]" >{{activityResult.workoutName}}</a>
+                        <a [routerLink]="['../workout', activityResult.workoutId , 'view' ]" >{{activityResult.workoutName}}</a>
                     </div>
                 </td>
                 <td>

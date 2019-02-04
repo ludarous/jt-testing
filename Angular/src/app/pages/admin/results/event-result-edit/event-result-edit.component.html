@@ -22,9 +22,9 @@
   </div>
 
   <div *ngIf="eventResult">
-    <div *ngFor="let activityGroupResult of eventResult.activityGroupResults">
-      <app-activity-group-result-edit [eventResult]="eventResult" [testEvent]="testEvent" [activityGroupResult]="activityGroupResult"
-                            [activityGroup]="getActivityGroupForActivityGroupResult(activityGroupResult)" [person]="person"></app-activity-group-result-edit>
+    <div *ngFor="let workoutResult of eventResult.workoutResults">
+      <app-workout-result-edit [eventResult]="eventResult" [testEvent]="testEvent" [workoutResult]="workoutResult"
+                            [workout]="getWorkoutForWorkoutResult(workoutResult)" [person]="person"></app-workout-result-edit>
     </div>
     <button mat-raised-button (click)="saveEventResults()">{{'Uložit' | translate}}</button>
   </div>

@@ -44,13 +44,13 @@ public class WorkoutCategoryResource {
     }
 
     /**
-     * POST  /activity-group-categories : Create a new workoutCategory.
+     * POST  /workout-categories : Create a new workoutCategory.
      *
      * @param workoutCategoryDTO the workoutCategoryDTO to create
      * @return the ResponseEntity with status 201 (Created) and with body the new workoutCategoryDTO, or with status 400 (Bad Request) if the workoutCategory has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/activity-group-categories")
+    @PostMapping("/workout-categories")
     @Timed
     public ResponseEntity<WorkoutCategoryDTO> createWorkoutCategory(@Valid @RequestBody WorkoutCategoryDTO workoutCategoryDTO) throws URISyntaxException {
         log.debug("REST request to save WorkoutCategory : {}", workoutCategoryDTO);
@@ -58,13 +58,13 @@ public class WorkoutCategoryResource {
             throw new BadRequestAlertException("A new workoutCategory cannot already have an ID", ENTITY_NAME, "idexists");
         }
         WorkoutCategoryDTO result = workoutCategoryService.save(workoutCategoryDTO);
-        return ResponseEntity.created(new URI("/api/activity-group-categories/" + result.getId()))
+        return ResponseEntity.created(new URI("/api/workout-categories/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
     /**
-     * PUT  /activity-group-categories : Updates an existing workoutCategory.
+     * PUT  /workout-categories : Updates an existing workoutCategory.
      *
      * @param workoutCategoryDTO the workoutCategoryDTO to update
      * @return the ResponseEntity with status 200 (OK) and with body the updated workoutCategoryDTO,
@@ -72,7 +72,7 @@ public class WorkoutCategoryResource {
      * or with status 500 (Internal Server Error) if the workoutCategoryDTO couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/activity-group-categories")
+    @PutMapping("/workout-categories")
     @Timed
     public ResponseEntity<WorkoutCategoryDTO> updateWorkoutCategory(@Valid @RequestBody WorkoutCategoryDTO workoutCategoryDTO) throws URISyntaxException {
         log.debug("REST request to update WorkoutCategory : {}", workoutCategoryDTO);
@@ -86,27 +86,27 @@ public class WorkoutCategoryResource {
     }
 
     /**
-     * GET  /activity-group-categories : get all the workoutCategories.
+     * GET  /workout-categories : get all the workoutCategories.
      *
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of workoutCategories in body
      */
-    @GetMapping("/activity-group-categories")
+    @GetMapping("/workout-categories")
     @Timed
     public ResponseEntity<List<WorkoutCategoryDTO>> getAllWorkoutCategories(Pageable pageable) {
         log.debug("REST request to get a page of WorkoutCategories");
         Page<WorkoutCategoryDTO> page = workoutCategoryService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/activity-group-categories");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/workout-categories");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
-     * GET  /activity-group-categories/:id : get the "id" workoutCategory.
+     * GET  /workout-categories/:id : get the "id" workoutCategory.
      *
      * @param id the id of the workoutCategoryDTO to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the workoutCategoryDTO, or with status 404 (Not Found)
      */
-    @GetMapping("/activity-group-categories/{id}")
+    @GetMapping("/workout-categories/{id}")
     @Timed
     public ResponseEntity<WorkoutCategoryDTO> getWorkoutCategory(@PathVariable Long id) {
         log.debug("REST request to get WorkoutCategory : {}", id);
@@ -115,12 +115,12 @@ public class WorkoutCategoryResource {
     }
 
     /**
-     * DELETE  /activity-group-categories/:id : delete the "id" workoutCategory.
+     * DELETE  /workout-categories/:id : delete the "id" workoutCategory.
      *
      * @param id the id of the workoutCategoryDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/activity-group-categories/{id}")
+    @DeleteMapping("/workout-categories/{id}")
     @Timed
     public ResponseEntity<Void> deleteWorkoutCategory(@PathVariable Long id) {
         log.debug("REST request to delete WorkoutCategory : {}", id);
@@ -129,19 +129,19 @@ public class WorkoutCategoryResource {
     }
 
     /**
-     * SEARCH  /_search/activity-group-categories?query=:query : search for the workoutCategory corresponding
+     * SEARCH  /_search/workout-categories?query=:query : search for the workoutCategory corresponding
      * to the query.
      *
      * @param query the query of the workoutCategory search
      * @param pageable the pagination information
      * @return the result of the search
      */
-    @GetMapping("/_search/activity-group-categories")
+    @GetMapping("/_search/workout-categories")
     @Timed
     public ResponseEntity<List<WorkoutCategoryDTO>> searchWorkoutCategories(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of WorkoutCategories for query {}", query);
         Page<WorkoutCategoryDTO> page = workoutCategoryService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/activity-group-categories");
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/workout-categories");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

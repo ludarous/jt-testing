@@ -1,5 +1,5 @@
 import { IActivity } from 'app/shared/model//activity.model';
-import { IWorkoutCategory } from 'app/shared/model//activity-group-category.model';
+import { IWorkoutCategory } from 'app/shared/model//workout-category.model';
 
 export interface IWorkout {
     id?: number;

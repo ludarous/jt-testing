@@ -2,7 +2,7 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { WorkoutService } from 'app/entities/workout/workout.service';
-import { Workout } from 'app/shared/model/activity-group.model';
+import { Workout } from 'app/shared/model/workout.model';
 import { SERVER_API_URL } from 'app/app.constants';
 
 describe('Service Tests', () => {
@@ -26,7 +26,7 @@ describe('Service Tests', () => {
 
                 const req = httpMock.expectOne({ method: 'GET' });
 
-                const resourceUrl = SERVER_API_URL + 'api/activity-groups';
+                const resourceUrl = SERVER_API_URL + 'api/workouts';
                 expect(req.request.url).toEqual(resourceUrl + '/' + 123);
             });
 

@@ -4,15 +4,15 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JhiAlertService } from 'ng-jhipster';
 
-import { IWorkout } from 'app/shared/model/activity-group.model';
+import { IWorkout } from 'app/shared/model/workout.model';
 import { WorkoutService } from './workout.service';
 import { IActivity } from 'app/shared/model/activity.model';
 import { ActivityService } from 'app/entities/activity';
-import { IWorkoutCategory } from 'app/shared/model/activity-group-category.model';
+import { IWorkoutCategory } from 'app/shared/model/workout-category.model';
 import { WorkoutCategoryService } from 'app/entities/workout-category';
 
 @Component({
-    selector: 'jhi-activity-group-update',
+    selector: 'jhi-workout-update',
     templateUrl: './workout-update.component.html'
 })
 export class WorkoutUpdateComponent implements OnInit {

@@ -3,7 +3,7 @@ import {IActivity} from '../../../../entities/activity';
 import {IActivityResult} from '../../../../entities/activity-result';
 import {ActivityService} from '../../../../services/activity.service';
 import {EnumTranslatorService} from '../../../../shared/pipes/enum-translator/enum-translator';
-import {IActivityGroup} from '../../../../entities/activity-group';
+import {IWorkout} from '../../../../entities/workout';
 import {IEvent} from '../../../../entities/event';
 import {StatsRequest} from '../../../../entities/stats-request';
 import {EventManager} from '../../../../services/event.manager';
@@ -26,7 +26,7 @@ export class UserActivityResultComponent implements OnInit {
   }
 
   @Input()
-  test: IActivityGroup;
+  test: IWorkout;
 
   @Input()
   event: IEvent;

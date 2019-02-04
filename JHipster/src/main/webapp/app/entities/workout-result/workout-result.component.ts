@@ -4,14 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import { IWorkoutResult } from 'app/shared/model/activity-group-result.model';
+import { IWorkoutResult } from 'app/shared/model/workout-result.model';
 import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { WorkoutResultService } from './workout-result.service';
 
 @Component({
-    selector: 'jhi-activity-group-result',
+    selector: 'jhi-workout-result',
     templateUrl: './workout-result.component.html'
 })
 export class WorkoutResultComponent implements OnInit, OnDestroy {
@@ -88,7 +88,7 @@ export class WorkoutResultComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-        this.router.navigate(['/activity-group-result'], {
+        this.router.navigate(['/workout-result'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -103,7 +103,7 @@ export class WorkoutResultComponent implements OnInit, OnDestroy {
         this.page = 0;
         this.currentSearch = '';
         this.router.navigate([
-            '/activity-group-result',
+            '/workout-result',
             {
                 page: this.page,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
@@ -119,7 +119,7 @@ export class WorkoutResultComponent implements OnInit, OnDestroy {
         this.page = 0;
         this.currentSearch = query;
         this.router.navigate([
-            '/activity-group-result',
+            '/workout-result',
             {
                 search: this.currentSearch,
                 page: this.page,

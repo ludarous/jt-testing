@@ -4,15 +4,15 @@ import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import { IWorkoutResult } from 'app/shared/model/activity-group-result.model';
+import { IWorkoutResult } from 'app/shared/model/workout-result.model';
 
 type EntityResponseType = HttpResponse<IWorkoutResult>;
 type EntityArrayResponseType = HttpResponse<IWorkoutResult[]>;
 
 @Injectable({ providedIn: 'root' })
 export class WorkoutResultService {
-    private resourceUrl = SERVER_API_URL + 'api/activity-group-results';
-    private resourceSearchUrl = SERVER_API_URL + 'api/_search/activity-group-results';
+    private resourceUrl = SERVER_API_URL + 'api/workout-results';
+    private resourceSearchUrl = SERVER_API_URL + 'api/_search/workout-results';
 
     constructor(private http: HttpClient) {}
 

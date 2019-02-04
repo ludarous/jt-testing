@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EventResult, IEventResult} from '../../../../entities/event-result';
 import {IEvent} from '../../../../entities/event';
-import {IActivityGroupResult} from '../../../../entities/activity-group-result';
-import {IActivityGroup} from '../../../../entities/activity-group';
+import {IWorkoutResult} from '../../../../entities/workout-result';
+import {IWorkout} from '../../../../entities/workout';
 import {EventResultService} from '../../../../services/event-result.service';
 import {EventService} from '../../../../services/event.service';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
@@ -28,8 +28,8 @@ export class UserEventResultComponent implements OnInit {
     });
   }
 
-  getActivityGroupForActivityGroupResult(activityGroupResult: IActivityGroupResult): IActivityGroup {
-    return this.event.activityGroups.find((t) => t.id === activityGroupResult.id);
+  getWorkoutForWorkoutResult(workoutResult: IWorkoutResult): IWorkout {
+    return this.event.workouts.find((t) => t.id === workoutResult.id);
   }
 
 }

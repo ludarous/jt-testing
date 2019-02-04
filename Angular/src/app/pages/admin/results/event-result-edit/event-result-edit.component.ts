@@ -7,8 +7,8 @@ import {IPerson} from '../../../../entities/person';
 import {IPersonFull} from '../../../../entities/person-full';
 import {EventResult, IEventResult} from '../../../../entities/event-result';
 import {EventResultService} from '../../../../services/event-result.service';
-import {IActivityGroupResult} from '../../../../entities/activity-group-result';
-import {IActivityGroup} from '../../../../entities/activity-group';
+import {IWorkoutResult} from '../../../../entities/workout-result';
+import {IWorkout} from '../../../../entities/workout';
 import {EventManager} from '../../../../services/event.manager';
 import {MessageService} from 'primeng/api';
 
@@ -66,9 +66,9 @@ export class EventResultEditComponent implements OnInit {
     console.log(this._person);
   }
 
-  getActivityGroupForActivityGroupResult(activityGroupResult: IActivityGroupResult): IActivityGroup {
-    if (this.testEvent.activityGroups) {
-      return this.testEvent.activityGroups.find((t) => t.id === activityGroupResult.activityGroupId);
+  getWorkoutForWorkoutResult(workoutResult: IWorkoutResult): IWorkout {
+    if (this.testEvent.workouts) {
+      return this.testEvent.workouts.find((t) => t.id === workoutResult.workoutId);
     }
   }
 

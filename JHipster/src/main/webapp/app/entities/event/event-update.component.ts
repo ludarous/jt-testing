@@ -10,7 +10,7 @@ import { IEvent } from 'app/shared/model/event.model';
 import { EventService } from './event.service';
 import { IAddress } from 'app/shared/model/address.model';
 import { AddressService } from 'app/entities/address';
-import { IWorkout } from 'app/shared/model/activity-group.model';
+import { IWorkout } from 'app/shared/model/workout.model';
 import { WorkoutService } from 'app/entities/workout';
 import { IPerson } from 'app/shared/model/person.model';
 import { PersonService } from 'app/entities/person';

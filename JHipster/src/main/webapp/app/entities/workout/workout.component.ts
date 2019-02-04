@@ -4,14 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import { IWorkout } from 'app/shared/model/activity-group.model';
+import { IWorkout } from 'app/shared/model/workout.model';
 import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { WorkoutService } from './workout.service';
 
 @Component({
-    selector: 'jhi-activity-group',
+    selector: 'jhi-workout',
     templateUrl: './workout.component.html'
 })
 export class WorkoutComponent implements OnInit, OnDestroy {
@@ -88,7 +88,7 @@ export class WorkoutComponent implements OnInit, OnDestroy {
     }
 
     transition() {
-        this.router.navigate(['/activity-group'], {
+        this.router.navigate(['/workout'], {
             queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
@@ -103,7 +103,7 @@ export class WorkoutComponent implements OnInit, OnDestroy {
         this.page = 0;
         this.currentSearch = '';
         this.router.navigate([
-            '/activity-group',
+            '/workout',
             {
                 page: this.page,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
@@ -119,7 +119,7 @@ export class WorkoutComponent implements OnInit, OnDestroy {
         this.page = 0;
         this.currentSearch = query;
         this.router.navigate([
-            '/activity-group',
+            '/workout',
             {
                 search: this.currentSearch,
                 page: this.page,

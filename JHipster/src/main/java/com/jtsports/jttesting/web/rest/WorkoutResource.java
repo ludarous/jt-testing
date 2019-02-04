@@ -44,13 +44,13 @@ public class WorkoutResource {
     }
 
     /**
-     * POST  /activity-groups : Create a new workout.
+     * POST  /workouts : Create a new workout.
      *
      * @param workoutDTO the workoutDTO to create
      * @return the ResponseEntity with status 201 (Created) and with body the new workoutDTO, or with status 400 (Bad Request) if the workout has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/activity-groups")
+    @PostMapping("/workouts")
     @Timed
     public ResponseEntity<WorkoutDTO> createWorkout(@Valid @RequestBody WorkoutDTO workoutDTO) throws URISyntaxException {
         log.debug("REST request to save Workout : {}", workoutDTO);
@@ -58,13 +58,13 @@ public class WorkoutResource {
             throw new BadRequestAlertException("A new workout cannot already have an ID", ENTITY_NAME, "idexists");
         }
         WorkoutDTO result = workoutService.save(workoutDTO);
-        return ResponseEntity.created(new URI("/api/activity-groups/" + result.getId()))
+        return ResponseEntity.created(new URI("/api/workouts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
     /**
-     * PUT  /activity-groups : Updates an existing workout.
+     * PUT  /workouts : Updates an existing workout.
      *
      * @param workoutDTO the workoutDTO to update
      * @return the ResponseEntity with status 200 (OK) and with body the updated workoutDTO,
@@ -72,7 +72,7 @@ public class WorkoutResource {
      * or with status 500 (Internal Server Error) if the workoutDTO couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/activity-groups")
+    @PutMapping("/workouts")
     @Timed
     public ResponseEntity<WorkoutDTO> updateWorkout(@Valid @RequestBody WorkoutDTO workoutDTO) throws URISyntaxException {
         log.debug("REST request to update Workout : {}", workoutDTO);
@@ -86,13 +86,13 @@ public class WorkoutResource {
     }
 
     /**
-     * GET  /activity-groups : get all the workouts.
+     * GET  /workouts : get all the workouts.
      *
      * @param pageable the pagination information
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
      * @return the ResponseEntity with status 200 (OK) and the list of workouts in body
      */
-    @GetMapping("/activity-groups")
+    @GetMapping("/workouts")
     @Timed
     public ResponseEntity<List<WorkoutDTO>> getAllWorkouts(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get a page of Workouts");
@@ -102,17 +102,17 @@ public class WorkoutResource {
         } else {
             page = workoutService.findAll(pageable);
         }
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/activity-groups?eagerload=%b", eagerload));
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, String.format("/api/workouts?eagerload=%b", eagerload));
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
-     * GET  /activity-groups/:id : get the "id" workout.
+     * GET  /workouts/:id : get the "id" workout.
      *
      * @param id the id of the workoutDTO to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the workoutDTO, or with status 404 (Not Found)
      */
-    @GetMapping("/activity-groups/{id}")
+    @GetMapping("/workouts/{id}")
     @Timed
     public ResponseEntity<WorkoutDTO> getWorkout(@PathVariable Long id) {
         log.debug("REST request to get Workout : {}", id);
@@ -121,12 +121,12 @@ public class WorkoutResource {
     }
 
     /**
-     * DELETE  /activity-groups/:id : delete the "id" workout.
+     * DELETE  /workouts/:id : delete the "id" workout.
      *
      * @param id the id of the workoutDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/activity-groups/{id}")
+    @DeleteMapping("/workouts/{id}")
     @Timed
     public ResponseEntity<Void> deleteWorkout(@PathVariable Long id) {
         log.debug("REST request to delete Workout : {}", id);
@@ -135,19 +135,19 @@ public class WorkoutResource {
     }
 
     /**
-     * SEARCH  /_search/activity-groups?query=:query : search for the workout corresponding
+     * SEARCH  /_search/workouts?query=:query : search for the workout corresponding
      * to the query.
      *
      * @param query the query of the workout search
      * @param pageable the pagination information
      * @return the result of the search
      */
-    @GetMapping("/_search/activity-groups")
+    @GetMapping("/_search/workouts")
     @Timed
     public ResponseEntity<List<WorkoutDTO>> searchWorkouts(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Workouts for query {}", query);
         Page<WorkoutDTO> page = workoutService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/activity-groups");
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/workouts");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

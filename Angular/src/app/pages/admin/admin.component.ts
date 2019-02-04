@@ -49,35 +49,35 @@ export class AdminComponent implements OnInit {
         ]
       },
       {
-        label: 'Skupiny aktivit',
-        routerLink: ['/admin/activity-groups'],
+        label: 'Cvičení',
+        routerLink: ['/admin/workouts'],
         routerLinkActiveOptions: {exact: true},
         items: [
           {
-            label: 'Kategorie skupin aktivit',
-            routerLink: ['/admin/activity-group-categories'],
+            label: 'Kategorie cvičení',
+            routerLink: ['/admin/workout-categories'],
             routerLinkActiveOptions: {exact: true},
             items: [
               {
-                label: 'Seznam kategorií skupin aktivit',
-                routerLink: ['/admin/activity-group-categories/list'],
+                label: 'Seznam kategorií cvičení',
+                routerLink: ['/admin/workout-categories/list'],
                 routerLinkActiveOptions: {exact: true},
               },
               {
-                label: 'Vytvoř kategorii skupin aktivit',
-                routerLink: ['/admin/activity-group-categories/create'],
+                label: 'Vytvoř kategorii cvičení',
+                routerLink: ['/admin/workout-categories/create'],
                 routerLinkActiveOptions: {exact: true},
               }
             ]
           },
           {
-            label: 'Seznam skupin aktivit',
-            routerLink: ['/admin/activity-groups/list'],
+            label: 'Seznam cvičení',
+            routerLink: ['/admin/workouts/list'],
             routerLinkActiveOptions: {exact: true},
           },
           {
-            label: 'Vytvoř skupinu aktivit',
-            routerLink: ['/admin/activity-groups/create'],
+            label: 'Vytvoř cvičení',
+            routerLink: ['/admin/workouts/create'],
             routerLinkActiveOptions: {exact: true},
           }
         ]

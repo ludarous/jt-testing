@@ -8,11 +8,11 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { IActivityResult } from 'app/shared/model/activity-result.model';
 import { ActivityResultService } from './activity-result.service';
-import { IWorkoutResult } from 'app/shared/model/activity-group-result.model';
+import { IWorkoutResult } from 'app/shared/model/workout-result.model';
 import { WorkoutResultService } from 'app/entities/workout-result';
 import { IActivity } from 'app/shared/model/activity.model';
 import { ActivityService } from 'app/entities/activity';
-import { IWorkout } from 'app/shared/model/activity-group.model';
+import { IWorkout } from 'app/shared/model/workout.model';
 import { WorkoutService } from 'app/entities/workout';
 import { IEvent } from 'app/shared/model/event.model';
 import { EventService } from 'app/entities/event';

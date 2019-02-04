@@ -129,7 +129,7 @@ public class WorkoutCategoryResourceIntTest {
 
         // Create the WorkoutCategory
         WorkoutCategoryDTO workoutCategoryDTO = workoutCategoryMapper.toDto(workoutCategory);
-        restWorkoutCategoryMockMvc.perform(post("/api/activity-group-categories")
+        restWorkoutCategoryMockMvc.perform(post("/api/workout-categories")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(workoutCategoryDTO)))
             .andExpect(status().isCreated());
@@ -156,7 +156,7 @@ public class WorkoutCategoryResourceIntTest {
         WorkoutCategoryDTO workoutCategoryDTO = workoutCategoryMapper.toDto(workoutCategory);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restWorkoutCategoryMockMvc.perform(post("/api/activity-group-categories")
+        restWorkoutCategoryMockMvc.perform(post("/api/workout-categories")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(workoutCategoryDTO)))
             .andExpect(status().isBadRequest());
@@ -179,7 +179,7 @@ public class WorkoutCategoryResourceIntTest {
         // Create the WorkoutCategory, which fails.
         WorkoutCategoryDTO workoutCategoryDTO = workoutCategoryMapper.toDto(workoutCategory);
 
-        restWorkoutCategoryMockMvc.perform(post("/api/activity-group-categories")
+        restWorkoutCategoryMockMvc.perform(post("/api/workout-categories")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(workoutCategoryDTO)))
             .andExpect(status().isBadRequest());
@@ -195,7 +195,7 @@ public class WorkoutCategoryResourceIntTest {
         workoutCategoryRepository.saveAndFlush(workoutCategory);
 
         // Get all the workoutCategoryList
-        restWorkoutCategoryMockMvc.perform(get("/api/activity-group-categories?sort=id,desc"))
+        restWorkoutCategoryMockMvc.perform(get("/api/workout-categories?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(workoutCategory.getId().intValue())))
@@ -212,7 +212,7 @@ public class WorkoutCategoryResourceIntTest {
         workoutCategoryRepository.saveAndFlush(workoutCategory);
 
         // Get the workoutCategory
-        restWorkoutCategoryMockMvc.perform(get("/api/activity-group-categories/{id}", workoutCategory.getId()))
+        restWorkoutCategoryMockMvc.perform(get("/api/workout-categories/{id}", workoutCategory.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(workoutCategory.getId().intValue()))
@@ -224,7 +224,7 @@ public class WorkoutCategoryResourceIntTest {
     @Transactional
     public void getNonExistingWorkoutCategory() throws Exception {
         // Get the workoutCategory
-        restWorkoutCategoryMockMvc.perform(get("/api/activity-group-categories/{id}", Long.MAX_VALUE))
+        restWorkoutCategoryMockMvc.perform(get("/api/workout-categories/{id}", Long.MAX_VALUE))
             .andExpect(status().isNotFound());
     }
 
@@ -246,7 +246,7 @@ public class WorkoutCategoryResourceIntTest {
             .description(UPDATED_DESCRIPTION);
         WorkoutCategoryDTO workoutCategoryDTO = workoutCategoryMapper.toDto(updatedWorkoutCategory);
 
-        restWorkoutCategoryMockMvc.perform(put("/api/activity-group-categories")
+        restWorkoutCategoryMockMvc.perform(put("/api/workout-categories")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(workoutCategoryDTO)))
             .andExpect(status().isOk());
@@ -272,7 +272,7 @@ public class WorkoutCategoryResourceIntTest {
         WorkoutCategoryDTO workoutCategoryDTO = workoutCategoryMapper.toDto(workoutCategory);
 
         // If the entity doesn't have an ID, it will be created instead of just being updated
-        restWorkoutCategoryMockMvc.perform(put("/api/activity-group-categories")
+        restWorkoutCategoryMockMvc.perform(put("/api/workout-categories")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(workoutCategoryDTO)))
             .andExpect(status().isBadRequest());
@@ -294,7 +294,7 @@ public class WorkoutCategoryResourceIntTest {
         int databaseSizeBeforeDelete = workoutCategoryRepository.findAll().size();
 
         // Get the workoutCategory
-        restWorkoutCategoryMockMvc.perform(delete("/api/activity-group-categories/{id}", workoutCategory.getId())
+        restWorkoutCategoryMockMvc.perform(delete("/api/workout-categories/{id}", workoutCategory.getId())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());
 
@@ -314,7 +314,7 @@ public class WorkoutCategoryResourceIntTest {
         when(mockWorkoutCategorySearchRepository.search(queryStringQuery("id:" + workoutCategory.getId()), PageRequest.of(0, 20)))
             .thenReturn(new PageImpl<>(Collections.singletonList(workoutCategory), PageRequest.of(0, 1), 1));
         // Search the workoutCategory
-        restWorkoutCategoryMockMvc.perform(get("/api/_search/activity-group-categories?query=id:" + workoutCategory.getId()))
+        restWorkoutCategoryMockMvc.perform(get("/api/_search/workout-categories?query=id:" + workoutCategory.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(workoutCategory.getId().intValue())))

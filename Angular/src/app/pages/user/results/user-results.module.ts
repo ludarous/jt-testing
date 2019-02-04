@@ -7,7 +7,7 @@ import {MaterialComponentsModule} from '../../../shared/material-components.modu
 import {EventResultService} from '../../../services/event-result.service';
 import {EventService} from '../../../services/event.service';
 import { UserEventResultComponent } from './user-event-result/user-event-result.component';
-import { UserActivityGroupResultComponent } from './user-activity-group-result/user-activity-group-result.component';
+import { UserWorkoutResultComponent } from './user-workout-result/user-workout-result.component';
 import { UserActivityResultComponent } from './user-activity-result/user-activity-result.component';
 import {ActivityService} from '../../../services/activity.service';
 import {EnumTranslationsModule} from '../../../shared/pipes/enum-translator/enum-translations.module';
@@ -20,14 +20,14 @@ import {
   NumberCardModule, PolarChartModule
 } from '@swimlane/ngx-charts';
 import {ActivityCategoryService} from '../../../services/activity-category.service';
-import {ActivityGroupService} from '../../../services/activity-group.service';
+import {WorkoutService} from '../../../services/workout.service';
 import {StatsService} from '../../../services/stats.service';
 
 @NgModule({
   declarations: [
     UserResultsComponent,
     UserEventResultComponent,
-    UserActivityGroupResultComponent,
+    UserWorkoutResultComponent,
     UserActivityResultComponent,
   ],
   imports: [
@@ -47,13 +47,13 @@ import {StatsService} from '../../../services/stats.service';
     EventService,
     ActivityService,
     ActivityCategoryService,
-    ActivityGroupService,
+    WorkoutService,
     StatsService,
   ],
   exports: [
     UserResultsComponent,
     UserEventResultComponent,
-    UserActivityGroupResultComponent,
+    UserWorkoutResultComponent,
     UserActivityResultComponent
   ]
 })

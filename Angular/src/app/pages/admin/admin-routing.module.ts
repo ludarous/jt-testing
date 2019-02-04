@@ -20,12 +20,12 @@ const routes: Routes = [
         loadChildren: 'app/pages/admin/activities/activities.module#ActivitiesModule',
       },
       {
-        path: 'activity-group-categories',
-        loadChildren: 'app/pages/admin/activity-group-categories/activity-group-categories.module#ActivityGroupCategoriesModule',
+        path: 'workout-categories',
+        loadChildren: 'app/pages/admin/workout-categories/workout-categories.module#WorkoutCategoriesModule',
       },
       {
-        path: 'activity-groups',
-        loadChildren: 'app/pages/admin/activity-groups/activity-groups.module#ActivityGroupsModule',
+        path: 'workouts',
+        loadChildren: 'app/pages/admin/workouts/workouts.module#WorkoutsModule',
       },
       {
         path: 'events',

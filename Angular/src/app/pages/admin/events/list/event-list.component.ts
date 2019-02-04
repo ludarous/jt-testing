@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {IActivity} from '../../../../entities/activity';
 import {Router} from '@angular/router';
-import {ActivityGroupService} from '../../../../services/activity-group.service';
-import {IActivityGroup} from '../../../../entities/activity-group';
+import {WorkoutService} from '../../../../services/workout.service';
+import {IWorkout} from '../../../../entities/workout';
 import {IEvent} from '../../../../entities/event';
 import {EventService} from '../../../../services/event.service';
 import {IActivityCategory} from '../../../../entities/activity-category';
@@ -33,7 +33,7 @@ export class EventListComponent implements OnInit {
   }
 
   load() {
-    this.eventService.query().subscribe((eventsResponse: HttpResponse<Array<IActivityGroup>>) => {
+    this.eventService.query().subscribe((eventsResponse: HttpResponse<Array<IWorkout>>) => {
       this.events = eventsResponse.body;
     });
   }

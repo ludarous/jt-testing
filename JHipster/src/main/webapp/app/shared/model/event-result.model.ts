@@ -1,4 +1,4 @@
-import { IWorkoutResult } from 'app/shared/model//activity-group-result.model';
+import { IWorkoutResult } from 'app/shared/model//workout-result.model';
 
 export interface IEventResult {
     id?: number;

@@ -7,7 +7,7 @@ import { ActivatedRoute, Data } from '@angular/router';
 import { JtTestingTestModule } from '../../../test.module';
 import { WorkoutCategoryComponent } from 'app/entities/workout-category/workout-category.component';
 import { WorkoutCategoryService } from 'app/entities/workout-category/workout-category.service';
-import { WorkoutCategory } from 'app/shared/model/activity-group-category.model';
+import { WorkoutCategory } from 'app/shared/model/workout-category.model';
 
 describe('Component Tests', () => {
     describe('WorkoutCategory Management Component', () => {

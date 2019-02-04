@@ -5,7 +5,7 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {RxjsUtils} from '../../../../utils/rxjs.utils';
-import {IActivityGroup} from '../../../../entities/activity-group';
+import {IWorkout} from '../../../../entities/workout';
 import {EventService} from '../../../../services/event.service';
 import {IEvent, Event} from '../../../../entities/event';
 import {IPersonFull} from '../../../../entities/person-full';
@@ -14,7 +14,7 @@ import {Person} from '../../../../entities/person';
 import {Moment} from 'moment';
 import * as moment from 'moment';
 import {MessageService} from 'primeng/api';
-import {ActivityGroupService} from '../../../../services/activity-group.service';
+import {WorkoutService} from '../../../../services/workout.service';
 
 @Component({
   selector: 'app-events-edit',
@@ -27,13 +27,13 @@ export class EventEditComponent implements OnInit {
   event: IEvent;
   eventId: number;
 
-  tests: Array<IActivityGroup>;
+  tests: Array<IWorkout>;
   persons: Array<IPersonFull>;
 
-  suggestedTests: Array<IActivityGroup> = new Array<IActivityGroup>();
+  suggestedTests: Array<IWorkout> = new Array<IWorkout>();
   suggestedPerson: Array<IPersonFull> = new Array<IPersonFull>();
 
-  selectedTests: Array<IActivityGroup> = new Array<IActivityGroup>();
+  selectedTests: Array<IWorkout> = new Array<IWorkout>();
   selectedPersons: Array<IPersonFull> = new Array<IPersonFull>();
 
 
@@ -75,7 +75,7 @@ export class EventEditComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private eventService: EventService,
               private personService: PersonService,
-              private activityGroupService: ActivityGroupService,
+              private workoutService: WorkoutService,
               private messageService: MessageService,
               private router: Router) { }
 
@@ -85,7 +85,7 @@ export class EventEditComponent implements OnInit {
     params$.subscribe((params) => {
       this.eventId = +params['id'];
 
-      const getTests$ = this.activityGroupService.query({
+      const getTests$ = this.workoutService.query({
         page: 0,
         size: 1000,
       });
@@ -107,7 +107,7 @@ export class EventEditComponent implements OnInit {
   }
   
 
-  setEventForm(event: IEvent, tests: Array<IActivityGroup>, persons: Array<IPersonFull>) {
+  setEventForm(event: IEvent, tests: Array<IWorkout>, persons: Array<IPersonFull>) {
 
     this.eventForm = new FormGroup({
       id: new FormControl(event.id),
@@ -117,8 +117,8 @@ export class EventEditComponent implements OnInit {
       maxAge: new FormControl(event.maxAge)
     });
 
-    if (tests && event.activityGroups) {
-      this.selectedTests = tests.filter((t) => event.activityGroups.some((st) => st.id === t.id));
+    if (tests && event.workouts) {
+      this.selectedTests = tests.filter((t) => event.workouts.some((st) => st.id === t.id));
       this.suggestedTests = tests.filter((t) => !this.selectedTests.some((st) => st.id === t.id));
     } else {
       this.suggestedTests = tests;
@@ -156,7 +156,7 @@ export class EventEditComponent implements OnInit {
       }
 
       if (this.selectedTests) {
-        eventToSave.activityGroups = this.selectedTests;
+        eventToSave.workouts = this.selectedTests;
       }
 
       if (this.selectedPersons) {

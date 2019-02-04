@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="jtTestingApp.workoutCategory.home.title">Workout Categories</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-activity-group-category" [routerLink]="['/activity-group-category/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-workout-category" [routerLink]="['/workout-category/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span class="hidden-sm-down"  jhiTranslate="jtTestingApp.workoutCategory.home.createLabel">
             Create new Workout Category
@@ -38,26 +38,26 @@
             </thead>
             <tbody>
             <tr *ngFor="let workoutCategory of workoutCategories ;trackBy: trackId">
-                <td><a [routerLink]="['/activity-group-category', workoutCategory.id, 'view' ]">{{workoutCategory.id}}</a></td>
+                <td><a [routerLink]="['/workout-category', workoutCategory.id, 'view' ]">{{workoutCategory.id}}</a></td>
                 <td>{{workoutCategory.name}}</td>
                 <td>{{workoutCategory.key}}</td>
                 <td>{{workoutCategory.description}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['/activity-group-category', workoutCategory.id, 'view' ]"
+                                [routerLink]="['/workout-category', workoutCategory.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/activity-group-category', workoutCategory.id, 'edit']"
+                                [routerLink]="['/workout-category', workoutCategory.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'activity-group-category/'+ workoutCategory.id + '/delete'} }]"
+                                [routerLink]="['/', { outlets: { popup: 'workout-category/'+ workoutCategory.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
