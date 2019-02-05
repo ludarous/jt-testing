@@ -44,6 +44,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.jtsports.jttesting.domain.enumeration.Sex;
 /**
  * Test class for the PersonalDataResource REST controller.
  *
@@ -64,6 +65,9 @@ public class PersonalDataResourceIntTest {
 
     private static final String DEFAULT_NATIONALITY = "AAAAAAAAAA";
     private static final String UPDATED_NATIONALITY = "BBBBBBBBBB";
+
+    private static final Sex DEFAULT_SEX = Sex.MALE;
+    private static final Sex UPDATED_SEX = Sex.FEMALE;
 
     @Autowired
     private PersonalDataRepository personalDataRepository;
@@ -122,7 +126,8 @@ public class PersonalDataResourceIntTest {
             .firstName(DEFAULT_FIRST_NAME)
             .lastName(DEFAULT_LAST_NAME)
             .birthDate(DEFAULT_BIRTH_DATE)
-            .nationality(DEFAULT_NATIONALITY);
+            .nationality(DEFAULT_NATIONALITY)
+            .sex(DEFAULT_SEX);
         return personalData;
     }
 
@@ -151,6 +156,7 @@ public class PersonalDataResourceIntTest {
         assertThat(testPersonalData.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
         assertThat(testPersonalData.getBirthDate()).isEqualTo(DEFAULT_BIRTH_DATE);
         assertThat(testPersonalData.getNationality()).isEqualTo(DEFAULT_NATIONALITY);
+        assertThat(testPersonalData.getSex()).isEqualTo(DEFAULT_SEX);
 
         // Validate the PersonalData in Elasticsearch
         verify(mockPersonalDataSearchRepository, times(1)).save(testPersonalData);
@@ -250,7 +256,8 @@ public class PersonalDataResourceIntTest {
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME.toString())))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())))
             .andExpect(jsonPath("$.[*].birthDate").value(hasItem(sameInstant(DEFAULT_BIRTH_DATE))))
-            .andExpect(jsonPath("$.[*].nationality").value(hasItem(DEFAULT_NATIONALITY.toString())));
+            .andExpect(jsonPath("$.[*].nationality").value(hasItem(DEFAULT_NATIONALITY.toString())))
+            .andExpect(jsonPath("$.[*].sex").value(hasItem(DEFAULT_SEX.toString())));
     }
     
 
@@ -268,7 +275,8 @@ public class PersonalDataResourceIntTest {
             .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME.toString()))
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME.toString()))
             .andExpect(jsonPath("$.birthDate").value(sameInstant(DEFAULT_BIRTH_DATE)))
-            .andExpect(jsonPath("$.nationality").value(DEFAULT_NATIONALITY.toString()));
+            .andExpect(jsonPath("$.nationality").value(DEFAULT_NATIONALITY.toString()))
+            .andExpect(jsonPath("$.sex").value(DEFAULT_SEX.toString()));
     }
     @Test
     @Transactional
@@ -294,7 +302,8 @@ public class PersonalDataResourceIntTest {
             .firstName(UPDATED_FIRST_NAME)
             .lastName(UPDATED_LAST_NAME)
             .birthDate(UPDATED_BIRTH_DATE)
-            .nationality(UPDATED_NATIONALITY);
+            .nationality(UPDATED_NATIONALITY)
+            .sex(UPDATED_SEX);
         PersonalDataDTO personalDataDTO = personalDataMapper.toDto(updatedPersonalData);
 
         restPersonalDataMockMvc.perform(put("/api/personal-data")
@@ -310,6 +319,7 @@ public class PersonalDataResourceIntTest {
         assertThat(testPersonalData.getLastName()).isEqualTo(UPDATED_LAST_NAME);
         assertThat(testPersonalData.getBirthDate()).isEqualTo(UPDATED_BIRTH_DATE);
         assertThat(testPersonalData.getNationality()).isEqualTo(UPDATED_NATIONALITY);
+        assertThat(testPersonalData.getSex()).isEqualTo(UPDATED_SEX);
 
         // Validate the PersonalData in Elasticsearch
         verify(mockPersonalDataSearchRepository, times(1)).save(testPersonalData);
@@ -373,7 +383,8 @@ public class PersonalDataResourceIntTest {
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME.toString())))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())))
             .andExpect(jsonPath("$.[*].birthDate").value(hasItem(sameInstant(DEFAULT_BIRTH_DATE))))
-            .andExpect(jsonPath("$.[*].nationality").value(hasItem(DEFAULT_NATIONALITY.toString())));
+            .andExpect(jsonPath("$.[*].nationality").value(hasItem(DEFAULT_NATIONALITY.toString())))
+            .andExpect(jsonPath("$.[*].sex").value(hasItem(DEFAULT_SEX.toString())));
     }
 
     @Test

@@ -6,7 +6,7 @@ import {UserService} from '../../../services/user.service';
 import {AddressService} from '../../../services/address.service';
 import {PersonalDataService} from '../../../services/personal-data.service';
 import {PersonService} from '../../../services/person.service';
-import {MessageService} from 'primeng/api';
+import {MessageService, SelectItem} from 'primeng/api';
 import {Address, IAddress} from '../../../entities/address';
 import {IPersonalData, PersonalData} from '../../../entities/personal-data';
 import {Observable} from 'rxjs';
@@ -17,6 +17,10 @@ import {Principal} from '../../../core/auth/principal.service';
 import {IPerson} from '../../../entities/person';
 import {IUser, User} from '../../../entities/user';
 import {EventManager} from '../../../services/event.manager';
+import {ActivityResultUnits} from '../../../entities/enums/activity-result-units';
+import {Sex} from '../../../entities/enums/sex';
+import {ResultType} from '../../../entities/enums/result-type';
+import {EnumTranslatorService} from '../../../shared/pipes/enum-translator/enum-translator';
 
 @Component({
   selector: 'app-profile',
@@ -29,6 +33,9 @@ export class ProfileComponent implements OnInit {
 
   person: IPersonFull;
   personForm: FormGroup;
+
+  sexes: Array<Sex>;
+  sexOptions: Array<SelectItem>;
 
   private _personBirthDate: Date;
   get personBirthDate(): Date {
@@ -51,10 +58,15 @@ export class ProfileComponent implements OnInit {
               private personService: PersonService,
               private messageService: MessageService,
               private eventManager: EventManager,
-              private router: Router) {
+              private router: Router,
+              private enumTranslateService: EnumTranslatorService) {
   }
 
   ngOnInit() {
+
+    this.sexes = Sex.getAll();
+    this.sexOptions = this.sexes.map(s => ({label: this.enumTranslateService.translate(s), value: s.ordinal}));
+
     this.principal.identity().then((account) => {
       this.account = account;
 
@@ -102,6 +114,7 @@ export class ProfileComponent implements OnInit {
       firstName: new FormControl(personalData.firstName),
       lastName: new FormControl(personalData.lastName),
       birthDate: new FormControl(personalData.birthDate ? new Date(personalData.birthDate) : null),
+      sex: new FormControl(personalData.sex ? personalData.sex.ordinal : null),
       nationality: new FormControl(personalData.nationality),
     });
   }
@@ -110,7 +123,7 @@ export class ProfileComponent implements OnInit {
     if (userId) {
       return this.personService.findByUserId(userId).pipe(map(
         (personResponse: HttpResponse<IPersonFull>) => {
-          return personResponse.body;
+          return PersonFull.resolveResponse(personResponse);
         }),
         catchError((error: HttpErrorResponse) => {
             return RxjsUtils.create(new PersonFull());

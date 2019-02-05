@@ -15,6 +15,7 @@ import {AddressService} from '../../services/address.service';
 import {UserService} from '../../services/user.service';
 import {PersonService} from '../../services/person.service';
 import {PersonalDataService} from '../../services/personal-data.service';
+import {EnumTranslationsModule} from '../../shared/pipes/enum-translator/enum-translations.module';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import {PersonalDataService} from '../../services/personal-data.service';
     MaterialComponentsModule,
     PrimeNgComponentsModule,
     TranslateModule,
+    EnumTranslationsModule,
     AccountRoutingModule,
   ],
   providers: [

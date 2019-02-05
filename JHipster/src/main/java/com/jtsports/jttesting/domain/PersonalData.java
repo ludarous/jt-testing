@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
+import com.jtsports.jttesting.domain.enumeration.Sex;
+
 /**
  * A PersonalData.
  */
@@ -38,6 +40,10 @@ public class PersonalData implements Serializable {
 
     @Column(name = "nationality")
     private String nationality;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sex")
+    private Sex sex;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -99,6 +105,19 @@ public class PersonalData implements Serializable {
     public void setNationality(String nationality) {
         this.nationality = nationality;
     }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public PersonalData sex(Sex sex) {
+        this.sex = sex;
+        return this;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -129,6 +148,7 @@ public class PersonalData implements Serializable {
             ", lastName='" + getLastName() + "'" +
             ", birthDate='" + getBirthDate() + "'" +
             ", nationality='" + getNationality() + "'" +
+            ", sex='" + getSex() + "'" +
             "}";
     }
 }

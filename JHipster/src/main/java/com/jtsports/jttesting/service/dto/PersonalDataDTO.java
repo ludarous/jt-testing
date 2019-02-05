@@ -4,6 +4,7 @@ import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+import com.jtsports.jttesting.domain.enumeration.Sex;
 
 /**
  * A DTO for the PersonalData entity.
@@ -22,6 +23,8 @@ public class PersonalDataDTO implements Serializable {
     private ZonedDateTime birthDate;
 
     private String nationality;
+
+    private Sex sex;
 
     public Long getId() {
         return id;
@@ -63,6 +66,14 @@ public class PersonalDataDTO implements Serializable {
         this.nationality = nationality;
     }
 
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -92,6 +103,7 @@ public class PersonalDataDTO implements Serializable {
             ", lastName='" + getLastName() + "'" +
             ", birthDate='" + getBirthDate() + "'" +
             ", nationality='" + getNationality() + "'" +
+            ", sex='" + getSex() + "'" +
             "}";
     }
 }

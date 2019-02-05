@@ -20,7 +20,8 @@
             "firstName": "First Name",
             "lastName": "Last Name",
             "birthDate": "Birth Date",
-            "nationality": "Nationality"
+            "nationality": "Nationality",
+            "sex": "Sex"
         }
     }
 }

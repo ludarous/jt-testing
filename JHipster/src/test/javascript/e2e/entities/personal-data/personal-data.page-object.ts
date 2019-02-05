@@ -21,6 +21,7 @@ export class PersonalDataUpdatePage {
     lastNameInput = element(by.id('field_lastName'));
     birthDateInput = element(by.id('field_birthDate'));
     nationalityInput = element(by.id('field_nationality'));
+    sexSelect = element(by.id('field_sex'));
 
     getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -58,6 +59,20 @@ export class PersonalDataUpdatePage {
         return this.nationalityInput.getAttribute('value');
     }
 
+    setSexSelect(sex): promise.Promise<void> {
+        return this.sexSelect.sendKeys(sex);
+    }
+
+    getSexSelect() {
+        return this.sexSelect.element(by.css('option:checked')).getText();
+    }
+
+    sexSelectLastOption(): promise.Promise<void> {
+        return this.sexSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
     save(): promise.Promise<void> {
         return this.saveButton.click();
     }

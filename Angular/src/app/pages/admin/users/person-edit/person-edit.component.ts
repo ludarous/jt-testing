@@ -12,7 +12,9 @@ import {Address, IAddress} from '../../../../entities/address';
 import {IPersonalData, PersonalData} from '../../../../entities/personal-data';
 import {PersonService} from '../../../../services/person.service';
 import {IPersonFull, PersonFull} from '../../../../entities/person-full';
-import {MessageService} from 'primeng/api';
+import {MessageService, SelectItem} from 'primeng/api';
+import {Sex} from '../../../../entities/enums/sex';
+import {EnumTranslatorService} from '../../../../shared/pipes/enum-translator/enum-translator';
 
 @Component({
   selector: 'app-person-edit',
@@ -24,6 +26,9 @@ export class PersonEditComponent implements OnInit {
   personId: number;
   person: IPersonFull;
   personForm: FormGroup;
+
+  sexes: Array<Sex>;
+  sexOptions: Array<SelectItem>;
 
   private _personBirthDate: Date;
   get personBirthDate(): Date {
@@ -43,10 +48,15 @@ export class PersonEditComponent implements OnInit {
               private personalDataService: PersonalDataService,
               private personService: PersonService,
               private messageService: MessageService,
-              private router: Router) {
+              private router: Router,
+              private enumTranslateService: EnumTranslatorService) {
   }
 
   ngOnInit() {
+
+    this.sexes = Sex.getAll();
+    this.sexOptions = this.sexes.map(s => ({label: this.enumTranslateService.translate(s), value: s.ordinal}));
+
     const params$ = this.activatedRoute.params;
     params$.subscribe((params) => {
       this.personId = params['id'];
@@ -95,6 +105,7 @@ export class PersonEditComponent implements OnInit {
       firstName: new FormControl(personalData.firstName),
       lastName: new FormControl(personalData.lastName),
       birthDate: new FormControl(personalData.birthDate),
+      sex: new FormControl(personalData.sex ? personalData.sex.ordinal : null),
       nationality: new FormControl(personalData.nationality),
     });
   }
@@ -102,7 +113,7 @@ export class PersonEditComponent implements OnInit {
   getPerson(personId: number): Observable<IPersonFull> {
     if (personId) {
       return this.personService.findFull(personId).pipe(map((personResponse: HttpResponse<IPersonFull>) => {
-        return personResponse.body;
+        return PersonFull.resolveResponse(personResponse);
       }));
 
     } else {

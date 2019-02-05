@@ -38,6 +38,7 @@ describe('PersonalData e2e test', () => {
         expect(personalDataUpdatePage.getBirthDateInput()).toContain('2001-01-01T02:30');
         personalDataUpdatePage.setNationalityInput('nationality');
         expect(personalDataUpdatePage.getNationalityInput()).toMatch('nationality');
+        personalDataUpdatePage.sexSelectLastOption();
         personalDataUpdatePage.save();
         expect(personalDataUpdatePage.getSaveButton().isPresent()).toBeFalsy();
     });

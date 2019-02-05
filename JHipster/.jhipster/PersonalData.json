@@ -1,5 +1,7 @@
 {
-    "name": "PersonalData",
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
     "fields": [
         {
             "fieldName": "firstName",
@@ -25,17 +27,18 @@
         {
             "fieldName": "nationality",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "sex",
+            "fieldType": "Sex",
+            "fieldValues": "MALE,FEMALE,OTHER"
         }
     ],
-    "relationships": [],
     "changelogDate": "20180919081358",
-    "entityTableName": "personal_data",
     "dto": "mapstruct",
-    "pagination": "pagination",
+    "searchEngine": "elasticsearch",
     "service": "serviceImpl",
+    "entityTableName": "personal_data",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*",
-    "searchEngine": "elasticsearch"
+    "pagination": "pagination"
 }

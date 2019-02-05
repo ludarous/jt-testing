@@ -28,6 +28,9 @@
           ></p-calendar>
         </div>
         <div class="ui-inputgroup">
+          <p-selectButton [options]="sexOptions" formControlName="sex"></p-selectButton>
+        </div>
+        <div class="ui-inputgroup">
           <input type="text" pInputText [placeholder]="'Národnost' | translate" formControlName="nationality">
         </div>
       </div>

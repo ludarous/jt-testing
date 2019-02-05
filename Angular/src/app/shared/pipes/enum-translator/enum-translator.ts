@@ -3,6 +3,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {EnumWrapper} from '../../../entities/enums/enum-wrapper';
 import {ActivityResultUnits} from '../../../entities/enums/activity-result-units';
 import {ResultType} from '../../../entities/enums/result-type';
+import {Sex} from '../../../entities/enums/sex';
 
 @Injectable()
 export class EnumTranslatorService {
@@ -12,7 +13,7 @@ export class EnumTranslatorService {
   }
 
 
-  public translate(enumObj: EnumWrapper, args: string): string {
+  public translate(enumObj: EnumWrapper, args: string = null): string {
 
     let argsArray: Array<string>;
     if (args) {
@@ -115,6 +116,16 @@ export class EnumTranslatorService {
             return this.translateService.instant('Více je lépe');
           case 'NONE':
             return this.translateService.instant('Neurčeno');
+        }
+
+      } else if (enumObj instanceof Sex) {
+        switch (enumObj.value) {
+          case 'MALE':
+            return this.translateService.instant('Muž');
+          case 'FEMALE':
+            return this.translateService.instant('Žena');
+          case 'OTHER':
+            return this.translateService.instant('Jiné');
         }
 
       } else {

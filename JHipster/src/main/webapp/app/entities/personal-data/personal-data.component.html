@@ -34,6 +34,7 @@
             <th jhiSortBy="lastName"><span jhiTranslate="jtTestingApp.personalData.lastName">Last Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="birthDate"><span jhiTranslate="jtTestingApp.personalData.birthDate">Birth Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="nationality"><span jhiTranslate="jtTestingApp.personalData.nationality">Nationality</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="sex"><span jhiTranslate="jtTestingApp.personalData.sex">Sex</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -44,6 +45,7 @@
                 <td>{{personalData.lastName}}</td>
                 <td>{{personalData.birthDate | date:'medium'}}</td>
                 <td>{{personalData.nationality}}</td>
+                <td jhiTranslate="{{'jtTestingApp.Sex.' + personalData.sex}}">{{personalData.sex}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
