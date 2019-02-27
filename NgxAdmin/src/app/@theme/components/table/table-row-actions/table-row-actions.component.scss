@@ -1,0 +1,25 @@
+@import '../../../styles/primeng-overrides';
+
+.table-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.table-btn {
+  outline: none;
+  background: transparent;
+  border: 1px solid $corporate-success;
+  height: 38px;
+  width: 38px;
+  font-size: 32px;
+  color: $corporate-success;
+  margin: 5px;
+  cursor: pointer;
+  padding: 3px;
+
+  &:hover {
+    color: $corporate-success-hover;
+    background-color: $corporate-success-active;
+  }
+}

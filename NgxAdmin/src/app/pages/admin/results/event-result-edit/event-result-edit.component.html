@@ -1,0 +1,50 @@
+<div *ngIf="testEvent && person">
+
+  <nb-stepper *ngIf="eventResult" orientation="horizontal">
+    <nb-step label="Obecné údaje">
+      <div class="personal-event-data-container">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label>{{('Váha v době testu' | translate)}}</label>
+              <input type="text"
+                     class="form-control"
+                     [(ngModel)]="eventResult.actualWeightInKg"
+                     [placeholder]="('Váha v době testu' | translate)"/>
+            </div>
+
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label>{{('Výška v době testu' | translate)}}</label>
+              <input type="text"
+                     class="form-control"
+                     [(ngModel)]="eventResult.actualHeightInCm"
+                     [placeholder]="('Výška v době testu' | translate)"/>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label>{{('Poznámka' | translate)}}</label>
+              <textarea type="text"
+                        class="form-control"
+                        nbInput
+                        [placeholder]="'Poznámka' | translate"
+                        [(ngModel)]="eventResult.note">
+          </textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nb-step>
+    <nb-step [label]="workoutResult.workoutName" *ngFor="let workoutResult of eventResult.workoutResults">
+      <app-workout-result-edit [eventResult]="eventResult" [testEvent]="testEvent" [workoutResult]="workoutResult"
+                               [workout]="getWorkoutForWorkoutResult(workoutResult)"
+                               [person]="person"></app-workout-result-edit>
+    </nb-step>
+    <button mat-raised-button (click)="saveEventResults()">{{'Uložit' | translate}}</button>
+  </nb-stepper>
+
+</div>

@@ -1,7 +1,7 @@
 import {Address, IAddress} from './address';
 import {IPersonalData, PersonalData} from './personal-data';
 import {IUser} from './user';
-import {StringUtils} from '../utils/string-utils';
+import {StringUtils} from '../../../../NgxAdmin/src/app/@core/utils/string-utils';
 import {HttpResponse} from '@angular/common/http';
 import {Workout} from './workout';
 import {IEvent} from './event';

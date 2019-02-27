@@ -31,7 +31,7 @@ public class WorkoutResult implements Serializable {
     private String note;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnore
     private EventResult eventResult;
 
     @OneToMany(mappedBy = "workoutResult", cascade = CascadeType.ALL)

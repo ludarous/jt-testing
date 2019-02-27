@@ -15,8 +15,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -44,7 +48,9 @@ public class EventResultServiceImpl implements EventResultService {
 
     private final EventResultSearchRepository eventResultSearchRepository;
 
-    public EventResultServiceImpl(EventResultRepository eventResultRepository, EventRepository eventRepository, PersonRepository personRepository, WorkoutResultRepository workoutResultRepository, ActivityResultRepository activityResultRepository, EventResultMapper eventResultMapper, EventResultSearchRepository eventResultSearchRepository) {
+    private final EntityManager entityManager;
+
+    public EventResultServiceImpl(EventResultRepository eventResultRepository, EventRepository eventRepository, PersonRepository personRepository, WorkoutResultRepository workoutResultRepository, ActivityResultRepository activityResultRepository, EventResultMapper eventResultMapper, EventResultSearchRepository eventResultSearchRepository, EntityManager entityManager) {
         this.eventResultRepository = eventResultRepository;
         this.eventRepository = eventRepository;
         this.personRepository = personRepository;
@@ -52,6 +58,7 @@ public class EventResultServiceImpl implements EventResultService {
         this.activityResultRepository = activityResultRepository;
         this.eventResultMapper = eventResultMapper;
         this.eventResultSearchRepository = eventResultSearchRepository;
+        this.entityManager = entityManager;
     }
 
     /**
@@ -64,7 +71,10 @@ public class EventResultServiceImpl implements EventResultService {
     public EventResultDTO save(EventResultDTO eventResultDTO) {
         log.debug("Request to save EventResult : {}", eventResultDTO);
         EventResult eventResult = eventResultMapper.toEntity(eventResultDTO);
-        eventResult = eventResultRepository.save(eventResult);
+        eventResult = eventResultRepository.saveAndFlush(eventResult);
+        entityManager.detach(eventResult);
+        eventResult = eventResultRepository.findById(eventResult.getId()).get();
+
 
         for(WorkoutResult workoutResult : eventResult.getWorkoutResults()) {
             workoutResult.setEventResult(eventResult);
@@ -83,6 +93,67 @@ public class EventResultServiceImpl implements EventResultService {
         EventResultDTO result = eventResultMapper.toDto(eventResult);
         eventResultSearchRepository.save(eventResult);
         return result;
+    }
+
+    /**
+     * Create a eventResult.
+     *
+     * @param eventResultDTO the entity to save
+     * @return the persisted entity
+     */
+    @Override
+    public EventResultDTO create(EventResultDTO eventResultDTO) {
+
+        Optional<Event> eventOptional = this.eventRepository.findOneWithEagerRelationships(eventResultDTO.getEventId());
+        if(!eventOptional.isPresent()) {
+            log.warn("Cannot find event with id: " + eventResultDTO.getEventId());
+            return null;
+        }
+
+        Optional<Person> personOptional = this.personRepository.findById(eventResultDTO.getPersonId());
+        if(!personOptional.isPresent()) {
+            log.warn("Cannot find person with id: " + eventResultDTO.getPersonId());
+            return null;
+        }
+
+        Event event = eventOptional.get();
+        Person person = personOptional.get();
+
+        EventResult eventResult = new EventResult();
+        eventResult.setEvent(event);
+        eventResult.setPerson(person);
+
+        Set<WorkoutResult> workoutResultSet = new HashSet<>();
+
+        for(Workout workout : event.getWorkouts()) {
+            WorkoutResult workoutResult = new WorkoutResult();
+            workoutResult.setWorkout(workout);
+            workoutResult.setEventResult(eventResult);
+
+
+            Set<ActivityResult> activityResultSet = new HashSet<>();
+            for(Activity activity : workout.getActivities()) {
+                ActivityResult activityResult = new ActivityResult();
+                activityResult.setEvent(event);
+                activityResult.setPerson(person);
+                activityResult.setWorkoutResult(workoutResult);
+                activityResult.setWorkout(workout);
+                activityResult.setActivity(activity);
+                activityResultSet.add(activityResult);
+            }
+            workoutResult.setActivitiesResults(activityResultSet);
+
+            workoutResultSet.add(workoutResult);
+        }
+
+        eventResult.setWorkoutResults(workoutResultSet);
+
+        eventResult = eventResultRepository.save(eventResult);
+
+        eventResultDTO = eventResultMapper.toDto(eventResult);
+        eventResultSearchRepository.save(eventResult);
+
+        return eventResultDTO;
     }
 
     /**

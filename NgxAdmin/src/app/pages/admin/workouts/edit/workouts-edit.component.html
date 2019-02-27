@@ -1,0 +1,170 @@
+<div class="component-container-center">
+  <form class="form" *ngIf="testForm" [formGroup]="testForm" (submit)="saveWorkout()">
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Název" formControlName="name" required>
+      <p-message severity="error" text="Název testu je povinný"
+                 *ngIf="!testForm.controls['name'].valid && testForm.controls['name'].touched"></p-message>
+    </div>
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Minimální věk" formControlName="minAge">
+    </div>
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Maximální věk" formControlName="maxAge">
+    </div>
+    <div class="ui-inputgroup">
+      <p-autoComplete
+        placeholder="Napiš kategorie testu"
+        [multiple]="true"
+        [suggestions]="suggestedCategories"
+        (completeMethod)="search($event)"
+        [(ngModel)]="selectedCategories"
+        [ngModelOptions]="{standalone: true}"
+        [forceSelection]="true"
+        field="name"></p-autoComplete>
+    </div>
+    <div *ngIf="testActivities" class="ui-inputgroup">
+      <p-pickList styleClass="edit-picklist"
+                  [source]="suggestedActivities"
+                  [target]="selectedActivities"
+                  sourceHeader="Aktivity"
+                  targetHeader="Vybrané aktivity"
+                  filterBy="name"
+                  dragdrop="true">
+        <ng-template let-activity pTemplate="item">
+          <div class="ui-helper-clearfix">
+            {{activity.name}}
+          </div>
+          <div class="activity-picklist-categories">
+            Kategorie:
+            <ng-container *ngFor="let category of activity.categories">
+              <span>{{category.name}}</span>
+            </ng-container>
+          </div>
+        </ng-template>
+      </p-pickList>
+    </div>
+    <div class="form-button-container">
+      <button mat-raised-button>{{'Uložit' | translate}}</button>
+      <br>
+      <button type="button" mat-raised-button (click)="duplicateTest()">{{'Vytvořit kopii' | translate}}</button>
+    </div>
+  </form>
+</div>
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-header>{{workout?.name}}</nb-card-header>
+      <nb-card-body>
+        <form class="form" *ngIf="workoutForm" [formGroup]="workoutForm" (submit)="saveWorkout()">
+          <nb-stepper #stepper orientation="horizontal" [(selectedIndex)]="selectedStepperIndex">
+            <nb-step [label]="'Základní údaje cvičení' | translate">
+
+              <div class="form-group has-error">
+                <label for="name">{{('Název' | translate)}}</label>
+                <input type="text" class="form-control" id="name" [placeholder]="('Název' | translate)"
+                       formControlName="name">
+                <small *ngIf="!workoutForm.controls['name'].valid && workoutForm.controls['name'].touched"
+                       class="form-text"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="description">{{('Popis' | translate)}}</label>
+                <textarea type="text" class="form-control" id="description" [placeholder]="('Popis' | translate)"
+                          formControlName="description"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="minAge">{{('Minimální věk' | translate)}}</label>
+                <input class="form-control"
+                       id="minAge" type="text" placeholder="Minimální věk" formControlName="minAge">
+              </div>
+
+              <div class="form-group">
+                <label for="maxAge">{{('Maximální věk' | translate)}}</label>
+                <input class="form-control"
+                       id="maxAge" type="text" placeholder="Maximální věk" formControlName="maxAge">
+              </div>
+
+              <div class="d-flex justify-content-end">
+                <button nbButton nbStepperNext>{{'Další' | translate}}</button>
+              </div>
+            </nb-step>
+            <nb-step [label]="'Výběr aktivity pro cvičení' | translate">
+              <ng-container *ngIf="workoutActivities">
+                <ngx-drag-drop-lists
+                  [sourceData]="workoutActivities"
+                  [sourceFilter]="true"
+                  [sourceFilterPlaceholder]="'Vyhledej aktivity'"
+                  [sourceHeading]="'Všechny aktivity'"
+                  [targetData]="selectedActivities"
+                  [targetFilter]="true"
+                  [targetFilterPlaceholder]="'Vyhledej aktivity'"
+                  [targetHeading]="'Vybrané aktivity'"
+                  [filterFields]="['name', 'description']">
+                  <ng-template let-item="item">
+                    <div class="ui-helper-clearfix">
+                      <b>{{item.name}}</b>
+                    </div>
+                    <div class="activity-picklist-categories">
+                      Kategorie:
+                      <ng-container *ngFor="let category of item.categories; last as isLast">
+                        <span>{{category.name}}</span><span *ngIf="!isLast">, </span>
+                      </ng-container>
+                    </div>
+                  </ng-template>
+                </ngx-drag-drop-lists>
+              </ng-container>
+
+              <div class="d-flex justify-content-between">
+                <button nbButton nbStepperPrevious>{{'Předchozí' | translate}}</button>
+                <button nbButton nbStepperNext>{{'Další' | translate}}</button>
+              </div>
+            </nb-step>
+            <nb-step [label]="'Rekapitulace' | translate">
+              <div class="form-group">
+                <div class="text-hint">{{('Název' | translate)}}</div>
+                <h5 class="text-body">{{workoutForm.controls['name'].value}}</h5>
+              </div>
+
+              <div class="form-group">
+                <div class="text-hint">{{('Popis' | translate)}}</div>
+                <h5 class="text-body">{{workoutForm.controls['description'].value}}</h5>
+              </div>
+
+              <div class="form-group">
+                <div class="text-hint">{{('Minimální věk' | translate)}}</div>
+                <h5 class="text-body">{{workoutForm.controls['minAge'].value}}</h5>
+              </div>
+
+              <div class="form-group">
+                <div class="text-hint">{{('Maximální věk' | translate)}}</div>
+                <h5 class="text-body">{{workoutForm.controls['maxAge'].value}}</h5>
+              </div>
+
+              <div class="form-group">
+                <div class="text-hint">{{('Aktivity' | translate)}}</div>
+                <div class="d-flex flex-row">
+                  <h5 class="text-body" *ngFor="let activity of selectedActivities; last as isLast">
+                    {{activity.name}}<span style="margin-right: 5px;" *ngIf="!isLast">,</span>
+                  </h5>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <button nbButton nbStepperPrevious>{{'Předchozí' | translate}}</button>
+                <button nbButton
+                        status="success"
+                        [disabled]="submitted || !workoutForm.valid"
+                        [class.btn-pulse]="submitted">
+                  {{'Uložit' | translate}}
+                </button>
+              </div>
+            </nb-step>
+          </nb-stepper>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

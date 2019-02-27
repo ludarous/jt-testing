@@ -2,7 +2,9 @@ package com.jtsports.jttesting.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the WorkoutResult entity.
@@ -18,6 +20,8 @@ public class WorkoutResultDTO implements Serializable {
     private Long workoutId;
 
     private String workoutName;
+
+    private Set<ActivityResultDTO> activitiesResults = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -59,6 +63,14 @@ public class WorkoutResultDTO implements Serializable {
         this.workoutName = workoutName;
     }
 
+    public Set<ActivityResultDTO> getActivitiesResults() {
+        return activitiesResults;
+    }
+
+    public void setActivitiesResults(Set<ActivityResultDTO> activitiesResults) {
+        this.activitiesResults = activitiesResults;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -90,4 +102,5 @@ public class WorkoutResultDTO implements Serializable {
             ", workout='" + getWorkoutName() + "'" +
             "}";
     }
+
 }

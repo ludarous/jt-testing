@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivityStatsData} from '../user-stats.component';
-import {ChartUtils} from '../../../../utils/chart-utils';
+import {ChartUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/chart-utils';
 import {PersonalActivityStats, PersonalStats} from '../../../../entities/stats';
 import * as $ from 'jquery';
 

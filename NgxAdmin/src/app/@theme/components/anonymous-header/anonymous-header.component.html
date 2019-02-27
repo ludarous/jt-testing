@@ -1,0 +1,21 @@
+<div class="header-container"
+     [class.left]="position === 'normal'"
+     [class.right]="position === 'inverse'">
+  <div class="logo-containter">
+    <!--<a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>-->
+    <div class="logo" (click)="goToHome()">Sportstalent</div>
+  </div>
+  <!--<ngx-theme-switcher></ngx-theme-switcher>-->
+</div>
+
+<div class="header-container center" >
+  <a *ngIf="principal.isAuthenticated()" class='navigation' [routerLink]="['/pages/dashboard']" routerLinkActive="active-navigation">Dashboard</a>
+  <a class='navigation' [routerLink]="['/home']" routerLinkActive="active-navigation">Home</a>
+  <a class='navigation' [routerLink]="['/about']" routerLinkActive="active-navigation">About</a>
+  <a class='navigation' [routerLink]="['/pricing']" routerLinkActive="active-navigation">Pricing</a>
+  <a class='navigation' [routerLink]="['/features']" routerLinkActive="active-navigation">Features</a>
+</div>
+
+<div *ngIf="!principal.isAuthenticated()" class="header-container right">
+  <a [routerLink]="['/account/login']">Sign in</a>
+</div>

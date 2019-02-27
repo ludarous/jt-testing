@@ -10,11 +10,11 @@ import {colorSets} from '@swimlane/ngx-charts/release/utils';
 import {StatsRequest} from '../../../../entities/stats-request';
 import {WorkoutService} from '../../../../services/workout.service';
 import {EventManager} from '../../../../services/event.manager';
-import {StatsUtils} from '../../../../utils/stats-utils';
+import {StatsUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/stats-utils';
 import {StatsService} from '../../../../services/stats.service';
 import {PersonalActivityStats, PersonalCategoryStats, PersonalStats, Stats} from '../../../../entities/stats';
 import * as $ from 'jquery';
-import {ArrayUtils} from '../../../../utils/array.utils';
+import {ArrayUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/array.utils';
 
 @Component({
   selector: 'app-user-test-result',

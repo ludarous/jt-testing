@@ -1,0 +1,20 @@
+<div class="activity-result-container">
+  <div class="row">
+
+    <div class="ui-inputgroup col-6">
+      <input type="text" pInputText placeholder="Hlavní výsledek" [(ngModel)]="activityResult.primaryResultValue" required>
+      <span class="ui-inputgroup-addon">{{activity.primaryResultValueUnit | enumTranslator: 'abbr'}}</span>
+    </div>
+
+    <div *ngIf="activity.secondaryResultValueUnit" class="ui-inputgroup col-6">
+      <input type="text" pInputText placeholder="Vedlejší výsledek" [(ngModel)]="activityResult.secondaryResultValue" required>
+      <span class="ui-inputgroup-addon">{{activity.secondaryResultValueUnit | enumTranslator: 'abbr'}}</span>
+    </div>
+
+    <div class="ui-inputgroup col-12">
+      <textarea type="text" pInputTextarea placeholder="Poznámka"
+                autoResize="autoResize" [(ngModel)]="activityResult.note"></textarea>
+    </div>
+
+  </div>
+</div>

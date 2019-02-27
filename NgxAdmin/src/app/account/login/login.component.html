@@ -1,0 +1,91 @@
+<h1 id="title" class="title">{{('Přihlášení' | translate)}}</h1>
+<p class="sub-title">{{('Ahoj, přihlaš se tvým přihlašovacím jménem nebo e-mailem.' | translate)}}</p>
+
+<nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger" role="alert">
+  <p class="alert-title"><b>{{('Ajaj' | translate)}}</b></p>
+  <ul class="alert-message-list">
+    <li *ngFor="let error of errors" class="alert-message">{{ error }}</li>
+  </ul>
+</nb-alert>
+
+<nb-alert *ngIf="showMessages.success && messages?.length && !submitted" outline="success" role="alert">
+  <p class="alert-title"><b>Hooray!</b></p>
+  <ul class="alert-message-list">
+    <li *ngFor="let message of messages" class="alert-message">{{ message }}</li>
+  </ul>
+</nb-alert>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" aria-labelledby="title">
+
+  <div class="form-control-group">
+    <label class="label" for="input-email">{{('Přihlašovací jméno / e-mail' | translate)}}</label>
+    <input nbInput
+           fullWidth
+           formControlName="username"
+           name="email"
+           id="input-email"
+           [placeholder]="('Přihlašovací jméno / e-mail' | translate)"
+           autofocus
+           [status]="username.dirty ? (username.invalid  ? 'danger' : 'success') : ''"
+           [attr.aria-invalid]="username.invalid && username.touched ? true : null">
+    <ng-container *ngIf="username.invalid && username.touched">
+      <p class="error-message" *ngIf="username.errors?.required">
+        {{('Přihlašovací jméno / e-mail je povinné' | translate)}}
+      </p>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group">
+    <label class="label" for="input-password">{{'Heslo' | translate}}</label>
+    <input nbInput
+           fullWidth
+           formControlName="password"
+           name="password"
+           type="password"
+           id="input-password"
+           [placeholder]="'Heslo' | translate"
+           [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : ''"
+           [attr.aria-invalid]="password.invalid && password.touched ? true : null">
+    <ng-container *ngIf="password.invalid && password.touched ">
+      <p class="error-message" *ngIf="password.errors?.required">
+        {{('Heslo je povinné' | translate)}}
+      </p>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group accept-group">
+    <nb-checkbox name="rememberMe" formControlName="rememberMe"> {{('Zapamatuj si mě' | translate)}}</nb-checkbox>
+    <a class="forgot-password" routerLink="../request-password">{{'Zapomněl si heslo?' | translate}}</a>
+  </div>
+
+  <button nbButton
+          fullWidth
+          status="success"
+          [disabled]="submitted || !form.valid"
+          [class.btn-pulse]="submitted">
+    {{'Přihlásit' | translate}}
+  </button>
+</form>
+
+<section *ngIf="socialLinks && socialLinks.length > 0" class="links" aria-label="Social sign in">
+  or enter with:
+  <div class="socials">
+    <ng-container *ngFor="let socialLink of socialLinks">
+      <a *ngIf="socialLink.link"
+         [routerLink]="socialLink.link"
+         [attr.target]="socialLink.target"
+         [attr.class]="socialLink.icon"
+         [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
+      <a *ngIf="socialLink.url"
+         [attr.href]="socialLink.url"
+         [attr.target]="socialLink.target"
+         [attr.class]="socialLink.icon"
+         [class.with-icon]="socialLink.icon">{{ socialLink.title }}</a>
+    </ng-container>
+  </div>
+</section>
+
+<section class="another-action" aria-label="Register">
+  {{'Ještě nemáš účet? Zaregistruj se.' | translate}} <a class="text-link" routerLink="../register">{{'Registrovat' | translate}}</a>
+</section>
+

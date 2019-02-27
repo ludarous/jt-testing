@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {RxjsUtils} from '../../../../utils/rxjs.utils';
+import {RxjsUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/rxjs.utils';
 import {IWorkout} from '../../../../entities/workout';
 import {EventService} from '../../../../services/event.service';
 import {IEvent, Event} from '../../../../entities/event';

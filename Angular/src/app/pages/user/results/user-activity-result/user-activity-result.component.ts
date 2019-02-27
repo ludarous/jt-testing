@@ -8,8 +8,8 @@ import {IEvent} from '../../../../entities/event';
 import {StatsRequest} from '../../../../entities/stats-request';
 import {EventManager} from '../../../../services/event.manager';
 import {MatExpansionPanel} from '@angular/material';
-import {StatsUtils} from '../../../../utils/stats-utils';
-import {ChartUtils} from '../../../../utils/chart-utils';
+import {StatsUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/stats-utils';
+import {ChartUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/chart-utils';
 import {ResultType} from '../../../../entities/enums/result-type';
 import {PersonalActivityStats} from '../../../../entities/stats';
 

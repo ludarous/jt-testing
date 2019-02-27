@@ -1,0 +1,38 @@
+$sidebar-width: 300px;
+
+#container {
+  height: 100%;
+  flex: 1;
+}
+
+#sidebar {
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  width: $sidebar-width;
+  overflow: auto;
+  background-color: #333333;
+}
+
+#content {
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  width: calc(100% - #{$sidebar-width});
+  overflow: auto;
+
+}
+
+.ui-panelmenu .ui-panelmenu-content {
+  background-color: transparent !important;
+  color: white !important;
+  border: none !important;
+
+  .ui-submenu-list {
+    margin-left: 40px !important;
+  }
+}
+
+.ui-menuitem-link {
+  color: white !important;
+}

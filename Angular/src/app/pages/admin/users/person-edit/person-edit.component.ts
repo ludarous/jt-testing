@@ -5,7 +5,7 @@ import {UserService} from '../../../../services/user.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {RxjsUtils} from '../../../../utils/rxjs.utils';
+import {RxjsUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/rxjs.utils';
 import {AddressService} from '../../../../services/address.service';
 import {PersonalDataService} from '../../../../services/personal-data.service';
 import {Address, IAddress} from '../../../../entities/address';

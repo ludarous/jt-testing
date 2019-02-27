@@ -19,8 +19,10 @@ public class EventResultDTO implements Serializable {
 
     private Float actualWeightInKg;
 
+    @NotNull
     private Long eventId;
 
+    @NotNull
     private Long personId;
 
     private Set<WorkoutResultDTO> workoutResults = new HashSet<>();

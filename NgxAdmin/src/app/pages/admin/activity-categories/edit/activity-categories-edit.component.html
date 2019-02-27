@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-header>{{category?.name}}</nb-card-header>
+      <nb-card-body>
+        <form class="form" *ngIf="categoryForm" [formGroup]="categoryForm" (submit)="saveCategory()">
+
+          <div class="form-group has-error">
+            <label for="name">{{('Název' | translate)}}</label>
+            <input type="text" class="form-control" id="name" [placeholder]="('Název' | translate)"
+                   formControlName="name">
+            <small *ngIf="!categoryForm.controls['name'].valid && categoryForm.controls['name'].touched"
+                   class="form-text"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="description">{{('Popis' | translate)}}</label>
+            <textarea type="text" class="form-control" id="description" [placeholder]="('Popis' | translate)"
+                      formControlName="description"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="key">{{('Klíč' | translate)}}</label>
+            <input type="text"
+                   class="form-control"
+                   id="key"
+                   [placeholder]="('Název' | translate)"
+                   formControlName="key">
+          </div>
+
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="form-group">
+                <label for="parentCategory">{{('Nadřazená kategorie' | translate)}}</label>
+                <input type="text"
+                       class="form-control"
+                       id="parentCategory"
+                       [placeholder]="('Nadřazená kategorie' | translate)"
+                       [ngModel]="parentCategoryNode?.data.name"
+                       [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+            <div class="col-lg-9">
+              <div class="form-group">
+                <label>&nbsp;</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="{{'Zadej hledanou kategorii' | translate}}"
+                       [(ngModel)]="categoriesFilter"
+                       [ngModelOptions]="{standalone: true}">
+              </div>
+              <p-tree class="activity-category-tree"
+                      [value]="filteredCategoriesNodes"
+                      selectionMode="single"
+                      [(selection)]="parentCategoryNode"
+                      (onNodeSelect)="nodeSelect($event)">
+                <ng-template let-node pTemplate="default">
+                  <span>{{node.data.name}}</span>
+                </ng-template>
+              </p-tree>
+            </div>
+          </div>
+
+          <button nbButton
+                  fullWidth
+                  status="success"
+                  [disabled]="submitted || !categoryForm.valid"
+                  [class.btn-pulse]="submitted">
+            {{'Uložit' | translate}}
+          </button>
+
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

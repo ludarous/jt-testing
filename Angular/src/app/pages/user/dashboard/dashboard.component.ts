@@ -9,7 +9,7 @@ import {StatsService} from '../../../services/stats.service';
 import * as $ from 'jquery';
 import {colorSets} from '@swimlane/ngx-charts/release/utils';
 import {zip} from 'rxjs';
-import {ArrayUtils} from '../../../utils/array.utils';
+import {ArrayUtils} from '../../../../../../NgxAdmin/src/app/@core/utils/array.utils';
 
 @Component({
   selector: 'app-dashboard',

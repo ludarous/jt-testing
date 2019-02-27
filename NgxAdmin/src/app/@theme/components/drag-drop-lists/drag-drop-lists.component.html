@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-6">
+    <nb-card size="large">
+      <nb-card-header>
+        <div class="select-header">
+          <div class="select-header-title">{{sourceHeading}}</div>
+          <div class="select-header-content">
+            <div class="form-group">
+              <input class="form-control"
+                     type="text"
+                     [placeholder]="sourceFilterPlaceholder"
+                     [(ngModel)]="sourceFilterQuery"
+                     [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+        </div>
+      </nb-card-header>
+      <nb-list pDroppable="activities" (onDrop)="sourceDrop($event)">
+        <nb-list-item pDraggable="activities"
+                      (onDragStart)="sourceDragStart($event,item)"
+                      (onDragEnd)="sourceDragEnd($event)"
+                      *ngFor="let item of suggestedSourceData">
+          <ng-container *ngTemplateOutlet="layoutTemplate; context: { item: item}"></ng-container>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+  <div class="col-6">
+    <nb-card size="large">
+      <nb-card-header>
+        <div class="select-header">
+          <div class="select-header-title">{{targetHeading}}</div>
+          <div class="select-header-content">
+            <div class="form-group">
+              <input class="form-control"
+                     type="text"
+                     [placeholder]="targetFilterPlaceholder"
+                     [(ngModel)]="targetFilterQuery"
+                     [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+        </div>
+      </nb-card-header>
+      <nb-list pDroppable="activities" (onDrop)="targetDrop($event)">
+        <nb-list-item pDraggable="activities"
+                      (onDragStart)="targetDragStart($event,item)"
+                      (onDragEnd)="targetDragEnd($event)"
+                      *ngFor="let item of suggestedTargetData">
+          <ng-container *ngTemplateOutlet="layoutTemplate; context: { item: item}"></ng-container>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+</div>

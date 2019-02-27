@@ -1,0 +1,155 @@
+<nb-card>
+  <nb-card-header>{{event ? event.name : ('Nová událost' | translate)}}</nb-card-header>
+  <nb-card-body>
+    <form class="form" *ngIf="eventForm" [formGroup]="eventForm" (submit)="saveEvent()">
+
+      <nb-stepper #stepper orientation="horizontal" [(selectedIndex)]="selectedStepperIndex">
+        <nb-step [label]="'Základní údaje události' | translate">
+
+          <div class="form-group has-error">
+            <label for="name">{{('Název' | translate)}}</label>
+            <input type="text" class="form-control" id="name" [placeholder]="('Název' | translate)"
+                   formControlName="name">
+            <small *ngIf="!eventForm.controls['name'].valid && eventForm.controls['name'].touched"
+                   class="form-text"></small>
+          </div>
+          <div class="form-group">
+            <label for="minAge">{{('Minimální věk' | translate)}}</label>
+            <input class="form-control"
+                   id="minAge" type="text" placeholder="Minimální věk" formControlName="minAge">
+          </div>
+          <div class="form-group">
+            <label for="maxAge">{{('Maximální věk' | translate)}}</label>
+            <input class="form-control"
+                   id="maxAge" type="text" placeholder="Maximální věk" formControlName="maxAge">
+          </div>
+          <div class="form-group">
+            <label for="maxAge">{{('Datum události' | translate)}}</label>
+            <p-calendar [(ngModel)]="eventDateClassic"
+                        [ngModelOptions]="{standalone: true}"
+                        [placeholder]="'Datum události'"
+                        [inline]="true"
+                        showTime="true"
+                        hourFormat="24"
+                        dateFormat="dd.mm.yy"
+            ></p-calendar>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button nbButton nbStepperNext>{{'Další' | translate}}</button>
+          </div>
+        </nb-step>
+        <nb-step [label]="'Výběr test pro událost' | translate">
+          <ng-container *ngIf="tests">
+            <ngx-drag-drop-lists
+              [sourceData]="tests"
+              [sourceFilter]="true"
+              [sourceFilterPlaceholder]="'Vyhledej testy'"
+              [sourceHeading]="'Všechny test'"
+              [targetData]="selectedTests"
+              [targetFilter]="true"
+              [targetFilterPlaceholder]="'Vyhledej testy'"
+              [targetHeading]="'Vybrané testy'"
+              [filterFields]="['name', 'description']">
+              <ng-template let-item="item">
+                <div class="ui-helper-clearfix">
+                  <b>{{item.name}}</b>
+                </div>
+              </ng-template>
+            </ngx-drag-drop-lists>
+          </ng-container>
+
+          <div class="d-flex justify-content-between">
+            <button nbButton nbStepperPrevious>{{'Předchozí' | translate}}</button>
+            <button nbButton nbStepperNext>{{'Další' | translate}}</button>
+          </div>
+        </nb-step>
+        <nb-step [label]="'Výběr účastníků události' | translate">
+          <ng-container *ngIf="persons">
+            <ngx-drag-drop-lists
+              [sourceData]="persons"
+              [sourceFilter]="true"
+              [sourceFilterPlaceholder]="'Vyhledej osoby'"
+              [sourceHeading]="'Všechny osoby'"
+              [targetData]="selectedPersons"
+              [targetFilter]="true"
+              [targetFilterPlaceholder]="'Vyhledej osoby'"
+              [targetHeading]="'Vybrané osoby'"
+              [filterFields]="['name', 'description']">
+              <ng-template let-item="item">
+                <div class="ui-helper-clearfix">
+                  <b>{{item.personalData.firstName + ' ' + item.personalData.lastName}}</b>
+                </div>
+              </ng-template>
+            </ngx-drag-drop-lists>
+          </ng-container>
+
+          <div class="d-flex justify-content-between">
+            <button nbButton nbStepperPrevious>{{'Předchozí' | translate}}</button>
+            <button nbButton nbStepperNext>{{'Další' | translate}}</button>
+          </div>
+        </nb-step>
+        <nb-step [label]="'Rekapitulace' | translate">
+          <div class="form-group">
+            <div class="text-hint">{{('Název' | translate)}}</div>
+            <h5 class="text-body">{{eventForm.controls['name'].value}}</h5>
+          </div>
+
+          <div class="form-group">
+            <div class="text-hint">{{('Minimální věk' | translate)}}</div>
+            <h5 class="text-body">{{eventForm.controls['minAge'].value}}</h5>
+          </div>
+
+          <div class="form-group">
+            <div class="text-hint">{{('Maximální věk' | translate)}}</div>
+            <h5 class="text-body">{{eventForm.controls['maxAge'].value}}</h5>
+          </div>
+
+          <div class="form-group">
+            <div class="text-hint">{{('Testy' | translate)}}</div>
+            <div class="d-flex flex-row">
+              <h5 class="text-body" *ngFor="let test of selectedTests; last as isLast">
+                {{test.name}}<span style="margin-right: 5px;" *ngIf="!isLast">,</span>
+              </h5>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="text-hint">{{('Účastníci' | translate)}}</div>
+            <div class="d-flex flex-row">
+              <h5 class="text-body" *ngFor="let person of selectedPersons; last as isLast">
+                {{person.personalData.firstName + ' ' + person.personalData.lastName}}<span style="margin-right: 5px;" *ngIf="!isLast">,</span>
+              </h5>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <button nbButton nbStepperPrevious>{{'Předchozí' | translate}}</button>
+            <div>
+              <button nbButton
+                      status="primary"
+                      [class.btn-pulse]="submitted"
+                      (click)="duplicateEvent()">
+                {{'Vytvořit kopii' | translate}}
+              </button>
+              <button nbButton
+                      status="success"
+                      [disabled]="submitted || !eventForm.valid"
+                      [class.btn-pulse]="submitted">
+                {{'Uložit' | translate}}
+              </button>
+              <button nbButton
+                      status="success"
+                      [disabled]="submitted || !eventForm.valid"
+                      [class.btn-pulse]="submitted"
+                      [routerLink]="['/pages/admin/events/', event.id, 'results']">
+                {{'Výsledky' | translate}}
+              </button>
+            </div>
+
+          </div>
+        </nb-step>
+      </nb-stepper>
+    </form>
+  </nb-card-body>
+</nb-card>
+

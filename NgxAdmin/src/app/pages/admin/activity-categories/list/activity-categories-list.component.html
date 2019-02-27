@@ -1,0 +1,32 @@
+<nb-card>
+  <nb-card-header>
+    {{'Kategorie aktivit' | translate}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <ngx-table-search [createItemTitle]="('Vytvořit kategorii' | translate)" (create)="create()"></ngx-table-search>
+
+    <p-treeTable class="table-top-margin" *ngIf="categoriesNodes" [value]="categoriesNodes">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>{{'Název' | translate}}</th>
+          <th>{{'Description' | translate}}</th>
+          <th class="table-action-column"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+        <tr>
+          <td>
+            <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+            {{rowData.name}}
+          </td>
+          <td>{{rowData.description}}</td>
+          <td class="table-action-column">
+            <ngx-table-row-actions [item]="rowData" (delete)="delete($event)" (edit)="edit($event)"></ngx-table-row-actions>
+          </td>
+        </tr>
+      </ng-template>
+    </p-treeTable>
+  </nb-card-body>
+</nb-card>
+

@@ -1,0 +1,118 @@
+<nb-card>
+  <nb-card-header>{{person ? person.personalData.firstName + ' ' + person.personalData.lastName : ('Nový uživatel' | translate)}}</nb-card-header>
+  <nb-card-body>
+    <form *ngIf="personForm" [formGroup]="personForm" class="form" (submit)="savePerson()">
+
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <nb-card>
+            <nb-card-header>{{('Osobní údaje' | translate)}}</nb-card-header>
+            <nb-card-body>
+              <div class="form-group has-error">
+                <label for="email">{{('E-mail' | translate)}}</label>
+                <input type="text" class="form-control" id="email" [placeholder]="('Název' | translate)"
+                       formControlName="email">
+                <small *ngIf="!personForm.controls['email'].valid && personForm.controls['email'].touched"
+                       class="form-text has-error">E-mail je povinný
+                </small>
+              </div>
+
+              <div class="form-group">
+                <nb-checkbox name="virtual" formControlName="virtual">{{'Virtuální uživatel' | translate}}</nb-checkbox>
+              </div>
+
+              <div formGroupName="personalData">
+
+                <div class="form-group has-error">
+                  <label for="firstName">{{('Křestní jméno' | translate)}}</label>
+                  <input type="text" class="form-control" id="firstName" [placeholder]="('Název' | translate)"
+                         formControlName="firstName">
+                  <small *ngIf="!personForm.controls['personalData'].controls['firstName'].valid &&
+          personForm.controls['personalData'].controls['firstName'].touched"
+                         class="form-text has-error">{{'Křestní jméno je povinné' | translate}}</small>
+                </div>
+
+                <div class="form-group has-error">
+                  <label for="lastName">{{('Příjmení' | translate)}}</label>
+                  <input type="text" class="form-control" id="lastName" [placeholder]="('Příjmení' | translate)"
+                         formControlName="lastName">
+                  <small *ngIf="!personForm.controls['personalData'].controls['lastName'].valid &&
+          personForm.controls['personalData'].controls['lastName'].touched"
+                         class="form-text has-error">{{'Příjmení je povinné' | translate}}</small>
+                </div>
+
+
+                <div class="form-group has-error">
+                  <label for="birthDate">{{('Datum narození' | translate)}}</label>
+                  <input nbInput
+                         id="birthDate"
+                         name="birthDate"
+                         [placeholder]="'Datum narození' | translate"
+                         [nbDatepicker]="birthDatePicker">
+                  <nb-datepicker #birthDatePicker></nb-datepicker>
+                </div>
+
+                <div class="form-group has-error">
+                  <label for="sex">{{('Pohlaví' | translate)}}</label>
+                  <p-selectButton id="sex" [options]="sexOptions" formControlName="sex"></p-selectButton>
+                </div>
+
+                <div class="form-group has-error">
+                  <label for="nationality">{{('Národnost' | translate)}}</label>
+                  <input type="text" class="form-control" id="nationality" [placeholder]="('Národnost' | translate)"
+                         formControlName="nationality">
+                </div>
+
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <nb-card>
+            <nb-card-header>{{('Bydliště' | translate)}}</nb-card-header>
+            <nb-card-body>
+              <div formGroupName="address">
+                <div class="form-group has-error">
+                  <label for="country">{{('Země' | translate)}}</label>
+                  <input type="text" class="form-control" id="country" [placeholder]="('Země' | translate)"
+                         formControlName="country">
+                </div>
+
+                <div class="form-group has-error">
+                  <label for="city">{{('Město' | translate)}}</label>
+                  <input type="text" class="form-control" id="city" [placeholder]="('Město' | translate)"
+                         formControlName="city">
+                </div>
+
+                <div class="form-group has-error">
+                  <label for="street">{{('Ulice' | translate)}}</label>
+                  <input type="text" class="form-control" id="street" [placeholder]="('Ulice' | translate)"
+                         formControlName="street">
+                </div>
+
+                <div class="form-group has-error">
+                  <label for="zipCode">{{('PSČ' | translate)}}</label>
+                  <input type="text" class="form-control" id="zipCode" [placeholder]="('PSČ' | translate)"
+                         formControlName="zipCode">
+                </div>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between">
+        <button nbButton
+                status="primary"
+                (click)="duplicatePerson()">
+          {{'Vytvořit kopii' | translate}}
+        </button>
+        <button nbButton
+                status="success"
+                [disabled]="submitted || !personForm.valid"
+                [class.btn-pulse]="submitted">
+          {{'Uložit' | translate}}
+        </button>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

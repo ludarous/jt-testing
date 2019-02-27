@@ -12,7 +12,7 @@ import {IPersonalData, PersonalData} from '../../../entities/personal-data';
 import {Observable} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {RxjsUtils} from '../../../utils/rxjs.utils';
+import {RxjsUtils} from '../../../../../../NgxAdmin/src/app/@core/utils/rxjs.utils';
 import {Principal} from '../../../core/auth/principal.service';
 import {IPerson} from '../../../entities/person';
 import {IUser, User} from '../../../entities/user';

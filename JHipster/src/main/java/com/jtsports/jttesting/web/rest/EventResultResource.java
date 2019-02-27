@@ -57,11 +57,12 @@ public class EventResultResource {
         if (eventResultDTO.getId() != null) {
             throw new BadRequestAlertException("A new eventResult cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        EventResultDTO result = eventResultService.save(eventResultDTO);
+        EventResultDTO result = eventResultService.create(eventResultDTO);
         return ResponseEntity.created(new URI("/api/event-results/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
 
     /**
      * PUT  /event-results : Updates an existing eventResult.

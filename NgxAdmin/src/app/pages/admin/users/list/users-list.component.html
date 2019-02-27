@@ -1,0 +1,10 @@
+<nb-card>
+  <nb-card-header>
+    Smart Table
+  </nb-card-header>
+
+  <nb-card-body>
+    <ngx-table [data]="tablePersons" [cols]="tableCols" (rowClick)="rowSelect($event)"
+               (delete)="delete($event)"></ngx-table>
+  </nb-card-body>
+</nb-card>

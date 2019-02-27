@@ -1,0 +1,12 @@
+<nb-card>
+  <nb-card-header>
+    {{'Cvičení' | translate}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <ngx-table-search [createItemTitle]="('Vytvořit cvičení' | translate)" (create)="create()"></ngx-table-search>
+
+    <ngx-table [data]="workouts" [cols]="tableCols" (rowClick)="rowSelect($event)"
+               (delete)="delete($event)"></ngx-table>
+  </nb-card-body>
+</nb-card>

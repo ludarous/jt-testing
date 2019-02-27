@@ -7,7 +7,7 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivityService} from '../../../../services/activity.service';
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {RxjsUtils} from '../../../../utils/rxjs.utils';
+import {RxjsUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/rxjs.utils';
 import {Workout, IWorkout} from '../../../../entities/workout';
 import {ISport} from '../../../../entities/sport';
 import {WorkoutService} from '../../../../services/workout.service';

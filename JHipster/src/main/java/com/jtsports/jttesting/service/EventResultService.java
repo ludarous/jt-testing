@@ -21,6 +21,8 @@ public interface EventResultService {
      */
     EventResultDTO save(EventResultDTO eventResultDTO);
 
+    EventResultDTO create(EventResultDTO eventResultDTO);
+
     /**
      * Get all the eventResults.
      *

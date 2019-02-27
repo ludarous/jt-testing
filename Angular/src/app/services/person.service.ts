@@ -7,7 +7,7 @@ import {IAddress} from '../entities/address';
 import {IPerson} from '../entities/person';
 import {Observable} from 'rxjs';
 import {IPersonFull, PersonFull} from '../entities/person-full';
-import {createRequestOption} from '../utils/request-util';
+import {createRequestOption} from '../../../../NgxAdmin/src/app/@core/utils/request-util';
 
 @Injectable()
 export class PersonService extends CrudBaseService<IPerson> {

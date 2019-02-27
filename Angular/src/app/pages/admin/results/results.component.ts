@@ -9,7 +9,7 @@ import {EventResult, IEventResult} from '../../../entities/event-result';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {EventResultService} from '../../../services/event-result.service';
 import {IPersonFull} from '../../../entities/person-full';
-import {ArrayUtils} from '../../../utils/array.utils';
+import {ArrayUtils} from '../../../../../../NgxAdmin/src/app/@core/utils/array.utils';
 
 @Component({
   selector: 'app-results',
