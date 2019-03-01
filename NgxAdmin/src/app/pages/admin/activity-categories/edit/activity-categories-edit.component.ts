@@ -8,6 +8,8 @@ import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {RxjsUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/rxjs.utils';
 import {MessageService, TreeNode} from 'primeng/api';
+import {NbToastrService} from '@nebular/theme';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-activity-categories-edit',
@@ -40,11 +42,14 @@ export class ActivityCategoriesEditComponent implements OnInit {
   }
 
   submitted = false;
+  selectedStepperIndex = 0;
 
   constructor(private activityCategoryService: ActivityCategoryService,
               private activatedRoute: ActivatedRoute,
               private messageService: MessageService,
-              private router: Router) {
+              private router: Router,
+              private toasterService: NbToastrService,
+              private translateService: TranslateService) {
   }
 
   ngOnInit() {
@@ -101,11 +106,11 @@ export class ActivityCategoriesEditComponent implements OnInit {
         (categoryResponse: HttpResponse<IActivityCategory>) => {
           this.category = categoryResponse.body;
           this.setCategoryForm(this.category);
-          this.messageService.add({severity: 'success', summary: 'Kategorie uložena'});
-          this.router.navigate(['/admin/activity-categories/list']);
+          this.toasterService.success(null, this.translateService.instant('Kategorie uložena'));
+          this.router.navigate(['/pages/admin/activity-categories/list']);
         },
         (errorResponse: HttpErrorResponse) => {
-          this.messageService.add({severity: 'error', summary: 'Kategorie nebyla uložena', detail: errorResponse.error.detail});
+          this.toasterService.danger(null, this.translateService.instant('Kategorie nebyla uložena'));
         });
     }
   }

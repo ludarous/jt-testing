@@ -1,20 +1,52 @@
-<div class="activity-result-container">
-  <div class="row">
+<nb-card>
+  <nb-card-header>{{activityResult?.activityName}}</nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="activityResultForm" (submit)="saveActivityResult()">
 
-    <div class="ui-inputgroup col-6">
-      <input type="text" pInputText placeholder="Hlavní výsledek" [(ngModel)]="activityResult.primaryResultValue" required>
-      <span class="ui-inputgroup-addon">{{activity.primaryResultValueUnit | enumTranslator: 'abbr'}}</span>
-    </div>
-
-    <div *ngIf="activity.secondaryResultValueUnit" class="ui-inputgroup col-6">
-      <input type="text" pInputText placeholder="Vedlejší výsledek" [(ngModel)]="activityResult.secondaryResultValue" required>
-      <span class="ui-inputgroup-addon">{{activity.secondaryResultValueUnit | enumTranslator: 'abbr'}}</span>
-    </div>
-
-    <div class="ui-inputgroup col-12">
-      <textarea type="text" pInputTextarea placeholder="Poznámka"
-                autoResize="autoResize" [(ngModel)]="activityResult.note"></textarea>
-    </div>
-
-  </div>
-</div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>{{('Hlavní výsledek' | translate)}}</label>
+            <div class="input-group-append">
+              <input type="text"
+                     class="form-control"
+                     formControlName="primaryResultValue"
+                     [placeholder]="('Hlavní výsledek' | translate)"/>
+              <div class="activity-result-unit">
+                {{activity.primaryResultValueUnit | enumTranslator: 'plural'}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="activity.secondaryResultValueUnit" class="col-lg-6 col-md-6 col-sm-12">
+          <div class="form-group">
+            <label>{{('Vedlejší výsledek' | translate)}}</label>
+            <input type="text"
+                   class="form-control"
+                   formControlName="secondaryResultValue"
+                   [placeholder]="('Vedlejší výsledek' | translate)"/>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label>{{('Poznámka' | translate)}}</label>
+            <textarea type="text"
+                      class="form-control"
+                      formControlName="note"
+                      [placeholder]="('Poznámka' | translate)"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button nbButton
+                status="success"
+                [disabled]="submitted || !activityResultForm.valid"
+                [class.btn-pulse]="submitted">
+          {{'Uložit' | translate}}
+        </button>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

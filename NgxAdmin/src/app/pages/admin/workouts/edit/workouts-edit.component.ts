@@ -16,7 +16,9 @@ import {SportService} from '../../../../services/sport.service';
 import {IWorkoutCategory} from '../../../../entities/workout-category';
 import {MessageService} from 'primeng/api';
 import {ArrayUtils} from '../../../../@core/utils/array.utils';
-import {NbStepperComponent} from '@nebular/theme';
+import {NbStepperComponent, NbToastrService} from '@nebular/theme';
+import {ToasterService} from 'angular2-toaster';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-workout-edit',
@@ -57,6 +59,8 @@ export class WorkoutsEditComponent implements OnInit {
               private workoutCategoryService: WorkoutCategoryService,
               private sportService: SportService,
               private messageService: MessageService,
+              private toasterService: NbToastrService,
+              private translateService: TranslateService,
               private router: Router) { }
 
   ngOnInit() {
@@ -144,11 +148,11 @@ export class WorkoutsEditComponent implements OnInit {
         (workoutResponse: HttpResponse<IWorkout>) => {
         this.workout = workoutResponse.body;
         this.setTestForm(this.workout, this.workoutActivities, this.workoutCategories, this.sports);
-          this.messageService.add({severity: 'success', summary: 'Cvičení uloženo'});
+          this.toasterService.success(null, this.translateService.instant('Cvičení uloženo'));
           this.router.navigate(['/pages/admin/workouts/list']);
       },
         (errorResponse: HttpErrorResponse) => {
-          this.messageService.add({severity: 'error', summary: 'Cvičení nebylo uloženo', detail: errorResponse.error.detail});
+          this.toasterService.danger(null, this.translateService.instant('Cvičení nebylo uloženo'));
         });
     }
   }

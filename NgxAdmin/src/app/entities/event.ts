@@ -48,8 +48,8 @@ export class Event implements IEvent {
 
   static parseItemEnums(event: any): IEvent {
     if (event) {
-      if (event.tests) {
-        Workout.parseItemsEnums(event.tests);
+      if (event.workouts) {
+        Workout.parseItemsEnums(event.workouts);
       }
     }
     return event;

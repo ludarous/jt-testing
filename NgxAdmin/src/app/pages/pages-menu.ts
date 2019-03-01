@@ -8,6 +8,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
+    title: 'UŽIVATEL',
+    group: true,
+  },
+  {
+    title: 'Výsledky',
+    icon: 'nb-compose',
+    link: '/pages/user/results',
+  },
+  {
+    title: 'Statistiky',
+    icon: 'nb-compose',
+    link: '/pages/user/results',
+  },
+  {
     title: 'ADMIN',
     group: true,
   },

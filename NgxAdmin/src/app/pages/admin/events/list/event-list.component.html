@@ -7,6 +7,6 @@
     <ngx-table-search [createItemTitle]="('Vytvořit událost' | translate)" (create)="create()"></ngx-table-search>
 
     <ngx-table [data]="events" [cols]="tableCols" (rowClick)="rowSelect($event)"
-               (delete)="delete($event)"></ngx-table>
+               (delete)="delete($event)" (edit)="edit($event)"></ngx-table>
   </nb-card-body>
 </nb-card>

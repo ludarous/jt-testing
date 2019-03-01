@@ -8,6 +8,8 @@ import {map} from 'rxjs/operators';
 import {RxjsUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/rxjs.utils';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MessageService} from 'primeng/api';
+import {NbToastrService} from '@nebular/theme';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-workout-categories-edit',
@@ -25,6 +27,8 @@ export class WorkoutCategoriesEditComponent implements OnInit {
   constructor(private workoutCategoryService: WorkoutCategoryService,
               private activatedRoute: ActivatedRoute,
               private messageService: MessageService,
+              private toasterService: NbToastrService,
+              private translateService: TranslateService,
               private router: Router) {
   }
 
@@ -67,11 +71,11 @@ export class WorkoutCategoriesEditComponent implements OnInit {
       saveCategory$.subscribe(
         (categoryResponse: HttpResponse<IWorkoutCategory>) => {
           this.workoutCategory = categoryResponse.body;
-          this.messageService.add({severity: 'success', summary: 'Kategorie uložena'});
+          this.toasterService.success(null, this.translateService.instant('Kategorie uložena'));
           this.router.navigate(['/pages/admin/workout-categories/list']);
         },
         (errorResponse: HttpErrorResponse) => {
-          this.messageService.add({severity: 'error', summary: 'Kategorie nebyla uložena', detail: errorResponse.error.detail});
+          this.toasterService.danger(null, this.translateService.instant('Kategorie nebyla uložena'));
         });
     }
   }

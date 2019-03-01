@@ -42,6 +42,8 @@ export class ActivitiesEditComponent implements OnInit {
 
   submitted = false;
 
+  selectedStepperIndex = 0;
+
   constructor(private activatedRoute: ActivatedRoute,
               private activityService: ActivityService,
               private activityCategoryService: ActivityCategoryService,

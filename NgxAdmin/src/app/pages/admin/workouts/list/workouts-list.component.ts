@@ -35,7 +35,7 @@ export class WorkoutsListComponent implements OnInit {
   }
 
   rowSelect(workout: IWorkout) {
-    this.router.navigate(['/pages/admin/workouts/edit', workout.id]);
+    this.edit(workout);
   }
 
   delete(workout: IWorkout) {
@@ -47,6 +47,10 @@ export class WorkoutsListComponent implements OnInit {
       });
     }
 
+  }
+
+  edit(workout: IWorkout) {
+    this.router.navigate(['/pages/admin/workouts/edit', workout.id]);
   }
 
   create() {

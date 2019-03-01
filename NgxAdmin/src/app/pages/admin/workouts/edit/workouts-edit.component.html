@@ -145,10 +145,10 @@
 
               <div class="form-group">
                 <div class="text-hint">{{('Aktivity' | translate)}}</div>
-                <div class="d-flex flex-row">
-                  <h5 class="text-body" *ngFor="let activity of selectedActivities; last as isLast">
+                <div class="workout-activities-summary">
+                  <span class="font-exo" *ngFor="let activity of selectedActivities; last as isLast">
                     {{activity.name}}<span style="margin-right: 5px;" *ngIf="!isLast">,</span>
-                  </h5>
+                  </span>
                 </div>
               </div>
 

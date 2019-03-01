@@ -40,7 +40,7 @@ export class ActivitiesListComponent implements OnInit {
   }
 
   rowSelect(activity: IActivity) {
-    this.router.navigate(['/pages/admin/activities/edit', activity.id]);
+    this.edit(activity);
   }
 
   delete(activity: IActivity) {
@@ -56,5 +56,9 @@ export class ActivitiesListComponent implements OnInit {
 
   create() {
     this.router.navigate(['/pages/admin/activities/create']);
+  }
+
+  edit(activity: IActivity) {
+    this.router.navigate(['/pages/admin/activities/edit', activity.id]);
   }
 }

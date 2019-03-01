@@ -4,6 +4,7 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {WorkoutCategoryService} from '../../../../services/workout-category.service';
 import {Router} from '@angular/router';
 import {MessageService} from 'primeng/api';
+import {IWorkout} from '../../../../entities/workout';
 
 @Component({
   selector: 'ngx-test-categories-list',
@@ -36,7 +37,7 @@ export class WorkoutCategoriesListComponent implements OnInit {
   }
 
   rowSelect(category: IWorkoutCategory) {
-    this.router.navigate(['/pages/admin/workout-categories/edit', category.id]);
+    this.edit(category);
   }
 
   delete(workoutCategory: IWorkoutCategory) {
@@ -49,6 +50,10 @@ export class WorkoutCategoriesListComponent implements OnInit {
       });
     }
 
+  }
+
+  edit(category: IWorkoutCategory) {
+    this.router.navigate(['/pages/admin/workout-categories/edit', category.id]);
   }
 
   create() {

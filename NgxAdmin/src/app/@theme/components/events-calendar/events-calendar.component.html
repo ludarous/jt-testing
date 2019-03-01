@@ -1,0 +1,19 @@
+<nb-card>
+  <nb-card-header>
+    {{'Události' | translate}}
+  </nb-card-header>
+  <nb-card-body>
+    <!--<nb-calendar-month-picker-->
+      <!--[(month)]="date"-->
+      <!--[cellComponent]="monthCellComponent"-->
+    <!--&gt;</nb-calendar-month-picker>-->
+    <!--<nb-calendar-day-picker-->
+      <!--[boundingMonths]="false"-->
+      <!--[visibleDate]="date"-->
+      <!--[date]="date"-->
+      <!--(dateChange)="select.emit($event)"-->
+      <!--[cellComponent]="dayCellComponent">-->
+    <!--</nb-calendar-day-picker>-->
+    <nb-calendar [dayCellComponent]="dayCellComponent"></nb-calendar>
+  </nb-card-body>
+</nb-card>

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-12">
     <nb-card>
-      <nb-card-header>{{workoutCategoryForm?.name}}</nb-card-header>
+      <nb-card-header>{{workoutCategory?.name}}</nb-card-header>
       <nb-card-body>
         <form class="form" *ngIf="workoutCategoryForm" [formGroup]="workoutCategoryForm" (submit)="saveCategory()">
 

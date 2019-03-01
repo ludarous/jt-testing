@@ -15,7 +15,7 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
-        <tr>
+        <tr class="table-row" (click)="rowSelect(rowData)">
           <td>
             <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
             {{rowData.name}}

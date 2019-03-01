@@ -79,6 +79,12 @@ import { TableRowActionsComponent } from './components/table/table-row-actions/t
 import {CallbackPipe} from './pipes/filter.pipe';
 import { DragDropListsComponent } from './components/drag-drop-lists/drag-drop-lists.component';
 import {TranslateModule} from '@ngx-translate/core';
+import { ScrollableListComponent } from './components/scrollable-list/scrollable-list.component';
+import { EventsCalendarComponent } from './components/events-calendar/events-calendar.component';
+import {EventsCalendarMonthCellComponent} from './components/events-calendar/month-cell/month-cell.component';
+import {EventsCalendarDayCellComponent} from './components/events-calendar/day-cell/day-cell.component';
+import {EventsCalendarService} from './components/events-calendar/events-calendar.service';
+import {EventService} from '../services/event.service';
 
 const BASE_MODULES = [
   CommonModule,
@@ -145,7 +151,12 @@ const COMPONENTS = [
   TableComponent,
   TableSearchComponent,
   TableRowActionsComponent,
-  DragDropListsComponent
+  DragDropListsComponent,
+  ScrollableListComponent,
+
+  EventsCalendarComponent,
+  EventsCalendarMonthCellComponent,
+  EventsCalendarDayCellComponent,
 ];
 
 const ENTRY_COMPONENTS = [
@@ -180,6 +191,11 @@ const NB_THEME_PROVIDERS = [
   }).providers,
 ];
 
+const PROVIDERS = [
+  EventsCalendarService,
+  EventService,
+]
+
 @NgModule({
   imports: [...BASE_MODULES, ...NB_MODULES],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
@@ -190,7 +206,7 @@ export class ThemeModule {
   static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
       ngModule: ThemeModule,
-      providers: [...NB_THEME_PROVIDERS],
+      providers: [...NB_THEME_PROVIDERS, PROVIDERS],
     };
   }
 }

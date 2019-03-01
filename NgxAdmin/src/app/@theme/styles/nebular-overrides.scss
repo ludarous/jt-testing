@@ -2,4 +2,20 @@ nb-stepper {
   .header {
     margin: 0 50px;
   }
+
+  .vertical {
+    .step-content {
+      flex: 1;
+    }
+  }
+}
+
+.nb-theme-corporate nb-calendar-days-names .day {
+  flex: 1;
+}
+
+.nb-theme-corporate nb-base-calendar.medium nb-card {
+  width: auto !important;
+  height: 100%;
+  flex: 1;
 }

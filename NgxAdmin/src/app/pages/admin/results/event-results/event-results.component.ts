@@ -4,8 +4,9 @@ import {EventService} from '../../../../services/event.service';
 import {EventResultService} from '../../../../services/event-result.service';
 import {EventManager} from '../../../../services/event.manager';
 import {TranslateService} from '@ngx-translate/core';
-import {IEvent} from '../../../../entities/event';
+import {IEvent, Event} from '../../../../entities/event';
 import {HttpResponse} from '@angular/common/http';
+import {EventResult, IEventResult} from '../../../../entities/event-result';
 
 @Component({
   selector: 'ngx-event-results',
@@ -41,7 +42,7 @@ export class EventResultsComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       this.eventId = params['eventId'];
       this.eventService.find(this.eventId).subscribe((eventResponse: HttpResponse<IEvent>) => {
-        this.event = eventResponse.body;
+        this.event = Event.resolveResponse(eventResponse);
 
         this.tablePersons = this.event.attachedPersons
           .map(p => (
@@ -58,5 +59,6 @@ export class EventResultsComponent implements OnInit {
   personSelect(tablePerson: any) {
     this.router.navigate(['/pages/admin/events/', this.event.id, 'results', 'person', tablePerson.data.id]);
   }
+
 
 }

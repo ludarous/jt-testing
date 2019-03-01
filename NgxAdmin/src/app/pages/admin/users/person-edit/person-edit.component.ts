@@ -15,6 +15,8 @@ import {IPersonFull, PersonFull} from '../../../../entities/person-full';
 import {MessageService, SelectItem} from 'primeng/api';
 import {Sex} from '../../../../entities/enums/sex';
 import {EnumTranslatorService} from '../../../../@theme/modules/enum-translator/enum-translator';
+import {NbToastrService} from '@nebular/theme';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-person-edit',
@@ -50,6 +52,8 @@ export class PersonEditComponent implements OnInit {
               private personalDataService: PersonalDataService,
               private personService: PersonService,
               private messageService: MessageService,
+              private toasterService: NbToastrService,
+              private translateService: TranslateService,
               private router: Router,
               private enumTranslateService: EnumTranslatorService) {
   }
@@ -137,12 +141,11 @@ export class PersonEditComponent implements OnInit {
       savePerson$.subscribe(
         (personResponse: HttpResponse<PersonFull>) => {
         this.person = personResponse.body;
-          this.messageService.add({severity: 'success', summary: 'Výsledky uloženy'});
+          this.toasterService.success(null, this.translateService.instant('Uživatel uložen'));
           this.router.navigate(['/pages/admin/users/list']);
       },
         (errorResponse: HttpErrorResponse) => {
-          this.messageService
-            .add({severity: 'error', summary: 'Výsledky nebyly uloženy', detail: errorResponse.error.detail});
+          this.toasterService.danger(null, this.translateService.instant('Uživatel nebyl uložena'));
         });
     }
   }

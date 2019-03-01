@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-12">
     <nb-card>
-      <nb-card-header>{{'Vyberte uživatele' | translate}}</nb-card-header>
+      <nb-card-header>{{('Výsledky události:' | translate) + ' ' + event?.name}}</nb-card-header>
       <nb-card-body>
         <ngx-table [data]="tablePersons" [cols]="personsCols" (rowClick)="personSelect($event)" [showActions]="false"></ngx-table>
       </nb-card-body>

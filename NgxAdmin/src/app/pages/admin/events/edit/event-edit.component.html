@@ -23,7 +23,7 @@
             <input class="form-control"
                    id="maxAge" type="text" placeholder="Maximální věk" formControlName="maxAge">
           </div>
-          <div class="form-group">
+          <div class="form-group form-group-column">
             <label for="maxAge">{{('Datum události' | translate)}}</label>
             <p-calendar [(ngModel)]="eventDateClassic"
                         [ngModelOptions]="{standalone: true}"
@@ -124,7 +124,7 @@
 
           <div class="d-flex justify-content-between">
             <button nbButton nbStepperPrevious>{{'Předchozí' | translate}}</button>
-            <div>
+            <div class="btn-group">
               <button nbButton
                       status="primary"
                       [class.btn-pulse]="submitted"

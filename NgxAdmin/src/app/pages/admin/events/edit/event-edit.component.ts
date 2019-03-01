@@ -15,6 +15,8 @@ import {Moment} from 'moment';
 import * as moment from 'moment';
 import {MessageService} from 'primeng/api';
 import {WorkoutService} from '../../../../services/workout.service';
+import {NbToastrService} from '@nebular/theme';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-events-edit',
@@ -81,6 +83,8 @@ export class EventEditComponent implements OnInit {
               private personService: PersonService,
               private workoutService: WorkoutService,
               private messageService: MessageService,
+              private toasterService: NbToastrService,
+              private translateService: TranslateService,
               private router: Router) { }
 
   ngOnInit() {
@@ -171,11 +175,11 @@ export class EventEditComponent implements OnInit {
         (eventResponse: HttpResponse<IEvent>) => {
         this.event = eventResponse.body;
         this.setEventForm(this.event, this.tests, this.persons);
-        this.messageService.add({severity: 'success', summary: 'Událost uložena'});
+          this.toasterService.success(null, this.translateService.instant('Událost uložena'));
         this.router.navigate(['/pages/admin/events/list']);
       },
         (errorResponse: HttpErrorResponse) => {
-          this.messageService.add({severity: 'error', summary: 'Událost nebyla uložena', detail: errorResponse.error.detail});
+          this.toasterService.danger(null, this.translateService.instant('Událost nebyla uložena'));
         });
     }
   }

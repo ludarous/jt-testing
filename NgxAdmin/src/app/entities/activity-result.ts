@@ -43,9 +43,4 @@ export class ActivityResult implements IActivityResult {
   personId: number;
   personName: string;
 
-  constructor(activity: IActivity, workout: IWorkout, event: IEvent) {
-    this.activityId = activity.id;
-    this.workoutId = workout.id;
-    this.eventId = event.id;
-  }
 }

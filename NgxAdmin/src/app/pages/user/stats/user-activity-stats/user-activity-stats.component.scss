@@ -1,0 +1,67 @@
+@import "app-colors";
+
+.user-activity-result-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  margin: 20px;
+  padding: 20px;
+}
+
+.user-activity-note {
+  text-align: center;
+  font-size: 24px;
+}
+
+.user-activity-result-info {
+
+  .user-activity-name {
+    text-align: center;
+    font-size: 24px;
+  }
+
+}
+
+.info-label {
+  font-weight: bold;
+}
+
+.user-activity-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-activity-stats {
+  margin: 20px;
+  padding: 20px;
+}
+
+.activity-result-panel {
+  margin-bottom: 10px;
+}
+
+.result-charts {
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-container {
+  height: 300px;
+}
+
+.header-cards-container {
+  background-color: $chart-color;
+  height: 60px;
+  border-radius: 4px;
+  font-size: 24px;
+  padding: 10px 40px;
+  margin: 0px 20px;
+  text-align: center;
+  width: 300px;
+}
+
+
+.activity-line-chart {
+  min-height: 500px;
+}

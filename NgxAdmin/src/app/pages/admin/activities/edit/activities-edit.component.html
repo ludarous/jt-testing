@@ -4,103 +4,119 @@
       <nb-card-header>{{activity?.name}}</nb-card-header>
       <nb-card-body>
         <form class="form" *ngIf="activityForm" [formGroup]="activityForm" (submit)="saveActivity()">
+          <nb-stepper #stepper orientation="horizontal" [(selectedIndex)]="selectedStepperIndex">
+            <nb-step [label]="'Základní údaje aktivity' | translate">
+              <div class="form-group has-error">
+                <label for="name">{{('Název' | translate)}}</label>
+                <input type="text" class="form-control" id="name" [placeholder]="('Název' | translate)"
+                       formControlName="name">
+                <small *ngIf="!activityForm.controls['name'].valid && activityForm.controls['name'].touched"
+                       class="form-text"></small>
+              </div>
 
-          <div class="form-group has-error">
-            <label for="name">{{('Název' | translate)}}</label>
-            <input type="text" class="form-control" id="name" [placeholder]="('Název' | translate)"
-                   formControlName="name">
-            <small *ngIf="!activityForm.controls['name'].valid && activityForm.controls['name'].touched"
-                   class="form-text"></small>
-          </div>
+              <div class="form-group">
+                <label for="description">{{('Popis' | translate)}}</label>
+                <textarea type="text" class="form-control" id="description" [placeholder]="('Popis' | translate)"
+                          formControlName="description"></textarea>
+              </div>
 
-          <div class="form-group">
-            <label for="description">{{('Popis' | translate)}}</label>
-            <textarea type="text" class="form-control" id="description" [placeholder]="('Popis' | translate)"
-                      formControlName="description"></textarea>
-          </div>
+              <div class="form-group">
+                <label for="help">{{('Nápověda' | translate)}}</label>
+                <textarea type="text" class="form-control" id="help" [placeholder]="('Nápověda' | translate)"
+                          formControlName="help"></textarea>
+              </div>
 
-          <div class="form-group">
-            <label for="help">{{('Nápověda' | translate)}}</label>
-            <textarea type="text" class="form-control" id="help" [placeholder]="('Nápověda' | translate)"
-                      formControlName="help"></textarea>
-          </div>
+              <div class="form-group">
+                <label for="key">{{('Klíč' | translate)}}</label>
+                <input type="text"
+                       class="form-control"
+                       id="key"
+                       [placeholder]="('Klíč' | translate)"
+                       formControlName="key">
+              </div>
 
-          <div class="form-group">
-            <label for="key">{{('Klíč' | translate)}}</label>
-            <input type="text"
-                   class="form-control"
-                   id="key"
-                   [placeholder]="('Klíč' | translate)"
-                   formControlName="key">
-          </div>
+              <div class="form-group">
+                <label for="minAge">{{('Minimální věk' | translate)}}</label>
+                <input class="form-control"
+                       id="minAge" type="text" placeholder="Minimální věk" formControlName="minAge">
+              </div>
 
-          <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-              <div>
-                <div class="form-group">
-                  <label for="primaryResultValueUnit">{{('Jednotky hlavního výsledku' | translate)}}</label>
-                  <p-selectButton class="form-control"
-                                  id="primaryResultValueUnit"
-                                  [options]="unitsOptions"
-                                  formControlName="primaryResultValueUnit"></p-selectButton>
+              <div class="form-group">
+                <label for="maxAge">{{('Maximální věk' | translate)}}</label>
+                <input class="form-control"
+                       id="maxAge" type="text" placeholder="Maximální věk" formControlName="maxAge">
+              </div>
+            </nb-step>
+            <nb-step [label]="'Výsledky' | translate">
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div>
+                    <div class="form-group">
+                      <label for="primaryResultValueUnit">{{('Jednotky hlavního výsledku' | translate)}}</label>
+                      <p-selectButton class="form-control"
+                                      id="primaryResultValueUnit"
+                                      [options]="unitsOptions"
+                                      formControlName="primaryResultValueUnit"></p-selectButton>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div>
+                    <div class="form-group">
+                      <label for="primaryResultType">{{('Typ hlavního výsledku' | translate)}}</label>
+                      <p-selectButton class="form-control"
+                                      id="primaryResultType"
+                                      [options]="resultTypesOptions"
+                                      formControlName="primaryResultType"></p-selectButton>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12">
-              <div>
-                <div class="form-group">
-                  <label for="primaryResultType">{{('Typ hlavního výsledku' | translate)}}</label>
-                  <p-selectButton class="form-control"
-                                  id="primaryResultType"
-                                  [options]="resultTypesOptions"
-                                  formControlName="primaryResultType"></p-selectButton>
+
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label for="secondaryResultValueUnit">{{('Jednotky vedlejšího výsledku' | translate)}}</label>
+                    <p-selectButton class="form-control"
+                                    id="secondaryResultValueUnit"
+                                    [options]="unitsOptions"
+                                    formControlName="secondaryResultValueUnit"></p-selectButton>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                  <div class="form-group">
+                    <label for="secondaryResultType">{{('Typ vedlejšího výsledku' | translate)}}</label>
+                    <p-selectButton class="form-control"
+                                    id="secondaryResultType"
+                                    [options]="resultTypesOptions"
+                                    formControlName="secondaryResultType"></p-selectButton>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </nb-step>
+            <nb-step [label]="'Kategorie' | translate">
+              <ng-container *ngIf="activityCategories">
+                <ngx-drag-drop-lists
+                  [sourceData]="activityCategories"
+                  [sourceFilter]="true"
+                  [sourceFilterPlaceholder]="'Vyhledej kategorie'"
+                  [sourceHeading]="'Všechny kategorie'"
+                  [targetData]="selectedCategories"
+                  [targetFilter]="true"
+                  [targetFilterPlaceholder]="'Vyhledej kategorie'"
+                  [targetHeading]="'Vybrané kategorie'"
+                  [filterFields]="['name', 'description']">
+                  <ng-template let-item="item">
+                    <div class="ui-helper-clearfix">
+                      <b>{{item.name}}</b>
+                    </div>
+                  </ng-template>
+                </ngx-drag-drop-lists>
+              </ng-container>
+            </nb-step>
+          </nb-stepper>
 
-          <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-              <div class="form-group">
-                <label for="secondaryResultValueUnit">{{('Jednotky vedlejšího výsledku' | translate)}}</label>
-                <p-selectButton class="form-control"
-                                id="secondaryResultValueUnit"
-                                [options]="unitsOptions"
-                                formControlName="secondaryResultValueUnit"></p-selectButton>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12">
-              <div class="form-group">
-                <label for="secondaryResultType">{{('Typ vedlejšího výsledku' | translate)}}</label>
-                <p-selectButton class="form-control"
-                                id="secondaryResultType"
-                                [options]="resultTypesOptions"
-                                formControlName="secondaryResultType"></p-selectButton>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="minAge">{{('Minimální věk' | translate)}}</label>
-            <input class="form-control"
-                   id="minAge" type="text" placeholder="Minimální věk" formControlName="minAge">
-          </div>
-          <div class="form-group">
-            <label for="maxAge">{{('Maximální věk' | translate)}}</label>
-            <input class="form-control"
-                   id="maxAge" type="text" placeholder="Maximální věk" formControlName="maxAge">
-          </div>
-          <div class="form-group">
-            <p-autoComplete
-              placeholder="Napiš kategorie aktivity"
-              [multiple]="true"
-              [suggestions]="suggestedCategories"
-              (completeMethod)="search($event)"
-              [(ngModel)]="selectedCategories"
-              [ngModelOptions]="{standalone: true}"
-              [forceSelection]="true"
-              field="name"></p-autoComplete>
-          </div>
           <button nbButton
                   fullWidth
                   status="success"

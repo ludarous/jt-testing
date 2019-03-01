@@ -18,3 +18,19 @@
     background-color: #333333 !important;
   }
 }
+
+.filled {
+  background-color: rgba(0, 128, 0, 0.21);
+}
+
+.not-selected {
+  opacity: 0.7;
+}
+
+.selected {
+  opacity: 1;
+}
+
+.list-item {
+  padding: 10px;
+}

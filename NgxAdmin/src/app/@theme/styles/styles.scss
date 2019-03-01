@@ -37,3 +37,61 @@
   }
   @include bootstrap-rtl();
 };
+
+button {
+  cursor: pointer !important;
+}
+
+app-admin {
+  height: 100%;
+
+  ngx-results {
+    height: 100%;
+  }
+}
+
+ngx-events-calendar {
+  height: 100%;
+
+  nb-card {
+    height: 100%;
+  }
+}
+
+.font-exo {
+  font-family: 'Exo';
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.btn-group {
+
+  button {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  button:first-child {
+    margin-left: 0;
+  }
+
+  button:last-child {
+    margin-right: 0;
+  }
+
+}
+
+.table-row {
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f0f0f0 !important;
+  }
+}
+
+.flex-full {
+  flex: 1;
+}

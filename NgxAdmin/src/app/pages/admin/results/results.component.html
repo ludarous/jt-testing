@@ -1,63 +1,21 @@
-<div class="row">
-  <div class="col-lg-12">
-    <nb-card>
-      <nb-card-header>{{getCardHeader()}}</nb-card-header>
-      <nb-card-body>
-        <nb-stepper #stepper orientation="horizontal" [(selectedIndex)]="selectedStepperIndex">
-          <nb-step [label]="'Vyber událost' | translate">
-            <ngx-table [data]="events" [cols]="eventsCols" (rowClick)="eventSelect($event)" [showActions]="false"></ngx-table>
-          </nb-step>
-          <nb-step [label]="'Vyber uživatele' | translate">
-            <ngx-table [data]="tablePersons" [cols]="personsCols" (rowClick)="personSelect($event)" [showActions]="false"></ngx-table>
-          </nb-step>
-          <nb-step [label]="'Zapiš výsledky' | translate">
-            <div *ngIf="selectedEvent && selectedPerson && selectedPersonalEventResult">
-              <app-event-result-edit [eventResult]="selectedPersonalEventResult" [person]="selectedPerson"
-                                     [testEvent]="selectedEvent"></app-event-result-edit>
-            </div>
-          </nb-step>
-        </nb-stepper>
-      </nb-card-body>
-    </nb-card>
-  </div>
-</div>
+<!--<ngx-scrollable-list *ngIf="events"-->
+                     <!--[filterFields]="['name']"-->
+                     <!--[data]="events"-->
+                     <!--[heading]="'Události' | translate"-->
+                     <!--[filterPlaceholder]="'Vyhledej událost'"-->
+                     <!--[filter]="true">-->
+  <!--<ng-template let-item="item">-->
+    <!--<div class="ui-helper-clearfix">-->
+      <!--<b>{{item.name}}</b>-->
+    <!--</div>-->
+    <!--&lt;!&ndash;<div class="activity-picklist-categories">&ndash;&gt;-->
+      <!--&lt;!&ndash;Kategorie:&ndash;&gt;-->
+      <!--&lt;!&ndash;<ng-container *ngFor="let category of item.categories; last as isLast">&ndash;&gt;-->
+        <!--&lt;!&ndash;<span>{{category.name}}</span><span *ngIf="!isLast">, </span>&ndash;&gt;-->
+      <!--&lt;!&ndash;</ng-container>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+  <!--</ng-template>-->
+<!--</ngx-scrollable-list>-->
 
-
-<!--<div class="component-container-center">-->
-  <!--<div class="row">-->
-    <!--<div class="ui-inputgroup col-6">-->
-      <!--<p-dropdown [options]="eventSelectItems"-->
-                  <!--[(ngModel)]="selectedEvent"-->
-                  <!--[filter]="true"-->
-                  <!--filterBy="label,value.name,value.date"-->
-                  <!--[autoWidth]="false">-->
-        <!--<ng-template let-event pTemplate="item">-->
-          <!--{{event.label}}-->
-        <!--</ng-template>-->
-      <!--</p-dropdown>-->
-    <!--</div>-->
-    <!--<div class="ui-inputgroup col-6">-->
-      <!--<p-dropdown *ngIf="selectedEvent"-->
-                  <!--[options]="personSelectItems"-->
-                  <!--[(ngModel)]="selectedPerson"-->
-                  <!--[filter]="true"-->
-                  <!--(onChange)="personChanged($event)"-->
-                  <!--filterBy="label,value.firstName,value.lastName"-->
-                  <!--[autoWidth]="false">-->
-        <!--<ng-template let-person pTemplate="item">-->
-          <!--{{person.label}}-->
-        <!--</ng-template>-->
-      <!--</p-dropdown>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<div class="event-result-edit">-->
-    <!--<div *ngIf="selectedEvent && selectedPerson && !selectedPersonalEventResult">-->
-      <!--<button mat-raised-button (click)="createEventResult()">{{'Vytvoř výsledek' | translate}}</button>-->
-    <!--</div>-->
-    <!--<div *ngIf="selectedEvent && selectedPerson && selectedPersonalEventResult">-->
-      <!--<app-event-result-edit [eventResult]="selectedPersonalEventResult" [person]="selectedPerson"-->
-                             <!--[testEvent]="selectedEvent"></app-event-result-edit>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
+<ngx-events-calendar></ngx-events-calendar>
 

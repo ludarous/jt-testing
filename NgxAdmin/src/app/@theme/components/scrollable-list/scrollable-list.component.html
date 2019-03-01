@@ -1,0 +1,21 @@
+<nb-card size="large">
+  <nb-card-header>
+    <div class="select-header">
+      <div class="select-header-title">{{heading}}</div>
+      <div class="select-header-content">
+        <div class="form-group">
+          <input class="form-control"
+                 type="text"
+                 [placeholder]="filterPlaceholder"
+                 [(ngModel)]="filterQuery"
+                 [ngModelOptions]="{standalone: true}">
+        </div>
+      </div>
+    </div>
+  </nb-card-header>
+  <nb-list>
+    <nb-list-item class="item" *ngFor="let item of filteredData" (click)="onItemClick(item)">
+      <ng-container *ngTemplateOutlet="layoutTemplate; context: { item: item}"></ng-container>
+    </nb-list-item>
+  </nb-list>
+</nb-card>

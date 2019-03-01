@@ -1,0 +1,26 @@
+<div class="dashboard-container">
+  <div class="chart-container">
+    <ngx-charts-polar-chart *ngIf="chartData"
+                            class="chart-container dark"
+                            [scheme]="getColorScheme('cool')"
+                            [results]="chartData"
+                            [animations]="true"
+                            [legend]="false"
+                            (legendLabelClick)="onLegendLabelClick($event)"
+                            [gradient]="true"
+                            [xAxis]="true"
+                            [yAxis]="true"
+                            [autoScale]="false"
+                            [showGridLines]="true"
+                            [rangeFillOpacity]="rangeFillOpacity"
+                            [showSeriesOnHover]="true"
+                            [yAxisMinScale]="100"
+                            [labelTrim]="false"
+                            (select)="selectCategory($event)">
+    </ngx-charts-polar-chart>
+  </div>
+  <div *ngIf="events" class="calendar-container">
+    <p-fullCalendar [options]="calendarOptions"></p-fullCalendar>
+  </div>
+</div>
+

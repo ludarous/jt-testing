@@ -1,18 +1,59 @@
-<div class="test-result-container">
-  <div
-    class="test-name">{{'Výsledky testu ' + workout.name + ' uživatele ' + person.personalData.firstName + ' ' + person.personalData.lastName}}
-  </div>
-
-  <p-accordion styleClass="activities-results-accordion">
-    <ng-container *ngFor="let activityResult of workoutResult.activitiesResults">
-      <p-accordionTab [header]="activityResult.activityName">
-        <app-activity-result-edit [activity]="getActivityForActivityResult(activityResult)" [workoutResult]="workoutResult"
-                                  [activityResult]="activityResult" [testEvent]="testEvent"></app-activity-result-edit>
-      </p-accordionTab>
-    </ng-container>
-  </p-accordion>
-  <!--<div class="flex-fill" *ngFor="let activityResult of testsResult.activitiesResults">-->
-    <!--<app-activity-result-edit [activity]="getActivityForActivityResult(activityResult)" [workoutResult]="testsResult"-->
-                              <!--[activityResult]="activityResult" [testEvent]="testEvent"></app-activity-result-edit>-->
-  <!--</div>-->
-</div>
+<nb-card>
+  <nb-card-header>{{event?.name + ' - ' + workout.name}}</nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <!--<nb-card size="large">-->
+          <!--<nb-card-header>-->
+            <!--<div class="select-header">-->
+              <!--<div class="select-header-title">{{'Aktivity' | translate}}</div>-->
+              <!--<div class="select-header-content">-->
+                <!--<div class="form-group">-->
+                  <!--<input class="form-control" type="text">-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</nb-card-header>-->
+          <!--<nb-list>-->
+            <!--<nb-list-item class="pointer" [ngClass]="{-->
+            <!--'pointer': true,-->
+            <!--'filled': activityResult.primaryResultValue,-->
+            <!--'selected': activityResult === selectedActivityResult,-->
+            <!--'not-selected': activityResult !== selectedActivityResult-->
+            <!--}" (click)="selectActivityResult(activityResult)"-->
+                          <!--*ngFor="let activityResult of workoutResult.activitiesResults">-->
+              <!--<div class="ui-helper-clearfix">-->
+                <!--<b>{{activityResult.activityName}}</b>-->
+              <!--</div>-->
+            <!--</nb-list-item>-->
+          <!--</nb-list>-->
+        <!--</nb-card>-->
+        <ngx-scrollable-list [data]="workoutResult.activitiesResults"
+                             [filter]="true"
+                             [filterFields]="['activityName']"
+                             [filterPlaceholder]="'Vyhledej aktivitu'"
+                             (itemClick)="selectActivityResult($event)">
+          <ng-template let-item="item">
+            <div [ngClass]="{
+            'list-item': true,
+            'pointer': true,
+            'filled': item.primaryResultValue,
+            'selected': item === selectedActivityResult,
+            'not-selected': item !== selectedActivityResult
+            }">
+              <b>{{item.activityName}}</b>
+            </div>
+          </ng-template>
+        </ngx-scrollable-list>
+      </div>
+      <div class="col-lg-9 col-md-6 col-sm-12" *ngIf="selectedActivityResult">
+        <ngx-activity-result-edit [activity]="getActivityForActivityResult(selectedActivityResult)"
+                                  [workoutResult]="workoutResult"
+                                  [activityResult]="selectedActivityResult"
+                                  [event]="event"
+                                  (saveSuccess)="onActivityResultSuccessSave($event)">
+        </ngx-activity-result-edit>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

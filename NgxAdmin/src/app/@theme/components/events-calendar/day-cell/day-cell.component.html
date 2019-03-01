@@ -1,0 +1,10 @@
+<div class="custom-day-cell" [ngClass]="{'today': today}">
+  <div class="d-flex justify-content-center">
+    <h4 [ngClass]="{'bounding-month' : boundingMonth}">{{title}}</h4>
+  </div>
+  <ng-container *ngIf="dayEvents">
+    <div class="event" (click)="selectEvent(event)" *ngFor="let event of dayEvents">
+      {{event.name}}
+    </div>
+  </ng-container>
+</div>

@@ -30,9 +30,5 @@ export class EventResult implements IEventResult {
   constructor(event: IEvent, person: IPersonFull) {
     this.eventId = event.id;
     this.personId = person.id;
-
-    for (const workout of event.workouts) {
-      this.workoutResults.push(new WorkoutResult(workout, event));
-    }
   }
 }

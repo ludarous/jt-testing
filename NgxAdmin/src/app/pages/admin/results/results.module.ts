@@ -13,6 +13,7 @@ import {PrimeNgComponentsModule} from '../../../@theme/modules/primeng/primeng-c
 import {EnumTranslationsModule} from '../../../@theme/modules/enum-translator/enum-translations.module';
 import {ThemeModule} from '../../../@theme/theme.module';
 import { EventResultsComponent } from './event-results/event-results.component';
+import {ActivityResultService} from '../../../services/activity-result.service';
 
 const COMPONENTS = [
   ResultsComponent,
@@ -38,6 +39,7 @@ const COMPONENTS = [
   ],
   providers: [
     EventResultService,
+    ActivityResultService,
   ],
   exports: [
     COMPONENTS

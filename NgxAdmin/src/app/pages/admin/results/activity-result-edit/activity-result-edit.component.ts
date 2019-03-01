@@ -1,18 +1,27 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {IActivity} from '../../../../entities/activity';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Activity, IActivity} from '../../../../entities/activity';
 import {ActivityResult, IActivityResult} from '../../../../entities/activity-result';
 import {IWorkoutResult} from '../../../../entities/workout-result';
 import {FormControl, FormGroup} from '@angular/forms';
 import {IEvent} from '../../../../entities/event';
+import {IActivityCategory} from '../../../../entities/activity-category';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {ActivityResultService} from '../../../../services/activity-result.service';
+import {NbToastrService} from '@nebular/theme';
+import {TranslateService} from '@ngx-translate/core';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-activity-result-edit',
+  selector: 'ngx-activity-result-edit',
   templateUrl: './activity-result-edit.component.html',
   styleUrls: ['./activity-result-edit.component.scss']
 })
 export class ActivityResultEditComponent implements OnInit {
 
-  constructor() { }
+  constructor(private activityResultService: ActivityResultService,
+              private toasterService: NbToastrService,
+              private translateService: TranslateService,
+              private router: Router) { }
 
   private _activity: IActivity;
   @Input()
@@ -33,7 +42,7 @@ export class ActivityResultEditComponent implements OnInit {
   set activityResult(value: IActivityResult) {
     if (value) {
       this._activityResult = value;
-      //this.setActivityResultForm(this._activityResult);
+      this.setActivityResultForm(this._activityResult);
     }
   }
 
@@ -47,17 +56,21 @@ export class ActivityResultEditComponent implements OnInit {
     this._workoutResult = value;
   }
 
-  private _testEvent: IEvent;
+  private _event: IEvent;
   @Input()
-  get testEvent(): IEvent {
-    return this._testEvent;
+  get event(): IEvent {
+    return this._event;
   }
 
-  set testEvent(value: IEvent) {
-    this._testEvent = value;
+  set event(value: IEvent) {
+    this._event = value;
   }
+
+  @Output()
+  saveSuccess: EventEmitter<IActivityResult> = new EventEmitter<IActivityResult>();
 
   activityResultForm: FormGroup;
+  submitted: boolean;
 
   ngOnInit() {
     // if (!this.activityResult) this.activityResult = new ActivityResult();
@@ -74,8 +87,33 @@ export class ActivityResultEditComponent implements OnInit {
       secondaryResultValue: new FormControl(activityResult.secondaryResultValue),
       workoutResultId: new FormControl(activityResult.workoutResultId),
       activityId: new FormControl(activityResult.activityId),
-      eventDate: new FormControl(this.testEvent.date)
+      date: new FormControl(this.event ? this.event.date : null)
     });
+  }
+
+  saveActivityResult() {
+    if (this.activityResultForm.valid) {
+
+      const activityResultToSave = <IActivityResult>this.activityResultForm.value;
+      let saveActivityResult$;
+      if (activityResultToSave.id) {
+        saveActivityResult$ = this.activityResultService.update(activityResultToSave);
+      } else {
+        saveActivityResult$ = this.activityResultService.create(activityResultToSave);
+      }
+
+
+      saveActivityResult$.subscribe(
+        (activityResultResponse: HttpResponse<IActivityResult>) => {
+          this.activityResult = activityResultResponse.body;
+          this.setActivityResultForm(this.activityResult);
+          this.toasterService.success(null, this.translateService.instant('Výsledek uložen'));
+          this.saveSuccess.emit(this.activityResult);
+        },
+        (errorResponse: HttpErrorResponse) => {
+          this.toasterService.danger(null, this.translateService.instant('Výsledek nebyl uložen'));
+        });
+    }
   }
 
 }

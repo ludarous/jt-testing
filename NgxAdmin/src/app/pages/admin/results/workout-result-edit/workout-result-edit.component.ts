@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {IWorkout} from '../../../../entities/workout';
 import {IEvent} from '../../../../entities/event';
 import {IPersonFull} from '../../../../entities/person-full';
@@ -6,14 +6,17 @@ import {IWorkoutResult} from '../../../../entities/workout-result';
 import {IEventResult} from '../../../../entities/event-result';
 import {IActivityResult} from '../../../../entities/activity-result';
 import {IActivity} from '../../../../entities/activity';
+import {NbStepperComponent} from '@nebular/theme';
 
 @Component({
-  selector: 'app-workout-result-edit',
+  selector: 'ngx-workout-result-edit',
   templateUrl: './workout-result-edit.component.html',
   styleUrls: ['./workout-result-edit.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class WorkoutResultEditComponent implements OnInit {
+
+  private selectedActivityResult: IActivityResult;
 
   constructor() { }
 
@@ -37,14 +40,14 @@ export class WorkoutResultEditComponent implements OnInit {
     this._workoutResult = value;
   }
 
-  private _testEvent: IEvent;
+  private _event: IEvent;
   @Input()
-  get testEvent(): IEvent {
-    return this._testEvent;
+  get event(): IEvent {
+    return this._event;
   }
 
-  set testEvent(value: IEvent) {
-    this._testEvent = value;
+  set event(value: IEvent) {
+    this._event = value;
   }
 
   private _eventResult: IEventResult;
@@ -67,14 +70,28 @@ export class WorkoutResultEditComponent implements OnInit {
     this._person = value;
   }
 
+  @ViewChild('stepper')
+  stepper: NbStepperComponent;
 
 
   ngOnInit() {
-    console.log(this.testEvent);
+    // console.log(this.event);
   }
 
   getActivityForActivityResult(activityResult: IActivityResult): IActivity {
-    return this.workout.activities.find(a => a.id === activityResult.activityId);
+    if (activityResult) {
+      return this.workout.activities.find(a => a.id === activityResult.activityId);
+    }
+
+    return null;
+  }
+
+  onActivityResultSuccessSave(activityResults: IActivityResult) {
+    if (this.stepper) this.stepper.next();
+  }
+
+  selectActivityResult(activityResult: IActivityResult) {
+    this.selectedActivityResult = activityResult;
   }
 
 }

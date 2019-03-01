@@ -30,13 +30,13 @@ export class EventListComponent implements OnInit {
   }
 
   load() {
-    this.eventService.query().subscribe((eventsResponse: HttpResponse<Array<IWorkout>>) => {
+    this.eventService.query().subscribe((eventsResponse: HttpResponse<Array<IEvent>>) => {
       this.events = eventsResponse.body;
     });
   }
 
   rowSelect(event: IEvent) {
-    this.router.navigate(['/pages/admin/events/edit', event.id]);
+    this.edit(event);
   }
 
   delete(event: IEvent) {
@@ -48,6 +48,11 @@ export class EventListComponent implements OnInit {
       });
     }
   }
+
+  edit(event: IEvent) {
+    this.router.navigate(['/pages/admin/events/edit', event.id]);
+  }
+
 
   create() {
     this.router.navigate(['/pages/admin/events/create']);

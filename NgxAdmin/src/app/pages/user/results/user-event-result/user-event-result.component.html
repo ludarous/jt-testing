@@ -1,0 +1,16 @@
+<div class="user-event-result-container" *ngFor="let eventResult of eventResults">
+  <div class="event-result-info">
+    <div>
+      <span class="info-label" translate>Váha v době události: </span>{{eventResult.actualWeightInKg}} Kg
+    </div>
+    <div>
+      <span class="info-label" translate>Výška v době události: </span> {{eventResult.actualHeightInCm}} Cm
+    </div>
+    <div>
+      <span class="info-label" translate>Poznámka: </span> {{eventResult.note}}
+    </div>
+  </div>
+  <div *ngFor="let workoutResult of eventResult.workoutResults">
+    <app-user-test-result [test]="getWorkoutForWorkoutResult(workoutResult)" [workoutResult]="workoutResult" [event]="event"></app-user-test-result>
+  </div>
+</div>

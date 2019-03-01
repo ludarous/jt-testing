@@ -25,10 +25,4 @@ export class WorkoutResult implements IWorkoutResult {
 
   activitiesResults: Array<IActivityResult> = new Array<IActivityResult>();
 
-  constructor(workout: IWorkout, event: IEvent) {
-    this.workoutId = workout.id;
-    for (const activity of workout.activities) {
-      this.activitiesResults.push(new ActivityResult(activity, workout, event));
-    }
-  }
 }

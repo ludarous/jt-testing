@@ -4,6 +4,7 @@ import {MessageService, TreeNode} from 'primeng/api';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivityCategoryService} from '../../../../services/activity-category.service';
 import {Router} from '@angular/router';
+import {IActivity} from '../../../../entities/activity';
 
 @Component({
   selector: 'ngx-activity-categories-list',
@@ -69,8 +70,12 @@ export class ActivityCategoriesListComponent implements OnInit {
     return treeNode;
   }
 
+  rowSelect(category: IActivityCategory) {
+    this.edit(category);
+  }
+
   delete(category: IActivityCategory) {
-       if (confirm('Opravdu chceš smazat categorii ' + category.name)) {
+    if (confirm('Opravdu chceš smazat categorii ' + category.name)) {
       this.activityCategoryService.delete(category.id).subscribe(() => {
         this.load();
       }, (errorResponse: HttpErrorResponse) => {
@@ -80,7 +85,7 @@ export class ActivityCategoriesListComponent implements OnInit {
   }
 
   edit(category: IActivityCategory) {
-
+    this.router.navigate(['/pages/admin/activity-categories/edit', category.id]);
   }
 
   create() {

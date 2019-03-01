@@ -1,0 +1,40 @@
+@import '../../../../@theme/styles/themes';
+
+@include nb-install-component() {
+
+}
+
+.full-width {
+  flex: 1;
+}
+
+.custom-day-cell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100px;
+  padding: 10px;
+}
+
+
+.bounding-month {
+  color: #cdcdcd;
+}
+
+.today {
+  background-color: #cdcdcd;
+
+  .bounding-month {
+    color: gray;
+  }
+}
+
+
+.event {
+  font-family: 'Exo';
+  cursor: pointer;
+
+  &:hover {
+    font-weight: bold;
+  }
+}
+
