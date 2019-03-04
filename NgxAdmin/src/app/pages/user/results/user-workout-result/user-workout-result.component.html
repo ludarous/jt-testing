@@ -75,10 +75,10 @@
   </div>
   <ng-container *ngIf="stats">
     <div *ngFor="let activityStats of filteredActivitiesStats">
-      <app-user-activity-result [activityStats]="activityStats"
+      <ngx-user-activity-result [activityStats]="activityStats"
                                 [test]="test"
                                 [event]="event">
-      </app-user-activity-result>
+      </ngx-user-activity-result>
     </div>
   </ng-container>
 </div>

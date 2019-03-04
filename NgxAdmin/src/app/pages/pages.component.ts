@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import { MENU_ITEMS } from './pages-menu';
+import {Principal} from '../@core/auth/principal.service';
+import {Authorities} from '../entities/enums/authorities';
 
 @Component({
   selector: 'ngx-pages',
@@ -12,7 +14,19 @@ import { MENU_ITEMS } from './pages-menu';
     </ngx-sample-layout>
   `,
 })
-export class PagesComponent {
+export class PagesComponent implements OnInit {
+
+  constructor(private principal: Principal) {
+
+  }
+
+  isAdmin: boolean;
+  isPerson: boolean;
 
   menu = MENU_ITEMS;
+
+  ngOnInit(): void {
+    this.principal.hasAuthority(AuthoritiesE);
+  }
+
 }

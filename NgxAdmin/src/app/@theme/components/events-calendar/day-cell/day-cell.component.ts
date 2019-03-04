@@ -42,6 +42,8 @@ export class EventsCalendarDayCellComponent extends NbCalendarDayCellComponent<D
       this.getDateEvents(events);
     });
 
+    this.getDateEvents(this.eventsCalendarService.events);
+
   }
 
   get title() {
@@ -62,7 +64,7 @@ export class EventsCalendarDayCellComponent extends NbCalendarDayCellComponent<D
   }
 
   selectEvent(event: IEvent) {
-    this.router.navigate(['/pages/admin/events/', event.id, 'results']);
+    this.router.navigate(this.eventsCalendarService.eventRouterLink(event));
   }
 
 }

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit} from '@angular/core';
 import { EventsCalendarMonthCellComponent } from './month-cell/month-cell.component';
 import {EventsCalendarDayCellComponent} from './day-cell/day-cell.component';
 import {EventsCalendarService} from './events-calendar.service';
@@ -23,14 +23,21 @@ export class EventsCalendarComponent implements OnInit {
   monthCellComponent = EventsCalendarMonthCellComponent;
   dayCellComponent = EventsCalendarDayCellComponent;
 
+  @Input()
   events: Array<IEvent>;
+
+  @Input()
+  eventRouterLink: (e) => any[];
 
   ngOnInit(): void {
 
-    this.eventsCalendarService.eventsLoaded$.subscribe((events: Array<IEvent>) => {
-      this.events = events;
-    });
+    this.eventsCalendarService.events = this.events;
+    this.eventsCalendarService.eventRouterLink = this.eventRouterLink;
 
-    this.eventsCalendarService.loadEvents();
+    // this.eventsCalendarService.eventsLoaded$.subscribe((events: Array<IEvent>) => {
+    //   this.events = events;
+    // });
+    //
+    // this.eventsCalendarService.loadEvents();
   }
 }

@@ -17,5 +17,5 @@
   <!--</ng-template>-->
 <!--</ngx-scrollable-list>-->
 
-<ngx-events-calendar></ngx-events-calendar>
+<ngx-events-calendar *ngIf="events" [events]="events" [eventRouterLink]="eventRouterLink"></ngx-events-calendar>
 

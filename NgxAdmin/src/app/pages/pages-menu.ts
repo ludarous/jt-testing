@@ -6,21 +6,27 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-e-commerce',
     link: '/pages/dashboard',
     home: true,
-  },
+  }
+];
+
+export const PERSON_MENU_ITEMS = [
   {
     title: 'UŽIVATEL',
     group: true,
   },
   {
-    title: 'Výsledky',
+    title: 'Moje Výsledky',
     icon: 'nb-compose',
-    link: '/pages/user/results',
+    link: '/pages/user/my-results',
   },
   {
-    title: 'Statistiky',
-    icon: 'nb-compose',
-    link: '/pages/user/results',
+    title: 'Moje Statistiky',
+    icon: 'nb-bar-chart',
+    link: '/pages/user/my-stats',
   },
+]
+
+export const ADMIN_MENU_ITEMS = [
   {
     title: 'ADMIN',
     group: true,
@@ -68,6 +74,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/admin/results',
     icon: 'nb-compose'
   },
+]
+
+export const NEBULAR_MENU_ITEMS = [
   {
     title: 'FEATURES',
     group: true,
@@ -311,4 +320,4 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
-];
+]

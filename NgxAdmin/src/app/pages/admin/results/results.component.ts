@@ -12,6 +12,7 @@ import {IPersonFull} from '../../../entities/person-full';
 import {ArrayUtils} from '../../../../../../NgxAdmin/src/app/@core/utils/array.utils';
 import {TranslateService} from '@ngx-translate/core';
 import {NbStepperComponent} from '@nebular/theme';
+import event = google.maps.event;
 
 @Component({
   selector: 'ngx-results',
@@ -68,6 +69,8 @@ export class ResultsComponent implements OnInit {
   eventsCols: Array<any>;
   personsCols: Array<any>;
 
+  eventRouterLink: (e) => any[];
+
   constructor(private activatedRoute: ActivatedRoute,
               private eventService: EventService,
               private eventResultService: EventResultService,
@@ -77,6 +80,8 @@ export class ResultsComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.eventRouterLink = this.getEventRouterLink;
 
     const getEvents$ = this.eventService.query();
 
@@ -94,8 +99,12 @@ export class ResultsComponent implements OnInit {
     ];
   }
 
-  eventSelect(event: IEvent) {
-    this.selectedEvent = event;
+  getEventRouterLink(e: IEvent): any[] {
+    return new Array(<any>'/pages/admin/events/', <any>e.id, <any>'results');
+  }
+
+  eventSelect(e: IEvent) {
+    this.selectedEvent = e;
     this.stepper.next();
   }
 

@@ -25,6 +25,9 @@ const routes: Routes = [{
     path: 'admin',
     loadChildren: './admin/admin.module#AdminModule',
   }, {
+    path: 'user',
+    loadChildren: './user/user.module#UserModule',
+  }, {
     path: 'extra-components',
     loadChildren: './extra-components/extra-components.module#ExtraComponentsModule',
   }, {

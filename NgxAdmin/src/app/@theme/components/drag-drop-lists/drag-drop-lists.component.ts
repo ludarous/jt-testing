@@ -35,8 +35,7 @@ export class DragDropListsComponent implements OnInit {
 
   set sourceFilterQuery(value: string) {
     this._sourceFilterQuery = value;
-    const filteredData = this.sourceData.filter(c => this.itemSuitsFilter(c, this.sourceFilterQuery, this.filterFields));
-    this.suggestedSourceData = [...filteredData];
+    this.filterSourceData();
   }
 
   @Input()
@@ -69,8 +68,7 @@ export class DragDropListsComponent implements OnInit {
 
   set targetFilterQuery(value: string) {
     this._targetFilterQuery = value;
-    const filteredData = this.targetData.filter(c => this.itemSuitsFilter(c, this.targetFilterQuery, this.filterFields));
-    this.suggestedTargetData = [...filteredData];
+    this.filterTargetData();
   }
 
   private draggedItem: any;
@@ -96,7 +94,7 @@ export class DragDropListsComponent implements OnInit {
   }
 
   sourceDrop($event) {
-    this.sourceData.push(this.draggedItem);
+    ArrayUtils.addNewItem(this.sourceData, this.draggedItem);
     ArrayUtils.removeItem(this.targetData, this.draggedItem);
 
     this.filterSourceData();
@@ -112,7 +110,7 @@ export class DragDropListsComponent implements OnInit {
   }
 
   targetDrop($event) {
-    this.targetData.push(this.draggedItem);
+    ArrayUtils.addNewItem(this.targetData, this.draggedItem);
     ArrayUtils.removeItem(this.sourceData, this.draggedItem);
 
     this.filterSourceData();

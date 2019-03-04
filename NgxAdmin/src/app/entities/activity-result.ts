@@ -7,6 +7,8 @@ export interface IActivityResult {
   primaryResultValue?: number;
   secondaryResultValue?: number;
   note?: string;
+
+  date?: string;
   
   workoutResultId?: number;
   activityId?: number;
@@ -21,6 +23,8 @@ export interface IActivityResult {
   personId?: number;
   personName?: string;
 
+
+
 }
 
 export class ActivityResult implements IActivityResult {
@@ -28,6 +32,8 @@ export class ActivityResult implements IActivityResult {
   primaryResultValue: number;
   secondaryResultValue: number;
   note: string;
+
+  date: string;
 
   workoutResultId: number;
 

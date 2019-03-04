@@ -5,7 +5,7 @@ import {PersonalActivityStats, PersonalStats} from '../../../../entities/stats';
 import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-user-activity-stats',
+  selector: 'ngx-user-activity-stats',
   templateUrl: './user-activity-stats.component.html',
   styleUrls: ['./user-activity-stats.component.scss']
 })

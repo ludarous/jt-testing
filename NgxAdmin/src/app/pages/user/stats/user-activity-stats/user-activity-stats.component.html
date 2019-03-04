@@ -1,142 +1,131 @@
-<mat-expansion-panel #expansionPanel class="activity-result-panel" (afterExpand)="afterExpand($event)">
-  <mat-expansion-panel-header [collapsedHeight]="'100px'" [expandedHeight]="'100px'">
-    <mat-panel-title>
-      <div>{{activityStats.activity.name}}</div>
-    </mat-panel-title>
-    <mat-panel-description>
-
-    </mat-panel-description>
-  </mat-expansion-panel-header>
-
-  <ng-template matExpansionPanelContent>
-    <div class="user-activity-result-container">
-      <div class="user-activity-result-info">
-        <div class="user-activity-name">{{activityStats.activity.name}}</div>
-        <div>
-          <span class="info-label" translate>Kategorie: </span>
-          <span *ngFor="let category of activityStats.activity.categories">{{category.name}}, {{(category.parent ? category.parent.name : '')}}</span>
-        </div>
-      </div>
-      <div class="user-activity-content">
-        <div *ngIf="activityStats">
-          <div class="result-charts dark">
-            <div class="row">
-              <div class="col-12">
-                <div class="chart-container">
-                  <ngx-charts-line-chart class="chart-container dark"
-                                         [scheme]="getColorScheme('cool')"
-                                         [results]="activityStatsChartData.chartData"
-                                         [animations]="true"
-                                         [legend]="false"
-                                         (legendLabelClick)="onLegendLabelClick($event)"
-                                         [gradient]="true"
-                                         [xAxis]="true"
-                                         [yAxis]="true"
-                                         [curve]="getCurve('Cardinal')"
-                                         [showXAxisLabel]="false"
-                                         [showYAxisLabel]="true"
-                                         [yAxisLabel]="(activityStats.activity.primaryResultValueUnit | enumTranslator)"
-                                         [autoScale]="false"
-                                         [timeline]="false"
-                                         [showGridLines]="true"
-                                         [roundDomains]="true"
-                                         [gradient]="true"
-                                         [tooltipDisabled]="false"
-                                         [showRefLines]="true"
-                                         [showRefLabels]="true"
-                                         [yScaleMax]="yScaleMax"
-                                         [yScaleMin]="0"
-                                         [referenceLines]="activityStatsChartData.refLines"
-                                         (select)="select($event)">
-                  </ngx-charts-line-chart>
-                  <!--<ngx-charts-area-chart class="chart-container dark"-->
-                                         <!--[scheme]="getColorScheme('cool')"-->
-                                         <!--[results]="activityStatsChartData.chartData"-->
-                                         <!--[animations]="true"-->
-                                         <!--[legend]="false"-->
-                                         <!--(legendLabelClick)="onLegendLabelClick($event)"-->
-                                         <!--[gradient]="true"-->
-                                         <!--[xAxis]="true"-->
-                                         <!--[yAxis]="true"-->
-                                         <!--[curve]="getCurve('Cardinal')"-->
-                                         <!--[showXAxisLabel]="false"-->
-                                         <!--[showYAxisLabel]="true"-->
-                                         <!--[yAxisLabel]="(activityStats.activity.primaryResultValueUnit | enumTranslator)"-->
-                                         <!--[autoScale]="false"-->
-                                         <!--[timeline]="false"-->
-                                         <!--[showGridLines]="true"-->
-                                         <!--[roundDomains]="false"-->
-                                         <!--[gradient]="true"-->
-                                         <!--[tooltipDisabled]="false"-->
-                                         <!--[yScaleMax]="yScaleMax"-->
-                                         <!--[yScaleMin]="0"-->
-                                         <!--(select)="select($event)">-->
-                  <!--</ngx-charts-area-chart>-->
-                </div>
-              </div>
+<div class="user-activity-result-container">
+  <div class="user-activity-result-info">
+    <div class="user-activity-name">{{activityStats.activity.name}}</div>
+    <div>
+      <span class="info-label" translate>Kategorie: </span>
+      <span *ngFor="let category of activityStats.activity.categories">{{category.name}}
+        , {{(category.parent ? category.parent.name : '')}}</span>
+    </div>
+  </div>
+  <div class="user-activity-content">
+    <div *ngIf="activityStats">
+      <div class="result-charts dark">
+        <div class="row">
+          <div class="col-12">
+            <div class="chart-container">
+              <ngx-charts-line-chart class="chart-container dark"
+                                     [scheme]="getColorScheme('cool')"
+                                     [results]="activityStatsChartData.chartData"
+                                     [animations]="true"
+                                     [legend]="false"
+                                     (legendLabelClick)="onLegendLabelClick($event)"
+                                     [gradient]="true"
+                                     [xAxis]="true"
+                                     [yAxis]="true"
+                                     [curve]="getCurve('Cardinal')"
+                                     [showXAxisLabel]="false"
+                                     [showYAxisLabel]="true"
+                                     [yAxisLabel]="(activityStats.activity.primaryResultValueUnit | enumTranslator)"
+                                     [autoScale]="false"
+                                     [timeline]="false"
+                                     [showGridLines]="true"
+                                     [roundDomains]="true"
+                                     [gradient]="true"
+                                     [tooltipDisabled]="false"
+                                     [showRefLines]="true"
+                                     [showRefLabels]="true"
+                                     [yScaleMax]="yScaleMax"
+                                     [yScaleMin]="0"
+                                     [referenceLines]="activityStatsChartData.refLines"
+                                     (select)="select($event)">
+              </ngx-charts-line-chart>
+              <!--<ngx-charts-area-chart class="chart-container dark"-->
+              <!--[scheme]="getColorScheme('cool')"-->
+              <!--[results]="activityStatsChartData.chartData"-->
+              <!--[animations]="true"-->
+              <!--[legend]="false"-->
+              <!--(legendLabelClick)="onLegendLabelClick($event)"-->
+              <!--[gradient]="true"-->
+              <!--[xAxis]="true"-->
+              <!--[yAxis]="true"-->
+              <!--[curve]="getCurve('Cardinal')"-->
+              <!--[showXAxisLabel]="false"-->
+              <!--[showYAxisLabel]="true"-->
+              <!--[yAxisLabel]="(activityStats.activity.primaryResultValueUnit | enumTranslator)"-->
+              <!--[autoScale]="false"-->
+              <!--[timeline]="false"-->
+              <!--[showGridLines]="true"-->
+              <!--[roundDomains]="false"-->
+              <!--[gradient]="true"-->
+              <!--[tooltipDisabled]="false"-->
+              <!--[yScaleMax]="yScaleMax"-->
+              <!--[yScaleMin]="0"-->
+              <!--(select)="select($event)">-->
+              <!--</ngx-charts-area-chart>-->
             </div>
-            <div *ngIf="false" class="row">
-              <div
-                [ngClass]="{'col-7': activityResult.secondaryResultValue, 'col-12': !activityResult.secondaryResultValue}">
-                <div class="chart-container" *ngIf="myPrimaryResultCardData">
-                  <ngx-charts-number-card class="chart-container"
-                                          [scheme]="getColorScheme('cool')"
-                                          cardColor="#232837"
-                                          emptyColor="#1e222e"
-                                          [results]="myPrimaryResultCardData"
-                                          [animations]="true"
-                                          [valueFormatting]="valueFormat"
-                                          [labelFormatting]="statusLabelFormat"
-                                          (legendLabelClick)="onLegendLabelClick($event)"
-                                          (select)="onSelect($event)">
-                  </ngx-charts-number-card>
-                </div>
-                <div class="chart-container" *ngIf="primaryCardsData">
-                  <ngx-charts-number-card class="chart-container"
-                                          [scheme]="getColorScheme('fire')"
-                                          cardColor="#232837"
-                                          emptyColor="#1e222e"
-                                          [results]="primaryCardsData"
-                                          [animations]="true"
-                                          [valueFormatting]="valueFormat"
-                                          [labelFormatting]="statusLabelFormat"
-                                          (legendLabelClick)="onLegendLabelClick($event)"
-                                          (select)="onSelect($event)">
-                  </ngx-charts-number-card>
-                </div>
-              </div>
-              <div *ngIf="activityResult.secondaryResultValue" class="col-5">
-                <div class="chart-container" *ngIf="mySecondaryResultCardData">
-                  <ngx-charts-number-card class="chart-container"
-                                          [scheme]="getColorScheme('cool')"
-                                          cardColor="#232837"
-                                          emptyColor="#1e222e"
-                                          [results]="mySecondaryResultCardData"
-                                          [animations]="true"
-                                          [valueFormatting]="valueFormat"
-                                          [labelFormatting]="statusLabelFormat"
-                                          (legendLabelClick)="onLegendLabelClick($event)"
-                                          (select)="onSelect($event)">
-                  </ngx-charts-number-card>
-                </div>
-                <div class="chart-container" *ngIf="secondaryCardsData">
-                  <ngx-charts-number-card class="chart-container"
-                                          [scheme]="getColorScheme('air')"
-                                          cardColor="#232837"
-                                          emptyColor="#1e222e"
-                                          [results]="secondaryCardsData"
-                                          [animations]="true"
-                                          [valueFormatting]="valueFormat"
-                                          [labelFormatting]="statusLabelFormat"
-                                          (legendLabelClick)="onLegendLabelClick($event)"
-                                          (select)="onSelect($event)">
-                  </ngx-charts-number-card>
-                </div>
-              </div>
+          </div>
+        </div>
+        <div *ngIf="false" class="row">
+          <div
+            [ngClass]="{'col-7': activityResult.secondaryResultValue, 'col-12': !activityResult.secondaryResultValue}">
+            <div class="chart-container" *ngIf="myPrimaryResultCardData">
+              <ngx-charts-number-card class="chart-container"
+                                      [scheme]="getColorScheme('cool')"
+                                      cardColor="#232837"
+                                      emptyColor="#1e222e"
+                                      [results]="myPrimaryResultCardData"
+                                      [animations]="true"
+                                      [valueFormatting]="valueFormat"
+                                      [labelFormatting]="statusLabelFormat"
+                                      (legendLabelClick)="onLegendLabelClick($event)"
+                                      (select)="onSelect($event)">
+              </ngx-charts-number-card>
+            </div>
+            <div class="chart-container" *ngIf="primaryCardsData">
+              <ngx-charts-number-card class="chart-container"
+                                      [scheme]="getColorScheme('fire')"
+                                      cardColor="#232837"
+                                      emptyColor="#1e222e"
+                                      [results]="primaryCardsData"
+                                      [animations]="true"
+                                      [valueFormatting]="valueFormat"
+                                      [labelFormatting]="statusLabelFormat"
+                                      (legendLabelClick)="onLegendLabelClick($event)"
+                                      (select)="onSelect($event)">
+              </ngx-charts-number-card>
+            </div>
+          </div>
+          <div *ngIf="activityResult.secondaryResultValue" class="col-5">
+            <div class="chart-container" *ngIf="mySecondaryResultCardData">
+              <ngx-charts-number-card class="chart-container"
+                                      [scheme]="getColorScheme('cool')"
+                                      cardColor="#232837"
+                                      emptyColor="#1e222e"
+                                      [results]="mySecondaryResultCardData"
+                                      [animations]="true"
+                                      [valueFormatting]="valueFormat"
+                                      [labelFormatting]="statusLabelFormat"
+                                      (legendLabelClick)="onLegendLabelClick($event)"
+                                      (select)="onSelect($event)">
+              </ngx-charts-number-card>
+            </div>
+            <div class="chart-container" *ngIf="secondaryCardsData">
+              <ngx-charts-number-card class="chart-container"
+                                      [scheme]="getColorScheme('air')"
+                                      cardColor="#232837"
+                                      emptyColor="#1e222e"
+                                      [results]="secondaryCardsData"
+                                      [animations]="true"
+                                      [valueFormatting]="valueFormat"
+                                      [labelFormatting]="statusLabelFormat"
+                                      (legendLabelClick)="onLegendLabelClick($event)"
+                                      (select)="onSelect($event)">
+              </ngx-charts-number-card>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </ng-template>
-</mat-expansion-panel>
+  </div>
+</div>
+

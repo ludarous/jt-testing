@@ -1,5 +1,6 @@
 package com.jtsports.jttesting.service.impl;
 
+import com.jtsports.jttesting.domain.PersonalData;
 import com.jtsports.jttesting.domain.User;
 import com.jtsports.jttesting.repository.AddressRepository;
 import com.jtsports.jttesting.repository.UserRepository;
@@ -82,6 +83,9 @@ public class PersonServiceImpl implements PersonService {
         log.debug("Request to save Person : {}", personDTO);
         Person person = personMapper.toEntity(personDTO);
         person = personRepository.save(person);
+
+        this.updateUser(person);
+
         PersonDTO result = personMapper.toDto(person);
         personSearchRepository.save(person);
         return result;
@@ -234,9 +238,22 @@ public class PersonServiceImpl implements PersonService {
         person.setEmail(personFullDTO.getEmail());
         person.setVirtual(personFullDTO.isVirtual());
 
+        this.updateUser(person);
+
+
         person = personRepository.save(person);
         PersonDTO result = personMapper.toDto(person);
         personSearchRepository.save(person);
         return personFullMapper.toDto(person);
+    }
+
+    void updateUser(Person person) {
+        User currentUser = userService.getCurrentUser();
+        if(person.getPersonalData() != null) {
+            PersonalData personalData = person.getPersonalData();
+            currentUser.setFirstName(personalData.getFirstName());
+            currentUser.setLastName(personalData.getLastName());
+            userRepository.save(currentUser);
+        }
     }
 }

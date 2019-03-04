@@ -19,6 +19,7 @@ export class EventsCalendarService {
   public eventsLoaded$ = this.eventsLoadedSource.asObservable();
 
   events: Array<IEvent>;
+  eventRouterLink: (event) => any[];
 
   static isSameDay(date1: Date, date2: Date) {
     return (date1.getDate() === date2.getDate()

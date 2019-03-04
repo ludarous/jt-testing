@@ -2,19 +2,18 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {IActivity} from '../../../../entities/activity';
 import {IActivityResult} from '../../../../entities/activity-result';
 import {ActivityService} from '../../../../services/activity.service';
-import {EnumTranslatorService} from '../../../../shared/pipes/enum-translator/enum-translator';
 import {IWorkout} from '../../../../entities/workout';
 import {IEvent} from '../../../../entities/event';
 import {StatsRequest} from '../../../../entities/stats-request';
 import {EventManager} from '../../../../services/event.manager';
 import {MatExpansionPanel} from '@angular/material';
-import {StatsUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/stats-utils';
-import {ChartUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/chart-utils';
 import {ResultType} from '../../../../entities/enums/result-type';
 import {PersonalActivityStats} from '../../../../entities/stats';
+import {EnumTranslatorService} from '../../../../@theme/modules/enum-translator/enum-translator';
+import {ChartUtils} from '../../../../@core/utils/chart-utils';
 
 @Component({
-  selector: 'app-user-activity-result',
+  selector: 'ngx-user-activity-result',
   templateUrl: './user-activity-result.component.html',
   styleUrls: ['./user-activity-result.component.scss']
 })
