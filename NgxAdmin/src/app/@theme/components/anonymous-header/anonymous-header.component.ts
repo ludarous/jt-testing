@@ -16,7 +16,7 @@ export class AnonymousHeaderComponent implements OnInit {
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private layoutService: LayoutService,
-              private principal: Principal) {
+              public principal: Principal) {
   }
 
   ngOnInit() {

@@ -38,6 +38,34 @@
             <button nbButton nbStepperNext>{{'Další' | translate}}</button>
           </div>
         </nb-step>
+        <nb-step [label]="'Adresa události' | translate">
+
+          <div formGroupName="address">
+            <div class="form-group has-error">
+              <label for="name">{{('Země' | translate)}}</label>
+              <input type="text" class="form-control" id="country" [placeholder]="('Země' | translate)"
+                     formControlName="country">
+            </div>
+            <div class="form-group has-error">
+              <label for="name">{{('Město' | translate)}}</label>
+              <input type="text" class="form-control" id="city" [placeholder]="('Město' | translate)"
+                     formControlName="city">
+            </div>
+            <div class="form-group has-error">
+              <label for="name">{{('Ulice' | translate)}}</label>
+              <input type="text" class="form-control" id="street" [placeholder]="('Ulice' | translate)"
+                     formControlName="street">
+            </div>
+            <div class="form-group has-error">
+              <label for="name">{{('PSČ' | translate)}}</label>
+              <input type="text" class="form-control" id="zipCode" [placeholder]="('PSČ' | translate)"
+                     formControlName="zipCode">
+            </div>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button nbButton nbStepperNext>{{'Další' | translate}}</button>
+          </div>
+        </nb-step>
         <nb-step [label]="'Výběr test pro událost' | translate">
           <ng-container *ngIf="tests">
             <ngx-drag-drop-lists
@@ -117,7 +145,8 @@
             <div class="text-hint">{{('Účastníci' | translate)}}</div>
             <div class="d-flex flex-row">
               <h5 class="text-body" *ngFor="let person of selectedPersons; last as isLast">
-                {{person.personalData.firstName + ' ' + person.personalData.lastName}}<span style="margin-right: 5px;" *ngIf="!isLast">,</span>
+                {{person.personalData.firstName + ' ' + person.personalData.lastName}}<span style="margin-right: 5px;"
+                                                                                            *ngIf="!isLast">,</span>
               </h5>
             </div>
           </div>

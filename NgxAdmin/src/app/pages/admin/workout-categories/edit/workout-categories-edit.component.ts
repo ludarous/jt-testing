@@ -22,7 +22,7 @@ export class WorkoutCategoriesEditComponent implements OnInit {
   workoutCategory: IWorkoutCategory;
   workoutCategoryForm: FormGroup;
 
-  submitted = false;
+  protected submitted = false;
 
   constructor(private workoutCategoryService: WorkoutCategoryService,
               private activatedRoute: ActivatedRoute,

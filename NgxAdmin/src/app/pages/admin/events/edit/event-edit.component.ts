@@ -17,6 +17,7 @@ import {MessageService} from 'primeng/api';
 import {WorkoutService} from '../../../../services/workout.service';
 import {NbToastrService} from '@nebular/theme';
 import {TranslateService} from '@ngx-translate/core';
+import { Address } from '../../../../entities/address';
 
 @Component({
   selector: 'ngx-events-edit',
@@ -76,7 +77,7 @@ export class EventEditComponent implements OnInit {
   }
 
 
-  submitted: false;
+  protected submitted: false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private eventService: EventService,
@@ -124,6 +125,18 @@ export class EventEditComponent implements OnInit {
       minAge: new FormControl(event.minAge),
       maxAge: new FormControl(event.maxAge)
     });
+
+    if (!event.addressId) {
+      event.address = new Address();
+    }
+
+    this.eventForm.addControl('address', new FormGroup({
+      id: new FormControl(event.address.id),
+      country: new FormControl(event.address.country),
+      city: new FormControl(event.address.city),
+      street: new FormControl(event.address.street),
+      zipCode: new FormControl(event.address.zipCode),
+    }));
 
     if (tests && event.workouts) {
       this.selectedTests = tests.filter((t) => event.workouts.some((st) => st.id === t.id));

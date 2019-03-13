@@ -1,14 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {EventResult, IEventResult} from '../../../../entities/event-result';
-import {IEvent} from '../../../../entities/event';
-import {IWorkoutResult} from '../../../../entities/workout-result';
-import {IWorkout} from '../../../../entities/workout';
-import {EventResultService} from '../../../../services/event-result.service';
-import {EventService} from '../../../../services/event.service';
+import {EventResult, IEventResult} from '../../../../../entities/event-result';
+import {IEvent} from '../../../../../entities/event';
+import {IWorkoutResult} from '../../../../../entities/workout-result';
+import {IWorkout} from '../../../../../entities/workout';
+import {EventResultService} from '../../../../../services/event-result.service';
+import {EventService} from '../../../../../services/event.service';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
 @Component({
-  selector: 'app-user-event-result',
+  selector: 'ngx-user-event-result',
   templateUrl: './user-event-result.component.html',
   styleUrls: ['./user-event-result.component.scss']
 })

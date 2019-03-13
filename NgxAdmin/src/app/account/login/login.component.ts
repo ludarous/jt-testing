@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   public rememberMe: AbstractControl;
 
   public returnUrl: string;
-  private submitted = false;
+  public submitted = false;
 
   env = environment;
 

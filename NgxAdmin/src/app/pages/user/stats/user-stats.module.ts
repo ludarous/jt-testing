@@ -6,19 +6,16 @@ import { UserStatsComponent } from './user-stats.component';
 import {EventResultService} from '../../../services/event-result.service';
 import {ActivityService} from '../../../services/activity.service';
 import {AreaChartModule, LineChartModule, NumberCardModule} from '@swimlane/ngx-charts';
-import { UserActivityStatsComponent } from './user-activity-stats/user-activity-stats.component';
 import {StatsService} from '../../../services/stats.service';
 import {EnumTranslationsModule} from '../../../@theme/modules/enum-translator/enum-translations.module';
 
 @NgModule({
-  declarations: [UserStatsComponent, UserActivityStatsComponent],
+  declarations: [
+    UserStatsComponent
+  ],
   imports: [
     CommonModule,
     UserStatsRoutingModule,
-    LineChartModule,
-    AreaChartModule,
-    NumberCardModule,
-    EnumTranslationsModule,
   ],
   providers: [
     EventResultService,

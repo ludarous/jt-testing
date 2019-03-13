@@ -62,7 +62,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public EventDTO save(EventDTO eventDTO) {
         log.debug("Request to save Event : {}", eventDTO);
-        Event event = eventMapper.toEntity(eventDTO);
+        Event event = eventMapperCustom.toEntity(eventDTO);
         event = eventRepository.save(event);
         EventDTO result = eventMapper.toDto(event);
         eventSearchRepository.save(event);
@@ -104,8 +104,8 @@ public class EventServiceImpl implements EventService {
     @Transactional(readOnly = true)
     public Optional<EventDTO> findOne(Long id) {
         log.debug("Request to get Event : {}", id);
-        return eventRepository.findOneWithEagerRelationships(id)
-            .map(eventMapper::toDto);
+        Optional<Event> event = eventRepository.findOneWithEagerRelationships(id);
+        return event.map(eventMapperCustom::toDto);
     }
 
     /**

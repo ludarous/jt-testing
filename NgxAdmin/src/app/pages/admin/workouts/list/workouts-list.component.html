@@ -1,10 +1,10 @@
 <nb-card>
   <nb-card-header>
-    {{'Cvičení' | translate}}
+    {{'Testy' | translate}}
   </nb-card-header>
 
   <nb-card-body>
-    <ngx-table-search [createItemTitle]="('Vytvořit cvičení' | translate)" (create)="create()"></ngx-table-search>
+    <ngx-table-search [createItemTitle]="('Vytvořit test' | translate)" (create)="create()"></ngx-table-search>
 
     <ngx-table [data]="workouts" [cols]="tableCols" (rowClick)="rowSelect($event)"
                (delete)="delete($event)" (edit)="edit($event)"></ngx-table>

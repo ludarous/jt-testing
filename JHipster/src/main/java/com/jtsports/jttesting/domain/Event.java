@@ -44,7 +44,7 @@ public class Event implements Serializable {
     @OneToMany(mappedBy = "event")
     private Set<EventResult> eventResults = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnoreProperties("")
     private Address address;
 

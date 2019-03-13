@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
   showMessages: any = {};
   errors: string[] = [];
   messages: string[] = [];
-  private submitted = false;
+  submitted = false;
 
   account: IUser;
   person: IPersonFull;
@@ -57,12 +57,12 @@ export class ProfileComponent implements OnInit {
   street: AbstractControl;
   zipCode: AbstractControl;
 
-  private _personBirthDate: Moment = moment();
-  get personBirthDate(): Moment {
+  private _personBirthDate: Date = new Date();
+  get personBirthDate(): Date {
     return this._personBirthDate;
   }
 
-  set personBirthDate(value: Moment) {
+  set personBirthDate(value: Date) {
     this._personBirthDate = value;
     if (this.personForm && value) {
       (<FormGroup>this.personForm.controls['personalData']).controls['birthDate'].setValue(value.toISOString());
@@ -114,7 +114,7 @@ export class ProfileComponent implements OnInit {
     if (!person.personalData) person.personalData = new PersonalData();
     this.personForm.addControl('personalData', this.setPersonalDataForm(person.personalData));
 
-    this.personBirthDate = person.personalData.birthDate ? moment(person.personalData.birthDate) : null;
+    this.personBirthDate = person.personalData.birthDate ? new Date(person.personalData.birthDate) : null;
 
     this.email = this.personForm.controls['email'];
 
@@ -144,7 +144,7 @@ export class ProfileComponent implements OnInit {
       id: new FormControl(personalData.id),
       firstName: new FormControl(personalData.firstName),
       lastName: new FormControl(personalData.lastName),
-      birthDate: new FormControl(personalData.birthDate ? new Date(personalData.birthDate) : null),
+      birthDate: new FormControl(personalData.birthDate),
       sex: new FormControl(personalData.sex ? personalData.sex.ordinal : null),
       nationality: new FormControl(personalData.nationality),
     });
@@ -178,8 +178,9 @@ export class ProfileComponent implements OnInit {
     if (this.personForm.valid) {
 
 
-      const personToSave = this.personForm.value;
+      const personToSave = <IPersonFull>this.personForm.value;
       personToSave.user = this.account;
+      personToSave.personalData.birthDate = this.personBirthDate.toISOString();
 
       let savePerson$;
       if (personToSave.id) {
@@ -201,6 +202,10 @@ export class ProfileComponent implements OnInit {
           this.toasterService.danger(null, 'Profil nebyl uložen');
         });
     }
+  }
+
+  birthDayChange(birthDate: Date) {
+    this.personBirthDate = birthDate;
   }
 
 }

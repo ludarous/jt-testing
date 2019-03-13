@@ -40,7 +40,7 @@ export class ActivitiesEditComponent implements OnInit {
   suggestedCategories: Array<IActivityCategory>;
   selectedCategories: Array<IActivityCategory>;
 
-  submitted = false;
+  protected submitted = false;
 
   selectedStepperIndex = 0;
 

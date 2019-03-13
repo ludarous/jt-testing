@@ -1,16 +1,16 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {IActivity} from '../../../../entities/activity';
-import {IActivityResult} from '../../../../entities/activity-result';
-import {ActivityService} from '../../../../services/activity.service';
-import {IWorkout} from '../../../../entities/workout';
-import {IEvent} from '../../../../entities/event';
-import {StatsRequest} from '../../../../entities/stats-request';
-import {EventManager} from '../../../../services/event.manager';
+import {IActivity} from '../../../../../entities/activity';
+import {IActivityResult} from '../../../../../entities/activity-result';
+import {ActivityService} from '../../../../../services/activity.service';
+import {IWorkout} from '../../../../../entities/workout';
+import {IEvent} from '../../../../../entities/event';
+import {StatsRequest} from '../../../../../entities/stats-request';
+import {EventManager} from '../../../../../services/event.manager';
 import {MatExpansionPanel} from '@angular/material';
-import {ResultType} from '../../../../entities/enums/result-type';
-import {PersonalActivityStats} from '../../../../entities/stats';
-import {EnumTranslatorService} from '../../../../@theme/modules/enum-translator/enum-translator';
-import {ChartUtils} from '../../../../@core/utils/chart-utils';
+import {ResultType} from '../../../../../entities/enums/result-type';
+import {PersonalActivityStats} from '../../../../../entities/stats';
+import {EnumTranslatorService} from '../../../../../@theme/modules/enum-translator/enum-translator';
+import {ChartUtils} from '../../../../../@core/utils/chart-utils';
 
 @Component({
   selector: 'ngx-user-activity-result',

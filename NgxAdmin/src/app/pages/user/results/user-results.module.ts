@@ -5,9 +5,9 @@ import { UserResultsRoutingModule } from './user-results-routing.module';
 import { UserResultsComponent } from './user-results.component';
 import {EventResultService} from '../../../services/event-result.service';
 import {EventService} from '../../../services/event.service';
-import { UserEventResultComponent } from './user-event-result/user-event-result.component';
-import { UserWorkoutResultComponent } from './user-workout-result/user-workout-result.component';
-import { UserActivityResultComponent } from './user-activity-result/user-activity-result.component';
+import { UserEventResultComponent } from '../components/results/user-event-result/user-event-result.component';
+import { UserWorkoutResultComponent } from '../components/results/user-workout-result/user-workout-result.component';
+import { UserActivityResultComponent } from '../components/results/user-activity-result/user-activity-result.component';
 import {ActivityService} from '../../../services/activity.service';
 import {
   BarChartModule,
@@ -26,9 +26,6 @@ import {ThemeModule} from '../../../@theme/theme.module';
 @NgModule({
   declarations: [
     UserResultsComponent,
-    UserEventResultComponent,
-    UserWorkoutResultComponent,
-    UserActivityResultComponent,
   ],
   imports: [
     CommonModule,
@@ -52,9 +49,6 @@ import {ThemeModule} from '../../../@theme/theme.module';
   ],
   exports: [
     UserResultsComponent,
-    UserEventResultComponent,
-    UserWorkoutResultComponent,
-    UserActivityResultComponent
   ]
 })
 export class UserResultsModule { }

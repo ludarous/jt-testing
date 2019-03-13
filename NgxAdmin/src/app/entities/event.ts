@@ -2,6 +2,7 @@ import {Workout, IWorkout} from './workout';
 import {IPersonFull} from './person-full';
 import {HttpResponse} from '@angular/common/http';
 import {IEventResult} from './event-result';
+import { IAddress } from './address';
 
 export interface IEvent {
   id?: number;
@@ -12,6 +13,7 @@ export interface IEvent {
 
   addressId?: number;
   addressStreet?: string;
+  address?: IAddress;
 
   workouts?: Array<IWorkout>;
   attachedPersons?: Array<IPersonFull>;
@@ -28,6 +30,7 @@ export class Event implements IEvent {
 
   addressId: number;
   addressStreet: string;
+  address: IAddress;
 
   workouts: Array<IWorkout>;
   attachedPersons: Array<IPersonFull>;

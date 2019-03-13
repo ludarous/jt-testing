@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
   showMessages: any = {};
   errors: string[] = [];
   messages: string[] = [];
-  private submitted = false;
+  public submitted = false;
 
   public form: FormGroup;
 

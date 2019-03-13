@@ -10,16 +10,16 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {PersonalDataMapper.class, AddressMapper.class, UserMapper.class})
 public interface PersonFullMapper extends EntityMapper<PersonFullDTO, Person> {
 
-    @Mapping(source = "personalData", target = "personalData", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
-    @Mapping(source = "address", target = "address", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
-    @Mapping(source = "user", target = "user", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
+    @Mapping(source = "personalData", target = "personalData")
+    @Mapping(source = "address", target = "address")
+    @Mapping(source = "user", target = "user")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "virtual", target = "virtual")
     PersonFullDTO toDto(Person person);
 
-    @Mapping(source = "personalData", target = "personalData", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
-    @Mapping(source = "address", target = "address", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
-    @Mapping(source = "user", target = "user", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
+    @Mapping(source = "personalData", target = "personalData")
+    @Mapping(source = "address", target = "address")
+    @Mapping(source = "user", target = "user")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "virtual", target = "virtual")
     Person toEntity(PersonFullDTO personFullDTO);

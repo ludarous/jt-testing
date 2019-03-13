@@ -21,13 +21,13 @@ import {zip} from 'rxjs';
 })
 export class EventResultEditComponent implements OnInit {
 
-  private eventId: number;
-  private event: IEvent;
+  eventId: number;
+  event: IEvent;
 
-  private personId: number;
-  private person: IPersonFull;
+  personId: number;
+  person: IPersonFull;
 
-  private eventResult: IEventResult;
+  eventResult: IEventResult;
 
   constructor(private activatedRoute: ActivatedRoute,
               private eventService: EventService,

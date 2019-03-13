@@ -44,7 +44,7 @@ export class PersonEditComponent implements OnInit {
     }
   }
 
-  submitted = false;
+  protected submitted = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private userService: UserService,

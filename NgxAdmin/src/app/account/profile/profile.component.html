@@ -66,11 +66,10 @@
           <label class="label" for="birthDate">{{'Datum narození' | translate}}</label>
           <input nbInput
                  id="birthDate"
-                 [(ngModel)]="personBirthDate"
-                 [ngModelOptions]="{standalone: true}"
+                 [ngModel]="personBirthDate"
                  [placeholder]="'Datum narození' | translate"
                  [nbDatepicker]="formpicker">
-          <nb-datepicker #formpicker></nb-datepicker>
+          <nb-datepicker #formpicker (dateChange)="birthDayChange($event)"></nb-datepicker>
 
         </div>
       </div>

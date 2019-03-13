@@ -1,23 +1,23 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IWorkout} from '../../../../entities/workout';
-import {IWorkoutResult} from '../../../../entities/workout-result';
-import {IActivityResult} from '../../../../entities/activity-result';
-import {IActivity} from '../../../../entities/activity';
-import {IEvent} from '../../../../entities/event';
-import {ActivityCategoryService} from '../../../../services/activity-category.service';
+import {IWorkout} from '../../../../../entities/workout';
+import {IWorkoutResult} from '../../../../../entities/workout-result';
+import {IActivityResult} from '../../../../../entities/activity-result';
+import {IActivity} from '../../../../../entities/activity';
+import {IEvent} from '../../../../../entities/event';
+import {ActivityCategoryService} from '../../../../../services/activity-category.service';
 import {HttpResponse} from '@angular/common/http';
 import {colorSets} from '@swimlane/ngx-charts/release/utils';
-import {StatsRequest} from '../../../../entities/stats-request';
-import {WorkoutService} from '../../../../services/workout.service';
-import {EventManager} from '../../../../services/event.manager';
-import {StatsUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/stats-utils';
-import {StatsService} from '../../../../services/stats.service';
-import {PersonalActivityStats, PersonalCategoryStats, PersonalStats, Stats} from '../../../../entities/stats';
+import {StatsRequest} from '../../../../../entities/stats-request';
+import {WorkoutService} from '../../../../../services/workout.service';
+import {EventManager} from '../../../../../services/event.manager';
+import {StatsUtils} from '../../../../../@core/utils/stats-utils';
+import {StatsService} from '../../../../../services/stats.service';
+import {PersonalActivityStats, PersonalCategoryStats, PersonalStats, Stats} from '../../../../../entities/stats';
 import * as $ from 'jquery';
-import {ArrayUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/array.utils';
+import {ArrayUtils} from '../../../../../@core/utils/array.utils';
 
 @Component({
-  selector: 'app-user-test-result',
+  selector: 'ngx-user-workout-result',
   templateUrl: './user-workout-result.component.html',
   styleUrls: ['./user-workout-result.component.scss']
 })

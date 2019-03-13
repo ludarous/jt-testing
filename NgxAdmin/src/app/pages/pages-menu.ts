@@ -24,7 +24,7 @@ export const PERSON_MENU_ITEMS = [
     icon: 'nb-bar-chart',
     link: '/pages/user/my-stats',
   },
-]
+];
 
 export const ADMIN_MENU_ITEMS = [
   {
@@ -46,15 +46,15 @@ export const ADMIN_MENU_ITEMS = [
     ]
   },
   {
-    title: 'Cvičení',
+    title: 'Testy',
     icon: 'nb-heart',
     children: [
       {
-        title: 'Cvičení',
+        title: 'Testy',
         link: '/pages/admin/workouts',
       },
       {
-        title: 'Kategorie cvičení',
+        title: 'Kategorie testů',
         link: '/pages/admin/workout-categories',
       }
     ]
@@ -74,7 +74,7 @@ export const ADMIN_MENU_ITEMS = [
     link: '/pages/admin/results',
     icon: 'nb-compose'
   },
-]
+];
 
 export const NEBULAR_MENU_ITEMS = [
   {
@@ -320,4 +320,4 @@ export const NEBULAR_MENU_ITEMS = [
       },
     ],
   },
-]
+];

@@ -16,7 +16,7 @@ import {NbStepperComponent} from '@nebular/theme';
 })
 export class WorkoutResultEditComponent implements OnInit {
 
-  private selectedActivityResult: IActivityResult;
+  selectedActivityResult: IActivityResult;
 
   constructor() { }
 

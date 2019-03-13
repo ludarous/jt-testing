@@ -11,6 +11,6 @@
     </div>
   </div>
   <div *ngFor="let workoutResult of eventResult.workoutResults">
-    <app-user-test-result [test]="getWorkoutForWorkoutResult(workoutResult)" [workoutResult]="workoutResult" [event]="event"></app-user-test-result>
+    <ngx-user-workout-result [test]="getWorkoutForWorkoutResult(workoutResult)" [workoutResult]="workoutResult" [event]="event"></ngx-user-workout-result>
   </div>
 </div>

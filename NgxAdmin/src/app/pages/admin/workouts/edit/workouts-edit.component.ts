@@ -148,11 +148,11 @@ export class WorkoutsEditComponent implements OnInit {
         (workoutResponse: HttpResponse<IWorkout>) => {
         this.workout = workoutResponse.body;
         this.setTestForm(this.workout, this.workoutActivities, this.workoutCategories, this.sports);
-          this.toasterService.success(null, this.translateService.instant('Cvičení uloženo'));
+          this.toasterService.success(null, this.translateService.instant('Test uložen'));
           this.router.navigate(['/pages/admin/workouts/list']);
       },
         (errorResponse: HttpErrorResponse) => {
-          this.toasterService.danger(null, this.translateService.instant('Cvičení nebylo uloženo'));
+          this.toasterService.danger(null, this.translateService.instant('Test nebyl uloženo'));
         });
     }
   }

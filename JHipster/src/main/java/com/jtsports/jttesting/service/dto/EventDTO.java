@@ -27,6 +27,8 @@ public class EventDTO implements Serializable {
 
     private String addressStreet;
 
+    private AddressDTO address;
+
     private Set<WorkoutDTO> workouts = new HashSet<>();
 
     private Set<PersonFullDTO> attachedPersons = new HashSet<>();
@@ -113,6 +115,10 @@ public class EventDTO implements Serializable {
         this.eventResults = eventResults;
     }
 
+    public AddressDTO getAddress() { return address; }
+
+    public void setAddress(AddressDTO address) { this.address = address; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -146,4 +152,5 @@ public class EventDTO implements Serializable {
             ", address='" + getAddressStreet() + "'" +
             "}";
     }
+
 }

@@ -41,7 +41,7 @@ export class ActivityCategoriesEditComponent implements OnInit {
     this.filteredCategoriesNodes = this.categoriesNodes.filter(n => this.filterNode(n, value));
   }
 
-  submitted = false;
+  protected submitted = false;
   selectedStepperIndex = 0;
 
   constructor(private activityCategoryService: ActivityCategoryService,

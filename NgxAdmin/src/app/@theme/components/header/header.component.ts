@@ -27,13 +27,13 @@ export class HeaderComponent implements OnInit {
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
-              private principal: Principal,
+              public principal: Principal,
               private analyticsService: AnalyticsService,
               private layoutService: LayoutService) {
   }
 
   ngOnInit() {
-
+      const currentId = this.principal.getCurrentIdentity();
   }
 
   toggleSidebar(): boolean {

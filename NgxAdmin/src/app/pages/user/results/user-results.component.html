@@ -1,5 +1,48 @@
 <!--<div *ngFor="let event of myEvents">-->
-  <!--<app-user-event-result [event]="event"></app-user-event-result>-->
+<!--<ngx-user-event-result [event]="event"></ngx-user-event-result>-->
 <!--</div>-->
 
-<ngx-events-calendar *ngIf="myEvents" [events]="myEvents"></ngx-events-calendar>
+<!--<ngx-events-calendar *ngIf="myEvents" [events]="myEvents" [eventRouterLink]="eventRouterLink"></ngx-events-calendar>-->
+
+<!--<div class="d-flex flex-column">-->
+  <!--<div class="d-flex flex-column event-container" *ngFor="let event of myEvents">-->
+    <!--<div class="event-name">{{event.name}}</div>-->
+    <!--<div class="event-date">{{event.date | date: 'EEEE, MMMM d, y, hh:mm:ss'}}</div>-->
+    <!--<div class="event-address-name">{{event.addressStreet}}</div>-->
+    <!--<div class="event-address">{{event.addressStreet}}</div>-->
+  <!--</div>-->
+<!--</div>-->
+
+
+<!--<nb-list-->
+  <!--nbInfiniteList-->
+  <!--listenWindowScroll-->
+  <!--[threshold]="500">-->
+  <!--<nb-list-item *ngFor="let event of myEvents">-->
+    <!--<div class="d-flex flex-column event-container">-->
+      <!--<div class="event-name">{{event.name}}</div>-->
+      <!--<div class="event-date">{{event.date | date: 'EEEE, d. MMMM y, hh:mm:ss'}}</div>-->
+      <!--<div *ngIf="event.address" class="event-address">-->
+        <!--{{event.address?.street}}, {{event.address?.city}}, {{event.address?.country}}-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</nb-list-item>-->
+  <!--&lt;!&ndash;<nb-list-item *ngFor="let _ of secondCard.placeholders">&ndash;&gt;-->
+    <!--&lt;!&ndash;<ngx-news-post-placeholder></ngx-news-post-placeholder>&ndash;&gt;-->
+  <!--&lt;!&ndash;</nb-list-item>&ndash;&gt;-->
+<!--</nb-list>-->
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 col-sm-4" *ngFor="let event of myEvents">
+      <div class="event-container">
+        <div class="event-name">{{event.name}}</div>
+        <div class="event-date">{{event.date | date: 'EEEE, d. MMMM y, hh:mm:ss'}}</div>
+        <div *ngIf="event.address" class="event-address">
+          {{event.address?.street}}, {{event.address?.city}}, {{event.address?.country}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
