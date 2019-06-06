@@ -1,6 +1,4 @@
-import {AfterContentInit, AfterViewInit, Component, OnInit} from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
-import {IWorkout} from '../../../entities/workout';
+import {Component, OnInit} from '@angular/core';
 import {EventService} from '../../../services/event.service';
 import {IEvent} from '../../../entities/event';
 import {StatsRequest} from '../../../entities/stats-request';
@@ -9,7 +7,7 @@ import {StatsService} from '../../../services/stats.service';
 import * as $ from 'jquery';
 import {colorSets} from '@swimlane/ngx-charts/release/utils';
 import {zip} from 'rxjs';
-import {ArrayUtils} from '../../../../../../NgxAdmin/src/app/@core/utils/array.utils';
+import {ArrayUtils} from '../../../utils/array.utils';
 
 @Component({
   selector: 'app-dashboard',

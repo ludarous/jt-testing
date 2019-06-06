@@ -26,12 +26,6 @@ import { ThemeModule } from '../../@theme/theme.module';
 @NgModule({
   declarations: [
     DashboardComponent,
-
-    // Components
-    UserActivityStatsComponent,
-    UserActivityResultComponent,
-    UserWorkoutResultComponent,
-    UserEventResultComponent,
   ],
   imports: [
     CommonModule,
@@ -53,10 +47,7 @@ import { ThemeModule } from '../../@theme/theme.module';
     StatsService
   ],
   exports: [
-    UserActivityStatsComponent,
-    UserActivityResultComponent,
-    UserWorkoutResultComponent,
-    UserEventResultComponent,
+
   ]
 })
 export class UserModule { }

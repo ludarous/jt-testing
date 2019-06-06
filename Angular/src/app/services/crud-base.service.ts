@@ -1,8 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import {environment} from '../../environments/environment';
-import {createRequestOption} from '../../../../NgxAdmin/src/app/@core/utils/request-util';
-
+import {createRequestOption} from '../utils/request-util';
 
 export class CrudBaseService<T> {
   readonly resourceUrl;

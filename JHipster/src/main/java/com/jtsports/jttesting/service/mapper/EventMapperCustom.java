@@ -23,7 +23,7 @@ public interface EventMapperCustom extends EntityMapper<EventDTO, Event> {
     @Mapping(source = "address", target = "address")
     @Mapping(target = "eventResults", ignore = true)
     @Mapping(source = "workouts", target = "workouts")
-    @Mapping(target = "attachedPersons", ignore = true)
+    @Mapping(source = "attachedPersons", target = "attachedPersons")
     EventDTO toDto(Event event);
 
     @Mapping(target = "eventResults", ignore = true)

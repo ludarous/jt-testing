@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Activity, IActivity} from '../../../../entities/activity';
-import {ActivityCategory, IActivityCategory} from '../../../../entities/activity-category';
+import {IActivityCategory} from '../../../../entities/activity-category';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivityService} from '../../../../services/activity.service';
@@ -10,12 +10,11 @@ import {CustomValidators} from '../../../../shared/validators/custom-validators'
 import {ActivityCategoryService} from '../../../../services/activity-category.service';
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {RxjsUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/rxjs.utils';
 import {ResultType} from '../../../../entities/enums/result-type';
 import {MessageService, SelectItem} from 'primeng/api';
-import {ArrayUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/array.utils';
-import {TranslateService} from '@ngx-translate/core';
 import {EnumTranslatorService} from '../../../../shared/pipes/enum-translator/enum-translator';
+import {ArrayUtils} from '../../../../utils/array.utils';
+import {RxjsUtils} from '../../../../utils/rxjs.utils';
 
 @Component({
   selector: 'app-edit',

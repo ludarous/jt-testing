@@ -6,8 +6,8 @@ import {ActivityCategoryService} from '../../../../services/activity-category.se
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {RxjsUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/rxjs.utils';
 import {MessageService, TreeNode} from 'primeng/api';
+import {RxjsUtils} from '../../../../utils/rxjs.utils';
 
 @Component({
   selector: 'app-activity-categories-edit',

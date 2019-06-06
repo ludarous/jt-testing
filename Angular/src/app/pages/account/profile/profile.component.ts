@@ -12,15 +12,12 @@ import {IPersonalData, PersonalData} from '../../../entities/personal-data';
 import {Observable} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {RxjsUtils} from '../../../../../../NgxAdmin/src/app/@core/utils/rxjs.utils';
 import {Principal} from '../../../core/auth/principal.service';
-import {IPerson} from '../../../entities/person';
 import {IUser, User} from '../../../entities/user';
 import {EventManager} from '../../../services/event.manager';
-import {ActivityResultUnits} from '../../../entities/enums/activity-result-units';
 import {Sex} from '../../../entities/enums/sex';
-import {ResultType} from '../../../entities/enums/result-type';
 import {EnumTranslatorService} from '../../../shared/pipes/enum-translator/enum-translator';
+import {RxjsUtils} from '../../../utils/rxjs.utils';
 
 @Component({
   selector: 'app-profile',

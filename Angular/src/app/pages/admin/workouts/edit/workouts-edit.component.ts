@@ -7,7 +7,6 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivityService} from '../../../../services/activity.service';
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {RxjsUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/rxjs.utils';
 import {Workout, IWorkout} from '../../../../entities/workout';
 import {ISport} from '../../../../entities/sport';
 import {WorkoutService} from '../../../../services/workout.service';
@@ -15,6 +14,7 @@ import {WorkoutCategoryService} from '../../../../services/workout-category.serv
 import {SportService} from '../../../../services/sport.service';
 import {IWorkoutCategory} from '../../../../entities/workout-category';
 import {MessageService} from 'primeng/api';
+import {RxjsUtils} from '../../../../utils/rxjs.utils';
 
 @Component({
   selector: 'app-tests-edit',

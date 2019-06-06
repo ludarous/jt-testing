@@ -4,6 +4,7 @@ import {EventResultService} from '../../../services/event-result.service';
 import {EventService} from '../../../services/event.service';
 import {IEventResult} from '../../../entities/event-result';
 import {IEvent, Event} from '../../../entities/event';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-user-results',
@@ -12,7 +13,8 @@ import {IEvent, Event} from '../../../entities/event';
 })
 export class UserResultsComponent implements OnInit {
 
-  constructor(private eventResultService: EventResultService,
+  constructor(private router: Router,
+              private eventResultService: EventResultService,
               private eventService: EventService) { }
 
   myEventResults: Array<IEventResult>;
@@ -45,6 +47,10 @@ export class UserResultsComponent implements OnInit {
     //     cardData.loading = false;
     //     cardData.pageToLoadNext++;
     //   });
+  }
+
+  goToEventResults(event: IEvent) {
+    this.router.navigate(['/pages/user/my-results/event/', event.id]);
   }
 
 

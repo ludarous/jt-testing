@@ -37,7 +37,7 @@
                 <button nbButton nbStepperNext>{{'Další' | translate}}</button>
               </div>
             </nb-step>
-            <nb-step [label]="'Výběr aktivity pro test' | translate">;
+            <nb-step [label]="'Výběr aktivity pro test' | translate">
               <ng-container *ngIf="workoutActivities">
                 <ngx-drag-drop-lists
                   [sourceData]="workoutActivities"
@@ -50,14 +50,16 @@
                   [targetHeading]="'Vybrané aktivity'"
                   [filterFields]="['name', 'description']">
                   <ng-template let-item="item">
-                    <div class="ui-helper-clearfix">
-                      <b>{{item.name}}</b>
-                    </div>
-                    <div class="activity-picklist-categories">
-                      Kategorie:
-                      <ng-container *ngFor="let category of item.categories; last as isLast">
-                        <span>{{category.name}}</span><span *ngIf="!isLast">, </span>
-                      </ng-container>
+                    <div class="drop-list-item">
+                      <div class="ui-helper-clearfix">
+                        <b>{{item.name}}</b>
+                      </div>
+                      <div class="activity-picklist-categories">
+                        Kategorie:
+                        <ng-container *ngFor="let category of item.categories; last as isLast">
+                          <span>{{category.name}}</span><span *ngIf="!isLast">, </span>
+                        </ng-container>
+                      </div>
                     </div>
                   </ng-template>
                 </ngx-drag-drop-lists>

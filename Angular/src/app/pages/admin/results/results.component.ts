@@ -1,15 +1,14 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EventService} from '../../../services/event.service';
-import {IEvent, Event} from '../../../entities/event';
+import {Event, IEvent} from '../../../entities/event';
 import {EventManager} from '../../../services/event.manager';
 import {SelectItem} from 'primeng/api';
-import {IPerson} from '../../../entities/person';
 import {EventResult, IEventResult} from '../../../entities/event-result';
-import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {HttpResponse} from '@angular/common/http';
 import {EventResultService} from '../../../services/event-result.service';
 import {IPersonFull} from '../../../entities/person-full';
-import {ArrayUtils} from '../../../../../../NgxAdmin/src/app/@core/utils/array.utils';
+import {ArrayUtils} from '../../../utils/array.utils';
 
 @Component({
   selector: 'app-results',

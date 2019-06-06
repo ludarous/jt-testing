@@ -108,8 +108,10 @@
                   [targetHeading]="'Vybrané kategorie'"
                   [filterFields]="['name', 'description']">
                   <ng-template let-item="item">
-                    <div class="ui-helper-clearfix">
-                      <b>{{item.name}}</b>
+                    <div class="drop-list-item">
+                      <div class="ui-helper-clearfix">
+                        <b>{{item.name}}</b>
+                      </div>
                     </div>
                   </ng-template>
                 </ngx-drag-drop-lists>

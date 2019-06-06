@@ -5,9 +5,9 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {WorkoutCategoryService} from '../../../../services/workout-category.service';
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {RxjsUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/rxjs.utils';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MessageService} from 'primeng/api';
+import {RxjsUtils} from '../../../../utils/rxjs.utils';
 
 @Component({
   selector: 'app-test-categories-edit',

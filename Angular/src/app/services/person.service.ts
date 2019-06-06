@@ -1,13 +1,10 @@
 import {Injectable} from '@angular/core';
 import {CrudBaseService} from './crud-base.service';
-import {IUser} from '../entities/user';
 import {HttpClient, HttpResponse} from '@angular/common/http';
-import {IActivity} from '../entities/activity';
-import {IAddress} from '../entities/address';
 import {IPerson} from '../entities/person';
 import {Observable} from 'rxjs';
-import {IPersonFull, PersonFull} from '../entities/person-full';
-import {createRequestOption} from '../../../../NgxAdmin/src/app/@core/utils/request-util';
+import {IPersonFull} from '../entities/person-full';
+import {createRequestOption} from '../utils/request-util';
 
 @Injectable()
 export class PersonService extends CrudBaseService<IPerson> {

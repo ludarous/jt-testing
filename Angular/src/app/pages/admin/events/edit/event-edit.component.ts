@@ -1,20 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {RxjsUtils} from '../../../../../../../NgxAdmin/src/app/@core/utils/rxjs.utils';
 import {IWorkout} from '../../../../entities/workout';
 import {EventService} from '../../../../services/event.service';
-import {IEvent, Event} from '../../../../entities/event';
+import {Event, IEvent} from '../../../../entities/event';
 import {IPersonFull} from '../../../../entities/person-full';
 import {PersonService} from '../../../../services/person.service';
 import {Person} from '../../../../entities/person';
 import {Moment} from 'moment';
-import * as moment from 'moment';
 import {MessageService} from 'primeng/api';
 import {WorkoutService} from '../../../../services/workout.service';
+import {RxjsUtils} from '../../../../utils/rxjs.utils';
 
 @Component({
   selector: 'app-events-edit',

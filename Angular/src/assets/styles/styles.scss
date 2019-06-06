@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin-ext');
+//@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Exo&subset=latin,latin-ext');
 
 @import "app-colors";
 @import "app-sizes";
@@ -8,6 +9,8 @@
 @import "overrides/material-override";
 @import "overrides/bootstrap-override";
 @import "overrides/froala-override";
+
+//@import "fontface-exo";
 
 @mixin theme-color-grabber($theme) {
   // Parse the theme and create variables for each color in the pallete
@@ -51,7 +54,7 @@ html, body {
 
 
 body {
-  font-family: 'Open Sans', sans-serif !important;
+  font-family: 'Exo' !important;
   color: white;
   background-color: $chart-color;;
 }

@@ -79,8 +79,13 @@
               [targetHeading]="'Vybrané testy'"
               [filterFields]="['name', 'description']">
               <ng-template let-item="item">
-                <div class="ui-helper-clearfix">
-                  <b>{{item.name}}</b>
+                <div class="drop-list-item">
+                  <div class="ui-helper-clearfix">
+                    <b>{{item.name}}</b>
+                  </div>
+                  <div class="additional-item-info">
+                    {{item.description}}
+                  </div>
                 </div>
               </ng-template>
             </ngx-drag-drop-lists>
@@ -104,8 +109,13 @@
               [targetHeading]="'Vybrané osoby'"
               [filterFields]="['name', 'description']">
               <ng-template let-item="item">
-                <div class="ui-helper-clearfix">
-                  <b>{{item.personalData.firstName + ' ' + item.personalData.lastName}}</b>
+                <div class="drop-list-item">
+                  <div class="ui-helper-clearfix">
+                    <b>{{item.personalData.firstName + ' ' + item.personalData.lastName}}</b>
+                  </div>
+                  <div class="additional-item-info">
+                    {{item.personalData.birthDate | date: 'd. MMMM y'}}
+                  </div>
                 </div>
               </ng-template>
             </ngx-drag-drop-lists>
