@@ -1,11 +1,13 @@
 <div class="menu">
   <nav>
-    <a *ngIf="showAdminMenuItem" [routerLink]="['admin']">Admin</a>
-    <a *ngIf="person" [routerLink]="['/user/dashboard']">Dashboard</a>
-    <a *ngIf="person" [routerLink]="['/user/my-results']">Moje výsledky</a>
-    <a *ngIf="person" [routerLink]="['/user/my-stats']">Moje statistiky</a>
+    <ng-container *ngFor="let menuItem of menuItems">
+      <a *ngIf="menuItem.visible" [routerLink]="menuItem.routerLink" [routerLinkActive]="menuItem.routerLinkActive">{{menuItem.title}}</a>
+    </ng-container>
   </nav>
   <div class="profile-container">
+    <div class="pointer" matBadge="2" matBadgePosition="above after">
+      <i class="fa fa-envelope"></i>
+    </div>
     <div class="pointer" matBadge="2" matBadgePosition="above after">
       <i class="fa fa-bell"></i>
     </div>

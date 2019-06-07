@@ -9,6 +9,20 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {AuthServerProvider} from '../../../core/auth/auth-jwt.service';
 import {Router} from '@angular/router';
 
+export class MenuItem {
+  title: string;
+  routerLink: any[];
+  routerLinkActive: string;
+  visible: boolean;
+
+  constructor(title: string, routerLink: any[], visible: boolean = true, routerLinkActive: string = 'active') {
+    this.title = title;
+    this.routerLink = routerLink;
+    this.routerLinkActive = routerLinkActive;
+    this.visible = visible;
+  }
+}
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -20,7 +34,7 @@ export class MenuComponent implements OnInit {
   person: IPerson;
 
   showAdminMenuItem: boolean;
-
+  menuItems: Array<MenuItem>;
 
   constructor(private principal: Principal,
               private eventManager: EventManager,
@@ -32,12 +46,22 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
 
     this.updateIdentity();
+    this.setMenu();
     this.registerAuthenticationSuccess();
     this.registerProfileFillSuccess();
     this.principal.getAuthenticationState().subscribe((account) => {
       this.updateAccount(account);
+      this.setMenu();
     });
 
+  }
+
+  setMenu() {
+    this.menuItems = new Array<MenuItem>();
+    this.menuItems.push(new MenuItem('Dashboard', ['/user/dashboard']));
+    this.menuItems.push(new MenuItem('Moje výsledky', ['/user/my-results']));
+    this.menuItems.push(new MenuItem('Moje statistiky', ['/user/my-stats']));
+    this.menuItems.push(new MenuItem('Administrace', ['/admin'], this.showAdminMenuItem));
   }
 
   registerAuthenticationSuccess() {

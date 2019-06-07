@@ -1,0 +1,12 @@
+<div class="sidebar-menu-item-container">
+  <div class="item-heading" (click)="toggle()">
+    <div class="icon"><i [class]="menuItem.iconClass"></i></div>
+    <div class="label">{{menuItem.label}}</div>
+    <div *ngIf="hasItems" class="collapse-icon" [ngClass]="{'expanded': !menuItem.collapsed}"><i class="fa fa-angle-left"></i></div>
+  </div>
+  <div *ngIf="hasItems" #itemContent class="item-content" [ngStyle]="{'margin-left': ((level + 1) * 10) + 'px'}">
+    <ng-container *ngFor="let item of menuItem.items">
+      <app-sidebar-menu-item [menuItem]="item" [parent]="this" [level]="level + 1"></app-sidebar-menu-item>
+    </ng-container>
+  </div>
+</div>

@@ -18,6 +18,7 @@ import {EventService} from '../../services/event.service';
 import {ActivityCategoriesModule} from './activity-categories/activity-categories.module';
 import {WorkoutService} from '../../services/workout.service';
 import {WorkoutCategoryService} from '../../services/workout-category.service';
+import {SharedComponentsModule} from '../../shared/components/shared-components.module';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {WorkoutCategoryService} from '../../services/workout-category.service';
 
     ActivitiesModule,
     ActivityCategoriesModule,
+    SharedComponentsModule,
   ],
   providers: [
     EventService,

@@ -1,0 +1,12 @@
+<div id="container">
+  <div id="sidebar">
+    <div id="sidebar-content">
+      <app-sidebar-menu-item *ngFor="let menuItem of menuItems" [menuItem]="menuItem"></app-sidebar-menu-item>
+    </div>
+  </div>
+  <div id="content">
+    <div id="main-content">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

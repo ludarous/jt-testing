@@ -18,6 +18,7 @@ export class AdminComponent implements OnInit {
         label: 'Aktivity',
         routerLink: ['/admin/activities'],
         routerLinkActiveOptions: {exact: true},
+        iconClass: 'fas fa-running',
         items: [
           {
             label: 'Kategorie aktivit',
@@ -52,6 +53,7 @@ export class AdminComponent implements OnInit {
         label: 'Cvičení',
         routerLink: ['/admin/workouts'],
         routerLinkActiveOptions: {exact: true},
+        iconClass: 'far fa-list-alt',
         items: [
           {
             label: 'Kategorie cvičení',
@@ -86,6 +88,7 @@ export class AdminComponent implements OnInit {
         label: 'Události',
         routerLink: ['/admin/events'],
         routerLinkActiveOptions: {exact: true},
+        iconClass: 'far fa-calendar-alt',
         items: [
           {
             label: 'Seznam událostí',
@@ -103,6 +106,7 @@ export class AdminComponent implements OnInit {
         label: 'Uživatelé',
         routerLink: ['/admin/users'],
         routerLinkActiveOptions: {exact: true},
+        iconClass: 'fas fa-users',
         items: [
           {
             label: 'Seznam uživatelů',
@@ -120,6 +124,7 @@ export class AdminComponent implements OnInit {
         label: 'Výsledky',
         routerLink: ['/admin/results'],
         routerLinkActiveOptions: {exact: true},
+        iconClass: 'fas fa-poll'
       },
     ];
   }

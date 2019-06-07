@@ -4,21 +4,31 @@ import { MenuComponent } from './menu/menu.component';
 import {RouterModule} from '@angular/router';
 import {PersonService} from '../../services/person.service';
 import {MaterialComponentsModule} from '../material-components.module';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import {PrimeNgComponentsModule} from '../primeng-components.module';
+import { SidebarMenuItemComponent } from './sidebar/sidebar-menu-item/sidebar-menu-item.component';
+
+const COMPONENTS = [
+  MenuComponent,
+  SidebarComponent,
+  SidebarMenuItemComponent,
+]
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    MaterialComponentsModule
+    MaterialComponentsModule,
+    PrimeNgComponentsModule,
   ],
   declarations: [
-    MenuComponent
+    ...COMPONENTS,
   ],
   providers: [
     PersonService,
   ],
   exports: [
-    MenuComponent
+    ...COMPONENTS,
   ]
 })
 export class SharedComponentsModule { }

@@ -1,12 +1,3 @@
-<div id="container">
-  <div id="sidebar">
-    <div id="sidebar-content">
-      <p-panelMenu [model]="menuItems"></p-panelMenu>
-    </div>
-  </div>
-  <div id="content">
-    <div id="main-content">
-      <router-outlet class="outlet-container"></router-outlet>
-    </div>
-  </div>
-</div>
+<app-sidebar [menuItems]="menuItems">
+  <router-outlet class="outlet-container"></router-outlet>
+</app-sidebar>

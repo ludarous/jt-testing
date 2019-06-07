@@ -1,0 +1,50 @@
+.sidebar-menu-item-container {
+  display: flex;
+  flex-direction: column;
+
+  .item-heading {
+    display: flex;
+    flex-direction: row;
+
+    height: 3em;
+    align-items: center;
+
+    cursor: pointer;
+
+    color: lightgray;
+
+    &:hover {
+      color: white;
+    }
+
+    .icon {
+      width: 30px;
+      padding: 10px;
+    }
+
+    .label {
+      flex: 1;
+      padding: 10px;
+    }
+
+    .collapse-icon {
+      display: flex;
+      justify-content: center;
+      width: 30px;
+      transition: transform 0.3s ease-out;
+
+      &.expanded {
+        transition: transform 0.3s ease-out;
+        transform: rotate(-90deg);
+      }
+    }
+  }
+
+  .item-content {
+    display: flex;
+    flex-direction: column;
+    transition: height 0.2s ease-out;
+    height:auto;
+    overflow: hidden;
+  }
+}
