@@ -53,6 +53,13 @@ export class ActivitiesListComponent implements OnInit {
         this.messageService.add({severity: 'error', summary: 'Aktivitu se nepodařilo smazat', detail: errorResponse.error.detail});
       });
     }
+  }
 
+  create() {
+    this.router.navigate(['/pages/admin/activities/create']);
+  }
+
+  edit(activity: IActivity) {
+    this.router.navigate(['/pages/admin/activities/edit', activity.id]);
   }
 }

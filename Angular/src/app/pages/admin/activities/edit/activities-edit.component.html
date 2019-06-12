@@ -1,10 +1,8 @@
 <div class="activity-edit-container">
   <form class="form" *ngIf="activityForm" [formGroup]="activityForm" (submit)="saveActivity()">
-    <div class="ui-inputgroup">
-      <input type="text" pInputText placeholder="Název" formControlName="name" required>
-      <p-message severity="error" text="Název kategorie je povinný"
-                 *ngIf="!activityForm.controls['name'].valid && activityForm.controls['name'].touched"></p-message>
-    </div>
+
+    <lr-input-field [controlName]="'name'" [parentForm]="activityForm" [label]="'Název' | translate" [errorsMap]="controlsErrorsMaps.get('name')"></lr-input-field>
+
     <div class="ui-inputgroup">
       <textarea type="text" pInputTextarea placeholder="Popis" formControlName="description"
                 autoResize="autoResize"></textarea>
@@ -13,9 +11,10 @@
       <textarea type="text" pInputTextarea placeholder="Nápověda" formControlName="help"
                 autoResize="autoResize"></textarea>
     </div>
-    <div class="ui-inputgroup">
-      <input type="text" pInputText placeholder="Klíč" formControlName="key">
-    </div>
+    <lr-input-field [type]="'textarea'" [controlName]="'help'" [parentForm]="activityForm" [label]="'Nápověda' | translate" [errorsMap]="controlsErrorsMaps.get('help')"></lr-input-field>
+
+    <lr-input-field [controlName]="'key'" [parentForm]="activityForm" [label]="'Klíč' | translate" [errorsMap]="controlsErrorsMaps.get('key')"></lr-input-field>
+
     <div class="ui-inputgroup">
       <p-selectButton [options]="unitsOptions" formControlName="primaryResultValueUnit"></p-selectButton>
     </div>

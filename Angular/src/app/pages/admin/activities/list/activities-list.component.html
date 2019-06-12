@@ -1,20 +1,24 @@
 <div class="component-container-center">
-  <p-table [value]="activities" selectionMode="single">
+  <p-table
+    [value]="activities"
+    selectionMode="single"
+  >
     <ng-template pTemplate="header">
       <tr>
-        <th *ngFor="let col of tableCols">
+        <th *ngFor="let col of tableCols" [pSortableColumn]="col.field">
           {{col.header}}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
         </th>
         <th class="table-action-column"></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-activity>
-      <tr (click)="rowSelect(activity)">
+      <tr class="pointer" (click)="rowSelect(activity)">
         <td *ngFor="let col of tableCols">
           {{activity[col.field]}}
         </td>
         <td class="table-action-column">
-          <button pButton type="button" icon="pi pi-times" (click)="delete($event, activity)" class="ui-button-danger"></button>
+          <i class="far fa-trash-alt fa-2x pointer" (click)="delete($event, activity)"></i>
         </td>
       </tr>
     </ng-template>

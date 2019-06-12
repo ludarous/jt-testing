@@ -1,8 +1,9 @@
 /* buttons */
 .btn, .mat-button {
-  border: none;
+  border: 1px solid lightgray !important;
   font-size: $button-font-size !important;
   outline: none;
+  font-family: 'Exo' !important;
 
   &.mat-fab .mat-button-wrapper {
     display: block !important;
@@ -20,19 +21,19 @@
   &.ui-button { // Rewrites prime-ng button style
     padding: $button-padding;
   }
-  &.btn-primary.mat-button, &.btn-primary { // Rewrites angular material button style
+  &.btn-primary.mat-button:not(:disabled), &.btn-primary:not(:disabled) { // Rewrites angular material button style
     background-color: $primary-color;
     color: $text-primary-color;
   }
-  &.btn-primary.mat-button:hover, &.btn-primar.mat-button:active { // Rewrites angular material button style
-    background-color: $primary-color-5;
+  &.btn-primary.mat-button:not(:disabled):hover, &.btn-primar.mat-button:not(:disabled):active { // Rewrites angular material button style
+    background-color: $primary-color-4;
     color: $text-primary-color;
   }
-  &.btn-accent.mat-button, &.btn-accent { // Rewrites angular material button style
+  &.btn-accent.mat-button:not(:disabled), &.btn-accent:not(:disabled) { // Rewrites angular material button style
     background-color: $accent-color;
     color: $text-accent-color;
   }
-  &.btn-accent.mat-button:hover, &.btn-accent.mat-button:active { // Rewrites angular material button style
+  &.btn-accent.mat-button:not(:disabled):hover, &.btn-accent.mat-button:not(:disabled):active { // Rewrites angular material button style
     background-color: $accent-color-4;
     color: $text-accent-color;
   }
@@ -42,7 +43,7 @@
     border-color: $app-danger-color;
     color: $text-accent-color;
   }
-  &.btn-danger.mat-button:hover, &.btn-danger.mat-button:active { // Rewrites angular material button style
+  &.btn-danger.mat-button:not(:disabled):hover, &.btn-danger.mat-button:not(:disabled):active { // Rewrites angular material button style
     background-color: $app-danger-color-2;
     border-color: $app-danger-color-2;
     color: $text-accent-color;

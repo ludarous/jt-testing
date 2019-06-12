@@ -37,6 +37,8 @@ export class ActivitiesEditComponent implements OnInit {
   suggestedCategories: Array<IActivityCategory>;
   selectedCategories: Array<IActivityCategory>;
 
+  controlsErrorsMaps: Map<string, Map<string, string>> = new Map();
+
   constructor(private activatedRoute: ActivatedRoute,
               private activityService: ActivityService,
               private activityCategoryService: ActivityCategoryService,
@@ -111,6 +113,11 @@ export class ActivitiesEditComponent implements OnInit {
     if (activity.categories) {
       this.selectedCategories = categories.filter((c) => activity.categories.some((ac) => ac.id === c.id));
     }
+
+    const nameErrorsMap = new Map();
+    nameErrorsMap.set('required', 'Název je povinný!');
+    this.controlsErrorsMaps.set('name', nameErrorsMap);
+
   }
 
   saveActivity() {

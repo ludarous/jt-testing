@@ -1,24 +1,60 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div *ngIf="form" class="col-4">
-      <form [formGroup]="form" (submit)="onSubmit()">
+    <div *ngIf="form" class="col-6">
 
-        <div class="ui-inputgroup">
-          <input type="text" pInputText [placeholder]="'Email / Přihlašovací jméno' | translate"
-                 formControlName="username" required>
-          <p-message severity="error" text="Pole musí obsahovat platný email nebo přihlašovací jméno."
-                     *ngIf="form.controls['username'].hasError('loginOrEmail')"></p-message>
-        </div>
-        <div class="ui-inputgroup">
-          <input type="password" pInputText [placeholder]="'Heslo' | translate" formControlName="password">
-        </div>
+      <div class="lr-box">
 
-        <div class="d-flex justify-content-between">
-          <button mat-raised-button id="loginBtn" type="submit" [innerHtml]="'Přihlásit se' | translate"></button>
-          <button mat-raised-button id="registerBtn" type="button" [innerHtml]="'Zaregistrovat' | translate" [routerLink]="['/account/register']"></button>
-        </div>
+        <div class="title">{{'Přihlášení' | translate}}</div>
+        <div class="subtitle">{{'Ahoj, přihlaš se tvým přihlašovacím jménem nebo e-mailem.' | translate}}</div>
 
-      </form>
+        <form [formGroup]="form" (submit)="onSubmit()">
+          <lr-form-field>
+            <input LrInput type="text" [placeholder]="'Email / Přihlašovací jméno' | translate"
+                   formControlName="username" required>
+            <lr-form-field-message [inputControl]="form.get('username')"
+                                   [error]="'loginOrEmail'"
+                                   [type]="'error'"
+                                   [message]="'Pole musí obsahovat platný email nebo přihlašovací jméno.' | translate">
+            </lr-form-field-message>
+            <lr-form-field-message [inputControl]="form.get('username')"
+                                   [error]="'minlength'"
+                                   [type]="'error'"
+                                   [message]="'Pole musí mít délku alespoň 4 znaky.' | translate">
+            </lr-form-field-message>
+            <lr-form-field-message [inputControl]="form.get('username')"
+                                   [error]="'required'"
+                                   [type]="'error'"
+                                   [message]="'Pole je povinné.' | translate">
+            </lr-form-field-message>
+          </lr-form-field>
+
+          <lr-form-field>
+            <input LrInput type="password" [placeholder]="'Heslo' | translate" formControlName="password">
+            <lr-form-field-message [inputControl]="form.get('password')"
+                                   [error]="'minlength'"
+                                   [type]="'error'"
+                                   [message]="'Pole musí mít délku alespoň 4 znaky.' | translate">
+            </lr-form-field-message>
+            <lr-form-field-message [inputControl]="form.get('password')"
+                                   [error]="'required'"
+                                   [type]="'error'"
+                                   [message]="'Pole je povinné.' | translate">
+            </lr-form-field-message>
+          </lr-form-field>
+
+          <div class="d-flex justify-content-between">
+            <mat-checkbox formControlName="rememberMe">{{'Zapamatuj si mě' | translate}}</mat-checkbox>
+            <a [routerLink]="['/account/lost-password/request']">{{'Zapomněl si heslo?' | translate}}</a>
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <button mat-button class="btn-accent" id="loginBtn" [disabled]="!form.valid">{{'Přihlásit se' | translate}}</button>
+            <button mat-button id="registerBtn" type="button" [innerHtml]="'Zaregistrovat' | translate"
+                    [routerLink]="['/account/register']"></button>
+          </div>
+
+        </form>
+      </div>
     </div>
   </div>
 </div>

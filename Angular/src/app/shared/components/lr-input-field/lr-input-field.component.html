@@ -1,0 +1,14 @@
+<lr-form-field [formGroup]="parentForm">
+  <label for="name">{{label}}</label>
+  <input *ngIf="type === 'input'" id="name" LrInput type="text" [placeholder]="label"
+         [formControlName]="controlName">
+  <textarea *ngIf="type === 'textarea'" type="text" pInputTextarea [placeholder]="label" [formControlName]="controlName"
+            autoResize="autoResize"></textarea>
+  <ng-container *ngIf="errorsMap">
+    <lr-form-field-message *ngFor="let error of errorsMap.keys()" [inputControl]="parentForm.get(controlName)"
+                           [error]="error"
+                           [type]="'error'"
+                           [message]="errorsMap.get(error)">
+    </lr-form-field-message>
+  </ng-container>
+</lr-form-field>

@@ -16,6 +16,9 @@ import {UserService} from '../../services/user.service';
 import {PersonService} from '../../services/person.service';
 import {PersonalDataService} from '../../services/personal-data.service';
 import {EnumTranslationsModule} from '../../shared/pipes/enum-translator/enum-translations.module';
+import {SharedComponentsModule} from '../../shared/components/shared-components.module';
+import { RequestComponent } from './lost-password/request/request.component';
+import { FinishComponent } from './lost-password/finish/finish.component';
 
 @NgModule({
   imports: [
@@ -28,6 +31,7 @@ import {EnumTranslationsModule} from '../../shared/pipes/enum-translator/enum-tr
     TranslateModule,
     EnumTranslationsModule,
     AccountRoutingModule,
+    SharedComponentsModule,
   ],
   providers: [
     UserService,
@@ -38,7 +42,9 @@ import {EnumTranslationsModule} from '../../shared/pipes/enum-translator/enum-tr
   declarations: [
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    RequestComponent,
+    FinishComponent
   ],
   exports: [
     LoginComponent,

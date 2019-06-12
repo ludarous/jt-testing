@@ -46,12 +46,14 @@ export class SidebarMenuItemComponent implements OnInit, AfterViewInit {
   }
 
   toggle() {
-    if (this.menuItem.collapsed) {
-      this.expandContent();
-      this.menuItem.collapsed = false;
-    } else {
-      this.collapseContent();
-      this.menuItem.collapsed = true;
+    if (this.menuItem.items && this.menuItem.items.length > 0) {
+      if (this.menuItem.collapsed) {
+        this.expandContent();
+        this.menuItem.collapsed = false;
+      } else {
+        this.collapseContent();
+        this.menuItem.collapsed = true;
+      }
     }
   }
 
@@ -98,14 +100,16 @@ export class SidebarMenuItemComponent implements OnInit, AfterViewInit {
     // have the element transition to the height of its inner content
     element.style.height = sectionHeight + 'px';
 
-    // when the next css transition finishes (which should be the one we just triggered)
-    element.addEventListener('transitionend', function(e) {
+    const callback = function(e) {
       // remove this event listener so it only gets triggered once
-      element.removeEventListener('transitionend', arguments.callee);
+      element.removeEventListener('transitionend', callback);
 
       // remove "height" from the element's inline styles, so it can return to its initial value
       element.style.height = 'auto';
-    });
+    };
+
+    // when the next css transition finishes (which should be the one we just triggered)
+    element.addEventListener('transitionend',  callback);
 
   }
 

@@ -1,0 +1,14 @@
+@import "app-colors";
+
+span {
+  font-size: 12px;
+}
+
+.error {
+  margin-left: 20px;
+  color: $app-danger-color;
+}
+
+.hidden {
+  visibility: hidden;
+}

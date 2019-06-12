@@ -12,6 +12,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {SharedModule} from '../../../shared/shared.module';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown'
 import {EnumTranslationsModule} from '../../../shared/pipes/enum-translator/enum-translations.module';
+import {SharedComponentsModule} from '../../../shared/components/shared-components.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {EnumTranslationsModule} from '../../../shared/pipes/enum-translator/enum
     TranslateModule,
     SharedModule,
     NgMultiSelectDropDownModule,
-    EnumTranslationsModule
+    EnumTranslationsModule,
+    SharedComponentsModule
   ],
   exports: [
     ActivitiesComponent,

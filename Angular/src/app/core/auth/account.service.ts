@@ -17,4 +17,8 @@ export class AccountService {
   save(account: any): Observable<HttpResponse<any>> {
     return this.http.post(environment.backendUrl + '/account', account, {observe: 'response'});
   }
+
+  resetPasswordInit(mail: string): Observable<HttpResponse<any>> {
+    return this.http.post(environment.backendUrl + '/account/reset-password/init', mail, {observe: 'response'});
+  }
 }
