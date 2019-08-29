@@ -28,10 +28,10 @@ export class ActivitiesEditComponent implements OnInit {
   activityId: number;
 
   units: Array<ActivityResultUnits>;
-  unitsOptions: Array<SelectItem>;
+  unitsOptions: Array<any>;
 
   resultTypes: Array<ResultType>;
-  resultTypesOptions: Array<SelectItem>;
+  resultTypesOptions: Array<any>;
 
   activityCategories: Array<IActivityCategory>;
   suggestedCategories: Array<IActivityCategory>;
@@ -55,7 +55,7 @@ export class ActivitiesEditComponent implements OnInit {
     this.unitsOptions = this.units.map(u => ({label: this.enumTranslateService.translate(u, 'plural-1p'), value: u.ordinal}));
     ArrayUtils.insertItem(this.unitsOptions, {label: 'NONE', value: null}, 0);
 
-    this.resultTypesOptions = this.resultTypes.map(rt => ({label: this.enumTranslateService.translate(rt, 'plural'), value: rt.ordinal}));
+    this.resultTypesOptions = this.resultTypes.map(rt => ({label: this.enumTranslateService.translate(rt, 'plural'), value: rt.ordinal, selected: rt.ordinal === 0}));
 
     const params$ = this.activatedRoute.params;
     params$.subscribe((params) => {
@@ -106,8 +106,8 @@ export class ActivitiesEditComponent implements OnInit {
       secondaryResultValueUnit: new FormControl(activity.secondaryResultValueUnit ? activity.secondaryResultValueUnit.ordinal : null),
       minAge: new FormControl(activity.minAge, [CustomValidators.integerPositive, Validators.min(0), Validators.max(120)]),
       maxAge: new FormControl(activity.maxAge, [CustomValidators.integerPositive, Validators.min(0), Validators.max(120)]),
-      primaryResultType: new FormControl(activity.primaryResultType ? activity.primaryResultType.ordinal : null),
-      secondaryResultType: new FormControl(activity.secondaryResultType ? activity.secondaryResultType.ordinal : null),
+      primaryResultType: new FormControl(activity.primaryResultType ? activity.primaryResultType.ordinal : ResultType.LESS_IS_BETTER.ordinal),
+      secondaryResultType: new FormControl(activity.secondaryResultType ? activity.secondaryResultType.ordinal : ResultType.LESS_IS_BETTER.ordinal),
     });
 
     if (activity.categories) {
@@ -158,9 +158,8 @@ export class ActivitiesEditComponent implements OnInit {
     }
   }
 
-  search(event) {
-    const filteredCategories = this.activityCategories.filter(c => c.name.includes(event.query));
-    this.suggestedCategories = filteredCategories;
+  selectedCategoriesChanged(selectedCategories: Array<any>) {
+    console.log(selectedCategories);
   }
 }
 

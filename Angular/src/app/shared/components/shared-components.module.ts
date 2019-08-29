@@ -11,7 +11,9 @@ import { LrFormFieldComponent } from './lr-form-field/lr-form-field.component';
 import { LrFormFieldMessageComponent } from './lr-form-field-message/lr-form-field-message.component';
 import { LrInputFieldComponent } from './lr-input-field/lr-input-field.component';
 import {TranslateModule} from '@ngx-translate/core';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {LrSelectComponent} from './lr-select/lr-select.component';
+import {LrAutocompleteComponent} from './lr-autocomplete/lr-autocomplete.component';
 
 const COMPONENTS = [
   MenuComponent,
@@ -20,13 +22,15 @@ const COMPONENTS = [
   LrFormFieldComponent,
   LrFormFieldMessageComponent,
   LrInputFieldComponent,
-
+  LrSelectComponent,
+  LrAutocompleteComponent
 ]
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
     ReactiveFormsModule,
     MaterialComponentsModule,
     PrimeNgComponentsModule,
@@ -41,7 +45,7 @@ const COMPONENTS = [
     PersonService,
   ],
   exports: [
-    ...COMPONENTS,
+    ...COMPONENTS
   ]
 })
 export class SharedComponentsModule { }

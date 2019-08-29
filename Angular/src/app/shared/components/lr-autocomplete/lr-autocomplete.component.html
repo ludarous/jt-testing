@@ -1,0 +1,23 @@
+<lr-form-field *ngIf="items">
+  <label for="input">{{label}}</label>
+
+  <p-autoComplete
+    id="input"
+    class="lr-autocomplete"
+    [placeholder]="placeholder"
+    [multiple]="true"
+    [suggestions]="suggestedItems"
+    (completeMethod)="search($event)"
+    [(ngModel)]="selectedItems"
+    [ngModelOptions]="{standalone: true}"
+    [forceSelection]="true"
+    field="name"></p-autoComplete>
+
+  <ng-container *ngIf="errorsMap">
+    <lr-form-field-message *ngFor="let error of errorsMap.keys()"
+                           [error]="error"
+                           [type]="'error'"
+                           [message]="errorsMap.get(error)">
+    </lr-form-field-message>
+  </ng-container>
+</lr-form-field>

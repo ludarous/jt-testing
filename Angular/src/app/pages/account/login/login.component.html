@@ -9,7 +9,7 @@
 
         <form [formGroup]="form" (submit)="onSubmit()">
           <lr-form-field>
-            <input LrInput type="text" [placeholder]="'Email / Přihlašovací jméno' | translate"
+            <input class="lr-input" type="text" [placeholder]="'Email / Přihlašovací jméno' | translate"
                    formControlName="username" required>
             <lr-form-field-message [inputControl]="form.get('username')"
                                    [error]="'loginOrEmail'"
@@ -29,7 +29,7 @@
           </lr-form-field>
 
           <lr-form-field>
-            <input LrInput type="password" [placeholder]="'Heslo' | translate" formControlName="password">
+            <input class="lr-input" type="password" [placeholder]="'Heslo' | translate" formControlName="password">
             <lr-form-field-message [inputControl]="form.get('password')"
                                    [error]="'minlength'"
                                    [type]="'error'"

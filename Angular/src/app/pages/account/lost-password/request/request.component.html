@@ -9,7 +9,7 @@
 
         <form [formGroup]="form" (submit)="onSubmit()">
           <lr-form-field>
-            <input LrInput type="text" [placeholder]="'Email' | translate"
+            <input class="lr-input" type="text" [placeholder]="'Email' | translate"
                    formControlName="mail" required>
             <lr-form-field-message [inputControl]="form.get('mail')"
                                    [error]="'email'"

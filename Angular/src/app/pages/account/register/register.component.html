@@ -9,7 +9,7 @@
 
 
           <lr-form-field>
-            <input type="text" lrInput [placeholder]="'Přihlašovací jméno' | translate"
+            <input type="text" class="lr-input" [placeholder]="'Přihlašovací jméno' | translate"
                    formControlName="login" required>
             <lr-form-field-message [inputControl]="form.get('login')"
                                    [error]="'loginOrEmail'"
@@ -30,7 +30,7 @@
 
 
           <lr-form-field>
-            <input type="text" lrInput [placeholder]="'E-mail' | translate"
+            <input type="text" class="lr-input" [placeholder]="'E-mail' | translate"
                    formControlName="email" required>
             <lr-form-field-message [inputControl]="form.get('email')"
                                    [error]="'email'"
@@ -45,7 +45,7 @@
           </lr-form-field>
 
           <lr-form-field>
-            <input type="password" lrInput [placeholder]="'Heslo' | translate" formControlName="password">
+            <input type="password" class="lr-input" [placeholder]="'Heslo' | translate" formControlName="password">
             <lr-form-field-message [inputControl]="form.get('password')"
                                    [error]="'minlength'"
                                    [type]="'error'"
@@ -58,7 +58,7 @@
             </lr-form-field-message>
           </lr-form-field>
           <lr-form-field>
-            <input type="password" lrInput [placeholder]="'Potvrzení hesla' | translate" [(ngModel)]="confirmPassword"
+            <input type="password" class="lr-input" [placeholder]="'Potvrzení hesla' | translate" [(ngModel)]="confirmPassword"
                    [ngModelOptions]="{standalone: true}">
           </lr-form-field>
 

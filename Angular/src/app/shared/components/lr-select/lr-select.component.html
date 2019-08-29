@@ -1,0 +1,13 @@
+<lr-form-field [formGroup]="parentForm">
+  <label for="input">{{label}}</label>
+  <select *ngIf="options" id="input" class="lr-select" [formControlName]="controlName">
+    <option *ngFor="let item of options" [value]="item[valueField]" [selected]="item.selected">{{item[labelField]}}</option>
+  </select>
+  <ng-container *ngIf="errorsMap">
+    <lr-form-field-message *ngFor="let error of errorsMap.keys()" [inputControl]="parentForm.get(controlName)"
+                           [error]="error"
+                           [type]="'error'"
+                           [message]="errorsMap.get(error)">
+    </lr-form-field-message>
+  </ng-container>
+</lr-form-field>

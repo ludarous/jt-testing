@@ -8,7 +8,8 @@ import {FormGroup} from '@angular/forms';
 })
 export class LrInputFieldComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   @Input()
   label: string;
@@ -23,9 +24,14 @@ export class LrInputFieldComponent implements OnInit {
   errorsMap: Map<string, string>;
 
   @Input()
-  type: string = 'input'
+  type: string = 'input';
+
+  errorKeys: Array<string>;
 
   ngOnInit() {
+    if (this.errorsMap) {
+      this.errorKeys = Array.from(this.errorsMap.keys());
+    }
   }
 
 }
