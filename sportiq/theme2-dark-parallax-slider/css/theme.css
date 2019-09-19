@@ -246,43 +246,27 @@ cite {
 /* Home Slider */
 
 .slide-wrap{
-	/*background-image: url(../images/sportiq/all-sports.jpg);*/
-	/*background-size: cover;*/
-	/*background-repeat: no-repeat;*/
-	/*background-position: center;*/
-	/*background-attachment: fixed;*/
-	background-color: black;
+	background-image: url(../images/sportiq/all-sports.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-attachment: fixed;
 }
 
 .slide-football {
-	background-image: url('../images/sportiq/football-np.jpg');
+	background-image: url(../images/sportiq/football.jpg);
 	background-size: cover;
-	-o-background-size: cover;
-	-moz-background-size: cover;
-	-webkit-background-size: cover;
-	background-position: center;
 	background-repeat: no-repeat;
+	background-position: center;
+	background-attachment: fixed;
 }
 
 .slide-basketball {
-	background-image: url('../images/sportiq/basketball-np.jpg');
+	background-image: url(../images/sportiq/football.jpg);
 	background-size: cover;
-	-o-background-size: cover;
-	-moz-background-size: cover;
-	-webkit-background-size: cover;
-	background-position: center;
-	background-position-y: 0px;
 	background-repeat: no-repeat;
-}
-
-.slide-hockey {
-	background-image: url('../images/sportiq/hockey-np.jpg');
-	background-size: cover;
-	-o-background-size: cover;
-	-moz-background-size: cover;
-	-webkit-background-size: cover;
 	background-position: center;
-	background-repeat: no-repeat;
+	background-attachment: fixed;
 }
 
 
@@ -560,7 +544,7 @@ cite {
 
 .element-title h3 {
 	font-size: 20px;
-	/*text-transform: capitalize;*/
+	text-transform: capitalize;
 }
 
 .typography-title h3 {
@@ -718,7 +702,6 @@ cite {
     padding: 0;
     width: 100%;
 	vertical-align: top;
-	height: 250px;
 }
 
 .team-member-holder {
@@ -731,9 +714,6 @@ cite {
     -o-transition: all .5s ease-in-out;
     -ms-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
 }
 
 .team-member-holder:hover .team-overlay{
@@ -748,11 +728,15 @@ cite {
 }
 
 .team-member-image {
-	flex: 1;
+    float: none;
+    height: 0;
     overflow: hidden;
-	background-color: black;
-	display: flex;
-	align-items: center;
+	line-height: 0;
+	position: relative;
+    padding-bottom: 100%;
+	display: block;
+	position: relative;
+	display: block;
 }
 
 .team-member-image img {
@@ -910,7 +894,7 @@ li:last-child {
 	background: transparent;
 	color: #fff;
 	border: none;
-	font-size: 30px !important;
+	font-size: 60px !important;
 	margin-top: 50px !important;
 }
 
@@ -1271,6 +1255,7 @@ span.price {
 	font-style: italic;
 	font-size: 18px;
 	color: #fff;
+	padding:
 }
 
 .testimonial-inner p::before{  
@@ -1814,13 +1799,9 @@ a.scroll-up:hover {
 	padding-top: 85px;
 }
 
-.siq-list {
-	list-style-type: disc;
-}
 
-.siq-list .siq-list-item {
-	text-align: left;
-}
+
+
 
 
 
