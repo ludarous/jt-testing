@@ -320,6 +320,12 @@ cite {
 	padding-bottom: 40px;
 }
 
+#skills-slider {
+	overflow: hidden;
+	position: relative;
+	height: 415px;
+}
+
 
 .carousel-fade .carousel-inner .item {
 	opacity: 0;
@@ -393,6 +399,14 @@ cite {
 } 
 
 #home-slider:hover .right-control {
+	right:30px
+}
+
+#skills-slider:hover .left-control {
+	left:30px
+}
+
+#skills-slider:hover .right-control {
 	right:30px
 }
 
@@ -881,7 +895,7 @@ cite {
 	/*background: none no-repeat scroll 0 0 #4d4d4d;*/
 	/*padding: 40px 2% 80px;*/
 	/*background-image: url("../images/skills-bg.jpg");*/
-	background-image: url('../images/sportiq/3-4-court-90.jpg');
+	/*background-image: url('../images/sportiq/3-4-court-90.jpg');*/
 }
 
 .wrapper-count {
@@ -889,8 +903,13 @@ cite {
 }
 
 .wrapper-block-skills{
-	padding: 60px 2% 100px;
-	background-color: rgba(0, 0, 0, 0.7);
+	/*padding: 60px 2% 100px;*/
+	/*background-color: rgba(0, 0, 0, 0.7);*/
+}
+
+.skill-slider-item {
+	padding: 40px;
+	background-color: rgba(0, 0, 0, 0.9);
 }
 
 

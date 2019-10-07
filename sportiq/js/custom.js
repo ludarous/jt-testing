@@ -39,6 +39,7 @@ jQuery(document).ready(function() {
 	$(window).resize(function(){'use strict',
 		$('#home-slider .item').css('height',slideHeight);
 	});
+
 	
 	//Collapse navigation on click (Bootstrap 3 is missing it)
 	$('.nav a').on('click', function () {
