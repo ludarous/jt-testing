@@ -145,6 +145,14 @@ a.btn:hover {
 	box-shadow: 0 0 0 4px #00cfef;
 }
 
+.hovicon.effect-1.white {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+.hovicon.effect-1.white:after {
+	box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
+}
+
 .text-color {
     background: none repeat scroll 0 0 #00cfef;
 }
@@ -169,6 +177,10 @@ cite {
 /* Effect 1a */
 .hovicon.effect-1.sub-a:hover {
 	background: #00cfef;
+}
+
+.hovicon.effect-1.white.sub-a:hover {
+	background: rgba(255, 255, 255, 0.3);
 }
 
 .main-color

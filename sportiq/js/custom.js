@@ -97,7 +97,7 @@ $('.about-us').waypoint(function() {
                 'value': 0,
 				'width': 200,			   
                 'min':0,
-                'max':100,
+                'max':4,
 				'lineCap': 'butt',
                 "readOnly":true,
                 'inputColor':' #ffffff',
@@ -105,14 +105,14 @@ $('.about-us').waypoint(function() {
 				'fgColor':' #00cfef ',
                 "thickness":.2,// Thickness of Skill Knobs
 				'dynamicDraw': true,
-				'draw' : function () { $(this.i).val(this.cv + ' %'); }
+				'draw' : function () { $(this.i).val(this.cv + ' s'); }
           });
 
 		$({value: 0}).animate({ value: perc }, {
 			duration: 3000,
 			easing: 'swing',
 			progress: function () {
-			element.val(Math.ceil(this.value)).trigger('change')}
+			element.val(this.value).trigger('change')}
 		});
 	});
  }, { offset: '50%', triggerOnce: true });
