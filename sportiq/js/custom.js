@@ -65,20 +65,26 @@ jQuery(document).ready(function() {
 	});
 	
 	/* Nav Bar Effect */
-	$(window).scroll(function(){	
-		"use strict";	
-		var scroll = $(window).scrollTop();
-		if( scroll > 60 ){		
-			$(".navbar-wrapper").addClass("scroll-fixed-navbar");				
-		} else {
-			$(".navbar-wrapper").removeClass("scroll-fixed-navbar");
-		}
-	});	
-	
+	// $(window).scroll(function(){
+	// 	"use strict";
+	// 	var scroll = $(window).scrollTop();
+	// 	if( scroll > 60 ){
+	// 		$(".navbar-wrapper").addClass("scroll-fixed-navbar");
+	// 	} else {
+	// 		$(".navbar-wrapper").removeClass("scroll-fixed-navbar");
+	// 	}
+	// });
+
+	$('#skills-slider').on('slide.bs.carousel', function () {
+		$(".timer").waypoint(function(){
+			$(this).countTo()
+		},{triggerOnce: true, offset:"bottom-in-view"});
+	});
+
 	/* Count */
 	$(".timer").waypoint(function(){
 		$(this).countTo()
-		},{triggerOnce:!0,offset:"bottom-in-view"});
+		},{triggerOnce: true, offset:"bottom-in-view"});
 	
 		
 	/* Portfolio */

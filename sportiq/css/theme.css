@@ -323,9 +323,12 @@ cite {
 #skills-slider {
 	overflow: hidden;
 	position: relative;
-	height: 415px;
+	/*height: 415px;*/
 }
 
+.full-height {
+	height: 100vh;
+}
 
 .carousel-fade .carousel-inner .item {
 	opacity: 0;
@@ -333,7 +336,7 @@ cite {
 	transition-property: opacity;
 	background-repeat: no-repeat;
 	background-size: cover;
-	height: 2037px;
+	/*height: 2037px;*/
 }
 
 .carousel-fade .carousel-inner .item:after {
@@ -1858,6 +1861,9 @@ a.scroll-up:hover {
 	position: relative;
 	text-decoration: none;
 	color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .used-by img {
